@@ -1,0 +1,281 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+
+%opening
+\title{Naproche version of ``There are infinitely many primes''}
+\author{Marcos Cramer}
+
+\begin{document}
+
+\maketitle
+
+Assume that there is a set of objects called numbers.
+Small latin letters always denote numbers.
+Assume that there are numbers $0$ and $1$ and there are functions $+$ and $\cdot$.
+
+\begin{axiom}
+$0$ is a number.
+\end{axiom}
+
+\begin{definition}
+Define $n$ to be nonzero iff $n \neq 0$.
+\end{definition}
+
+\begin{axiom}
+$1$ is a number.
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $n$, $l$, $(m + n) + l = m + (n + l)$.
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $m + 0 = m = 0 + m$.
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $n$, $m + n = n + m$. 
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $n$, $l$, $(m \cdot n) \cdot l = m \cdot (n \cdot l)$.
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $m \cdot 1 = m = 1 \cdot m$.
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $m \cdot 0 = 0 = 0 \cdot m$.
+\end{axiom}
+
+\begin{axiom} 
+For all $m$, $n$,$m \cdot n = n \cdot m$.
+\end{axiom}
+
+\begin{axiom}
+For all $m$, $n$, $l$, $m \cdot (n + l) = (m \cdot n) + (m \cdot l)$ and $(n + l) \cdot m = (n \cdot m) + (l \cdot m)$.
+\end{axiom}
+
+\begin{axiom} 
+If $l + m = l + n$ or $m + l = n + l$ then $m = n$.
+\end{axiom}
+
+\begin{axiom} 
+Assume that $l$ is nonzero. If $l \cdot m = l \cdot n$ or $m \cdot l = n \cdot l$ then $m = n$.
+\end{axiom}
+
+\begin{axiom} 
+If $m + n = 0$ then $m = 0$ and $n = 0$.
+\end{axiom}
+
+\begin{lemma} 
+If $m \cdot n = 0$ then $m = 0$ or $n = 0$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{definition} 
+Define $m \leq n$ iff there exists an $l$ such that $m + l = n$.
+\end{definition}
+
+\begin{lemma}
+If $m \leq n$, then there is a number $n - m$ such that $m + (n-m) = n$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+For all $m$, $m \leq m$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+$m \leq n \leq l$ implies $m \leq l$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+$m \leq n \leq m$ implies $m = n$. 
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{definition}
+Define $m < n$ iff $m \neq n$ and $m \leq n$.
+\end{definition}
+
+\begin{axiom}
+For all $m$, $n$, $m \leq n$ or $n < m$. 
+\end{axiom}
+
+\begin{lemma} 
+Assume that $l < n$.
+Then for all $m$, $m + l < m + n$ and $l + m < n + m$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+Assume that $m$ is nonzero and $l < n$.
+Then $m \cdot l < m \cdot n$ and $l \cdot m < n \cdot m$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{axiom} 
+For all $n$, $n = 0$ or $n = 1$ or $1 < n$.
+\end{axiom}
+
+\begin{lemma}
+$m \neq 0$ implies $n \leq n \cdot m$.
+\end{lemma}
+\begin{proof}
+Let $m \neq 0$. Then $1 \leq m$.
+\end{proof}
+
+\begin{axiom}
+Suppose $X$ is a set of numbers such that if for all $m$ such that $m < n$ $m \in X$, then $n \in X$. Then $X$ contains all numbers.
+\end{axiom}
+
+\begin{definition}
+Define a set $X$ to be finite iff there is a function $F$ and a number $n$ such that for every $x$ in $X$ there is an $m$ such that $m \leq n$ and $F(m) = x$. 
+\end{definition}
+
+\begin{definition}
+Define a set $X$ to be infinite iff $X$ is not finite.
+\end{definition}
+
+\begin{definition} 
+Define $m$ to divide $n$ iff there is an $l$ such that $n = m \cdot l$.
+\end{definition}
+
+\begin{definition}
+Define $m \mid n$ iff $m$ divides $n$.
+\end{definition}
+
+\begin{lemma}
+Assume that $m$ is nonzero and $m \mid n$. Then there is a number $\frac{n}{m}$ such that $n = m \cdot \frac{n}{m}$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+$l \mid m \mid n$ implies $l \mid n$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+Let $l \mid m$ and $l \mid n$. Then $l \mid m + n$.
+\end{lemma}
+\begin{proof}
+If $l$ is nonzero then $m + n = l \cdot (\frac{m}{l} + \frac{n}{l})$.
+\end{proof}
+
+Lemma DivMin. Let $l \mid m$ and $l \mid m + n$. Then $l \mid n$.
+\begin{proof}
+Assume that $l$ and $n$ are nonzero.
+There is an $i$ such that $m = l \cdot i$. 
+There is a $j$ such that $m + n = l \cdot j$.
+
+Assume for a contradiction that $j < i$.
+$m+n = l \cdot j < l \cdot i = m$. 
+$m \leq m+n$.
+$m = m+n$. Then $n=0$.
+Contradiction. Thus $i \leq j$.
+ 
+Define $k$ to be $j - i$.
+We have $(l \cdot i) + (l \cdot k) = (l \cdot i) + n$.
+Hence $n = l \cdot k$.
+\end{proof}
+
+\begin{lemma} 
+Let $m \mid n \neq 0$. Then $m \leq n$.
+\end{lemma}
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma} 
+Suppose $l$ is nonzero and $l \mid m$.
+Then $n \cdot \frac{m}{l} = \frac{n \cdot m}{l}$.
+\end{lemma}
+\begin{proof}
+$(l \cdot n) \cdot \frac{m}{l} = l \cdot \frac{n \cdot m}{l}$.
+\end{proof}
+
+\begin{axiom}
+Suppose that $F$ is a function and $m$ and $n$ are numbers. Then there is a number $\Pi_m^n F$ such that if $m \leq j \leq n$, then $F(j)$ divides $\Pi_m^n F$. If for all $j$ such that $m \leq j \leq n$ $F(j) \neq 0$, then $\Pi_m^n F \neq 0$.
+\end{axiom}
+
+Define $m$ to be trivial iff $m = 0$ or $m = 1$.
+Define $m$ to be nontrivial iff $m \neq 0$ and $m \neq 1$.
+
+\begin{definition} 
+Define $q$ to be prime iff $q$ is nontrivial and
+for every $m$ such that $m \mid q$, $m = 1$ or $m = q$.
+\end{definition}
+
+Define $m$ to be compound iff $m$ is not prime.
+
+\begin{lemma} 
+For every nontrivial $k$ some prime number divides $k$.
+\end{lemma}
+\begin{proof}
+Let $X$ be the set of $k$ such that if $k$ is nontrivial, then some prime number divides $k$.
+
+Let $k$ be a nontrivial number such that for all $m$ such that $m < k$, $m \in X$. There are two cases:
+
+Case 1: $k$ is prime. 
+Then $k \in X$.
+
+Case 2: $k$ is compound. 
+Then there is an $m$ such that $m \mid k$ and $m \neq 1$ and $m \neq k$.
+$m < k$, i.e. $m \in X$. $m$ is nontrivial, so there is a prime number $n$ such that $n$ divides $m$.
+Then $n$ divides $k$, so $k \in X$.
+
+So in both cases $k \in X$. Thus $X$ contains all numbers.
+\end{proof}
+
+\begin{theorem}
+The set of prime numbers is infinite.
+\end{theorem}
+\begin{proof}
+Let $A$ be a finite set of prime numbers.
+Then there is a function $P$ and a number $r$ such that for every $n$ in $A$, there is a $k$ such that $k \leq r$ and $P(k) = n$. 
+$\Pi_1^n P \neq 0$.
+Define $n$ to be $\Pi_1^n P +1$.
+$n$ is nontrivial. So there is a prime number $q$ such that $q$ divides $n$.
+
+Assume that $q$ is in $A$. Then there is an $i$ such that $1 \leq i \leq r$ and $q=P(i)$. $P(i)$ divides $\Pi_1^n P$. Then $q$ divides $1$ by lemma DivMin. Contradiction. 
+
+Thus $A$ is not the set of prime numbers.
+\end{proof}
+
+
+
+\end{document}
+

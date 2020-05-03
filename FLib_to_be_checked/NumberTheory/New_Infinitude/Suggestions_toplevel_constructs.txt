@@ -1,0 +1,69 @@
+Possible ForTheL language extensions for top level sections.
+
+Currently, all toplevel section have the form:
+
+(Axiom. | Definition. | Signature. | Theorem.) {Assumptions} Affirmation
+
+This rich form is adequate for the formulation of real theorems, but often shorter variants appear to be more natural. E.g., for Axioms or Signatures there are often no Assumptions.
+
+We suggest the following extensions for ForTheL:
+
+AXIOMS.
+
+> We presuppose that x + y = y + x .
+
+Labels may be placed in (..); also multiword labels are useful:
+
+> We presuppose that x + y = y + x (commutativity of addition).
+
+DEFINITIONS.
+
+> Define x is a subset of y iff ...
+
+or with some small Assumption:
+
+> For y =! 0 define x/y to be ... 
+
+With respect to the idea of making LaTeX the input language of ForTheL one could also require, that natural language notions introduced by definitions have to be written italic or boldface.
+
+SIGNATURES.
+
+> Work with natural numbers. (see previous mail)
+
+> Consider the notion of natural number.
+
+> Consider the domain/class/collection of natural numbers.
+
+> The constant 0 is a (fixed) natural number.
+
+> Fix the natural number 0.
+
+> x < y is a (fixed) relation.
+
+> The term x + y is a natural number.
+
+THEOREMS.
+
+For little "inline" propositions, that are trivial or have a one line proof:
+
+> Note that x = x.
+
+> Note that ... . Indeed ... .
+
+> Assuming that ... we have ...
+
+> Trivially ....
+
+Note that SAD already treats statements without further decoration as a top level propositions. 
+
+GENERAL.
+
+More (list-like) coordination of constructs is desirable, like lists of terms, sentences etc.
+
+> The constants 0,1, and 2 are natural numbers.
+
+> Presuppose (x + y) + z = x + (y + z) (associativity); x + 0 = x; ... .
+
+> Consider natural numbers, denoted by m, n, l.
+
+In the existing toplevel environments, there is exactly one affirmative sentence. This could be extended to lists of affirmations. E.g. one could have lists of axioms or definitions. Or a Theorem with a list of claims, but this requires to implement proofs for such lists instead of a single statement.

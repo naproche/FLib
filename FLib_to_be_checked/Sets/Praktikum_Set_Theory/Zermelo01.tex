@@ -1,0 +1,494 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{enumerate, latexsym, amssymb, amsmath}
+\usepackage{framed, multicol}
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{proofn}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newtheorem{axiom}{Axiom}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{signature}{Signature}
+\newtheorem{proposition}{Proposition}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\event}{UITP 2018}
+\newcommand{\dom}{Dom}
+\newcommand{\fun}{aFunction}
+\newcommand{\sym}{sym}
+\newcommand{\halfline}{{\vspace{3pt}}}
+\newcommand{\tab}{{\hspace{1cm}}}
+\newcommand{\ball}[2]{B_{#1}(#2)}
+\newcommand{\llbracket}{[}
+\newcommand{\rrbracket}{]}
+\newcommand{\less}[1]{<_{#1}}
+\newcommand{\greater}[1]{>_{#1}}
+\newcommand{\leeq}[1]{{\leq}_{#1}}
+\newcommand{\supr}[1]{\mathrm{sup}_{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\urbild}[2]{{#1}_{*}({#2})}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{A Formalization of the Zermelo Wellordering Theorem in the Naproche-SAD system}
+
+\author{Peter Koepke}
+
+\date{March 10, 2019}
+
+\maketitle
+
+
+\section{Introduction}
+
+The Naproche-SAD proof-checking system checks the logical correctness of texts written in an input language which is acceptable and readable as common mathematical language. Texts should resemble the style of undergraduate textbooks. To test the viability of this approach we are currently formalizing some basic results in Zermelo-Fraenkel set theory. Naproche-SAD accepts texts in a native ForTheL (Formula Theory Language) format. We are also testing a {\LaTeX} add-on which accepts texts in {\LaTeX} format and transforms them into ForTheL.
+
+In this report, we present a standard proof of the Wellordering Theorem, using ordinals, recursion and choice. This requires
+to formalize some initial theory. We follow parts of the Set Theory
+course 2018/19 at the University of Bonn.
+
+Some mathematical principles like Choice, set formation and function
+formation are already implemented in Naproche-SAD. Other set theoretical
+axioms have to be required explicitly. There are some marked differences with ZF set theory: Naproche-SAD has an abstraction term mechanisms that allow abstractions with {\it arbitrary} formulas. This transcends ZF towards the stronger Kelley-Morse set theory (KM). KM provides good foundations for mathematics. ZF is however more popular, perhaps for historic reasons, or
+since it is more amenable to the metamathematical analyses of
+axiomatic set theory.
+
+The abstraction term and function mechanism of the current version 
+of Naproche-SAD are directed towards standard mathematical fields and 
+so abstraction terms are naively identified with "sets" instead of
+"classes". To make Naproche-SAD work for unrestricted set theory, we
+use Naproche's sets as KM classes but make some changes to the
+vocabulary so that we can use a natural class / object / set ontology.
+
+Numbers of Definitions and Theorems correspond to the Set Theory scriptum when possible.
+There has been a difficulty with satisfying the existence task connected with the Choice operator "choose" in the proof of the Wellordering Theorem.
+We have therefore deactivated that task in the Naproche source file
+ProofTask.hs:82
+
+We first did the formalization in a ForTheL file {\tt ordinals07.ftl}. After this file was accepted by Naproche-SAD it was rewritten to a {\LaTeX} file
+{\tt Zermelo01.tex}. The {\LaTeX} file contains further text that is typeset but not checked. After typesetting the ForTheL content is indicated by a vertical line.  In this way this whole document is a single document, whose ForTheL content is proofchecked.
+
+
+
+\section{The Formalization}
+\subsection{Preliminaries on Sets and Classes}
+
+We work with the following ontology: mathematical objects are
+\emph{objects}; objects are elements of \emph{classes}; 
+classes which are themselves objects are \emph{sets}.
+Sets are the objects studied in set theory.
+
+\begin{forthel}
+Let $a \neq b$ stand for $a != b$.
+Let $A, B, C, D$ stand for \emph{classes}.
+Let $x \in y$ stand for $x$ \emph{is an element} of $y$. 
+Let $x \notin y$ stand for $x$ \emph{is not an element} of $y$. 
+
+\begin{definition}[7a] A \emph{subclass} of $B$ is a class $A$ such that every element of $A$ is an element of $B$. Let $x \subseteq y$ stand for $x$ is a subclass of $y$.
+\end{definition}
+[synonym object/objects]
+\begin{signature} An \emph{object} is a notion. Let $o$ stand for objects.
+\end{signature}
+
+\begin{axiom} Any element of any class is an object.
+\end{axiom}
+
+[synonym set/sets]
+\begin{definition} A \emph{set} is a class that is an object. Let $a,b,c,x,y,z$ stand for sets.
+\end{definition}
+\end{forthel}
+The axiom schema of \emph{foundation} is formalized by embedding the element relation into the universal induction relation -<- for which Naproche provides an induction scheme.
+\begin{forthel}
+\begin{axiom}[Foundation] If $o \in x$ then $o -<- x$.
+\end{axiom}
+
+\begin{theorem}[33] $x \notin x$.
+\end{theorem}
+\begin{proofn} By induction on $x$.
+\end{proofn}
+\end{forthel}
+The following definition includes the \emph{set existence} axiom.
+\begin{forthel}
+\begin{definition}[4a] The \emph{empty set} is the set 
+that has no elements. Let $\emptyset$ stand for the empty set.
+\end{definition}
+\end{forthel}
+We use a new unordered pair instead of the version available in Naproche-SAD. Perhaps one could as well use Naproche's pair.
+\begin{forthel}
+\begin{definition}[4c] $\{a,b\} = \{u \mid u = a or u = b\}$.
+\end{definition}
+
+\begin{axiom}[Pairing] $\{a,b\}$ is a set.
+\end{axiom}
+
+\begin{definition}[7j] $\{a\} = \{u \mid u = a\}$.
+\end{definition}
+
+\begin{lemma} $\{a\}$ is a set. \end{lemma}
+
+\begin{definition}[7e] 
+$\bigcup(x) = \{u \mid \text{ there is } a \text{ such that }u \in a \in x\}$.
+\end{definition}
+
+\begin{axiom}[Union] $\bigcup(x)$ is a set. \end{axiom}
+
+\begin{definition}[7b] $A \cup B = 
+\{u \mid u \in A \text{ or }u \in B\}$.
+\end{definition}
+
+\begin{lemma} $a \cup b$ is a set. \end{lemma}
+\begin{proof} $a \cup b = \bigcup(\{a,b\})$.
+\end{proof}
+
+\begin{definition}[7c] $A \cap B = 
+\{u \mid u \in A \text{ and } u \in B\}$.
+\end{definition}
+
+\begin{axiom}[Separation] $x \cap A$ is a set.
+\end{axiom}
+
+\begin{definition}[7d] $A \setminus B = 
+\{u \mid u \in A \text{ and } u \notin B\}$.
+\end{definition}
+
+\begin{lemma} $a \setminus B$ is a set. \end{lemma}
+\begin{proof} Define 
+$C = \{ u \mid u \in a \text{ and } u \notin B\}$.
+$a \setminus B = a \cap C$.
+\end{proof}
+
+\begin{definition}[30] $\mathrm{Succ}(x) = x \cup \{x\}$.
+\end{definition}
+
+\begin{lemma} $\mathrm{Succ}(x)$ is a set.
+\end{lemma}
+\end{forthel}
+
+\subsection{Preliminaries on Functions}
+
+We use the function notion and corresponding definition mechanisms
+built into Naproche-SAD.
+\begin{forthel}
+Let $F,G,f,g$ stand for \emph{functions}.
+
+\begin{definition}[15e] Let $F$ be a function.
+$$F"A = \{F(u)\mid u \in A \text{ and } u \in \mathrm{Dom}(F)\}.$$
+\end{definition}
+
+\begin{definition}[15b] $\mathrm{range}(F) = F " \mathrm{Dom}(F)$.
+\end{definition}
+\end{forthel}
+
+The replacement schema takes the following form:
+
+\begin{forthel}
+\begin{axiom}[Replacement] $F"x$ is a set. \end{axiom}
+
+\begin{definition}[19a]
+A \emph{function from} $A$ \emph{to} $B$ is a function $F$ such that
+$\mathrm{Dom}(F) = A$ and $\mathrm{range}(F) \subseteq B$.
+Let $F : A \rightarrow B$ stand for $F$ is a function from
+$A$ to $B$.
+\end{definition}
+
+\begin{definition}[19c]
+A \emph{surjective function from} $A$ \emph{to} $B$ is a 
+function $F$ such that $\mathrm{Dom}(F) = A$ and
+$\mathrm{range}(F) = B$.
+\end{definition}
+
+\begin{definition}[19d] 
+An \emph{injective function from} $A$ \emph{to} $B$ is a function $F$
+such that $F : A \rightarrow B$ and
+$\forall u,v \in A (u \neq v \Rightarrow F(u) \neq F(v))$.
+\end{definition}
+
+\begin{definition}[19e]
+A \emph{bijective function from} $A$ to $B$ is a function $F$
+such that $F$ is a surjective function from $A$ to $B$ and
+$F$ is an injective function from $A$ to $B$.
+Let $F : A \leftrightarrow B$ stand for $F$ is a 
+bijective function from $A$ to $B$.
+\end{definition}
+
+\begin{definition} Let $F$ be a function. Let $v$ be an object.
+$$\urbild{F}{v} = \{u \mid u \in \mathrm{Dom}(F) \text{ and } F(u) = v\}.$$
+\end{definition}
+
+\begin{theorem} Let $F$ be an injective function from $A$ to $x$.
+Then $A$ is a set.
+\end{theorem}
+\begin{proof} $\mathrm{range}(F) \subseteq x$.
+$\mathrm{range}(F)$ is a set. Indeed 
+$\mathrm{range}(F) = x \cap \mathrm{range}(F)$.
+Define $$G(v) = 
+\text{ choose } u \in \urbild{F}{v} \text{ in } u \text{ for } v \text{ in } \mathrm{range}(F).$$
+Then $\mathrm{range}(G) = A$.
+\end{proof}
+\end{forthel}
+
+\subsection{Ordinal Numbers}
+
+\begin{forthel}
+Let 0 stand for $\emptyset$.
+\begin{definition} $1 = \{0\}$. \end{definition}
+
+\begin{definition}[37a] $A$ is \emph{transitive} iff 
+every element of $A$ is a subclass of $A$.
+Let $\mathrm{Trans}(x)$ stand for $x$ is transitive.
+\end{definition}
+
+[synonym ordinal/ordinals]
+
+\begin{definition}[37b] An \emph{ordinal} is a set $x$ such that
+$x$ is transitive and every element of $x$ is transitive.
+Let $\mathrm{Ord}(x)$ stand for $x$ is an ordinal.
+Let $\alpha, \beta, \gamma, \lambda$ denote ordinals.
+\end{definition}
+
+\begin{theorem}[38a] $0$ is an ordinal.\end{theorem}
+
+\begin{theorem}[38b] $\mathrm{Succ}(\alpha)$ is an ordinal. \end{theorem}
+
+\begin{theorem}[39] Every element of $\alpha$ is an ordinal.
+\end{theorem}
+
+\begin{theorem} $(\alpha \in \beta \text{ and } \beta \in \gamma) => \alpha \in \gamma$.
+\end{theorem}
+
+\begin{theorem}[40b] For all $\alpha$ $\alpha \notin \alpha$.
+\end{theorem}
+
+\begin{definition}[41] $\alpha < \beta$ iff $\alpha \in \beta$.
+\end{definition}
+\end{forthel}
+The following linearity property can be proved by a double induction.
+For the proof, $\alpha$ and $\beta$ have to be universally quantified.
+\begin{forthel}
+\begin{axiom}[40c] $\alpha < \beta$ or $\alpha = \beta$ 
+or $\beta < \alpha$.
+\end{axiom}
+
+\begin{theorem}[44] If $\alpha < \beta$ then $\alpha -<- \beta$. 
+\end{theorem}
+
+\begin{theorem}[42a] $\alpha < \mathrm{Succ}(\alpha)$.
+\end{theorem}
+
+\begin{theorem}[42b] If $\beta < \mathrm{Succ}(\alpha)$ 
+then $\beta = \alpha$ or $\beta < \alpha$.
+\end{theorem}
+
+\begin{definition}[43a] A \emph{successor ordinal} is 
+an ordinal $\alpha$ such that
+$\exists \beta  \alpha = \mathrm{Succ}(\beta)$.
+\end{definition}
+
+\begin{definition}[43b] A \emph{limit ordinal} is an ordinal
+$\alpha$ such that
+$\alpha \neq 0$ and 
+$\alpha$ is not a successor ordinal.
+\end{definition}
+
+\begin{definition}[37c] $\mathrm{Ord} = 
+\{u \mid u \text{ is an ordinal}\}$.
+\end{definition}
+\end{forthel}
+
+The following is the well-known Burali-Forti paradox.
+
+\begin{forthel}
+
+\begin{theorem}[Exercise15] $\mathrm{Ord}$ is not a set.
+\end{theorem}
+%# \begin{proof}
+%# Assume the contrary.
+%# $\mathrm{Ord}$ is transitive and every element of 
+%# $\mathrm{Ord}$ is transitive.
+%# $\mathrm{Ord} \in \mathrm{Ord}$. Contradiction.
+%# \end{proof}
+\end{forthel}
+
+\subsection{The Well-Ordering Theorem}
+
+\begin{forthel}
+\begin{theorem}[72c] For every set $x$ there exists 
+  ordinal $\alpha$, function $f$ 
+  such that $$f : \alpha \leftrightarrow x.$$
+\end{theorem}
+\begin{proof} Let $x$ be a set. Define 
+
+$F(\alpha) = \text{ case } x \setminus (F " \alpha) =
+  \emptyset \rightarrow x,
+  \text{ case } (x \setminus (F " alpha)) \neq \emptyset \rightarrow 
+  \text{ choose an element } v \text{ of } x \setminus (F " alpha) 
+  \text{ in } v
+  \text{ for } \alpha \text{ in } \mathrm{Ord}$. 
+
+  (1) There exists $\alpha$ such that $F(\alpha) = x$.
+  
+  Proof. Assume the contrary.
+  
+    (1a) For all $\alpha \in \mathrm{Ord} F(\alpha) \in x 
+    \setminus (F " \alpha)$.
+
+    (1b) $F : \mathrm{Ord} \rightarrow x$.
+
+    (1c) $F$ is an injective function from $\mathrm{Ord}$ to $x$.
+
+    Proof. Let $\beta,\gamma \in \mathrm{Ord}$. 
+      Assume $\beta \neq \gamma$.
+      Then $F(\beta) \neq F(\gamma)$.
+
+      Proof. 
+        Case $\beta < \gamma$. 
+          $F(\gamma) \in x \setminus (F " \gamma)$.  
+          $F(\beta) \neq F(\gamma)$. 
+        end.
+
+        Case $\gamma < \beta$. 
+          $F(\beta) \in x \setminus (F " \beta)$. 
+          $F(\beta) \neq F(\gamma)$. 
+        end.
+      end.
+    qed.
+  qed.
+
+  Take an ordinal $\alpha$ such that $F(\alpha) = x$ and 
+  for all $\beta (\beta < \alpha => F(\beta) \neq x)$.
+
+  Proof. Assume the contrary.
+    Let us show that for all ordinals $\alpha$ $F(\alpha) \neq x$.
+
+    Proof by induction on alpha. qed. qed.
+    
+      Define $f(\beta) = F(\beta)$ for $\beta$ in $\alpha$.
+
+      (2a) For all 
+        $\beta \in \alpha f(\beta) \in x \setminus (F " \beta)$.
+
+      (2b) $f : \alpha \rightarrow x$.
+
+      (2c) $f$ is an injective function from $\alpha$ to $x$.
+
+      Proof. Let $\beta,\gamma \in \alpha$. 
+        Assume $\beta \neq \gamma$.
+        Then $f(\beta) \neq f(\gamma)$.
+
+        Proof. 
+          Case $\beta < \gamma$. 
+            $f(\gamma) \in x \setminus (F " \gamma)$.  
+            $f(\beta) \neq f(\gamma)$. 
+          end.
+
+          Case $\gamma < \beta$. 
+            $F(\beta) \in x \setminus (F " \beta)$. 
+            $f(\beta) \neq f(\gamma)$. 
+          end.
+        end.   
+      qed.
+
+(2d) $f$ is a surjective function from $\alpha$ to $x$.
+
+Proof. Assume the contrary.
+$\mathrm{range}(f) \neq x$.
+$x \setminus (F " \alpha) \neq \emptyset$.
+$F(\alpha) \in x$.
+$x \in x$. Contradiction.
+qed.
+\end{proof}
+\end{forthel}
+
+\section{Remarks}
+\subsection{Axiomatics}
+
+The present text uses only a part of the set theoretic axioms.
+Infinity and Powerset are not used, so that the text in principle
+could be interpreted within finitary set theory. Eventually,
+the axiomatic assumptions in the axioms and mechanisms of
+Naproche-SAD have to be fixed and determined.
+
+Although using KM set theory appears more elegant than ZF, if may
+be better to restrict to ZF to be in line with other systems.
+
+\subsection{Natural and Formal Text}
+
+The text of the proof of the well-ordering theorem in the lecture
+notes is of similar structure and length as the formal proof,
+although the formal proof misses some features of the informal
+proof like directly taking a minimal ordinal with some property. Instead, induction is used to show the existence of a minimal ordinal.
+
+A marked weakness of Naproche-SAD are the term-rewriting facilities. Fortunately in set theory, this issue hardly arises.
+
+We conjecture that most of the set theory lecture
+notes can eventually be reformulated in ForTheL. 
+
+\subsection{Possible Improvements} 
+
+Future versions of Naproche-SAD should allow more chaining of statements. In Definitions and Theorems, there could be chains of definitions or conclusions instead of single statements. One could allow listing and enumeration environments of {\LaTeX}. Then theorems could have been formalized as one theorem with parts $(a),(b)$ etc.
+
+Argumentative connectives like "since" should be included in extensions of ForTheL. Presently they have to be modelled by the "Indeed" construct or by listing of premises.
+
+Some more constructions, like choosing minimal witnesses of 
+properties.
+
+
+\section{{From \LaTeX} to ForTheL}
+The {\LaTeX}-input to Naproche-SAD is achieved by a simple-minded translation which transforms {\LaTeX}-text into corresponding ForTheL-text. A lot of type-setting information is simply filtered out and not given to Naproche-SAD. In particular the {\$}-symbols are filtered out since in ForTheL there is no real difference between symbolic and textual input. Style information like {\tt \textbackslash emph\{word\}} becomes simply {\tt word}.
+
+{\LaTeX}-environments like the definition, lemma, theorem or proof environments are modified into the corresponding ForTheL top level sections. E.g., the text
+
+{\tt \textbackslash begin\{theorem\}}
+
+{\tt theoremtext}
+
+{\tt \textbackslash end\{theorem\}}
+
+becomes
+
+{\tt Theorem. (the translation of) theoremtext}
+
+
+Actually only text within Forthel environments of the form
+
+{\tt \textbackslash begin\{forthel\}}
+
+{\tt theoremtext}
+
+{\tt \textbackslash end\{forthel\}}
+
+is transmitted to Naproche-SAD. Everything outside those environments is filtered away so that one can write free {\LaTeX} outside the ForTheL content. Actually this document is a {\LaTeX}-document containing several ForTheL-environments. These are typeset with a vertical marginal line.
+
+All this filtering is coded into the Haskell file
+{\tt LaTeX.hs} which exports the translation function
+{\tt fromLaTeX :: String -> String}.
+This function is employed in the source code of SAD3 in the file
+{\tt Reader.hs} where {\tt fromLaTeX} is applied to the input string within the {\tt reader}-function.
+
+Eventually a simple {\LaTeX}-format should become the standard input format for Naproche-SAD. This could be integrated into the standard workflow of mathematicians. If parts of a text should be checked by Naproche-SAD put them into ForTheL-environments and feed the text 
+to Naproche-SAD.
+
+
+\section{Discussion}
+
+Formalizing in SAD3 is not straightforward. The ForTheL language is a relatively rich language which appears like a natural language with a rather complicated (formal) grammar. This makes it at first hard to predict which constructs will be accepted.
+
+Also specific forms of constructs, although logically and intuitively equivalent, may greatly influence checking times or the checkability at all. Probably, some logical reformulations, however simple, may lead to further resolution steps and expand the search space of the ATP. Perhaps some obvious logical equivalences could be handled by simplifications in the reasoner instead of by the ATP?
+
+The user of Naproche-sAD seems to play something like a cooperative trial-and-error game with the ATP. There are cases, where the system is unable to do trivial steps like deducing $A$ from a long conjunction like $(A\wedge B\wedge C\wedge D \wedge E)$ whereas sometimes impressive argumentative chains of lemmas are found immediately. It seems that the heuristics of the ATP may give a "long" formula like $(A\wedge B\wedge C\wedge D \wedge E)$ low priority, whereas the powerful resolution algorithm will find non-trivial lemma applications through unification. It would be desirable to have more intuitions about the abilities of the ATP. Perhaps one could even tune the ATP towards the kind of tasks that Naproche-SAD produces.  
+  
+
+
+\end{document}

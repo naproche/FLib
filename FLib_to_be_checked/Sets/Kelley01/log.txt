@@ -1,0 +1,14 @@
+Kelley01 is a folder to carry through the Kelley formalisation.
+
+01-55_original correspond to the original Kelley text based on classes where sets are defined as (classes which are) elements of classes.
+
+The original class ontology is changed for an ontology of classes whose elements are objects. Here a set is defined as a class which is an object. So there may be objects which as not sets, like for example ordered pairs.
+
+Looking through the first 55 items in the ontology of Class11.ftl
+
+Certain items are no longer supported:  
+Theorem 34a: 0 = \bigcap UU fails.
+Theorem 34b: UU = \bigcup UU fails.
+Theorem 37. UU = 2^UU. We can have 2^UU \subset UU.
+Theorem 39. UU is not a set.
+

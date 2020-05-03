@@ -1,0 +1,421 @@
+\newtheorem{signature}{Signature} 
+\newtheorem{axiom}{Axiom} 
+\newcommand{\power}{{\cal P}} 
+\newcommand{\preimg}[2]{{#1}^{-1}[#2]} 
+\newcommand{\Seq}[2]{\{#1,\dots,#2\}}
+\newcommand{\Set}[3]{\{#1_{#2},\dots,#1_{#3}\}}
+\newcommand{\Product}[3]{\prod_{i=#2}^{#3}{#1}_i}
+\newcommand{\subs}[2]{{#1}_{#2}}
+\newcommand{\CC}{{\Bbb C}}
+\newcommand{\RR}{{\Bbb R}}
+\newcommand{\QQ}{{\Bbb Q}}
+\newcommand{\ZZ}{{\Bbb Z}} 
+\newcommand{\NN}{{\Bbb N}}
+
+\section{There are infinitely many primes}
+%#
+%# Version 16 March 2012
+%#
+\section{I. Foundations}
+
+
+\subsection{1. Sets}
+
+%%[set/-s] [element/-s] [belong/-s] [subset/-s]
+
+\begin{signature}.
+A {\bf set} is a notion.
+Let $X,Y,Z$ stand for sets. 
+\end{signature}
+
+\begin{signature}.
+An {\bf element} is a notion.
+Let $x,y,z$ stand for elements.
+\end{signature}
+
+\begin{signature}.
+An {\bf element of} $X$ is a notion.
+Let $x$ {\bf belongs to} $X$ stand for $x$ is an element of $X$.
+Let $x \in X$ stand for $x$ is an element of $X$.
+\end{signature}
+
+\begin{definition} Subset.
+A {\bf subset} of $Y$ is a set $X$ such that
+every element of $X$ belongs to $Y$.
+Let $X \subseteq Y$ stand for $X$ is a subset of $Y$.
+\end{definition}
+
+\begin{lemma}.$X \subseteq X$.\end{lemma}
+
+\begin{lemma}.
+$X \subseteq Y \subseteq Z  \rightarrow  X \subseteq Z$.
+\end{lemma}
+
+\begin{definition}.
+$\emptyset$ is a set that has no elements.
+Let $X$ is empty stand for $X = \emptyset$.
+Let $X$ is nonempty stand for $X \neq \emptyset$.
+\end{definition}
+
+\begin{axiom}.
+$X \subseteq Y \subseteq X  \rightarrow  X = Y$.
+\end{axiom}
+
+\begin{lemma}.
+If $X$ has no elements then $X=\emptyset$.
+\end{lemma}
+
+\begin{lemma}.$x,y \in \{x,y\}$. If $z \in \{x,y\}$ then $z=x$ or $z=y$.
+\end{lemma}
+
+\begin{lemma}.
+$\{x,y\}$ is a set.
+\end{lemma} 
+
+\begin{definition}.
+Assume that every element of $X$ is a set.
+$\bigcup X = \{ u | u \text{ is an element of some element of } X\}$.
+\end{definition}
+
+\begin{axiom}.
+Assume that every element of $X$ is a set.
+$\bigcup X$ is a set.
+\end{axiom}
+
+\begin{definition}.
+$\power(X) = \{\text{set} Y | Y \subseteq X \}$.
+\end{definition}
+
+\begin{axiom}.
+$\power(X)$ is a set.
+\end{axiom}
+
+\subsection{2. Functions}
+
+%%[function/-s]
+
+\begin{signature}.
+A {\bf function} is a notion.
+Let $f,g,p$ stand for functions.
+\end{signature}
+
+\begin{signature}.
+$\text{dom} f$ is a set. Let the {\bf domain} of $f$ stand for 
+$\text{dom} f$.
+\end{signature}
+
+\begin{signature}.
+Let $x \in \text{dom} f$. $f(x)$ is an element. Let
+$\subs{f}{x}$ stand for $f(x)$.
+\end{signature}
+
+%#\begin{definition}.
+%#$\preimg{f}{y} = \{ x \in \text{dom} f | f(x) = y \}$.
+%#\end{definition}
+
+\begin{definition}.
+Let $X \subseteq \text{dom} f$. 
+$f[X] = \{f(x) | x \in X \}$.
+Let $\text{ran} f$ stand for $f[\text{dom f}]$.
+Let the {\bf range} of $f$ stand for $\text{ran} f$.
+\end{definition}
+ 
+\begin{definition}.
+Let $X,Y$ be sets.
+Let a function {\bf from} $X$ {\bf to} $Y$ stand for
+a function $f$ such that $\text{dom} f = X$ and
+$\text{ran} f \subseteq Y$.
+Let $f : X \rightarrow Y$ stand for $f$ is a function
+from $X$ to $Y$.
+\end{definition}
+
+\begin{lemma}.
+Let $x \in \text{dom} f$. $f(x)$ belongs to $\text{ran} f$.
+\end{lemma}
+
+\begin{definition}.
+Let $X \subseteq \text{dom} f$.
+$f \upharpoonright X$ is a function
+$g$ such that $\text{dom} g = X$ and for every
+$x \in X$ $g(x) = f(x)$.
+\end{definition}
+
+\subsection{3. Numbers}
+
+%%[number/-s]
+
+\begin{signature}.
+A {\bf number} is a notion. Let $a,b,c,d$ stand for numbers.
+\end{signature}
+
+\begin{signature}.
+$0$ is a number. Let $a$ is {\bf nonzero} stand for $a \neq 0$.
+\end{signature}
+
+\begin{signature}.
+$1$ is a nonzero number.
+\end{signature}
+
+\subsubsection{3.1. Complex Numbers}
+
+\begin{signature}.
+$\CC$ is a set. Let $a$ is {\bf complex} stand for $a \in \CC$.
+\end{signature}
+
+\begin{axiom}.
+$\CC$ is the set of numbers.
+\end{axiom}
+
+\begin{signature}.
+$a + b$ is a number. Let the {\bf sum} of $a$ and $b$ stand for $a + b$.
+\end{signature}
+
+\begin{signature}.
+$a \cdot b$ is a number. Let the {\bf product} of $a$ and $b$ stand for $a \cdot b$.
+\end{signature}
+
+\begin{signature}.
+$-a$ is a number. Let the {\bf negative} of $a$ stand for $-a$.
+\end{signature}
+
+\begin{signature}.
+Let $a$ be nonzero. $a^{-1}$ is a number. Let the {\bf inverse}
+of $a$ stand for $a^{-1}$.
+\end{signature}
+
+\begin{axiom}.
+$(a+b)+c = a+(b+c)$.
+\end{axiom}
+\begin{axiom}.
+$a+0 = 0+a = a$.
+\end{axiom}
+\begin{axiom}.
+$a+(-a) = (-a)+a=0$.
+\end{axiom}
+\begin{axiom}.
+$a+b = b+a$.
+\end{axiom}
+\begin{axiom}.
+$(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+\end{axiom}
+\begin{axiom}.
+$a \cdot 1 = 1 \cdot a = a$.
+\end{axiom}
+\begin{axiom}.
+If $a$ is nonzero then $a \cdot a^{-1} = a^{-1} \cdot a = 1$.
+\end{axiom}
+\begin{axiom}.
+$a \cdot b = b \cdot a$.
+\end{axiom}
+\begin{axiom}.
+$(a + b) \cdot c = (a \cdot c) + (b \cdot c)$.
+\end{axiom}
+
+\subsubsection{3.2. Real Numbers}
+
+\begin{signature}.
+$\RR$ is a set. Let $a$ is {\bf real} stand for $a \in \RR$.
+\end{signature}
+
+\begin{axiom}.
+$\RR \subseteq \CC$.
+\end{axiom}
+
+%# \begin{lemma}. $\{a \in \CC | a \text{is real}\}$ is a set. \end{lemma}
+
+%# \begin{theorem}.$\RR \subseteq \{a \in \CC | a \text{is real}\}$.\end{theorem}
+%#\begin{proof}
+%#Let $b$ be an element of $\RR$. 
+%#Then $b \in \CC$ and $b$ is real.
+%#Hence $b$ belongs to $\{a \in \CC | a \text{is real}\}$.
+%#Hence every element of $\RR$ belongs to $\{a \in \CC | a \text{is real}\}$.
+%#Hence thesis (by Subset).
+%#\end{proof}
+
+\begin{axiom}.
+$0,1 \in \RR$.
+\end{axiom}
+
+\begin{axiom}.
+If $a,b$ are real numbers then $a+b$ is a real number.
+\end{axiom}
+
+\begin{axiom}.
+If $a,b$ are real numbers then $a \cdot b$ is a real number.
+\end{axiom}
+
+\subsubsection{3.3. Rational Numbers}
+
+\begin{signature}.
+$\QQ$ is a set. Let $a$ is {\bf rational} stand for $a \in \QQ$.
+\end{signature}
+
+\begin{axiom}.
+$\QQ \subseteq \RR$.
+\end{axiom}
+
+\subsubsection{3.4. Integers}
+
+%%[integer/-s]
+
+\begin{signature}.
+$\ZZ$ is a set. Let $a$ is {\bf integer} stand for $a \in \ZZ$.
+\end{signature}
+
+Let $r,s$ stand for integer numbers.
+
+\begin{axiom}.
+$\ZZ \subseteq \QQ$.
+\end{axiom}
+
+\begin{axiom}.
+$0,1 \in \ZZ$.
+\end{axiom}
+
+\begin{axiom}.
+If $r,s$ are integers then $r+s$ is an integer number.
+\end{axiom}
+
+\begin{axiom}.
+If $r,s$ are integers then $r \cdot s$ is an integer number.
+\end{axiom}
+
+
+
+\subsubsection{3.5. Natural Numbers}
+
+\begin{signature}.
+$\NN$ is a set. Let $a$ is {\bf natural} stand for $a \in \NN$.
+Let $i,j,k,m,n,p,q$ stand for natural numbers. 
+\end{signature}
+
+\begin{axiom}.
+$0 \in \NN$ and for all ($n \in \NN$) $(n+1) \in \NN$.
+\end{axiom}
+
+\begin{axiom}.
+$0,1 \in \NN$.
+\end{axiom}
+
+\begin{axiom}.
+If $a,b$ are natural numbers then $a+b$ is a natural number.
+\end{axiom}
+
+\begin{axiom}.
+If $a,b$ are natural numbers then $a \cdot b$ is a natural number.
+\end{axiom}
+
+\subsection{4. Finite Sets and Sequences}
+
+\begin{definition}.
+$\Seq{m}{n} =\{ number i  | (m \leq i \leq n) \}$.
+\end{definition}
+
+\begin{definition}.
+Let $d$ be a function such that $\Seq{m}{n} \subseteq \text{dom} d$. 
+$\Set{d}{m}{n} = \{ 1 | i \in \NN \wedge m \leq i \leq n \}$.
+\end{definition}
+
+\begin{definition}.
+$f$ {\bf enumerates} a set $X$ in $n$ steps iff
+$\Seq{1}{n} = \text{dom} f$ and $X=\Set{f}{1}{n}$.
+\end{definition}
+
+\begin{definition}.
+A set $X$ is {\bf finite} iff there is a function $f$ and a natural number $N$ such that $f$ enumerates $X$ in $n$ steps.
+\end{definition}
+
+\begin{definition}.
+A set $A$ is {\bf infinite} iff $A$ is not finite.
+\end{definition}
+
+\section{II. Prime Numbers}
+
+\subsection{1. Basics}
+
+%%[prime/-s] [compound/-s] [primenumber/-s]
+
+%%[divide/-s] [divisor/-s]
+
+\begin{definition}.
+$m$ {\bf divides} $n$ iff for some $l$ $n = m \cdot l$.
+Let $m | n$ denote $m$ divides $n$.
+Let a {\bf divisor} of $n$ denote a number that divides $n$.
+\end{definition}
+
+\begin{definition}.
+Assume that $m$ is nonzero and $m | n$.
+$\frac{n}{m}$ is a number $l$ such that $n = m \cdot l$.
+\end{definition}
+
+\begin{lemma}.
+$l | m | n \rightarrow l | n$.\end{lemma}
+
+\begin{lemma}.
+Let $l | m$ and $l | n$. Then $l | m + n$.
+Indeed if $l$ is nonzero then 
+$m + n = l \cdot (\frac{m}{l} + \frac{n}{l})$.
+\end{lemma}
+
+\begin{lemma}.
+Let $l | m$ and $l | m + n$. Then $l | n$.\end{lemma}
+\begin{proof}
+Assume that $l,n$ are nonzero.
+Take an integer number $p$ such that $m = l \cdot p$. 
+Take an integer number $q$ such that $m + n = l \cdot q$.
+
+Let us show that $p \leq q$.
+Assume the contrary. Then $q \leq p$.
+$m+n = l \cdot q \leq l \cdot p = m$. $m \leq m+n$.
+$m = m+n$. $n=0$.
+Contradiction. qed. 
+
+Take $r = q - p$.
+We have $(l \cdot p) + (l \cdot r) = (l \cdot p) + n$.
+Hence $n = l \cdot r$.
+\end{proof}
+
+
+\begin{definition}.
+$n$ is {\bf prime} iff $n$ is nontrivial and for every divisor
+$m$ of $n$ $m=1 \vee m=n$. Let $n$ is {\bf compound} stand for $n$
+is not prime.
+\end{definition}
+
+\begin{theorem}.
+Every nontrivial natural number has a prime divisor. \end{theorem}
+\begin{proof} By induction.
+Let $k$ be nontrivial.
+Case $k$ is prime. Obvious.
+Case $k$ is compound. Obvious.
+\end{proof}
+
+\begin{axiom}.
+Let $m \leq k \leq n$. Let $d$ be a function such that $\Seq{m}{n} \subseteq \text{dom} d$ and $\text{ran} d \subseteq \NN$.
+$d_k$ divides $\Product{d}{m}{n}$.
+\end{axiom}
+
+\subsection{2. The Infinitude of Primes}
+
+\begin{theorem}.
+The set of prime numbers is infinite.\end{theorem}
+\begin{proof}
+Let $A$ be a finite set of prime numbers.
+Take a function $q$ and a natural number $r$ such that $q$ enumerates
+$A$ in $r$ steps.
+Take $n=\Product{q}{1}{r}+1$.
+Take a prime divisor $p$ of $n$.
+
+Let us show that $p$ is not an element of $A$.
+Assume the contrary.
+Take $i$ such that ($1 \leq i \leq r$ and $p=\subs{q}{i}$).
+$\subs{q}{i}$ divides $\Product{q}{1}{r}$ (by MultProd).
+Indeed $\Seq{1}{r} \subseteq \text{dom} q$ and 
+$\text{ran} q \subseteq \NN$.
+Then $p$ divides $1$ (by DivMin). 
+Contradiction. qed.
+
+Hence $A$ is not the set of prime numbers.
+\end{proof}
+
+

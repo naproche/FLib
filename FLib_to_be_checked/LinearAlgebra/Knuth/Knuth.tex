@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+\usepackage{amsthm, amsmath, amssymb}
+\newtheorem{signature}{Signature}
+\newtheorem{signatures}{Signature}
+\newtheorem{axiom}{Axiom}
+\newtheorem{axioms}{Axioms}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{signaturep}{Signature}
+\newtheorem{axiomp}{Axiom}
+\newtheorem{definitionp}{Definition}
+\newtheorem{theoremp}{Theorem}
+ 
+\newcommand{\power}{{\cal P}} 
+\newcommand{\preimg}[2]{{#1}^{-1}[#2]} 
+\newcommand{\Seq}[2]{\{#1,\dots,#2\}}
+\newcommand{\Set}[3]{\{#1_{#2},\dots,#1_{#3}\}}
+\newcommand{\Product}[3]{\prod_{i=#2}^{#3}{#1}_i}
+\newcommand{\subfunc}[2]{{#1}_{#2}}
+\newcommand{\CC}{{\Bbb C}}
+\newcommand{\RR}{{\Bbb R}}
+\newcommand{\QQ}{{\Bbb Q}}
+\newcommand{\ZZ}{{\Bbb Z}} 
+\newcommand{\NN}{{\Bbb N}}
+\newcommand{\NNplus}{{\Bbb N}^+}
+
+\newcommand{\signatureitem}{\item}
+\newcommand{\axiomitem}{\item}
+\newcommand{\definitionitem}{\item}
+\newcommand{\lemmaitem}{\item}
+
+\title{Knuth's Exercise in Technical Writing in ForTheL (\LaTeX Version)}
+\author{Peter Koepke}
+
+\begin{document}
+\maketitle
+
+\subsubsection*{Preliminaries on Sets (Types)}
+
+\begin{signature} A \emph{type} is a set.
+Let $A,B,C$ stand for sets.
+Let $T$ stand for a type.
+Let $a : t$ stand for $a$ is an element of $t$.
+Let $a \in t$ stand for $a$ is an element of $t$.
+\end{signature}
+
+Let $x \neq y$ stand for $x != y$.
+
+\begin{signature} The \emph{empty set} is a set that has 
+no elements. Let $\emptyset$ stand for the empty set.
+\end{signature}
+
+\begin{definition} A \emph{subset of} $B$ is a set $A$ such
+that every element of $A$ is an element of $B$. 
+Let $A \subseteq B$ stand for $A$ is a subset of $B$.
+Let $A$ \emph{is contained in} $B$ stand for $A$ is a subset of $B$.
+Let $B$ \emph{contains} A stand for A is a subset of B.
+\end{definition}
+
+\subsubsection*{Preliminaries on Natural Numbers}
+
+[synonym number/numbers]
+\begin{signature} A \emph{natural number} is a notion.
+\end{signature}
+
+\begin{definition} $\NN$ is the set of natural numbers.
+Let i,j,k,l,m denote natural numbers.
+\end{definition}
+
+\begin{signature} $0$ is a natural number.
+\end{signature}
+
+\begin{signature} $1$ is a natural number.
+\end{signature}
+
+\begin{signature} $k + l$ is a natural number.
+\end{signature}
+
+\begin{signature} $k * l$ is a natural number.
+\end{signature}
+
+\begin{axiom} $k -<- k + 1$.
+\end{axiom}
+
+\begin{axiom} If $k \neq 0$ then there is $l$ 
+such that $k = l + 1$.
+\end{axiom}
+
+\begin{axiom} $k + 0 = k$.
+\end{axiom}
+
+\begin{axiom} $0 * l = 0$.
+\end{axiom}
+
+\begin{axiom} $(k + 1) * l = (k * l) + l$. 
+\end{axiom}
+
+\begin{signature} $k \leq l$ is an atom.
+\end{signature}
+
+\begin{axiom} $k \leq k$.
+\end{axiom}
+
+\begin{axiom} If $i \leq j \leq k$ then $i \leq k$.
+\end{axiom}
+
+\begin{axiom} If not $l \leq m$ then $m +1 \leq l$.
+\end{axiom} 
+
+\begin{axiom} If $i \leq j$ and $k \leq l$ then $i + k \leq j + l$.
+\end{axiom}
+
+\begin{axiom} If $i \leq j$ and $k \leq l$ then $i * k \leq j * l$.
+\end{axiom}
+
+\begin{axiom} (Archimedean Property) Assume that for every 
+$k \in \NN$
+$i + (k * l) \leq j + (k * m)$. Then $l \leq m$.
+\end{axiom}
+
+\subsubsection{Preliminaries on Functions and Sequences}
+
+\begin{axiom}[Functional Extensionality] Let $f,g$ be functions 
+such that $Dom(f) = Dom(g)$.
+If $f[i] = g[i]$ for all $i \in Dom(f)$ then $f = g$.
+\end{axiom}
+
+\begin{definition} A \emph{sequence of length} $l$ is a function 
+$a$ such that 
+$Dom(a) = \{i \in \NN \mid 1 \leq i \leq l\}$.
+\end{definition}
+
+\begin{definition} 
+$\NN^{l} = \{a \mid a \text{ is a sequence of length } l 
+\text{ such that } a[i] \in \NN 
+\text{ for all }i \in Dom(a)\}$.
+\end{definition}
+
+We fix a dimension or length:
+
+\begin{signature} $n$ is a natural number.
+Let $a,b,c,p$ denote elements of $\NN^{n}$.
+\end{signature}
+
+\begin{signature} $a ++ b$ is a sequence of length $n$
+such that $$(a ++ b)[i] = a[i] + b[i]$$ 
+for all $i \in Dom(a)$.
+\end{signature}
+
+\begin{signature} $0^{n}$ is a sequence of length $n$ such that
+$0^{n}[i] = 0$ for all $i \in Dom(0^{n})$.
+\end{signature}
+
+\begin{lemma} $c ++ 0^{n}$ is a sequence of length $n$
+and $c = c ++ (0^{n})$.
+\end{lemma}
+\begin{proof} For all $i \in Dom(c)$ 
+$c[i] = (c ++ 0^{n})[i]$. 
+$Dom(c) = Dom(c ++ 0^{n})$.
+\end{proof}
+
+\begin{signature} $k ** a$ is a sequence of length $n$ such that
+$(k ** a)[i] = k * a[i]$ for all $i \in Dom(a)$.
+\end{signature}
+
+\begin{lemma} $(l + 1) ** p = (l ** p) ++ p$.
+\end{lemma}
+\begin{proof} $(l ** p) ++ p \in \NN^{n}$.
+Let us show that for all elements $i of Dom(p)$ we have 
+$$((l + 1) ** p)[i] = ((l ** p) ++ p)[i].$$
+end.
+\end{proof}
+
+
+\subsubsection*{Preliminaries on Special Subsets of $\NN^{n}$} 
+
+\begin{signature} A \emph{submonoid} is a subset $Q$ of $\NN^{n}$
+such that $0^{n}\in Q$ and $a ++ b \in Q$ for all $a,b \in Q$.
+\end{signature}
+
+\begin{lemma} Let $Q$ be a submonoid and $p \in Q$. 
+Then for all natural numbers $k$ $k ** p \in Q$.
+\end{lemma}
+\begin{proof} (Proof by induction)
+Let $k$ be a natural number.
+
+(1) Case $k = 0$. Then $k ** p = 0^{n} \in Q$. end.
+
+(2) Case $k \neq 0$. Take $l$ such that $k = l + 1$. $l -<- k$ and
+$l ** p \in Q$.
+Then $k ** p = (l + 1) ** p = (l ** p) ++ p \in Q$. end.
+\end{proof}
+
+\begin{definition} $A(n) = \{a \in \NN^{n} \mid \text{for all } i,j\  
+(\text{if } 1 \leq i \leq j \leq n
+\text{ then } a[i] \leq a[j])\}$.
+\end{definition}
+
+\begin{signature} Let $P \subseteq \NN^{n}$. The 
+\emph{submonoid generated by} $P$ is
+a submonoid $Q$ such that $P$ is contained in $Q$ and
+$Q$ is contained in every submonoid that contains $P$.
+Let $P^{*}$ stand for the submonoid generated by $P$.
+\end{signature}
+
+\begin{definition} Let $A,B \subseteq \NN^{n}$.
+$A +++ B = \{a ++ b \mid a \in A \text{ and } b \in B\}$.
+\end{definition}
+
+\subsubsection*{The Lemma}
+
+\begin{lemma} Let $P,C \subseteq \NN^{n}$. Let $C \neq \emptyset$ and 
+$C +++ (P^{*}) \subseteq A(n)$.
+Then we have $C,P \subseteq A(n)$.
+\end{lemma}
+\begin{proof}
+We have $C \subseteq A(n)$. Indeed for all $c \in C$
+          $$c = c ++ 0^{n} \in (C +++ (P^{*})) \subseteq A(n).$$
+
+Let us show that $P \subseteq A(n)$. 
+Let $p \in P$.
+Let $i,j$ be natural numbers such that $1 \leq i \leq j \leq n$.
+Take $c \in C$. For all $k \in \NN$ we have
+$$c ++ (k ** p) \in C +++ (P^{*}) \subseteq A(n)$$ 
+and 
+$$c[i] + (k * p[i]) \leq c[j] + (k * p[j]).$$
+$p[i] \leq p[j]$ [using the  Archimedean Property]. end.
+\end{proof}
+
+
+
+
+\end{document}

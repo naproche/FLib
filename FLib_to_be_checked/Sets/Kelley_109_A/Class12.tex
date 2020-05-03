@@ -1,0 +1,195 @@
+\documentclass{scrartcl}
+\usepackage[english]{babel}
+\usepackage{enumerate, latexsym, amssymb, amsmath, amsthm}
+\usepackage{framed, multicol}
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
+%\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newtheorem*{axiom}{Axiom}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+\newtheorem*{signature}{Signature}
+\newtheorem*{proposition}{Proposition}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\event}{UITP 2018}
+\newcommand{\dom}{Dom}
+\newcommand{\fun}{aFunction}
+\newcommand{\sym}{sym}
+\newcommand{\halfline}{{\vspace{3pt}}}
+\newcommand{\tab}{{\hspace{1cm}}}
+\newcommand{\ball}[2]{B_{#1}(#2)}
+\newcommand{\llbracket}{[}
+\newcommand{\rrbracket}{]}
+\newcommand{\sing}[1]{\{{#1}\}}
+\newcommand{\pair}[2]{\{{#1},{#2}\}}
+\newcommand{\op}[2]{({#1},{#2})}
+\newcommand{\less}[1]{<_{#1}}
+\newcommand{\greater}[1]{>_{#1}}
+\newcommand{\leeq}[1]{{\leq}_{#1}}
+\newcommand{\supr}[1]{\mathrm{sup}_{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+
+\begin{document}
+
+\title{ELEMENTARY SET THEORY}
+
+\subtitle{An SAD3 Formalisation of the Appendix of \\"General Topology" 
+by John L. Kelley \\
+Relations and Preliminaries}
+
+\date{November 3, 2018}
+
+\maketitle
+
+
+\subsection{Preliminaries}
+
+\begin{forthel}
+
+[prove off]
+
+Let $x,y,z$ stand for \emph{classes}.
+
+
+[object/-s]
+\begin{signature}[Ontology] An object is a notion.
+Let $a,b,c,d,e$ stand for objects.
+\end{signature}
+
+Let $a \in x$ stand for $a$ is an \emph{element} of $x$.
+
+\begin{axiom} Every element of $x$ is an object. \end{axiom}
+
+\begin{axiom}[I]
+For each $x$ for each $y$ $x = y$ iff for each $z$ 
+$z \in x$ iff $z \in y$.
+\end{axiom}
+
+[set/-s]
+\begin{definition}[1] A \emph{set} is a class that is an object.
+\end{definition}
+
+
+\begin{definition}[2] $x \cup y = \{\text{object } u \mid u \in x \text{ or } u \in y \}$.
+\end{definition}
+
+\begin{definition}[3] $x \cap y = \{\text{object } u \mid u \in x \text{ and } u \in y \}$.
+\end{definition}
+
+\begin{definition}[25] 
+A \emph{subclass} of $y$ is a class $x$ such that each element of $x$ is an
+element of $y$. Let $x \subset y$ stand for $x$ is a subclass of $y$.
+Let $x$ is \emph{contained} in $y$ stand for $x \subset y$.
+\end{definition}
+
+\begin{theorem}[27] $x = y$ iff $x \subset y$ and $y \subset x$.
+\end{theorem}
+
+\begin{theorem}[28] If $x \subset y$ and $y \subset z$ then $x \subset z$.
+\end{theorem}
+
+\begin{signature}[48] $\op{a}{b}$ is an object.
+\end{signature}
+
+\begin{definition}[48a]
+An \emph{ordered pair} is an object $c$ such that there exist
+objects $a$ and $b$ such that $c = \op{a}{b}$.
+\end{definition}
+
+\begin{axiom}[55] If $\op{a}{b}=\op{c}{d}$ then
+$a = c$ and $b = d$.
+\end{axiom}
+
+\end{forthel}
+
+\subsection{Relations}
+
+\begin{forthel}
+
+[/prove]
+
+[relation/-s]
+\begin{definition}[56] A \emph{relation} is a class $r$ such that
+every element of $r$ is an ordered pair.
+\end{definition}
+
+Let $r,s,t$ stand for relations.
+
+\begin{definition}[57] 
+$r \circ s =
+\{\op{x}{z} \mid x,z \text{ are objects and there exists } b \text{ such that }
+\op{x}{b} \in s \text{ and } \op{b}{z} \in r\}$.
+\end{definition}
+
+\begin{theorem}[58] $(r \circ s) \circ t = r \circ (s \circ t)$.
+\end{theorem}
+\begin{proof} $(r \circ s) \circ t \subset r \circ (s \circ t)$ and
+$r \circ (s \circ t) \subset (r \circ s) \circ t$.
+\end{proof}
+
+
+\begin{theorem}[59a] $r \circ (s \cup t) = (r \circ s) \cup (r \circ t)$.
+\end{theorem}
+\begin{proof} $r \circ (s \cup t) \subset (r \circ s) \cup (r \circ t)$.
+$(r \circ s) \cup (r \circ t) \subset r \circ (s \cup t)$.
+\end{proof}
+
+\begin{theorem}[59b] $r \circ (s \cap t) \subset (r \circ s) \cap (r \circ t)$.
+\end{theorem}
+
+\begin{definition}[60] $r^{-1} = \{\op{b}{a} \mid a,b \text{ are objects and }
+\op{a}{b} \in r\}$.
+Let the \emph{relation inverse} to $r$ stand for $r^{-1}$.
+\end{definition}
+
+\begin{lemma} $r^{-1}$ is a relation.\end{lemma}
+
+\begin{theorem}[61] $(r^{-1})^{-1} = r$.
+\end{theorem}
+\begin{proof}
+$r \subset (r^{-1})^{-1}$.
+$(r^{-1})^{-1} \subset r$.
+\end{proof}
+
+\begin{lemma}[62a] Assume $r \subset s$. Then $r^{-1} \subset s^{-1}$.
+\end{lemma}
+
+\begin{lemma}[62b] $(r \circ s)^{-1} \subset (s^{-1}) \circ (r^{-1})$.
+\end{lemma}
+\begin{proof} Let $w \in (r \circ s)^{-1}$.
+Then $w \in (s^{-1}) \circ (r^{-1})$.
+\end{proof}
+
+\begin{lemma} $(s^{-1}) \circ (r^{-1}) \subset (r \circ s)^{-1}$.
+\end{lemma}
+\begin{proof}
+$((s^{-1}) \circ (r^{-1}))^{-1} \subset 
+((r^{-1})^{-1}) \circ ((s^{-1})^{-1})$ (by 62b) .
+$((s^{-1}) \circ (r^{-1}))^{-1} \subset 
+r \circ s$ (by 61) .
+$(((s^{-1}) \circ (r^{-1}))^{-1})^{-1} \subset 
+(r \circ s)^{-1}$ (by 62a).
+$(s^{-1}) \circ (r^{-1}) \subset (r \circ s)^{-1}$ (by 61).
+\end{proof}
+
+\begin{theorem}[62] $(r \circ s)^{-1} = (s^{-1}) \circ (r^{-1})$.
+\end{theorem}
+\begin{proof} $(r \circ s)^{-1} \subset (s^{-1}) \circ (r^{-1})$.
+$(s^{-1}) \circ (r^{-1}) \subset (r \circ s)^{-1}$.
+\end{proof}
+
+
+\end{forthel}
+
+
+\end{document}

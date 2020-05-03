@@ -1,0 +1,50 @@
+Formalizing Kelley-Morse Set Theory.
+
+Kelley-Morse Set Theory is a theory of sets and classes that can 
+serve as a foundation of mathematics. It is presented rather formally
+as a sequence of ca. 190 numbered Axioms, Definitions and Theorems 
+in the appendix of "General Topology" of Kelley. The formal
+basis ("ontology" of the current SAD3 system is close to 
+Kelley-Morse Set Theory.
+This suggests to formalize the appendix in SAD3.
+
+The text at hand poses some difficulties but it should eventually be
+possible to parse large parts of the axioms, definions and theorems
+verbatim. For complexity reasons it seems necessary to make some
+ontological changes to the text. Sets are defined in terms of classes,
+ordered pairs are complicated compositions of set operations.
+We have postulated objects, sets and classes. Classes are collections of
+objects; sets are classes that are objects themselves;
+ordered pairs of objects are objects. Other unstructured mathematical
+objects like elements of algebraic structures could be coded as objects.
+On the other hand, certain general operations will only be defined on
+objects, since we do not need ordered sets of classes.
+
+After that relations and functions can be defined as classes of
+ordered pairs. 
+
+The formalization runs smoothly on the complete text until the
+characteristic property of ordered pairs. Most claims can be checked 
+fully automatically. One can get further by
+thinning out the sets of premises for the proof checking process.
+I.e., later sections may only have a proper subset of the
+previous document as fundamental material.
+
+There are several tasks:
+
+- Continue the formalization, adding proofs to the document
+  if necessary.
+- Pushing through the whole document by brute force, possibly
+  using Vampire instead of Eprover.
+- LaTeX-input filtering or parsing.
+- Structuring the document like the original.
+- Extending ForTheL by the argumentative figures used in the original
+  so that the Kelley formulations are part of ForTheL.
+- Experiments with varying the text and/or ForTheL
+- ...
+
+Suggest project to Ayers, Frerix, Koepke for presentation/publication.
+Ayers will be at Bonn 29/10 - 11/11/18.
+
+Meetings of interest: Barcelona, Erlangen, Cambridge
+

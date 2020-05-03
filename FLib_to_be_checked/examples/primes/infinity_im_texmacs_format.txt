@@ -1,0 +1,31 @@
+<TeXmacs|1.0.7.4>
+
+<style|generic>
+
+<\body>
+  <assign|Seq|<macro|P|m|n|<math|{<arg|P><rsub|<arg|m>>,\<ldots\>,<arg|P><rsub|<arg|n>>}>>><assign|Prod|<macro|P|m|n|<math|<arg|P><rsub|<arg|m>>\<cdots\><arg|P><rsub|<arg|n>>>>>
+
+  <\theorem>
+    The set of prime numbers is infinite.
+  </theorem>
+
+  <\proof>
+    Let <math|A> be a finite set of prime numbers. Take a function <math|P>
+    and a number <math|r> such that <math|A=<Seq|P|1|r>>. Take
+    <math|n=<Prod|P|1|r>+1>. Take a prime divisor <math|p> of <math|n>. Let
+    us show that <math|p> is not an element of <math|A>. Assume the contrary.
+    Take <math|i> such that (<math|1\<leqslant\>i\<leqslant\>r> and
+    <math|p=P<rsub|i>>). <math|<Seq|P|1|r>\<subseteq\>Dom P> and <math|Ran
+    P\<subseteq\>\<bbb-N\>>. <math|P<rsub|i>> divides
+    <with|mode|math|<Prod|P|1|r>> (by MultProd). Then <math|p> divides
+    <math|1> (by DivMin). Contradiction. qed. Hence <math|A> is not the set
+    of prime numbers.
+  </proof>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|language|german>
+    <associate|page-type|a5>
+  </collection>
+</initial>

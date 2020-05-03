@@ -1,0 +1,2795 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>
+	Sed - An Introduction and Tutorial
+	</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META NAME="Description" CONTENT="Sed Tutorial"  >
+<META NAME="Keywords" CONTENT="sed, tutorial, unix, shell scripts, regular expressions, tr, linux, regex" >
+<META name="Author" content="Bruce Barnett">
+<!-- Place this tag in your head or just before your close body tag -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script><!-- Place this tag in your head or just before your close body tag -->
+</head>
+<body>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3246203470757260";
+//Ad1 728x90, created 12/24/07
+google_ad_slot = "5334774510";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<p><b>Thanks for making this the number #1 page in Google on 'sed'!</b> Also see my <a href="http://www.grymoire.com/Unix" title="Unix Tutorials">Unix Page</a>
+<p>
+My twitter handle is <a href="https://twitter.com/#!/grymoire">@grymoire</a>
+<p>Last update: Thu Oct  6 19:53:04 EDT 2011, 
+Check out my new <a href="SedChart.pdf">Sed Reference Chart</a> and <a href="http://blog.grymoire.com/wordpress-mu/2010/07/18/sed-and-tabs/" title="Sed tip">My blog post about sed and \t</a>
+<P>I moved the credits to the end to make this easier for those looking up answers
+<h1>Sed - An Introduction and Tutorial by Bruce Barnett <g:plusone></g:plusone></h1>
+
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="Sed.html#uh-0" name="toc-uh-0">The Awful Truth about sed</a>
+<li><a href="Sed.html#uh-1" name="toc-uh-1">The essential command: s for substitution</a>
+<li><a href="Sed.html#uh-2" name="toc-uh-2">The slash as a delimiter</a>
+<li><a href="Sed.html#uh-3" name="toc-uh-3">Using &amp; as the matched string</a>
+<li><a href="Sed.html#uh-4" name="toc-uh-4">Using \1 to keep part of the pattern</a>
+<li><a href="Sed.html#uh-5" name="toc-uh-5">Substitute Flags</a>
+<li><a href="Sed.html#uh-6" name="toc-uh-6">/g - Global replacement</a>
+<li><a href="Sed.html#uh-7" name="toc-uh-7">Is sed recursive?</a>
+<li><a href="Sed.html#uh-8" name="toc-uh-8">/1, /2, etc. Specifying which occurrence</a>
+<li><a href="Sed.html#uh-9" name="toc-uh-9">/p - print</a>
+<li><a href="Sed.html#uh-10" name="toc-uh-10">Write to a file with /w filename</a>
+<li><a href="Sed.html#uh-11" name="toc-uh-11">Combining substitution flags</a>
+<li><a href="Sed.html#uh-12" name="toc-uh-12">Arguments and invocation of sed</a>
+<li><a href="Sed.html#uh-13" name="toc-uh-13">Multiple commands with  -e command</a>
+<li><a href="Sed.html#uh-14" name="toc-uh-14">Filenames on the command line</a>
+<li><a href="Sed.html#uh-15" name="toc-uh-15">sed -n: no printing</a>
+<li><a href="Sed.html#uh-16" name="toc-uh-16">sed -f scriptname</a>
+<li><a href="Sed.html#uh-17" name="toc-uh-17">sed in shell script</a>
+<li><a href="Sed.html#uh-18" name="toc-uh-18">Quoting multiple sed lines in the C shell</a>
+<li><a href="Sed.html#uh-19" name="toc-uh-19">Quoting multiple sed lines in the Bourne shell</a>
+<li><a href="Sed.html#uh-20" name="toc-uh-20">A sed interpreter script</a>
+<li><a href="Sed.html#uh-21" name="toc-uh-21">Sed Comments</a>
+<li><a href="Sed.html#uh-22" name="toc-uh-22">Passing arguments into a sed script</a>
+<li><a href="Sed.html#uh-23" name="toc-uh-23">Using sed in a shell here-is document</a>
+<li><a href="Sed.html#uh-24" name="toc-uh-24">Multiple commands and order of execution</a>
+<li><a href="Sed.html#uh-25" name="toc-uh-25">Addresses and Ranges of Text</a>
+<li><a href="Sed.html#uh-26" name="toc-uh-26">Restricting to a line number</a>
+<li><a href="Sed.html#uh-27" name="toc-uh-27">Patterns</a>
+<li><a href="Sed.html#uh-28" name="toc-uh-28">Ranges by line number</a>
+<li><a href="Sed.html#uh-29" name="toc-uh-29">Ranges by patterns</a>
+<li><a href="Sed.html#uh-30" name="toc-uh-30">Delete with d</a>
+<li><a href="Sed.html#uh-31" name="toc-uh-31">Printing with p</a>
+<li><a href="Sed.html#uh-32" name="toc-uh-32">Reversing the restriction with !</a>
+<li><a href="Sed.html#uh-33" name="toc-uh-33">Relationships between d, p, and !</a>
+<li><a href="Sed.html#uh-34" name="toc-uh-34">The q or quit command</a>
+<li><a href="Sed.html#uh-35" name="toc-uh-35">Grouping with { and }</a>
+<li><a href="Sed.html#uh-36" name="toc-uh-36">Writing a file with the 'w' command</a>
+<li><a href="Sed.html#uh-37" name="toc-uh-37">Reading in a file with the 'r' command</a>
+<li><a href="Sed.html#uh-38" name="toc-uh-38">SunOS and the # Comment Command</a>
+<li><a href="Sed.html#uh-39" name="toc-uh-39">Adding, Changing, Inserting new lines</a>
+<li><a href="Sed.html#uh-40" name="toc-uh-40">Append a line with 'a'</a>
+<li><a href="Sed.html#uh-41" name="toc-uh-41">Insert a line with 'i'</a>
+<li><a href="Sed.html#uh-42" name="toc-uh-42">Change a line with 'c'</a>
+<li><a href="Sed.html#uh-43" name="toc-uh-43">Leading tabs and spaces in a sed script</a>
+<li><a href="Sed.html#uh-44" name="toc-uh-44">Adding more than one line</a>
+<li><a href="Sed.html#uh-45" name="toc-uh-45">Adding lines and the pattern space</a>
+<li><a href="Sed.html#uh-46" name="toc-uh-46">Address ranges and the above commands</a>
+<li><a href="Sed.html#uh-47" name="toc-uh-47">Multi-Line Patterns</a>
+<li><a href="Sed.html#uh-48" name="toc-uh-48">Print line number with =</a>
+<li><a href="Sed.html#uh-49" name="toc-uh-49">Transform with y</a>
+<li><a href="Sed.html#uh-50" name="toc-uh-50">Displaying control characters with a l</a>
+<li><a href="Sed.html#uh-51" name="toc-uh-51">Working with Multiple Lines</a>
+<li><a href="Sed.html#uh-nl" name="toc-uh-nl">Using newlines in sed scripts</a>
+<li><a href="Sed.html#uh-52" name="toc-uh-52">The Hold Buffer</a>
+<li><a href="Sed.html#uh-53" name="toc-uh-53">Exchange with x</a>
+<li><a href="Sed.html#uh-54" name="toc-uh-54">Example of Context Grep</a>
+<li><a href="Sed.html#uh-55" name="toc-uh-55">Hold with h or H</a>
+<li><a href="Sed.html#uh-56" name="toc-uh-56">Keeping more than one line in the hold buffer</a>
+<li><a href="Sed.html#uh-57" name="toc-uh-57">Get with g or G</a>
+<li><a href="Sed.html#uh-58" name="toc-uh-58">Flow Control</a>
+<li><a href="Sed.html#uh-59" name="toc-uh-59">Testing with t</a>
+<li><a href="Sed.html#uh-60" name="toc-uh-60">An alternate way of adding comments</a>
+<li><a href="Sed.html#uh-61" name="toc-uh-61">The poorly documented ;</a>
+<li><a href="Sed.html#uh-62" name="toc-uh-62">Passing regular expressions as arguments</a>
+<li><a href="Sed.html#uh-63" name="toc-uh-63">Command Summary</a>
+<li><a href="Sed.html#uh-64" name="toc-uh-64">In Conclusion</a>
+<li><a href="Sed.html#uh-65" name="toc-uh-65">More References</a>
+</ul>
+
+<p>Copyright 2001,2005,2007,2011 Bruce Barnett and General Electric Company
+<p>All rights reserved
+<p>You are allowed to print copies of this tutorial for your personal
+use, and link to this page, but you are not allowed to make electronic
+copies, or redistribute this tutorial in any form without permission.
+<p>
+<h1>Introduction to Sed</h1>
+<p>How to use sed, a special editor for modifying files automatically.
+If you want to write a program to make changes in a file, sed is the
+tool to use.
+
+<p>There are a few programs that are the real workhorse in the Unix
+toolbox.
+These programs are simple to use for simple applications, yet have a
+rich set of commands for performing complex actions.
+Don't let the complex potential of a program keep you from making use
+of the simpler aspects. This chapter, like all of the rest, start with
+the simple concepts and introduces the advanced topics later on.
+<br>
+A note on comments. When I first wrote this, most versions of sed
+did not allow you to place comments inside the script.
+Lines starting with the '#' characters are comments.
+Newer versions of sed may support comments at the end of the line as well.
+
+<p><h1><a name="uh-0" href="Sed.html#toc-uh-0">The Awful Truth about sed</a></h1>
+<p>
+<i>Sed</i> is the ultimate <b>s</b>tream <b>ed</b>itor. 
+If that sounds strange, picture a stream flowing through a pipe.
+Okay, you can't see a stream if it's inside a pipe.
+That's what I get for attempting a flowing analogy.
+You want literature, read James Joyce.
+<p>Anyhow, 
+<i>sed</i> is a marvelous utility.
+Unfortunately, most people never learn its real power.
+The language is very simple, but the
+documentation is terrible. The Solaris on-line manual pages for
+<i>sed</i> are five pages long, and
+two of those pages describe the 34 different errors you can get.
+A program that spends as much space documenting the errors than it
+does
+documenting the language has a serious learning curve.
+<p>
+<b>Do not fret!</b> It is not your fault you don't understand
+<i>sed</i>. I will cover 
+<i>sed</i> completely.
+But I will describe the features in the order that I learned them.
+I didn't learn everything at once. You don't need to either.
+<p><h1><a name="uh-1" href="Sed.html#toc-uh-1">The essential command: s for substitution</a></h1>
+<p>
+<i>Sed</i> has several commands, but most people only learn the substitute command:
+<i>s</i>. The substitute command changes all occurrences of the regular
+expression into a new value. A simple example is changing
+"day" in the "old" file to
+"night" in the "new" file:
+<p>
+<pre>
+sed s/day/night/ &lt;old &gt;new
+</pre>
+<p> Or another way (for Unix beginners), 
+<p>
+<pre>
+sed s/day/night/ old &gt;new
+</pre>
+<p>
+<p>and for those who want to test this:
+<p>
+<pre>
+echo day | sed s/day/night/ 
+</pre>
+<p>
+<p>This will output "night".
+<p>I didn't put quotes around the argument because this example didn't need them.
+If you read my earlier tutorial <a href="http:Quote.html">on quotes</a>, you would understand why it doesn't
+need quotes. However, I recommend you do use quotes.
+If you have meta-characters in the command, quotes are necessary.
+And if you aren't sure, it's a good habit, and I will henceforth quote future
+examples to emphasize the "best practice."
+Using the strong (single quote) character, that would be:
+<p>
+<pre>
+sed 's/day/night/' &lt;old &gt;new
+</pre>
+<p>
+<p> I must emphasize that the sed editor changes exactly what you tell it to.
+So if you executed
+<p>
+<pre>
+echo Sunday | sed 's/day/night/'
+</pre>
+<p>
+This would output the word "Sunnight" bacause sed found the string "day" in the input.
+<p>There are four parts to this substitute command:
+<pre>
+s	  Substitute command
+/../../	  Delimiter
+day	  Regular Expression Pattern Search Pattern
+night	  Replacement string
+</pre> 
+<p>The search pattern is on the left hand side and the replacement string is on the right hand side.
+<p>We've covered <a href="http://www.grymoire.com/Unix/Quote.html">
+quoting</a> and  
+<a href="http://www.grymoire.com/Unix/Regular.html"> regular expressions.</a>.
+That's 90% of the
+effort needed to learn the substitute command. 
+To put it another way, you already know how to handle 90% of the most
+frequent uses of 
+<i>sed.</i> There are a ... few fine points that an future sed expert should know about.
+(You just finished section 1. There's only 63 more sections to cover. :-)
+Oh. And you may want to bookmark this page, .... just in case you don't finish.
+
+<p><h1><a name="uh-2" href="Sed.html#toc-uh-2">The slash as a delimiter</a></h1>
+<p>The character after the 
+<i>s</i> is the delimiter. It is conventionally  a slash, because 
+this is what
+<i>ed</i>, 
+<i>more</i>, and
+<i>vi</i> use.
+It can be anything you want, however.
+If you want to change a pathname that contains a slash -  say /usr/local/bin to /common/bin - you could
+use the backslash to quote the slash:
+<p>
+<pre>
+sed 's/&#92/usr&#92/local&#92/bin/&#92/common&#92/bin/' &lt;old &gt;new
+</pre>
+<p>Gulp. Some call this a 'Picket Fence' and it's ugly. It is easier to read if you use an underline instead of a slash
+as a delimiter:
+<p>
+<pre>
+sed 's_/usr/local/bin_/common/bin_' &lt;old &gt;new
+</pre>
+<p>Some people use colons:
+<p>
+<pre>
+sed 's:/usr/local/bin:/common/bin:' &lt;old &gt;new
+</pre>
+<p>Others use the "|" character. 
+<p>
+<pre>
+sed 's|/usr/local/bin|/common/bin|' &lt;old &gt;new
+</pre>
+<p>
+Pick one you like. As long as it's not in the string you are looking for, anything goes. And remember that you need three delimiters. If you get a "Unterminated `s' command" it's because you are missing one of them.
+<p><h1><a name="uh-3" href="Sed.html#toc-uh-3">Using &amp; as the matched string</a></h1><p>Sometimes you want to search for a pattern and add some characters,
+like parenthesis,
+around or near
+the pattern you found. It is easy to do this if you are looking for a
+particular string:
+<p>
+<pre>
+sed 's/abc/(abc)/' &lt;old &gt;new
+</pre>
+<p>
+This won't work if you don't know exactly what you will find.
+How can you put the string you found in the replacement string 
+if you don't know what it is?
+<p>The solution requires the special character
+"&amp;." It corresponds to the pattern found.
+<p>
+<pre>
+sed 's/[a-z]*/(&amp;)/' &lt;old &gt;new
+</pre>
+<p>
+You can have any number of
+"&amp;" in the replacement string.
+You could also double a pattern, e.g.  the first number of a line:
+<p>
+<pre>
+% echo "123 abc" | sed 's/[0-9]*/&amp; &amp;/'
+123 123 abc
+</pre>
+<p>Let me slightly amend this example.  Sed will match the first string,
+and make it as greedy as possible.  The first match for '[0-9]*' is
+the first character on the line, as this matches zero of more
+numbers. So if the input was "abc 123" the output would be unchanged (well, except for a space before the letters).
+A better way to duplicate the number is to make sure it matches a number:
+
+<pre>
+% echo "123 abc" | sed 's/[0-9][0-9]*/&amp; &amp;/'
+123 123 abc
+</pre>
+<p> The string "abc" is unchanged, because it was not matched by the regular expression. If you wanted to eliminate "abc" from the output, you must expand the the regular expression to match the rest of the line and explicitly exclude part of the expression using "(", ")" and "\1", which is the next topic.
+<p>
+<p>A quick comment. The original sed did not support the "+" metacharacter. GNU sed does. It means "one or more matches". So the above could also be written using 
+<pre>
+% echo "123 abc" | sed 's/[0-9]+/&amp; &amp;/'
+123 123 abc
+</pre>
+
+<p><h1><a name="uh-4" href="Sed.html#toc-uh-4">Using \1 to keep part of the pattern</a></h1><p>I have already described the use of
+"(" 
+")" and
+"1" in my tutorial on <a href="http://www.grymoire.com/Unix/Regular.html">
+regular expressions.</a>
+To review, the escaped
+parentheses (that is, parentheses  with backslashes before them) remember portions of the regular expression. You can use this to exclude part of the regular expression.
+The
+"\1" is the first remembered pattern, and the
+"\2" is the second remembered pattern.
+Sed has up to nine remembered patterns.
+<p>
+If you wanted to keep the first word of a line, and delete the rest
+of the line,
+mark the important part with the parenthesis:
+<p>
+<pre>
+sed 's/\([a-z]*\).*/\1/'
+</pre>
+<p>I should elaborate on this. Regular exprssions are greedy, and try to match as much as possible. "[a-z]*" matches zero or more lower case letters, and tries to be as big as possible. The ".*" matches zero or more characters after the first match. Since the first one grabs all of the lower case letters, the second matches anything else. Therefore if you type
+<p>
+<pre>
+echo abcd123 | sed 's/\([a-z]*\).*/\1/'
+</pre>
+<p> This will output "abcd" and delete the numbers.
+<p>If you want to switch two words around, you can remember two patterns
+and
+change the order around:
+<p>
+<pre>
+sed 's/\([a-z]*\) \([a-z]*\)/\2 \1/'
+</pre>
+<p>Note the space between the two remembered patterns. This is used to
+make sure two words are found. However, this will do nothing if a
+single word is found, or any lines with no letters.
+You may want to insist that words have at least one letter by using
+<p>
+<pre>
+sed 's/\([a-z][a-z]*\) \([a-z][a-z]*\)/\2 \1/'
+</pre>
+<p>The
+"\1" doesn't have to be in the replacement string (in the right hand side). It can be in the pattern
+you are searching for (in the left hand side).
+If you want to eliminate duplicated words, you can try:
+<p>
+<pre>
+sed 's/\([a-z]*\) \1/\1/'
+</pre>
+<p>
+If you want to detect duplicated words, you can use 
+<pre>
+sed -n '/\([a-z][a-z]*\) \1/p'
+</pre>
+<p>This, when used as a filter, will print lines with duplicated words.
+<p>The numeric value can have up to nine values:
+"\1" thru
+"\9." 
+If you wanted to reverse the first three characters on a line, you can use
+<pre>
+sed 's/^\(.\)\(.\)\(.\)/\3\2\1/'
+</pre>
+<p><h1><a name="uh-5" href="Sed.html#toc-uh-5">Substitute Flags</a></h1><p>You can add additional flags after the last delimiter.
+These flags can specify what happens when there is more than one
+occurrence of a pattern on a single line, and what to do if a
+substitution is found. Let me describe them.
+<p><h1><a name="uh-6" href="Sed.html#toc-uh-6">/g - Global replacement</a></h1><p>Most Unix utilties work on files, reading a line at a time.
+<i>Sed</i>, by default, is the same way.
+If you tell it to change a word, it will only change the first
+occurrence of the word on a line.
+You may want to make the change on every word on the line instead of
+the first. For an example, let's place parentheses around words on a
+line.
+Instead of using a pattern like
+"[A-Za-z]*" which won't match words like
+"won't," we will use a pattern,
+"[^ ]*," that matches everything except a space.
+Well, this will also match anything because 
+"*" means 
+<b>zero or more</b>. The current version of 
+<i>sed</i> can get unhappy with patterns like this, and generate errors
+like
+"Output line too long" or even run forever.
+I consider this a bug, and have reported this to Sun.
+As a work-around, you must avoid matching the null string
+when using the
+"g" flag to 
+<i>sed</i>. A work-around example is:
+"[^ ][^ ]*." The following will put parenthesis around the first word:
+<p>
+<pre>
+sed 's/[^ ]*/(&amp;)/' &lt;old &gt;new
+</pre>
+<p>
+If you want it to make changes for every word, add a 
+"g" after the last delimiter and use the work-around:
+<p>
+<pre>
+sed 's/[^ ][^ ]*/(&amp;)/g' &lt;old &gt;new
+</pre>
+<p><h1><a name="uh-7" href="Sed.html#toc-uh-7">Is sed recursive?</a></h1>
+<p>
+<i>Sed</i> only operates on patterns found in the in-coming data.
+That is, the input line is read, and when a pattern is matched, the
+modified output is generated, and the
+<b>rest</b> of the input line is scanned. The
+"s" command will not scan the newly created output.
+That is, 
+you don't have to worry about expressions like:
+<p>
+<pre>
+sed 's/loop/loop the loop/g' &lt;old &gt;new
+</pre>
+<p>
+This will not cause an infinite loop.
+If a second
+"s" command is executed, it could modify the results of a previous
+command. I will show you how to execute multiple commands later.
+<p><h1><a name="uh-8" href="Sed.html#toc-uh-8">/1, /2, etc. Specifying which occurrence</a></h1><p>With no flags, the first pattern is changed.
+With the
+"g" option, all patterns are changed.
+If you want to modify a particular pattern that is not the first one on
+the line, you could use 
+"\(" and
+"\)" to mark each pattern, and use
+"\1" to put the first pattern back unchanged. This next example
+keeps the first word on the line but deletes the second:
+<p>
+<pre>
+sed 's/\([a-zA-Z]*\) \([a-zA-Z]*\) /\1 /' &lt;old &gt;new
+</pre>
+<p>Yuck. There is an easier way to do this. You can add a number after the
+substitution command to indicate you only want to match that particular
+pattern. Example:
+<p>
+<pre>
+sed 's/[a-zA-Z]* //2' &lt;old &gt;new
+</pre>
+<p>
+You can combine a number with the g (global) flag. For instance, if you want to leave the first world alone alone, but change the second, third, etc. to DELETED, use /2g:
+<p>
+<pre>
+sed 's/[a-zA-Z]* /DELETED /2g' &lt;old &gt;new
+</pre>
+<p>
+<p> Don't get /2 and \2 confused. The /2 is used at the end. \2 is used in inside the replacement field.
+<p>Note the space after the
+"*" character. Without the space, 
+<i>sed</i> will run a long, long time.
+(Note: this bug is probably fixed by now.)
+This is because the number flag and the
+"g" flag have the same bug.
+You should also be able to use the pattern
+<p>
+<pre>
+sed 's/[^ ]*//2' &lt;old &gt;new
+</pre>
+<p>but this also eats CPU.
+If this works on your computer, and it does on some Unix systems, you could 
+remove the encrypted password from the password file:
+<p>
+<pre>
+sed 's/[^:]*//2' &lt;/etc/passwd &gt;/etc/password.new
+</pre>
+<p>But this didn't work for me the time I wrote thise. Using
+"[^:][^:]*" as a work-around doesn't help because it won't match
+an non-existent password, and instead delete the third field, which is
+the user ID!
+Instead you have to use the ugly parenthesis:
+<p>
+<pre>
+sed 's/^\([^:]*\):[^:]:/\1::/'  &lt;/etc/passwd &gt;/etc/password.new
+</pre>
+<p>You could also add a character to the first pattern so that it
+no longer matches the null pattern:
+<p>
+<pre>
+sed 's/[^:]*:/:/2'  &lt;/etc/passwd &gt;/etc/password.new
+</pre>
+<p>The number flag is not restricted to a single digit. It can be any number
+from 1 to 512. If you wanted to add a colon after the 80th character
+in each line, you could type:
+<p>
+<pre>
+sed 's/./&amp;:/80' &lt;file &gt;new
+</pre>
+<p>
+You can also do it the hard way by using 80 dots:
+<p>
+<pre>
+sed 's/^................................................................................/&amp;:/' &lt;file &gt;new
+</pre>
+<p>
+<h1><a name="uh-9" href="Sed.html#toc-uh-9">/p - print</a></h1><p>By default, 
+<i>sed</i> prints every line.
+If it makes a substitution, the new text is printed instead of the
+old one.
+If you use an optional argument to sed, 
+"sed -n," it will not, by default, print any new lines.
+I'll cover this and other options later.
+When the
+"-n" option is used, the
+"p" flag will cause the modified line to be printed.
+Here is one way to duplicate the function of
+<i>grep</i> with
+<i>sed</i>: 
+<p>
+<pre>
+sed -n 's/pattern/&amp;/p' &lt;file
+</pre>
+<p>
+<h1><a name="uh-10" href="Sed.html#toc-uh-10">Write to a file with /w filename</a></h1><p>There is one more flag that can follow the third delimiter.
+With it, you can specify a file that will receive the modified data.
+An example is the following, which will write all lines that start
+with an even number, followed by a space, to the file
+<i>even</i>: 
+<br>
+<pre>
+sed -n 's/^[0-9]*[02468] /&amp;/w even' &lt;file 
+</pre>
+<p>
+<p>In this example, the output file isn't needed, as the
+input was not modified. 
+You must have exactly one space between the 
+<i>w</i> and the filename. You can also have ten files open with one
+instance of
+<i>sed</i>. This allows you to split up a stream of data into separate files.
+Using the previous example combined with multiple substitution
+commands described later, you could split a file into
+ten pieces depending on the last digit of the first number.
+You could also use this method to log error or debugging information
+to a special file.
+<p><h1><a name="uh-11" href="Sed.html#toc-uh-11">Combining substitution flags</a></h1><p>You can combine flags when it makes sense. 
+Also
+"w" has to be the last flag.
+For example the following command works:
+<p>
+<pre>
+sed -n 's/a/A/2pw /tmp/file' &lt;old &gt;new
+</pre>
+<p>Next I will discuss the options to 
+<i>sed</i>, and different ways to
+invoke
+<i>sed</i>. 
+<p><h1><a name="uh-12" href="Sed.html#toc-uh-12">Arguments and invocation of sed</a></h1><p>previously, I have only used one substitute command.
+If you need to make two changes, and you didn't want to read the
+manual, you could pipe together
+multiple 
+<i>sed</i> commands:
+<p>
+<pre>
+sed 's/BEGIN/begin/' &lt;old | sed 's/END/end/' &gt;new
+</pre>
+<p>This used two processes instead of one. A 
+<i>sed</i> guru 
+never uses two processes when one can do.
+<p><h1><a name="uh-13" href="Sed.html#toc-uh-13">Multiple commands with  -e command</a></h1><p>One method of combining multiple commands is to use a
+<i>-e</i> before each command:
+<p>
+<pre>
+sed -e 's/a/A/' -e 's/b/B/' &lt;old &gt;new
+</pre>
+<p>A
+"-e" isn't needed in the earlier examples because
+<i>sed</i> knows that there must always be one command.
+If you give
+<i>sed</i> one argument, it must be a command, and
+<i>sed</i> will edit the data read from standard input.
+<p>
+Also see <a href="Sed.html#uh-19">Quoting multiple sed lines in the Bourne shell</a>
+
+<p><h1><a name="uh-14" href="Sed.html#toc-uh-14">Filenames on the command line</a></h1><p>You can specify files on the command line if you wish.
+If there is more than one argument to
+<i>sed</i> that does not start with an option, it must be a filename.
+This next example will count the number of lines in three files
+that don't begin with a
+"#:" 
+<p>
+<pre>
+sed 's/^#.*//'  f1 f2 f3 | grep -v '^$' | wc -l
+</pre>
+<p>The
+<i>sed</i> substitute command changes every line that starts with a
+"#" into a blank line.
+<i>Grep</i> was used to filter out empty lines.
+<i>Wc</i> counts the number of lines left.
+<i>Sed</i> has more commands that make
+<i>grep</i> unnecessary. But I will cover that later.
+<p>Of course you could write the last example using the
+"-e" option:
+<p>
+<pre>
+sed -e 's/^#.*//'  f1 f2 f3 | grep -v '^$' | wc -l
+</pre>
+<p>There are two other options to 
+<i>sed.</i> 
+<p><h1><a name="uh-15" href="Sed.html#toc-uh-15">sed -n: no printing</a></h1><p>The
+"-n" option will not print anything unless an explicit request to print 
+is found. I mentioned the
+"/p" flag to the substitute command as one way to turn printing back on.
+Let me clarify this. The command
+<p>
+<pre>
+sed  's/PATTERN/&amp;/p' file
+</pre>
+<p>acts like the
+<i>cat</i> program if PATTERN is not in the file: e.g. nothing is changed.
+If PATTERN is in the file, then each line that has this is printed twice.
+Add the
+"-n" option and the example acts like grep:
+<p>
+<pre>
+sed -n 's/PATTERN/&amp;/p' file
+</pre>
+<p>
+Nothing is printed, except those lines with PATTERN included.
+<p><h1><a name="uh-16" href="Sed.html#toc-uh-16">sed -f scriptname</a></h1><p>If you have a large number of 
+<i>sed</i> commands, you can put them into a file and use
+<p>
+<pre>
+sed -f sedscript &lt;old &gt;new
+</pre>
+<p>where 
+<i>sedscript</i> could look like this:
+<p>
+<pre>
+# sed comment - This script changes lower case vowels to upper case
+s/a/A/g
+s/e/E/g
+s/i/I/g
+s/o/O/g
+s/u/U/g
+</pre>
+<P>When there are several commands in one file,
+each 
+command must be on a separate line.
+<P>
+Also see <a href="Sed.html#uh-20">here</a>
+<p><h1><a name="uh-17" href="Sed.html#toc-uh-17">sed in shell script</a></h1><p>If you have many commands and they won't fit neatly on one line, you
+can break up the line using a backslash:
+<p>
+<pre>
+sed -e 's/a/A/g' \
+    -e 's/e/E/g' \
+    -e 's/i/I/g' \
+    -e 's/o/O/g' \
+    -e 's/u/U/g'  &lt;old &gt;new
+</pre>
+<p>
+<h1><a name="uh-18" href="Sed.html#toc-uh-18">Quoting multiple sed lines in the C shell</a></h1><p>You can have a large, multi-line 
+<i>sed</i> script in the C shell, but you must tell the C shell that the quote is
+continued across several lines.
+This is done by placing a backslash at the end of each line:
+<p>
+<pre>
+#!/bin/csh -f
+sed 's/a/A/g  \
+s/e/E/g \
+s/i/I/g \
+s/o/O/g \
+s/u/U/g'  &lt;old &gt;new
+</pre>
+<p>
+<h1><a name="uh-19" href="Sed.html#toc-uh-19">Quoting multiple sed lines in the Bourne shell</a></h1><p>The Bourne shell makes this easier as a quote can cover several lines:
+<p>
+<pre>
+#!/bin/sh
+sed '
+s/a/A/g 
+s/e/E/g 
+s/i/I/g 
+s/o/O/g 
+s/u/U/g'  &lt;old &gt;new
+</pre>
+<p>
+<h1><a name="uh-20" href="Sed.html#toc-uh-20">A sed interpreter script</a></h1><p>Another way of executing 
+<i>sed</i> is to use an interpreter script.
+Create a file that contains:
+<br><br>#!/bin/sed -f<br>
+s/a/A/g<br>
+s/e/E/g<br>
+s/i/I/g<br>
+s/o/O/g<br>
+s/u/U/g<br>
+
+<p><br>Click here to get file: <a href="Scripts/CapVowel.sed">CapVowel.sed</a><br>
+If this script was stored in a file with the name
+"CapVowel" and was executable, you could use it with the simple command:
+<p>
+<pre>
+CapVowel &lt;old &gt;new
+</pre>
+<p>
+<h1><a name="uh-21" href="Sed.html#toc-uh-21">Comments</a></h1><p>
+<i>Sed</i> comments are lines where the first non-white character is a
+"#." On many systems, 
+<i>sed</i> can have only one comment, and it must be the first line of the script.
+On the Sun (1988 when I wrote this),
+you can have several comment lines anywhere in the script.
+Modern versions of Sed support this.
+If the first line contains exactly
+"#n" then this does the same thing as the
+"-n" option: turning off printing by default.
+This could not done with a
+<i>sed</i> interpreter script, because the first line must start with 
+"#!/bin/sed -f" as 
+I think
+"#!/bin/sed -nf" 
+generated an error. It works as I write this update in 2008.
+Note that 
+"#!/bin/sed -fn" 
+does not work because sed thinks the filename of the script is "n".
+
+However,
+<pre>
+"#!/bin/sed -nf" 
+</pre>
+<p>does work.
+
+<p><h1><a name="uh-22" href="Sed.html#toc-uh-22">Passing arguments into a sed script</a></h1><p>Passing a word into a shell script that calls 
+<i>sed</i> is easy if you remembered <a href="http://www.grymoire.com/Unix/Quote.html">my tutorial on the Unix quoting mechanism.</a>
+To review, you use the single quotes to turn quoting on and off.
+A simple shell script that uses
+<i>sed</i> to emulate grep is:
+<br><br>#!/bin/sh<br>
+sed -n 's/'$1'/&/p'<br>
+<br>
+However - there is a problem with this script.
+If you have a space as an argument, the script would cause a syntax error
+A better version would protect from this happening:
+
+<br><br>#!/bin/sh<br>
+sed -n 's/'"$1"'/&/p'<br>
+<br>
+
+<p><br>Click here to get file: <a href="Scripts/sedgrep.sed">sedgrep.sed</a><br>
+If this was stored in a file called
+<i>sedgrep</i>, you could type
+<p>
+<pre>
+sedgrep '[A-Z][A-Z]' &lt;file
+</pre>
+<p>
+This would allow sed to act as the grep command.
+<p><h1><a name="uh-23" href="Sed.html#toc-uh-23">Using sed in a shell here-is document</a></h1><p>You can use 
+<i>sed</i> to prompt the user for some parameters and then create a file with
+those parameters filled in.
+You could create a file with dummy values placed inside it, and use
+<i>sed</i> to change those dummy values. A simpler way is to use the
+"here is" document, which uses part of the shell script as if it were standard input:
+<pre>#!/bin/sh
+echo -n 'what is the value? '
+read value
+sed  's/XXX/'$value'/' &lt;&lt;EOF
+The value is XXX
+EOF
+</pre>
+<p>
+<p><br>Click here to get file: <a href="Scripts/sed_hereis.sed">sed_hereis.sed</a><br>
+When executed, the script says:
+<p>
+<pre>
+what is the value?
+</pre>
+<p>If you type in
+"123," the next line will be:
+<p>
+<pre>
+The value is 123
+</pre>
+<p>I admit this is a contrived example. 
+"Here is" documents can have values evaluated without the use of sed. This
+example does the same thing:
+<p>
+<pre>
+#!/bin/sh
+echo -n 'what is the value? '
+read value
+cat &lt;&lt;EOF
+The value is $value
+EOF
+</pre>
+<p>However, combining 
+"here is" documents with 
+<i>sed</i> can be useful for some complex cases.
+<br>
+Note that
+<br><br>
+sed  's/XXX/'$value'/' &lt;&lt;EOF<br>
+<br>
+will give a syntax error if the user types a space.
+Better form would be to use
+<br><br>
+sed  's/XXX/'"$value"'/' &lt;&lt;EOF<br>
+
+
+<p><h1><a name="uh-24" href="Sed.html#toc-uh-24">Multiple commands and order of execution</a></h1><p>As we explore more of the commands of
+<i>sed</i>, the commands will become complex, and the actual sequence can be
+confusing.
+It's really quite simple. Each line is read in. 
+Each command, in order specified by the user, has a chance to
+operate on the input line.
+After the substitutions are made, the next command has a chance
+to operate on the same line, which may have been modified by earlier
+commands.
+If you ever have a question, the best way to learn what will happen
+is to create a small example. If a complex command doesn't work, make
+it simpler. If you are having problems getting a complex script
+working, break it up into two smaller scripts and pipe the two scripts together.
+<p><h1><a name="uh-25" href="Sed.html#toc-uh-25">Addresses and Ranges of Text</a></h1><p>You have only learned one command, and you can see how
+powerful
+<i>sed</i> is.
+However, all it is doing is a
+<i>grep</i> and substitute.
+That is, the substitute command is treating each line
+by itself, without caring about nearby lines.
+What would be useful is the ability to restrict the operation
+to certain lines. Some useful restrictions might be:
+<dl><dd><br>
+
+<p><ul>
+<li>Specifying a line by its number.<br>
+<li>Specifying a range of lines by number.<br>
+<li>All lines containing a pattern.<br>
+<li>All lines from the beginning of a file to a regular expression<br>
+<li>All lines from a regular expression to the end of the file.<br>
+<li>All lines between two regular expressions.<br>
+</ul>
+</dl><p>
+<i>Sed</i> can do all that and more.
+Every command in
+<i>sed</i> can be proceeded by an address, range or restriction
+like the above examples. The restriction or address immediately
+precedes the command:
+<dl><dd><i>restriction</i> <i>command</i><br>
+
+</dl>
+<p><h1><a name="uh-26" href="Sed.html#toc-uh-26">Restricting to a line number</a></h1><p>The simplest restriction is a line number. If you wanted to delete the
+first number on line 3, just add a
+"3" before the command:
+<p>
+<pre>
+sed '3 s/[0-9][0-9]*//' &lt;file &gt;new
+</pre>
+<p>
+<h1><a name="uh-27" href="Sed.html#toc-uh-27">Patterns</a></h1><p>Many Unix utilities like
+<i>vi</i> and
+<i>more</i> use a slash to search for a regular expression.
+<i>Sed</i> uses the same convention, provided you terminate the expression with a
+slash.
+To delete the first number on all lines that
+start with a
+"#," use:
+<p>
+<pre>
+sed '/^#/ s/[0-9][0-9]*//'
+</pre>
+<p>I placed a space after the 
+"/<i>expression</i>/" so it is easier to read. It isn't necessary, but
+without it the command is harder to fathom.
+<i>Sed</i> does provide a few extra options when specifying regular expressions.
+But I'll discuss those later. 
+If the expression starts with a backslash, the next character is the
+delimiter. To use a comma instead of a slash, use:
+<p>
+<pre>
+sed '\,^#, s/[0-9][0-9]*//'
+</pre>
+<p>The main advantage of this feature is searching for slashes.
+Suppose you wanted to search for the string 
+"/usr/local/bin" and you wanted to change it for
+"/common/all/bin." You could use the backslash to escape the slash:
+<p>
+<pre>
+sed '/\/usr\/local\/bin/ s/\/usr\/local/\/common\/all/'
+</pre>
+<p>
+It would be easier to follow if you used an underline instead of
+a slash as a search. This example uses the underline in both the
+search command
+and the substitute command:
+<p>
+<pre>
+sed '\_/usr/local/bin_ s_/usr/local_/common/all_'
+</pre>
+<p>
+This illustrates why 
+<i>sed</i> scripts get the reputation for obscurity.
+I could be perverse and show you the example that will search for all
+lines that start with a
+"g," and change each
+"g" on that line to an
+"s:" 
+<p>
+<pre>
+sed '/^g/s/g/s/g'
+</pre>
+<p>
+Adding a space and using an underscore after the substitute command
+makes this 
+<b>much</b> easier to read:
+<p>
+<pre>
+sed '/^g/ s_g_s_g'
+</pre>
+<p>
+Er, I take that back. It's hopeless. 
+There is a lesson here: Use comments liberally in a
+<i>sed</i> script under SunOS.
+You may have to remove the comments to run the script under a
+different operating system, but you now know how to write a 
+<i>sed</i> script to do that very easily!
+Comments are a Good Thing.
+You may have understood the script perfectly when you wrote it. 
+But six months from now it could look like modem noise.
+<p><h1><a name="uh-28" href="Sed.html#toc-uh-28">Ranges by line number</a></h1><p>You can specify a range on line numbers by inserting a comma between
+the numbers. To restrict a substitution to the first 100 lines, you
+can use:
+<p>
+<pre>
+sed '1,100 s/A/a/'
+</pre>
+<p>
+If you know exactly how many lines are in a file, you can 
+explicitly state that number to perform the substitution on the rest
+of the file. In this case, assume you used
+<i>wc</i> to find out there are 532 lines in the file:
+<p>
+<pre>
+sed '101,532 s/A/a/'
+</pre>
+<p>
+An easier way is to use the special character
+"$," which means the last line in the file.
+<p>
+<pre>
+sed '101,$ s/A/a/'
+</pre>
+<p>
+The
+"$" is one of those conventions that mean
+"last" in utilities like
+<i>cat -e</i>, 
+<i>vi</i>, and
+<i>ed</i>. 
+"cat -e" 
+Line numbers are cumulative if several files are edited. That is,
+<p>
+<pre>
+sed '200,300 s/A/a/' f1 f2 f3 &gt;new
+</pre>
+<p>
+is the same as
+<p>
+<pre>
+cat f1 f2 f3 | sed '200,300 s/A/a/' &gt;new
+</pre>
+<p>
+<p><h1><a name="uh-29" href="Sed.html#toc-uh-29">Ranges by patterns</a></h1><p>You can specify two regular expressions as the range.
+Assuming a
+"#" starts a comment, you can search for a keyword,
+remove all comments until you see the second keyword.
+In this case the two keywords are
+"start" and
+"stop:" 
+<p>
+<pre>
+sed '/start/,/stop/ s/#.*//'
+</pre>
+<p>The first pattern turns on a flag that tells
+<i>sed</i> to perform the substitute command on every line.
+The second pattern turns off the flag.
+If the 
+"start" and
+"stop" pattern occurs twice, the substitution is done both times.
+If the
+"stop" pattern is missing, the flag is never turned off, and the
+substitution
+will be performed on every line until the end of the file.
+<p>You should know that if the 
+"start"
+pattern is found, the substitution occurs on the same line that contains 
+"start."
+This turns on a switch, which is line oriented. That is,
+the next line is read and the substitute command is checked.
+If it contains
+"stop"
+the switch is turned off. 
+Switches are line oriented, and not word oriented.
+<p>You can combine line numbers and regular expressions.
+This example will remove comments from the beginning of the file until
+it finds the keyword
+"start:" 
+<p>
+<pre>
+sed -e '1,/start/ s/#.*//'
+</pre>
+<p>
+This example will remove comments everywhere except the lines
+<b>between</b> the two keywords:
+<p>
+<pre>
+sed -e '1,/start/ s/#.*//' -e '/stop/,$ s/#.*//'
+</pre>
+<p>
+The last example has a range that overlaps the
+"/start/,/stop/" range, as both ranges operate on the lines that contain the keywords.
+I will show you later how to restrict a command up to, 
+<b>but not including</b> the line containing the specified pattern.
+<p>Before I start discussing the various commands, I should explain that
+some commands cannot operate on a range of lines. I will let you know
+when I mention the commands. In this next section I will describe three commands, one 
+of which cannot operate on a range.
+<p><h1><a name="uh-30" href="Sed.html#toc-uh-30">Delete with d</a></h1><p>Using ranges can be confusing, so you should expect to do some
+experimentation
+when you are trying out a new script. 
+A useful command deletes 
+every line that matches the restriction: 
+"d." If you want to look at the first 10 lines of a file, you can use:
+<p>
+<pre>
+sed '11,$ d' &lt;file 
+</pre>
+<p>
+which is similar in function to the
+<i>head</i> command.
+If you want to chop off the header of a mail message, which is
+everything up to the first blank line, use:
+<p>
+<pre>
+sed '1,/^$/ d' &lt;file
+</pre>
+<p>
+You can duplicate the function of the
+<i>tail</i> command, assuming you know the length of a file.
+<i>Wc</i> can count the lines, and
+<i>expr</i> can subtract 10 from the number of lines.
+A Bourne shell script to look at the last 10 lines of a file 
+might look like this:
+<br><br>#!/bin/sh<br>
+#print last 10 lines of file<br>
+# First argument is the filename<br>
+lines=`wc -l $1 | awk '{print $1}' `<br>
+start=`expr $lines - 10`<br>
+sed "1,$start d" $1<br>
+
+<p><br>Click here to get file: <a href="Scripts/sed_tail.sh">sed_tail.sh</a><br>
+The range for deletions can be regular expressions pairs to mark the
+begin and end of the operation.
+Or it can be a single regular expression.
+Deleting all lines that start with a
+"#" is easy:
+<p>
+<pre>
+sed '/^#/ d'
+</pre>
+<p>
+Removing comments and blank lines takes two commands.
+The first removes every character from the
+"#" to the end of the line, and the second deletes all blank lines:
+<p>
+<pre>
+sed -e 's/#.*//' -e '/^$/ d'
+</pre>
+<p>
+A third one should be added to remove all blanks and tabs
+immediately before the end of line:
+<p>
+<pre>
+sed -e 's/#.*//' -e 's/[ ^I]*$//' -e '/^$/ d' 
+</pre>
+<p>
+The character
+"^I" is a 
+<i>CTRL-I</i> or tab character.
+You would have to explicitly type in the tab.
+Note the order of operations above, which is in that order for a very
+good reason.
+Comments might start
+in the middle of a line, with white space characters before them.
+Therefore comments are first removed from a line, potentially leaving
+white space characters that were before the comment.
+The second command removes all trailing blanks, so
+that lines that are now blank are
+converted to empty lines.
+The last command deletes empty lines.
+Together, the three commands remove all lines containing only
+comments, tabs or spaces.
+<p>This demonstrates the pattern space
+<i>sed</i> uses to operate on a line.
+The actual operation 
+<i>sed</i> uses is:
+<dl><dd><br>
+
+<p><ul>
+<li>Copy the input line into the pattern space.<br>
+<li>Apply the first <br>
+<i>sed</i> command on the pattern space, if the address restriction is true.<br>
+<li>Repeat with the next sed expression, again<br>
+operating on the pattern space.<br>
+<li>When the last operation is performed, write out the pattern space<br>
+and read in the next line from the input file.<br>
+</ul>
+</dl>
+<p><h1><a name="uh-31" href="Sed.html#toc-uh-31">Printing with p</a></h1><p>Another useful command is the print command: 
+"p." If
+<i>sed</i> wasn't started with an
+"-n" option, the
+"p" command will duplicate the input. The command
+<p>
+<pre>
+sed 'p'
+</pre>
+<p>
+will duplicate every line. If you wanted to double every empty line,
+use:
+<p>
+<pre>
+sed '/^$/ p'
+</pre>
+<p>
+Adding the 
+"-n" option turns off printing unless you request it.
+Another way of duplicating
+<i>head</i>'s functionality is to print only the lines you want.
+This example prints the first 10 lines:
+<p>
+<pre>
+sed -n '1,10 p' &lt;file
+</pre>
+<p>
+<i>Sed</i> can act like
+<i>grep</i> by combining the print operator to function on all lines that 
+match a regular expression:
+<p>
+<pre>
+sed -n '/match/ p' 
+</pre>
+<p>
+which is the same as:
+<p>
+<pre>
+grep match
+</pre>
+<p><h1><a name="uh-32" href="Sed.html#toc-uh-32">Reversing the restriction with !</a></h1><p>Sometimes you need to perform an action on every line except 
+those that match a regular expression, or those outside of a range of
+addresses. The
+"!" character, which often means
+<i>not</i> in Unix utilities, inverts the address restriction.
+You remember that
+<p>
+<pre>
+sed -n '/match/ p'
+</pre>
+<p>
+
+acts like the 
+<i>grep</i> command. The
+"-v" option to
+<i>grep</i> prints all lines that don't contain the pattern.
+<i>Sed</i> can do this with
+<p>
+<pre>
+sed -n '/match/ !p' &lt;/tmp/b
+</pre>
+<p>
+<h1><a name="uh-33" href="Sed.html#toc-uh-33">Relationships between d, p, and !</a></h1><p>As you may have noticed, there are often several ways to 
+solve the same problem with 
+<i>sed</i>. This is because 
+<i>print</i> and
+<i>delete</i> are opposite functions, and
+it appears that
+"!p" is similar to
+"d," while
+"!d" is similar to 
+"p." I wanted to test this, so I created a 20 line file, and tried every
+different combination.
+The following table, which shows the results, 
+demonstrates the difference:
+<pre>
+Relations between d, p, and !
+  Sed	   Range   Command   Results
+  --------------------------------------------------------
+  sed -n   1,10	   p	     Print first 10 lines
+  sed -n   11,$	   !p	     Print first 10 lines
+  sed	   1,10	   !d	     Print first 10 lines
+  sed	   11,$	   d	     Print first 10 lines
+  --------------------------------------------------------
+  sed -n   1,10	   !p	     Print last 10 lines
+  sed -n   11,$	   p	     Print last 10 lines
+  sed	   1,10	   d	     Print last 10 lines
+  sed	   11,$	   !d	     Print last 10 lines
+  --------------------------------------------------------
+  sed -n   1,10	   d	     Nothing printed
+  sed -n   1,10	   !d	     Nothing printed
+  sed -n   11,$	   d	     Nothing printed
+  sed -n   11,$	   !d	     Nothing printed
+  --------------------------------------------------------
+  sed	   1,10	   p	     Print first 10 lines twice,
+			     Then next 10 lines once
+  sed	   11,$	   !p	     Print first 10 lines twice,
+			     Then last 10 lines once
+  --------------------------------------------------------
+  sed	   1,10	   !p	     Print first 10 lines once,
+			     Then last 10 lines twice
+  sed	   11,$	   p	     Print first 10 lines once,
+			     then last 10 lines twice</pre>
+<p>
+This table shows that the following commands are identical:
+<p>
+<pre>
+sed -n '1,10 p'
+sed -n '11,$ !p'
+sed '1,10 !d'
+sed '11,$ d'
+</pre>
+<p>
+It also shows that the
+"!" command "inverts" the address range, operating on the other lines.
+<p><h1><a name="uh-34" href="Sed.html#toc-uh-34">The q or quit command</a></h1><p>There is one more simple command that can restrict the changes to a
+set of lines. It is the
+"q" command: quit.
+the third way to duplicate the head command is:
+<p>
+<pre>
+sed '11 q'
+</pre>
+<p>
+which quits when the eleventh line is reached.
+This command is most useful when you wish to abort
+the editing after some condition is reached.
+<p>The
+"q" command is the one command that does not take a range of addresses.
+Obviously the command
+<p>
+<pre>
+sed '1,10 q'
+</pre>
+<p>
+cannot quit 10 times. Instead
+<p>
+<pre>
+sed '1 q'
+</pre>
+<p>
+or
+<p>
+<pre>
+sed '10 q'
+</pre>
+<p>
+is correct.
+<p>
+<p><h1><a name="uh-35" href="Sed.html#toc-uh-35">Grouping with { and }</a></h1><p>The curly braces, 
+"{" and
+"}," are used to group the
+commands.
+<p>Hardly worth the build up. All that prose and the solution is just
+matching squigqles. Well, there is one complication.
+Since each 
+<i>sed</i> command must start on its own line, the curly braces and the nested
+<i>sed</i> commands must be on separate lines.
+<p>Previously, I showed you how to remove comments starting with a 
+"#." If you wanted to restrict the removal to lines between special
+"begin" and
+"end" key words, you could use:
+<br><br><pre>#!/bin/sh
+# This is a Bourne shell script that removes #-type comments
+# between 'begin' and 'end' words.
+sed -n '
+	/begin/,/end/ {
+	     s/#.*//
+	     s/[ ^I]*$//
+	     /^$/ d
+	     p
+	}
+'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_begin_end.sh">sed_begin_end.sh</a><br>
+These braces can be nested, which allow you to combine address ranges.
+You could perform the same action as before, but limit the change to
+the first 100 lines:
+<br><br><pre>#!/bin/sh
+# This is a Bourne shell script that removes #-type comments
+# between 'begin' and 'end' words.
+sed -n '
+	1,100 {
+		/begin/,/end/ {
+		     s/#.*//
+		     s/[ ^I]*$//
+		     /^$/ d
+		     p
+		}
+	}
+'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_begin_end1.sh">sed_begin_end1.sh</a><br>
+You can place a
+"!" before a set of curly braces.
+This inverts the address, which removes comments from 
+all lines 
+<b>except</b> those between the two reserved words:
+<br><br>
+<pre>#!/bin/sh
+sed '
+	/begin/,/end/ !{
+	     s/#.*//
+	     s/[ ^I]*$//
+	     /^$/ d
+	     p
+	}
+'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_begin_end2.sh">sed_begin_end2.sh</a><br>
+<p><h1><a name="uh-36" href="Sed.html#toc-uh-36">Writing a file with the 'w' command</a></h1><p>You may remember that the substitute command can write to a file. Here again is the example that will only write lines that start with an even number (and followed by a space):
+<br>
+<pre>
+sed -n 's/^[0-9]*[02468] /&amp;/w even' &lt;file 
+</pre>
+<p>
+<p>I used the 
+"&amp;" in the replacement part of the substitution command so that the line
+would not be changed. A simpler example is to use the
+"w" command, which has the same syntax as the 
+"w" flag in the substitute command:
+<br>
+<pre>
+sed -n '/^[0-9]*[02468]/ w even' &lt;file
+</pre>
+<p>
+<p>Remember - only one space must follow the command.
+Anything else will be considered part of the file name.
+The
+"w" command also has the same limitation as the 
+"w" flag: only 10 files can be opened in 
+<i>sed</i>. 
+<p><h1><a name="uh-37" href="Sed.html#toc-uh-37">Reading in a file with the 'r' command</a></h1><p>There is also a command for reading files.
+The command
+<p>
+<pre>
+sed '$r end' &lt;in&gt;out
+</pre>
+<p>will append the file
+"end" at the end of the file (address
+"$)." The following will insert a file after the line with the word
+"INCLUDE:" 
+<p>
+<pre>
+sed '/INCLUDE/ r file' &lt;in &gt;out
+</pre>
+<p>
+You can use the curly braces to delete the line having the
+"INCLUDE" command on it:
+<br><br><pre>#!/bin/sh
+sed '/INCLUDE/ {
+	r file
+	d
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_include.sh">sed_include.sh</a><br>
+<p>The order of the delete command
+"d" and the read file command
+"r" is important. Change the order and it will not work.  
+There are two subtle actions that prevent this from working.
+The first is the
+"r" command writes the file to the output stream. The file
+is not inserted into the pattern space, and therefore cannot be
+modified by any command. Therefore the delete command does not affect
+the data read from the file.
+<p>The other subtlety is the
+"d" command deletes the current data in the pattern space.
+Once all of the data is deleted, it does make sense that no other
+action will be attempted. Therefore a
+"d" command executed in a curly brace also aborts all further actions.
+As an example, the substitute command below is never executed:
+<br><br><pre>#!/bin/sh
+# this example is WRONG
+sed -e '1 {
+	d
+	s/.*//
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_bad_example.sh">sed_bad_example.sh</a><br>
+<p>The earlier example is a crude version of the C preprocessor program.
+The file that is included has a predetermined name. It would be nice if
+<i>sed</i> allowed a variable (e.g 
+"\1)" instead of a fixed file name.
+Alas, 
+<i>sed</i> doesn't have this ability.
+You could work around this limitation by creating
+<i>sed</i> commands on the fly, or by using shell quotes to pass variables into
+the 
+<i>sed</i> script. Suppose you wanted to create a command that would include a
+file like
+<i>cpp</i>, but the filename is an argument to the script.
+An example of this script is:
+<p>
+<pre>
+% include 'sys/param.h' &lt;file.c &gt;file.c.new
+</pre>
+<p>
+A shell script to do this would be:
+<p>
+<pre>#!/bin/sh
+# watch out for a '/' in the parameter
+# use alternate search delimiter
+sed -e '\_#INCLUDE <'"$1"'>_{
+	r '"$1"'
+	d
+}'
+</pre>
+<p>
+
+Let me elaborate. If you had a file that contains
+<pre>
+Test first file
+#INCLUDE &lt;file1&gt;
+Test second file
+#INCLUDE &lt;file2&gt;
+</pre>
+<p>you could use the command
+<pre>
+sed_include1.sh file1&lt;input|sed_include1.sh file2
+</pre>
+<p>to include the specified files.
+
+
+<p><br>Click here to get file: <a href="Scripts/sed_include1.sh">sed_include1.sh</a><br>
+<p><h1><a name="uh-38" href="Sed.html#toc-uh-38">SunOS and the # Comment Command</a></h1><p>As we dig deeper into
+<i>sed</i>, comments will make the commands easier to follow.
+The older versions of
+<i>sed</i> only allow one line as a comment, and it must be the first line.
+SunOS (and GNU's sed) allows more than one comment, and these comments don't have to
+be first. 
+The last example could be:
+<br><br><pre>#!/bin/sh
+# watch out for a '/' in the parameter
+# use alternate search delimiter
+sed -e '\_#INCLUDE <'"$1"'>_{
+
+	# read the file
+	r '"$1"'
+
+	# delete any characters in the pattern space
+	# and read the next line in
+	d
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_include2.sh">sed_include2.sh</a><br>
+<p><h1><a name="uh-39" href="Sed.html#toc-uh-39">Adding, Changing, Inserting new lines</a></h1><p>
+<i>Sed</i> has three commands used to add new lines to the output stream.
+Because an entire line is added, the new line
+is on a line by itself to emphasize this.
+There is no option, an entire line is used, and it must be on its own
+line.
+If you are familiar with many unix utilities, you would expect 
+<i>sed</i> to use a similar convention: lines are continued by ending the
+previous line with a 
+"\". The syntax to these commands is finicky, like the
+"r" and
+"w" commands. 
+<p><h1><a name="uh-40" href="Sed.html#toc-uh-40">Append a line with 'a'</a></h1><p>The
+"a" command appends a line after the range or pattern.
+This example will add a line after every line with
+"WORD:" 
+<br><br><pre>#!/bin/sh
+sed '
+/WORD/ a\
+Add this line after every line with WORD
+'
+</pre>
+
+<p><br>Click here to get file: <a href="Scripts/sed_add_line_after_word.sh">sed_add_line_after_word.sh</a><br>
+<p>You could eliminate two lines in the shell script if you wish:
+<br><br><pre>#!/bin/sh
+sed '/WORD/ a\
+Add this line after every line with WORD'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_add_line_after_word1.sh">sed_add_line_after_word1.sh</a><br>
+<p>I prefer the first form because it's easier to add a new command
+by adding a new line
+and because the intent is clearer.
+There must not be a space after the
+"\". 
+<p><h1><a name="uh-41" href="Sed.html#toc-uh-41">Insert a line with 'i'</a></h1><p>You can insert a new line before the pattern with the
+"i" command:
+<br><br><pre>#!/bin/sh
+sed '
+/WORD/ i\
+Add this line before every line with WORD
+'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_add_line_before_word.sh">sed_add_line_before_word.sh</a><br>
+<p><h1><a name="uh-42" href="Sed.html#toc-uh-42">Change a line with 'c'</a></h1><p>You can change the current line with a new line.
+<br><br><pre>#!/bin/sh
+sed '
+/WORD/ c\
+Replace the current line with the line
+'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_change_line.sh">sed_change_line.sh</a><br>
+<p>A 
+"d" command followed by a
+"a" command won't work, as I discussed earlier.
+The
+"d" command would terminate the current actions.
+You can combine all three actions using curly braces:
+<br><br><pre>#!/bin/sh
+sed '
+/WORD/ {
+i\
+Add this line before
+a\
+Add this line after
+c\
+Change the line to this one
+}'
+</pre>
+
+<p><br>Click here to get file: <a href="Scripts/sed_insert_append_change.sh">sed_insert_append_change.sh</a><br>
+<p><h1><a name="uh-43" href="Sed.html#toc-uh-43">Leading tabs and spaces in a sed script</a></h1><p>
+<i>Sed</i> ignores leading tabs and spaces in all commands.
+However these white space characters may or may not be ignored 
+if they start the text following a
+"a," 
+"c" or
+"i" command. 
+In SunOS, both 
+"features" are available. The Berkeley (and Linux) style sed is in
+/usr/bin, and the AT&amp;T version (System V) is in /usr/5bin/.
+<p>To elaborate, the
+<b>/usr/bin/sed</b> command retains white space, while the
+<b>/usr/5bin/sed</b> strips off leading spaces.
+If you want to keep leading spaces, and not care about which version
+of
+<i>sed</i> you are using, put a
+"\" as the first character of the line:
+<p>
+<pre>
+#!/bin/sh
+sed '
+	a\
+\	This line starts with a tab
+'
+</pre>
+<p><h1><a name="uh-44" href="Sed.html#toc-uh-44">Adding more than one line</a></h1><p>All three commands will allow you to add more than one line.
+Just end each line with a
+"\:" 
+<p>
+<pre>
+#!/bin/sh
+sed '
+/WORD/ a\
+Add this line\
+This line\
+And this line
+'
+</pre>
+<p>
+<p>
+<h1><a name="uh-45" href="Sed.html#toc-uh-45">Adding lines and the pattern space</a></h1><p>I have mentioned the pattern space before. 
+Most commands operate on the pattern space, and subsequent commands
+may act on the results of the last modification.
+The three previous commands, like the read file command,
+add the new lines to the output stream, bypassing the pattern space.
+<p><h1><a name="uh-46" href="Sed.html#toc-uh-46">Address ranges and the above commands</a></h1><p>You may remember in my last tutorial I warned you that some 
+commands can take a range of lines, and others cannot.
+To be precise, the commands 
+"a," 
+"i," 
+"r," and
+"q" will not take a range like
+"1,100" or
+"/begin/,/end/." The documentation states that the read command can take a range, but I
+get an error when I try this. 
+The
+"c" or change command allows this, and it will let you change several
+lines into one:
+<p>
+<pre>
+#!/bin/sh
+sed '
+/begin/,/end/ c\
+***DELETED***
+'
+
+</pre>
+<p>If you need to do this, you can use the curly braces, as that will let
+you perform the operation on every line:
+<p>
+<pre>
+#!/bin/sh
+# add a blank line after every line
+sed '1,$ {
+	a\
+
+}'
+</pre>
+<p>
+<h1><a name="uh-47" href="Sed.html#toc-uh-47">Multi-Line Patterns</a></h1><p>
+<p>Most UNIX utilities are line oriented. Regular expressions are line
+oriented.
+Searching for patterns that
+covers more than one line is not an easy task. 
+(Hint: It will be very shortly.)
+<p>
+<i>Sed</i> reads in a line of text, performs commands which may modify the line,
+and outputs modification if desired. 
+The main loop of a
+<i>sed</i> script looks like this:
+<p><OL><li>The next line is read from the input file and places in the pattern
+space. If the end of file is found, and if there are additional files
+to read, the current file is closed, the next file is opened, and the
+first line of the new file is placed into the pattern space.
+<li>The line count is incremented by one. Opening a new file does not
+reset this number.
+<li>Each 
+<i>sed</i> command is examined. If there is a restriction placed on the command,
+and the current line in the pattern space meets that restriction, the
+command is executed. Some commands, like
+"n" or
+"d" cause 
+<i>sed</i> to go to the top of the loop. 
+The 
+"q" command causes
+<i>sed</i> to stop.
+Otherwise the next command is examined.
+<li>After all of the commands are examined, the pattern space is output
+unless 
+<i>sed</i> has the optional
+"-n" argument.
+</OL><p>The restriction before the command determines if the command is
+executed.
+If the restriction is a pattern, and the operation is the delete
+command, then the following will delete all lines that have the
+pattern:
+<p>
+<pre>
+/PATTERN/ d
+</pre>
+<p>If the restriction is a pair of numbers, then the deletion will happen
+if the line number is equal to the first number or greater than the
+first number and less than or equal to the last number:
+<p>
+<pre>
+10,20 d
+</pre>
+<p>
+If the restriction is a pair of patterns, there is a variable that is
+kept for each of these pairs.
+If the variable is false and the first pattern is found, the variable
+is made true. If the variable is true, the command is executed.
+If the variable is true, and the last pattern is on the line, after
+the command is executed the variable is turned off:
+<p>
+<pre>
+/begin/,/end/ d
+</pre>
+<p>Whew! That was a mouthful. If you have read carefully up to here, 
+you should have breezed through this.
+You may want to refer back, because I covered several
+subtle points. My choice of words was deliberate. It covers some
+unusual cases, like:
+<p>
+<pre>
+# what happens if the second number
+# is less than the first number?
+sed -n '20,1 p' file
+</pre>
+<p>
+and
+<p>
+<pre>
+# generate a 10 line file with line numbers
+# and see what happens when two patterns overlap
+yes | head -10 | cat -n | \
+sed -n -e '/1/,/7/ p' -e '/5/,/9/ p'
+</pre>
+<p>
+Enough mental punishment. Here is another review, this time in a table
+format.
+Assume the input file contains the following lines:
+<p>
+<pre>
+AB
+CD
+EF
+GH
+IJ
+</pre>
+<p>
+When
+<i>sed</i> starts up, the first line is placed in the pattern space.
+The next line is 
+"CD." The operations of the
+"n," 
+"d," and
+"p" commands can be summarized as:
+<pre>
++----------------+---------+------------------------------------------+
+|Pattern   Next	 | Command | Output	       New Pattern   New Next |
+|Space	   Input |	   |		       Space	     Input    |
++----------------+---------+------------------------------------------+
+|AB	   CD	 | n	   | &lt;default&gt;   	CD	     EF	      |
+|AB	   CD	 | d	   | -		       CD	     EF	      |
+|AB	   CD	 | p	   | AB		       CD	     EF	      |
++----------------+---------+------------------------------------------+</pre>
+
+<p>The
+"n" command may or may not generate output depending upon the existence of
+the
+"-n" flag.
+<p>That review is a little easier to follow, isn't it?
+Before I jump into multi-line patterns, I wanted to cover three more commands:
+
+<p><h1><a name="uh-48" href="Sed.html#toc-uh-48">Print line number with =</a></h1><p>
+The
+"=" command prints the current line number to standard output.
+One way to find out the line numbers that contain a pattern is to use:
+<p>
+<pre>
+# add line numbers first,
+# then use grep, 
+# then just print the number
+cat -n file | grep 'PATTERN' | awk '{print $1}'
+</pre>
+<p>
+The
+<i>sed</i> solution is:
+<p>
+<pre>
+sed -n '/PATTERN/ =' file
+</pre>
+<p>
+<p>Earlier I used the following to find the number of lines in a file
+<p>
+<pre>
+#!/bin/sh
+lines=`wc -l file | awk '{print $1}' `
+</pre>
+<p>
+Using the
+"=" command can simplify this:
+<p>
+<pre>
+#!/bin/sh
+lines=`sed -n '$=' file `
+</pre>
+<p>
+The
+"=" command only accepts one address, so if you want to print the number
+for
+a range of lines, you must use the curly braces:
+<p>
+<pre>
+#!/bin/sh
+# Just print the line numbers 
+sed -n '/begin/,/end/ {
+=
+d
+}' file
+
+</pre>
+<p>
+Since the 
+"=" command only prints to standard output, you cannot print the line
+number on the same line as the pattern. You need to edit multi-line
+patterns to do this.
+<p><h1><a name="uh-49" href="Sed.html#toc-uh-49">Transform with y</a></h1><p>If you wanted to change a word from lower case to upper case, you
+could write 26 character substitutions, converting
+"a" to
+"A," etc.
+<i>Sed</i> has a command that operates like the
+<i>tr</i> program. 
+It is called the
+"y" command.
+For instance, to change the letters 
+"a" through
+"f" into their upper case form, use:
+<p>
+<pre>
+sed 'y/abcdef/ABCDEF/' file
+</pre>
+<p>
+I could have used an example that converted all 26 letters into upper
+case, and while this column covers a broad range of topics, the 
+"column" prefers a narrower format.
+<p>If you wanted to convert a line that contained a hexadecimal number
+(e.g. 0x1aff) to
+upper case (0x1AFF), you could use:
+<p>
+<pre>
+sed '/0x[0-9a-zA-Z]*/ y/abcdef/ABCDEF' file
+</pre>
+<p>
+This works fine if there are only numbers in the file.
+If you wanted to change the second word in a line to upper case, you
+are out of luck - unless you use multi-line editing.
+(Hey - I think there is some sort of theme here!)
+<p><h1><a name="uh-50" href="Sed.html#toc-uh-50">Displaying control characters with a l</a></h1><p>The
+"l" command prints the current pattern space.
+It is therefore useful in debugging
+<i>sed</i> scripts. It also converts unprintable characters into
+printing characters by outputting the value in octal preceded by a
+"\" character.
+I found it useful to print out the current pattern space, while
+probing the subtleties of
+<i>sed</i>. 
+<p><h1><a name="uh-51" href="Sed.html#toc-uh-51">Working with Multiple Lines</a></h1><p>There are three new commands used in multiple-line patterns:
+"N," 
+"D," and
+"P." I will explain their relation to the matching 
+"n," 
+"d," and
+"p" single-line commands.
+<p>The
+"n" command will print out the current pattern space (unless the
+"-n" flag is used), empty the current pattern space, 
+and read in the next line of input.
+The
+"N" command does
+<b>not</b> print out the current pattern space and does
+<b>not</b> empty the pattern space. It reads in the next line, but appends a new
+line character along with the input line itself to
+the pattern space. 
+<p>The
+"d" command deleted the current pattern space, reads in the next line,
+puts the new line into the pattern space, and aborts the
+current 
+command, and starts execution at the first 
+<i>sed</i> command.
+This is called 
+starting a new 
+"cycle." The
+"D" command deletes the first portion of the pattern space, up to the new
+line character, leaving the rest of the pattern alone. Like
+"d," it stops the current command and starts the command cycle over again.
+However, it will not print the current pattern space. You must print
+it yourself, a step earlier.
+If the
+"D" command is executed with a group of other commands in a curly brace,
+commands after the 
+"D" command are ignored.
+The next group of 
+<i>sed</i> commands is executed, unless the pattern space is emptied.
+If this happens, the cycle is started from the top and a new line is
+read.
+<p>The
+"p" command prints the entire pattern space.
+The
+"P" command only prints the first part of the pattern space, up to the
+NEWLINE character. Neither the "p" nor the "P" command changes the patterns space.
+<p>Some examples might demonstrate 
+"N" by itself isn't very useful. the filter
+<p>
+<pre>
+sed -e 'N'
+</pre>
+<p>
+doesn't modify the input stream. Instead, it combines the first and
+second line, then prints them, combines the third and fourth line, and
+prints them, etc. It does allow you to use a new
+"anchor" character:
+"\n." This matches the new line character that separates multiple lines in
+the pattern space.
+If you wanted to search for a line that ended with the character
+"#," and append the next line to it, you could use
+<p>
+<pre>
+#!/bin/sh
+sed '
+# look for a "#" at the end of the line
+/#$/ {
+# Found one - now read in the next line
+	N
+# delete the "#" and the new line character, 
+	s/#\n//
+}' file
+</pre>
+<p>
+You could search for two lines containing 
+"ONE" and
+"TWO" and only print out the two consecutive lines:
+<pre>#!/bin/sh
+sed -n '
+/ONE/ {
+# found "ONE" - read in next line
+	N
+# look for "TWO" on the second line
+# and print if there.
+	/\n.*TWO/ p
+}' file
+</pre>
+<p>The next example would delete everything between
+"ONE" and 
+"TWO:" 
+<pre>
+#!/bin/sh
+sed '
+/ONE/ {
+# append a line
+	N
+# search for TWO on the second line	
+	/\n.*TWO/ {
+# found it - now edit making one line
+		s/ONE.*\n.*TWO/ONE TWO/
+	}
+}' file
+</pre>
+<p>You can either search for a particular pattern on two consecutive
+lines,
+or you can search for two consecutive words that may be split on a
+line boundary.
+The next example will look for two words which are either
+on the same line or one is on the end of a line and the second is on
+the beginning of the next line. If found, the first word is deleted:
+<pre>
+#!/bin/sh
+sed '
+/ONE/ {
+# append a line
+	N
+# "ONE TWO" on same line
+	s/ONE TWO/TWO/
+# "ONE
+# TWO" on two consecutive lines
+	s/ONE\nTWO/TWO/
+}' file
+</pre>
+<p>
+
+<p>Let's use the<br>
+
+"D" command, and if we find a line containing<br>
+
+"TWO" immediately after a line containing<br>
+
+"ONE," then delete the first line:<br>
+
+<br><br><pre>#!/bin/sh
+sed '
+/ONE/ {
+# append a line
+	N
+# if TWO found, delete the first line
+	/\n.*TWO/ D
+}' file
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_delete_line_after_word.sh">sed_delete_line_after_word.sh</a><br>
+<p>If we wanted to print the first line instead of deleting it,
+and not print every other line, change the 
+"D" to a
+"P" and add a 
+"-n" as an argument to 
+<i>sed</i>: 
+<br><br><pre>#!/bin/sh
+sed -n '
+# by default - do not print anything
+/ONE/ {
+# append a line
+	N
+# if TWO found, print the first line
+	/\n.*TWO/ P
+}' file
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_print_line_after_word.sh">sed_print_line_after_word.sh</a><br>
+<p>It is very common to combine all three multi-line
+commands. 
+The typical order is
+"N," 
+"P" and lastly
+"D." This one will delete everything between
+"ONE" and
+"TWO" if they are on one or two consecutive lines:
+<br><br><pre>#!/bin/sh
+sed '
+/ONE/ {
+# append the next line
+	N
+# look for "ONE" followed by "TWO"
+	/ONE.*TWO/ {
+#	delete everything between
+		s/ONE.*TWO/ONE TWO/
+#	print
+		P
+#	then delete the first line
+		D
+	}
+}' file
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_delete_between_two_words.sh">sed_delete_between_two_words.sh</a><br>
+<p>Earlier I talked about the
+"=" command, and using it to add line numbers to a file.
+You can use two invocations of
+<i>sed</i> to do this (although it is possible to do it with one, but that must
+wait until next section).
+The first 
+<i>sed</i> command will output a line number on one line, and then print the line
+on the next line.
+The second invocation of
+<i>sed</i> will merge the two lines together:
+<br><br><pre>#!/bin/sh
+sed '=' file | \
+sed '{
+	N
+	s/\n/ /
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_merge_two_lines.sh">sed_merge_two_lines.sh</a><br>
+<p>If you find it necessary, you can break one line into 
+two lines, edit them, and merge them together again.
+As an example, if you had a file that had a hexadecimal number
+followed by a word, and you wanted to convert the first word to all
+upper case, you can use the
+"y" command, but you must first split the line into two lines, change one
+of the two, and merge them together. 
+That is, a line containing
+<p>
+<pre>
+0x1fff table2
+</pre>
+<p>
+<p>will be changed into two lines:
+<p>
+<pre>
+0x1fff
+table2
+</pre>
+<p>and the first line will be converted into upper case.
+I will use
+<i>tr</i> to convert the space into a new line:
+<pre>
+#!/bin/sh
+tr ' ' '\012' file| 
+sed ' {
+	y/abcdef/ABCDEF/
+	N
+	s/\n/ /
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_split.sh">sed_split.sh</a><br>
+<p>It isn't obvious, but 
+<i>sed</i> could be used instead of 
+<i>tr</i>. You can embed a new line in a substitute command, but you must
+escape it with a backslash. 
+It is unfortunate that you must use
+"\n" in the left side of a substitute command, and an embedded new line
+in the right hand side. Heavy sigh.
+Here is the example:
+<pre>#!/bin/sh
+sed '
+s/ /\
+/' | \
+sed ' {
+	y/abcdef/ABCDEF/
+	N
+	s/\n/ /
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/sed_split_merge.sh">sed_split_merge.sh</a><br>
+<p>Sometimes I add a special character as a marker, and look for that
+character
+in the input stream. When found, it indicates the place a
+blank used to be. 
+A backslash is a good character, except it must be escaped with a
+backslash, and makes the
+<i>sed</i> script obscure. Save it for that guy who keeps asking dumb questions.
+The 
+<i>sed</i> script to change a blank into a
+"\" following by a new line would be:
+<br><br>#!/bin/sh<br>
+sed 's/ /\\\<br>
+/' file<br>
+
+<p><br>Click here to get file: <a href="Scripts/sed_addslash_before_blank.sh">sed_addslash_before_blank.sh</a><br>
+<p>Yeah. That's the ticket. Or use the C shell and really confuse him!
+<br><br>#!/bin/csh -f<br>
+sed '\<br>
+s/ /\\\\<br>
+/' file<br>
+
+<p><br>Click here to get file: <a href="Scripts/sed_addslash_before_blank.csh">sed_addslash_before_blank.csh</a><br>
+<p>A few more examples of that, and he'll never ask you a question again!
+I think I'm getting carried away. I'll summarize 
+with a chart that covers the features we've talked about:
+<pre>
++----------------+---------+------------------------------------------+
+|Pattern   Next	 | Command | Output	       New Pattern   New Next |
+|Space	   Input |	   |		       Space	     Input    |
++----------------+---------+------------------------------------------+
+|AB	   CD	 | n	   | &lt;default&gt;	  	 CD	     EF	      |
+|AB	   CD	 | N	   | -		       AB\nCD	     EF	      |
+|AB	   CD	 | d	   | -		       -	     EF	      |
+|AB	   CD	 | D	   | -		       -	     EF	      |
+|AB	   CD	 | p	   | AB		       AB	     CD	      | (Corrected)
+|AB	   CD	 | P	   | AB		       AB	     CD	      | (Corrected)
++----------------+---------+------------------------------------------+
+|AB\nCD	   EF	 | n	   | &lt;default&gt; 		  EF	     GH	      |
+|AB\nCD	   EF	 | N	   | -		       AB\nCD\nEF    GH	      |
+|AB\nCD	   EF	 | d	   | -		       EF	     GH	      |
+|AB\nCD	   EF	 | D	   | -		       CD	     EF	      |
+|AB\nCD	   EF	 | p	   | AB\nCD	       AB\nCD	     EF	      |
+|AB\nCD	   EF	 | P	   | AB		       AB\nCD	     EF	      |
++----------------+---------+------------------------------------------+</pre>
+
+<p>
+<p><h1><a name="uh-nl" href="Sed.html#toc-uh-nl">Using newlines in sed scripts</a></h1><p>
+
+Occasionally one wishes to use a new line character in a sed script.
+Well, this has some subtle issues here.
+If one wants to search for a new line, one has to use
+"\n."
+Here is an example where you search for a phrase, and delete the new line character after that phrase - joining two lines together. 
+<pre>
+(echo a;echo x;echo y) | sed '/x$/ {
+N
+s:x\n:x:
+}'
+</pre>
+<p>
+which generates
+<pre>
+a
+xy
+</pre>
+<p>
+However, if you are inserting a new line, don't use "\n" - instead insert a literal new line character:
+<pre>
+(echo a;echo x;echo y) | sed 's:x:X\
+:'
+</pre>
+<p>
+generates
+<pre>
+a
+X
+
+y
+</pre>
+<p><h1><a name="uh-52" href="Sed.html#toc-uh-52">The Hold Buffer</a></h1><p>So far we have talked about three concepts of 
+<i>sed</i>: (1) The input stream or data before it is modified,
+(2) the output stream or data after it has been modified, and
+(3) the pattern space, or buffer containing characters that can be
+modified and send to the output stream.
+<p>There is one more 
+"location" to be covered: the
+<i>hold buffer</i> or
+<i>hold space</i>. Think of it as a spare pattern buffer. It can be used to
+"copy" or
+"remember" the data in the pattern space for later.
+There are five commands that use the hold buffer.
+<p><h1><a name="uh-53" href="Sed.html#toc-uh-53">Exchange with x</a></h1><p>The 
+"x" command eXchanges the pattern space with the hold buffer.
+By itself, the command isn't useful. Executing the 
+<i>sed</i> command
+<p>
+<pre>
+sed 'x'
+</pre>
+<p>
+as a filter adds a blank line in the front, and deletes the last line.
+It looks like it didn't change the input stream significantly, but the
+<i>sed</i> command is modifying every line.
+<p>The hold buffer starts out containing a blank line.
+When the
+"x" command
+modifies the first line, line 1 is saved in the hold buffer, and
+the blank line takes the place of the first line.
+The second 
+"x" command exchanges the second line with the hold buffer, which contains
+the first line.  Each subsequent line is exchanged with the preceding
+line.
+The last line is placed in the hold buffer, and is not exchanged a
+second time, so it remains in the hold buffer when the program
+terminates, and never gets printed.
+This illustrates that care must be taken when storing data in the hold
+buffer, because it won't be output unless you explicitly request it. 
+<p><h1><a name="uh-54" href="Sed.html#toc-uh-54">Example of Context Grep</a></h1><p>One use of the hold buffer is to remember previous lines.
+An example of this is a utility that acts like 
+<i>grep</i> as it shows you the lines that match a pattern.
+In addition, it shows you the line before and after the pattern.
+That is, if line 8 contains the pattern, this utility would
+print lines 7, 8 and 9.
+<p>One way to do this is to see if the line has the pattern.
+If it does not have the pattern, put the current line in the hold
+buffer. 
+If it does, print the line in the hold buffer, then the current line,
+and then the next line. After each set, three dashes are printed.
+The script checks for the existence of an argument, and if
+missing, prints an error. Passing the argument into the
+<i>sed</i> script is done by turning off the single quote mechanism, inserting
+the
+"$1" into the script, and starting up the single quote again:
+<p>
+<br><br>
+<pre>#!/bin/sh
+# grep3 - prints out three lines around pattern
+# if there is only one argument, exit
+
+case $# in 
+	1);;
+	*) echo "Usage: $0 pattern";exit;;
+esac;
+# I hope the argument doesn't contain a /
+# if it does, sed will complain
+
+# use sed -n to disable printing 
+# unless we ask for it
+sed -n '
+'/$1/' !{
+	#no match - put the current line in the hold buffer
+	x
+	# delete the old one, which is 
+	# now in the pattern buffer
+	d
+}
+'/$1/' {
+	# a match - get last line
+	x
+	# print it
+	p
+	# get the original line back
+	x
+	# print it
+	p
+	# get the next line 
+	n
+	# print it
+	p
+	# now add three dashes as a marker
+	a\
+---
+	# now put this line into the hold buffer
+	x
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/grep3.sh">grep3.sh</a><br>
+<p>You could use this to show the three lines around a keyword, i.e.:
+<p>
+<pre>
+grep3 vt100 &lt;/etc/termcap
+</pre>
+<p>
+<h1><a name="uh-55" href="Sed.html#toc-uh-55">Hold with h or H</a></h1><p>The
+"x" command exchanges the hold buffer and the pattern buffer. Both are
+changed. The
+"h" command copies the pattern buffer into the hold buffer.
+The pattern buffer is unchanged. 
+An identical script to the above uses the hold commands:
+<p>
+<br><br>
+<pre>#!/bin/sh
+# grep3 version b - another version using the hold commands
+# if there is only one argument, exit
+
+case $# in 
+	1);;
+	*) echo "Usage: $0 pattern";exit;;
+esac;
+
+# again - I hope the argument doesn't contain a /
+
+# use sed -n to disable printing 
+
+sed -n '
+'/$1/' !{
+	# put the non-matching line in the hold buffer
+	h
+}
+'/$1/' {
+	# found a line that matches
+	# append it to the hold buffer
+	H
+	# the hold buffer contains 2 lines
+	# get the next line
+	n
+	# and add it to the hold buffer
+	H
+	# now print it back to the pattern space
+	x
+	# and print it.
+	p
+	# add the three hyphens as a marker
+	a\
+---
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/grep3a.sh">grep3a.sh</a><br>
+<p>
+<p><h1><a name="uh-56" href="Sed.html#toc-uh-56">Keeping more than one line in the hold buffer</a></h1><p>The
+"H" command allows you to combine several lines in the hold buffer.
+It acts like the
+"N" command as lines are appended to the buffer, with a
+"\n" between the lines.
+You can save several lines in the hold buffer, and print them only if
+a particular pattern is found later.
+<p>As an example, take a file that uses spaces as the first character of
+a line as a continuation character. The files
+<i>/etc/termcap</i>, 
+<i>/etc/printcap</i>, 
+<i>makefile</i> and mail messages use spaces or tabs to indicate a continuing of an
+entry.
+If you wanted to print the entry before a word, you could use this
+script. I use a
+"^I" to indicate an actual tab character:
+<p>
+<br><br>
+<pre>#!/bin/sh 
+# print previous entry
+sed -n '
+/^[ ^I]/!{
+	# line does not start with a space or tab,
+	# does it have the pattern we are interested in?
+	'/$1/' {
+		# yes it does. print three dashes
+		i\
+---
+		# get hold buffer, save current line
+		x
+		# now print what was in the hold buffer
+		p
+		# get the original line back
+		x
+	}
+	# store it in the hold buffer
+	h
+}
+# what about lines that start
+# with a space or tab?
+/^[ ^I]/ {
+	# append it to the hold buffer
+	H
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/grep_previous.sh">grep_previous.sh</a><br>
+<p>You can also use 
+the 
+"H" to extend the context grep. 
+In this example, 
+the program prints out the two lines before the pattern, instead of a
+single line.
+The method to limit this to two lines is to use the
+"s" command to keep one new line, and deleting extra lines.
+I call it
+<i>grep4</i>: 
+<p>
+<br><br>
+<pre>#!/bin/sh
+
+# grep4: prints out 4 lines around pattern
+# if there is only one argument, exit
+
+case $# in 
+	1);;
+	*) echo "Usage: $0 pattern";exit;;
+esac;
+
+sed -n '
+'/$1/' !{
+	# does not match - add this line to the hold space
+	H
+	# bring it back into the pattern space
+	x
+	# Two lines would look like .*\n.*
+	# Three lines look like .*\n.*\n.*
+	# Delete extra lines - keep two
+	s/^.*\n\(.*\n.*\)$/\1/
+	# now put the two lines (at most) into 
+	# the hold buffer again
+	x
+}
+'/$1/' {
+	# matches - append the current line
+	H
+	# get the next line
+	n
+	# append that one also
+	H
+	# bring it back, but keep the current line in
+	# the hold buffer. This is the line after the pattern,
+	# and we want to place it in hold in case the next line
+	# has the desired pattern
+	x
+	# print the 4 lines
+	p
+	# add the mark
+	a\
+---
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/grep4.sh">grep4.sh</a><br>
+You can modify this to print any number of lines around a pattern.
+As you can see, you must remember what is in the hold space, and what
+is in the pattern space. There are other ways to write the same
+routine.
+<p><h1><a name="uh-57" href="Sed.html#toc-uh-57">Get with g or G</a></h1><p>Instead of exchanging the hold space with the pattern space, you can
+copy the hold space to the pattern space with the
+"g" command.
+This deletes the pattern space. If you want to append
+to the pattern space, use the
+"G" command. This adds a new line to the pattern space, and copies the
+hold space after the new line.
+<p>Here is another version of the 
+"grep3" command. It works just like the previous one, but is implemented
+differently. This illustrates that
+<i>sed</i> has more than one way to solve many problems.
+What is important is you understand your problem, and document your solution:
+<p>
+<br><br>
+<pre>#!/bin/sh
+# grep3 version c: use 'G'  instead of H
+
+# if there is only one argument, exit
+
+case $# in 
+	1);;
+	*) echo "Usage: $0 pattern";exit;;
+esac;
+
+# again - I hope the argument doesn't contain a /
+
+sed -n '
+'/$1/' !{
+	# put the non-matching line in the hold buffer
+	h
+}
+'/$1/' {
+	# found a line that matches
+	# add the next line to the pattern space
+	N
+	# exchange the previous line with the 
+	# 2 in pattern space
+	x
+	# now add the two lines back
+	G
+	# and print it.
+	p
+	# add the three hyphens as a marker
+	a\
+---
+	# remove first 2 lines
+	s/.*\n.*\n\(.*\)$/\1/
+	# and place in the hold buffer for next time
+	h
+}'
+
+</pre>
+<p><br>Click here to get file: <a href="Scripts/grep3c.sh">grep3c.sh</a><br>
+<p>
+<p>The
+"G" command makes it easy to have two copies of a line.
+Suppose you wanted to the convert the first hexadecimal number to
+uppercase, and don't
+want to use the script I described in an earlier column
+<br><br>
+<pre>#!/bin/sh
+# change the first hex number to upper case format
+# uses sed twice
+# used as a filter
+# convert2uc &lt;in &gt;out
+sed '
+s/ /\
+/' | \
+sed ' {
+	y/abcdef/ABCDEF/
+	N
+	s/\n/ /
+}'
+</pre>
+
+<p><br>Click here to get file: <a href="Scripts/convert2uc.sh">convert2uc.sh</a><br>
+<p>
+<p>Here is a solution that does not require two invocations of
+<i>sed:</i> 
+<br><br><pre>#!/bin/sh
+# convert2uc version b
+# change the first hex number to upper case format
+# uses sed once
+# used as a filter
+# convert2uc &lt;in &gt;out
+sed '
+{
+	# remember the line
+	h
+	#change the current line to upper case
+	y/abcdef/ABCDEF/
+	# add the old line back
+	G
+	# Keep the first word of the first line, 
+	# and second word of the second line
+	# with one humongeous regular expression
+	s/^\([^ ]*\) .*\n[^ ]* \(.*\)/\1 \2/
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/convert2uc1.sh">convert2uc1.sh</a><br>
+Carl Henrik Lunde suggested a way to make this simpler. 
+I was working too hard.
+
+<br><br><pre>#!/bin/sh
+# convert2uc version b
+# change the first hex number to upper case format
+# uses sed once
+# used as a filter
+# convert2uc &lt;in &gt;out
+sed '
+{
+	# remember the line
+	h
+	#change the current line to upper case
+	y/abcdef/ABCDEF/
+	# add the old line back
+	G
+	# Keep the first word of the first line, 
+	# and second word of the second line
+	# with one humongeous regular expression
+	s/ .* / / # delete all but the first and last word
+}'
+</pre>
+<p><br>Click here to get file: <a href="Scripts/convert2uc2.sh">convert2uc2.sh</a><br>
+This example only converts the letters 
+"a" through
+"f" to upper case. This was chosen to make the script easier to
+print in these narrow columns. You can easily modify
+the script to convert all letters to uppercase, or to
+change the first letter, second word, etc.
+<p>
+<p><h1><a name="uh-58" href="Sed.html#toc-uh-58">Flow Control</a></h1><p>As you learn about 
+<i>sed</i> you realize that it has its own programming language.
+It is true that it's a very specialized and simple language.
+What language would be complete without a method of changing the flow
+control?
+There are three commands 
+<i>sed</i> uses for this.
+You can specify a label with an text string preceded by a colon.
+The 
+"b" command branches to the label.
+The label follows the command. If no label is there,
+branch to the end of the script.
+The 
+"t" command is used to test conditions. Before I discuss the
+"t" command, I will show you an example using the
+"b" command.
+<p>
+<p>This example remembers paragraphs, and if it contains the
+pattern (specified by an argument), 
+the script prints out the entire paragraph.
+<br><br><pre>#!/bin/sh
+sed -n '
+# if an empty line, check the paragraph
+/^$/ b para
+# else add it to the hold buffer
+H
+# at end of file, check paragraph
+$ b para
+# now branch to end of script
+b
+# this is where a paragraph is checked for the pattern
+:para
+# return the entire paragraph
+# into the pattern space
+x
+# look for the pattern, if there - print
+/'$1'/ p
+'
+</pre>
+
+<p><br>Click here to get file: <a href="Scripts/grep_paragraph.sh">grep_paragraph.sh</a><br>
+<p><h1><a name="uh-59" href="Sed.html#toc-uh-59">Testing with t</a></h1><p>You can execute a branch if a pattern is found.
+You may want to execute a branch only if a substitution is made.
+The command
+"t label" will branch to the label
+if the last substitute command modified the pattern space.
+<p>One use for this is recursive patterns.
+Suppose you wanted to remove white space inside parenthesis.
+These parentheses might be nested. That is, you would want to 
+delete a string that looked like 
+"(  (  (  ()))    )." The 
+<i>sed</i> expressions
+<p>
+<pre>
+sed 's/([ ^I]*)/g'
+</pre>
+<p>
+would only remove the innermost set. 
+You would have to pipe the data through the script four
+times to remove each set or parenthesis.
+You could use the regular expression
+<p>
+<pre>
+sed 's/([ ^I()]*)/g'
+</pre>
+<p>
+<p>but that would delete non-matching sets of parenthesis.
+The
+"t" command would solve this:
+<pre>
+#!/bin/sh
+sed '
+:again
+	s/([ ^I]*)//
+	t again
+'
+</pre>
+<p>
+An earlier version had a 'g' after the 's' expression. This is not needed.
+<p><br>Click here to get file: <a href="Scripts/delete_nested_parens.sh">delete_nested_parens.sh</a><br>
+<p><h1><a name="uh-60" href="Sed.html#toc-uh-60">An alternate way of adding comments</a></h1><p>There is one way to add comments in a 
+<i>sed</i> script if you don't have a version that supports it.
+Use the
+"a" command with the line number of zero:
+<br><br>
+<pre>#!/bin/sh
+sed '
+/begin/ {
+0i\
+	This is a comment\
+	It can cover several lines\
+	It will work with any version of sed
+}'
+</pre>
+
+<p><br>Click here to get file: <a href="Scripts/sed_add_comments.sh">sed_add_comments.sh</a><br>
+<p><h1><a name="uh-61" href="Sed.html#toc-uh-61">The poorly documented ;</a></h1><p>There is one more 
+<i>sed</i> command that 
+isn't well documented. It is the
+";" command. This can be used to combined several 
+<i>sed</i> commands on one line. 
+Here is the
+<i>grep4</i> script I described earlier, but without the
+comments or error checking and with semicolons between commands:
+<br><br>#!/bin/sh<br>
+sed -n '<br>
+'/$1/' !{;H;x;s/^.*\n\(.*\n.*\)$/\1/;x;}<br>
+'/$1/' {;H;n;H;x;p;a\<br>
+---<br>
+}'<br>
+
+<p><br>Click here to get file: <a href="Scripts/grep4a.sh">grep4a.sh</a><br>
+<p>Yessireebob! Definitely character building.
+I think I have made my point.
+As far as I am concerned, the only time the semicolon is useful
+is when you want to type the 
+<i>sed</i> script on the command line.
+If you are going to place it in a script, format it so it is readable.
+I have mentioned earlier that many versions of 
+<i>sed</i> do not support comments except on the first line.
+You may want to write your scripts with comments in them, and 
+install them in 
+"binary" form without comments.
+This should not be difficult. After all, you have become a 
+<i>sed</i> guru by now. I won't even tell you how to write a script to
+strip out comments. That would be insulting your intelligence.
+Also - some operating systems do NOT let you use semicolons.
+So if you see a script with semicolons, and it does not work on a non-Linux system, replace the semicolon with a new line character. (As long as you are not using csh/tcsh, but that's another topic.
+
+<p><h1><a name="uh-62" href="Sed.html#toc-uh-62">Passing regular expressions as arguments</a></h1><p>In the earlier scripts, I mentioned that 
+you would have problems if you passed an argument to the script that
+had a slash in it. In fact, regular expression might cause
+you problems. A script like the following is asking to be broken some
+day:
+<pre>#!/bin/sh
+sed 's/'"$1"'//g'
+</pre>
+<p>If the argument contains any of these characters in it, you may get
+a broken script:
+"/\.*[]^$" 
+For instance, if someone types a "/" then the substiture command will see four delimiters instead of three. You will also get syntax errors if you provide a "]" without a "]". 
+One solution is to have the user put a backslash before any of these characters when they pass it as an argument.
+However, the user has to know which characters are special.
+<br>
+Another solution is to add a backslash before each of those characters in the script
+<pre>
+#!/bin/sh
+arg=`echo "$1" | sed 's:[]\[\^\$\.\*\/]:\\\\&:g'`
+sed 's/'"$arg"'//g'
+</pre>
+
+<p><br>Click here to get file: <a href="Scripts/sed_with_regular_expressions1.sh">sed_with_regular_expressions1.sh</a><br>
+If you were searching for the pattern
+"^../," the script would convert this into
+"\^\.\.\/" before passing it to 
+<i>sed</i>. 
+<p><h1><a name="uh-63" href="Sed.html#toc-uh-63">Command Summary</a></h1><p>As I promised earlier, here is a table that summarizes the different
+commands.
+The second column specifies if the command can have a range or pair of
+addresses (with a 2) or a single address or pattern (with a 1).
+The next four columns specifies which of the four buffers or streams
+are modified by the command. Some commands only affect the output
+stream, others only affect the hold buffer.
+If you remember that the pattern space is output (unless a 
+"-n" was given to
+<i>sed</i>), this table should help you keep track of the various commands.
+<pre>
++--------------------------------------------------------+
+ |Command   Address		Modifications to	  |
+ |	    or Range   Input	Output	 Pattern   Hold	  |
+ |		       Stream	Stream	 Space	   Buffer |
+ +--------------------------------------------------------+
+ |=	    -	       -	Y	 -	   -	  |
+ |a	    1	       -	Y	 -	   -	  |
+ |b	    2	       -	-	 -	   -	  |
+ |c	    2	       -	Y	 -	   -	  |
+ |d	    2	       Y	-	 Y	   -	  |
+ |D	    2	       Y	-	 Y	   -	  |
+ |g	    2	       -	-	 Y	   -	  |
+ |G	    2	       -	-	 Y	   -	  |
+ |h	    2	       -	-	 -	   Y	  |
+ |H	    2	       -	-	 -	   Y	  |
+ |i	    1	       -	Y	 -	   -	  |
+ |l	    1	       -	Y	 -	   -	  |
+ |n	    2	       Y	*	 -	   -	  |
+ |N	    2	       Y	-	 Y	   -	  |
+ |p	    2	       -	Y	 -	   -	  |
+ |P	    2	       -	Y	 -	   -	  |
+ |q	    1	       -	-	 -	   -	  |
+ |r	    1	       -	Y	 -	   -	  |
+ |s	    2	       -	-	 Y	   -	  |
+ |t	    2	       -	-	 -	   -	  |
+ |w	    2	       -	Y	 -	   -	  |
+ |x	    2	       -	-	 Y	   Y	  |
+ |y	    2	       -	-	 Y	   -	  |
+ +--------------------------------------------------------+</pre>
+<p>
+The
+"n" command may or may not generate output, depending on the
+"-n" option. The 
+"r" command can only have one address, despite the documentation.
+<p>Check out my new <a href="SedChart.pdf">Sed Reference Chart</a>
+<p><h1><a name="uh-64" href="Sed.html#toc-uh-64">In Conclusion</a></h1><p>This concludes my tutorial on
+<i>sed</i>. It is possible to find shorter forms of some of my scripts.
+However, I chose these examples to illustrate some basic constructs.
+I wanted clarity, not obscurity.
+I hope you enjoyed it.
+<p>
+<p><h1><a name="uh-65" href="Sed.html#toc-uh-65">More References</a></h1><p>This concludes my tutorial on sed.
+Other of my Unix shell tutorials can be found 
+<a href="http://www.grymoire.com/Unix">here.</a>
+Other shell tutorials can be found at
+<a href="http://www.shelldorado.com/links/index.html#tutorials">Heiner's SHELLdorado</a>
+and 
+<a href="http://cfaj.freeshell.org/shell/">Chris F. A. Johnson's Unix Shell Page</a><br>
+<a href="http://en.wikipedia.org/wiki/Sed">The Wikipedia Entry on SED</a><br>
+<a href="http://student.northpark.edu/pemente/sed/sed1line.txt">SED one-liners</a><br>
+<p>And don't forget <a href="http://sed.sourceforge.net/sedfaq.html">The SED FAQ</a>
+
+<br>
+<br>This document was originally converted from NROFF to TEXT to HTML.
+<br> Please forgive errors in the translation.
+<br> If you are confused, grab the actual script if possible. No translations occurred in the scripts.
+<br>
+<h2>Thanks for the feedback, gang</h2>
+<p>
+<br>Thanks to Keelan Evans, Fredrik Nilsson, and Kurt McKee for spotting some typos.
+<br>Thanks to Wim Stolker and Jose' Sebrosa as well.
+<br>Thanks to Olivier Mengue.
+<br>Thanks to Andrew M. Goth.
+<br>Thanks to David P. Brown.
+<br> Thanks to Axel Schulze for some corrections
+<br> Thanks to Martin Jan for the corrections in sed format (grin)
+<br>A big thanks for Fazl Rahman for spotting dozens of errors.
+<br> Thanks to Carl Henrik Lunde who suggested an improvement to convert2uc1.sh
+<br> A big thanks to Bryan Hyun Huh who spotted an error in the table and reference chart
+<br> Thanks for input from
+<pre>
+	Marten Jan
+	Gordon Wilson
+	Tom Konantz
+	Peter Bratton
+	Grant Root
+	Keith Briggs
+    Zoltan Miklos
+	Peggy Russell
+	Lorens Kockkum.net
+	John Poulin
+	Rihards
+	Corey Richardson
+	Eric Mathison
+	Ildar Mulyukov 
+
+</pre>
+<p><I>This document was translated by troff2html v0.21 on September 22, 2001 and then manually edited to make it compliant with:</I>
+
+      <a href="http://validator.w3.org/check?uri=referer"><img
+          src="http://www.w3.org/Icons/valid-html401"
+          alt="Valid HTML 4.01!" height="31" width="88"></a>
+    </p>
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20908972-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

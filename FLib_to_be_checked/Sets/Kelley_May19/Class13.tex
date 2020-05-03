@@ -1,0 +1,264 @@
+\documentclass{scrartcl}
+\usepackage[english]{babel}
+\usepackage{enumerate, latexsym, amssymb, amsmath, amsthm}
+\usepackage{framed, multicol}
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
+%\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newtheorem*{axiom}{Axiom}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+\newtheorem*{signature}{Signature}
+\newtheorem*{proposition}{Proposition}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\event}{UITP 2018}
+\newcommand{\dom}{Dom}
+\newcommand{\fun}{aFunction}
+\newcommand{\sym}{sym}
+\newcommand{\halfline}{{\vspace{3pt}}}
+\newcommand{\tab}{{\hspace{1cm}}}
+\newcommand{\ball}[2]{B_{#1}(#2)}
+\newcommand{\llbracket}{[}
+\newcommand{\rrbracket}{]}
+\newcommand{\sing}[1]{\{{#1}\}}
+\newcommand{\pair}[2]{\{{#1},{#2}\}}
+\newcommand{\op}[2]{({#1},{#2})}
+\newcommand{\less}[1]{<_{#1}}
+\newcommand{\greater}[1]{>_{#1}}
+\newcommand{\leeq}[1]{{\leq}_{#1}}
+\newcommand{\supr}[1]{\mathrm{sup}_{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+
+\begin{document}
+
+\title{ELEMENTARY SET THEORY}
+
+\subtitle{An SAD3 Formalisation of the Appendix of \\"General Topology" 
+by John L. Kelley \\
+Functions and Preliminaries}
+
+\date{November 3, 2018}
+
+\maketitle
+
+
+\subsection{Preliminaries}
+
+\begin{forthel}
+
+[prove off]
+
+Let $x,y,z$ stand for \emph{classes}.
+
+
+[object/-s]
+\begin{signature}[Ontology] An object is a notion.
+Let $a,b,c,d,e,u,v$ stand for objects.
+\end{signature}
+
+Let $a \in x$ stand for $a$ is an \emph{element} of $x$.
+
+\begin{axiom} Every element of $x$ is an object. \end{axiom}
+
+\begin{axiom}[I]
+For each $x$ for each $y$ $x = y$ iff for each $z$ 
+$z \in x$ iff $z \in y$.
+\end{axiom}
+
+[set/-s]
+\begin{definition}[1] A \emph{set} is a class that is an object.
+\end{definition}
+
+
+\begin{definition}[2] $x \cup y = \{\text{object } u \mid u \in x \text{ or } u \in y \}$.
+\end{definition}
+
+\begin{definition}[23] $\bigcup x = 
+\{object u \mid \text{ for some } y (y \in x \text{ and } u \in y)\}$.
+Let the \emph{union} of $x$ stand for $\bigcup x$.
+\end{definition}
+
+\begin{definition}[25] 
+A \emph{subclass} of $y$ is a class $x$ such that each element of $x$ is an
+element of $y$. Let $x \subset y$ stand for $x$ is a subclass of $y$.
+Let $x$ is \emph{contained} in $y$ stand for $x \subset y$.
+\end{definition}
+
+\begin{theorem}[27] $x = y$ iff $x \subset y$ and $y \subset x$.
+\end{theorem}
+
+\begin{theorem}[28] If $x \subset y$ and $y \subset z$ then $x \subset z$.
+\end{theorem}
+
+\begin{axiom}[III] If $x$ is a set then there is a set $y$ such that for each
+$z$ if $z \subset x$ then $z \in y$.
+\end{axiom}
+
+\begin{theorem}[33] If $x$ is a set and $z \subset x$ then $z$ is a set.
+\end{theorem}
+
+\begin{definition}[36] $2^{x} = \{\text{set } y \mid y \subset x\}$.
+\end{definition}
+
+\begin{theorem}[38a] If $x$ is a set then $2^{x}$ is a set.
+\end{theorem}
+\begin{proof} Let $x$ be a set.
+Take a set $y$ such that for each $z$ 
+if $z \subset x$ then $z \in y$ (by III).
+Then $2^{x} \subset y$.
+\end{proof}
+
+\begin{definition}[40] $\sing{a} = \{a\}$.
+\end{definition}
+
+\begin{signature}[48] $\op{a}{b}$ is an object.
+\end{signature}
+
+\begin{definition}[48a]
+An \emph{ordered pair} is an object $c$ such that there exist
+objects $a$ and $b$ such that $c = \op{a}{b}$.
+\end{definition}
+
+\begin{axiom}[55] If $\op{a}{b}=\op{c}{d}$ then
+$a = c$ and $b = d$.
+\end{axiom}
+
+
+[relation/-s]
+\begin{definition}[56] A \emph{relation} is a class $r$ such that
+every element of $r$ is an ordered pair.
+\end{definition}
+
+Let $r,s,t$ stand for relations.
+
+\begin{definition}[57] 
+$r \circ s =
+\{\op{x}{z} \mid x,z \text{ are objects and there exists } b \text{ such that }
+\op{x}{b} \in s \text{ and } \op{b}{z} \in r\}$.
+\end{definition}
+
+
+\end{forthel}
+
+\subsection{Functions (Maps)}
+
+Since "function" is predefined in SAD3, we use the word "map" instead.
+
+\begin{forthel}
+[/prove]
+[map/-s]
+\begin{definition}[63] A \emph{map} is a relation $f$ such that for each
+$a,b,c$ if $\op{a}{b} \in f$ and $\op{a}{c} \in f$ then $b = c$.
+Let $f,g$ stand for maps.
+\end{definition}
+
+\begin{theorem}[64] If $f, g$ are maps then $f \circ g$ is a map.
+\end{theorem}
+
+\begin{definition}[65] ${\rm domain} f = \{\text{object } u \mid 
+\text{ there exists an object } v \text{ such that } \op{u}{v} \in f\}$.
+\end{definition}
+
+\begin{definition}[66] ${\rm range} f =  \{\text{object } v \mid 
+\text{ there exists an object } u \text{ such that } \op{u}{v} \in f\}$.
+\end{definition}
+
+\begin{signature}[68] Let $u \in {\rm domain} f$.
+The value of $f$ at $u$ is an object $v$ such that $\op{u}{v} \in f$.
+Let $f(u)$ stand for the value of $f$ at $u$.
+\end{signature}
+
+\begin{theorem}[70] Let $f$ be a map. Then 
+$f = \{\op{u}{f(u)} \mid u \in {\rm domain} f\}$.
+\end{theorem}
+
+\begin{theorem}[71] 
+Assume ${\rm domain} f = {\rm domain} g$ and
+for every element $u$ of ${\rm domain} f$  $f(u) = g(u)$.
+Then $f = g$.
+\end{theorem}
+
+\begin{axiom}[V] If $f$ is a map and ${\rm domain} f$ is a set 
+then ${\rm range} f$ is a set.
+\end{axiom}
+
+\begin{axiom}[VI] If $x$ is a set then $\bigcup x$ is a set.
+\end{axiom}
+
+\begin{definition}[72] $x \times y = 
+\{\op{u}{v} \mid u \in x \text{ and } v \in y\}$.
+\end{definition}
+
+\begin{theorem}[73] Let $u$ be an object. Let $y$ be a set.
+Then $\sing{u} \times y$ is a set.
+\end{theorem}
+\begin{proof} Define
+$f = \{\op{w}{v} \mid w \in y \text{ and } v = \op{u}{w}\}$.
+$f$ is a map. 
+${\rm domain} f = y$.
+${\rm range} f = \sing{u} \times y$.
+\end{proof}
+
+\begin{theorem}[74] Let $x,y$ be sets. Then $x \times y$ is a set.
+\end{theorem}
+\begin{proof} 
+Define $f = \{\op{u}{w} \mid u \in x \text{ and } w = \sing{u} \times y\}$.
+$f$ is a map.
+${\rm domain} f = x$.
+${\rm range} f$ is a set.
+${\rm range} f = \{\text{set } z \mid 
+\text{there exists } u \in x \text{ such that } z = \sing{u} \times y\}$.
+$\bigcup ({\rm range} f)$ is a set.
+$\bigcup ({\rm range} f) \subset x \times y$.
+Let us show that $x \times y \subset \bigcup ({\rm range} f)$.
+Let $w \in x \times y$. Take 
+an $u \in x$ and $v \in y$ such that $w = \op{u}{v}$.
+$w \in \sing{u} \times y \in {\rm range} f$.
+$w \in \bigcup {\rm range} f$.
+end.
+\end{proof}
+
+\begin{theorem}[75] Let $f$ be a map. Let ${\rm domain} f$ be a set.
+Then $f$ is a set.
+\end{theorem}
+\begin{proof}
+$f \subset {\rm domain} f \times {\rm range} f$.
+\end{proof}
+
+\begin{definition}[76]
+$y^x = \{\text{map } f \mid 
+{\rm domain} f = x \text{ and } {\rm range} f \subset y\}$.
+\end{definition}
+
+\begin{theorem}[77] Let $x,y$ be sets. Then $y^x$ is a set.
+\end{theorem}
+\begin{proof} $y^x \subset 2^{x \times y}$.
+\end{proof}
+
+\begin{definition}[78] $f$ is \emph{on} $x$ iff $x = {\rm domain} f$.
+\end{definition}
+
+\begin{definition}[79] $f$ is \emph{to} $y$ iff ${\rm range} f \subset y$.
+\end{definition}
+
+\begin{definition}[80] $f$ is \emph{onto} $y$ iff ${\rm range} f = y$.
+\end{definition}
+
+\end{forthel}
+
+
+
+
+
+
+\end{document}

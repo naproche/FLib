@@ -1,0 +1,317 @@
+[Parser] Kelley/Class09.ftl: parsing successful
+hypothesis.
+  forall v0 ((DHD :: aObject(v0)) implies truth).
+
+hypothesis.
+  assume aClass(x).
+  forall v0 (aElementOf(v0,x) implies aObject(v0)).
+
+hypothesis I.
+  forall v0 (aClass(v0) implies forall v1 (aClass(v1) implies (v0 = v1 iff forall v2 (aObject(v2) implies (aElementOf(v2,v0) iff aElementOf(v2,v1)))))).
+
+hypothesis 1.
+  forall v0 ((DHD :: aSet(v0)) iff (aClass(v0) and aObject(v0))).
+
+hypothesis 2.
+  assume (aClass(x) and aClass(y)).
+  forall v0 ((DHD :: v0 = x\cup y) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and (aElementOf(v1,x) or aElementOf(v1,y))))))).
+
+hypothesis 3.
+  assume (aClass(x) and aClass(y)).
+  forall v0 ((DHD :: v0 = x\cap y) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and (aElementOf(v1,x) and aElementOf(v1,y))))))).
+
+conjecture 4a.
+  assume ((aClass(z) and aClass(x)) and aClass(y)).
+  (aElementOf(z,x\cup y) iff (aElementOf(z,x) or aElementOf(z,y))).
+
+conjecture 4b.
+  assume ((aClass(z) and aClass(x)) and aClass(y)).
+  (aElementOf(z,x\cap y) iff (aElementOf(z,x) and aElementOf(z,y))).
+
+conjecture 5a.
+  assume aClass(x).
+  x\cup x = x.
+
+conjecture 5b.
+  assume aClass(x).
+  x\cap x = x.
+
+conjecture 6a.
+  assume (aClass(x) and aClass(y)).
+  x\cup y = y\cup x.
+
+conjecture 6b.
+  assume (aClass(x) and aClass(y)).
+  x\cap y = y\cap x.
+
+conjecture 7a.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  (x\cup y)\cup z = x\cup (y\cup z).
+
+conjecture 7b.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  (x\cap y)\cap z = x\cap (y\cap z).
+
+conjecture 8a.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  x\cap (y\cup z) = (x\cap y)\cup (x\cap z).
+
+conjecture 8b.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  x\cup (y\cap z) = (x\cup y)\cap (x\cup z).
+
+hypothesis 10.
+  assume aClass(x).
+  forall v0 ((DHD :: v0 = ~x) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and not aElementOf(v1,x)))))).
+
+conjecture 11.
+  assume aClass(x).
+  ~(~x) = x.
+
+conjecture 12a.
+  assume (aClass(x) and aClass(y)).
+  ~(x\cup y) = (~x)\cap (~y).
+
+conjecture 12b.
+  assume (aClass(x) and aClass(y)).
+  ~(x\cap y) = (~x)\cup (~y).
+
+hypothesis 13.
+  assume (aClass(x) and aClass(y)).
+  forall v0 ((DHD :: v0 = x~y) iff v0 = x\cap (~y)).
+
+conjecture 14.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  x\cap (y~z) = (x\cap y)~z.
+
+hypothesis 15.
+  forall v0 ((DHD :: v0 = 0) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and not v1 = v1))))).
+
+conjecture 16.
+  assume aClass(x).
+  not aElementOf(x,0).
+
+conjecture 17a.
+  assume aClass(x).
+  0\cup x = x.
+
+conjecture 17b.
+  assume aClass(x).
+  0\cap x = 0.
+
+hypothesis 18.
+  forall v0 ((DHD :: v0 = UU) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and v1 = v1))))).
+
+conjecture 19.
+  assume aClass(x).
+  (aElementOf(x,UU) iff aObject(x)).
+
+conjecture 20a.
+  assume aClass(x).
+  x\cup UU = UU.
+
+conjecture 20b.
+  assume aClass(x).
+  x\cap UU = x.
+
+conjecture 21a.
+  ~0 = UU.
+
+conjecture 21b.
+  ~UU = 0.
+
+hypothesis 22.
+  assume aClass(x).
+  forall v0 ((DHD :: v0 = \bigcap x) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and forall v2 (aSet(v2) implies (aElementOf(v2,x) implies aElementOf(v1,v2)))))))).
+
+hypothesis 23.
+  assume aClass(x).
+  forall v0 ((DHD :: v0 = \bigcup x) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and exists v2 (aSet(v2) and (aElementOf(v2,x) and aElementOf(v1,v2)))))))).
+
+conjecture 24a.
+  \bigcap 0 = UU.
+
+conjecture 24b.
+  \bigcup 0 = 0.
+
+hypothesis 25.
+  assume aClass(y).
+  forall v0 ((DHD :: aSubclassOf(v0,y)) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) implies aElementOf(v1,y)))).
+
+conjecture 26a.
+  assume aClass(x).
+  aSubclassOf(0,x).
+
+conjecture 26b.
+  assume aClass(x).
+  aSubclassOf(x,UU).
+
+conjecture 27.
+  assume (aClass(x) and aClass(y)).
+  (x = y iff (aSubclassOf(x,y) and aSubclassOf(y,x))).
+
+conjecture 28.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  ((aSubclassOf(x,y) and aSubclassOf(y,z)) implies aSubclassOf(x,z)).
+
+conjecture 29.
+  assume (aClass(x) and aClass(y)).
+  (aSubclassOf(x,y) iff x\cup y = y).
+
+conjecture 30.
+  assume (aClass(x) and aClass(y)).
+  (aSubclassOf(x,y) iff x\cap y = x).
+
+conjecture 31a.
+  assume (aClass(x) and aClass(y)).
+  (aSubclassOf(x,y) implies aSubclassOf(\bigcup x,\bigcup y)).
+
+conjecture 31a.
+  assume (aClass(x) and aClass(y)).
+  (aSubclassOf(x,y) implies aSubclassOf(\bigcap y,\bigcap x)).
+
+conjecture 32a.
+  assume (aClass(x) and aClass(y)).
+  (aElementOf(x,y) implies aSubclassOf(x,\bigcup y)).
+
+conjecture 32b.
+  assume (aClass(x) and aClass(y)).
+  (aElementOf(x,y) implies aSubclassOf(\bigcap y,x)).
+
+hypothesis III.
+  assume aClass(x).
+  (aSet(x) implies exists v0 (aSet(v0) and forall v1 (aClass(v1) implies (aSubclassOf(v1,x) implies aElementOf(v1,v0))))).
+
+conjecture 33.
+  assume (aClass(x) and aClass(z)).
+  ((aSet(x) and aSubclassOf(z,x)) implies aSet(z)).
+
+conjecture 35.
+  assume aClass(x).
+  (exists v0 (aElementOf(v0,x) and aSet(v0)) implies aSet(\bigcap x)).
+
+hypothesis 36.
+  assume aClass(x).
+  forall v0 ((DHD :: v0 = 2^x) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aSet(v1) and aSubclassOf(v1,x)))))).
+
+conjecture 38a.
+  assume aClass(x).
+  (aSet(x) implies aSet(2^x)).
+  proof.
+    assume aSet(x).
+    (aSet(y) and forall v0 (aClass(v0) implies (aSubclassOf(v0,x) implies aElementOf(v0,y)))).
+    aSubclassOf(2^x,y).
+  qed.
+
+conjecture 38b.
+  assume (aClass(x) and aClass(y)).
+  (aSet(x) implies (aSubclassOf(y,x) iff aElementOf(y,2^x))).
+
+hypothesis.
+  forall v0 ((DHD :: v0 = RR) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aSet(v1) and not aElementOf(v1,v1)))))).
+
+conjecture.
+  not aSet(RR).
+
+conjecture 39.
+  not aSet(UU).
+
+hypothesis 40.
+  assume aClass(x).
+  forall v0 ((DHD :: v0 = <x>) iff (aClass(v0) and forall v1 (aElementOf(v1,v0) iff (DRP :: (aObject(v1) and (aElementOf(x,UU) implies v1 = x)))))).
+
+conjecture 41.
+  assume aClass(x).
+  (aObject(x) implies forall v0 (aClass(v0) implies (aElementOf(v0,<x>) iff v0 = x))).
+
+conjecture 42.
+  assume aClass(x).
+  (aObject(x) implies aSet(<x>)).
+  proof.
+    assume aObject(x).
+    aSubclassOf(<x>,2^x).
+    aClass(2^x).
+  qed.
+
+conjecture 43.
+  assume aClass(x).
+  (<x> = UU iff not aObject(x)).
+
+conjecture 44a.
+  assume aClass(x).
+  (aObject(x) implies \bigcap <x> = x).
+
+conjecture 44b.
+  assume aClass(x).
+  (aObject(x) implies \bigcup <x> = x).
+
+hypothesis IV.
+  assume (aClass(x) and aClass(y)).
+  ((aSet(x) and aSet(y)) implies aSet(x\cup y)).
+
+hypothesis 45.
+  assume (aClass(x) and aClass(y)).
+  assume (aObject(x) and aObject(y)).
+  forall v0 ((DHD :: v0 = <x,y>) iff v0 = <x>\cup <y>).
+
+conjecture 46a.
+  assume (aClass(x) and aClass(y)).
+  ((aObject(x) and aObject(y)) implies aSet(<x,y>)).
+
+conjecture 46b.
+  assume ((aClass(x) and aClass(y)) and aClass(z)).
+  ((aObject(x) and aObject(y)) implies (aElementOf(z,<x,y>) iff (z = x or z = y))).
+
+conjecture 47a.
+  assume (aClass(x) and aClass(y)).
+  ((aSet(x) and aSet(y)) implies \bigcap <x,y> = x\cap y).
+
+conjecture 47b.
+  assume (aClass(x) and aClass(y)).
+  ((aSet(x) and aSet(y)) implies \bigcup <x,y> = x\cup y).
+  proof.
+    assume (aSet(x) and aSet(y)).
+    aSubclassOf(\bigcup <x,y>,x\cup y).
+    aSubclassOf(x\cup y,\bigcup <x,y>).
+  qed.
+
+hypothesis 48.
+  assume (aClass(x) and aClass(y)).
+  assume (aObject(x) and aObject(y)).
+  forall v0 ((DHD :: v0 = [x,y]) iff v0 = <<x>,<x,y>>).
+
+conjecture 49a.
+  assume (aClass(x) and aClass(y)).
+  ((aObject(x) and aObject(y)) implies aSet([x,y])).
+
+conjecture 50a.
+  assume (aClass(x) and aClass(y)).
+  ((aObject(x) and aObject(y)) implies (((((\bigcup [x,y] = <x,y> and \bigcap [x,y] = <x>) and \bigcup (\bigcap [x,y]) = x) and \bigcap (\bigcap [x,y]) = x) and \bigcup (\bigcup [x,y]) = x\cup y) and \bigcap (\bigcup [x,y]) = x\cap y)).
+
+hypothesis 51.
+  assume aClass(z).
+  assume aSet(z).
+  forall v0 ((DHD :: v0 = 1st z) iff v0 = \bigcap (\bigcap z)).
+
+hypothesis 52.
+  assume aClass(z).
+  assume aSet(z).
+  forall v0 ((DHD :: v0 = 2nd z) iff v0 = (\bigcap (\bigcup z))\cup ((\bigcup (\bigcup z))~(\bigcup (\bigcap z)))).
+
+conjecture 54a.
+  assume (aClass(x) and aClass(y)).
+  ((aObject(x) and aObject(y)) implies 1st [x,y] = x).
+
+conjecture 54b.
+  assume (aClass(x) and aClass(y)).
+  ((aObject(x) and aObject(y)) implies 2nd [x,y] = y).
+  proof.
+    assume (aObject(x) and aObject(y)).
+    ((2nd [x,y] = (\bigcap (\bigcup [x,y]))\cup ((\bigcup (\bigcup [x,y]))~(\bigcup (\bigcap [x,y]))) and (\bigcap (\bigcup [x,y]))\cup ((\bigcup (\bigcup [x,y]))~(\bigcup (\bigcap [x,y]))) = (x\cap y)\cup ((x\cup y)~x)) and (x\cap y)\cup ((x\cup y)~x) = y).
+  qed.
+
+conjecture 55.
+  assume (((aClass(x) and aClass(y)) and aClass(r)) and aClass(s)).
+  (((((aObject(x) and aObject(y)) and aObject(r)) and aObject(s)) and [x,y] = [r,s]) implies (x = r and y = s)).
+
+[Main] total 00:00.25

@@ -1,0 +1,393 @@
+\documentclass{scrartcl}
+\usepackage[english]{babel}
+\usepackage{enumerate, latexsym, amssymb, amsmath, amsthm}
+\usepackage{framed, multicol}
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
+%\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newtheorem*{axiom}{Axiom}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+\newtheorem*{signature}{Signature}
+\newtheorem*{proposition}{Proposition}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\event}{UITP 2018}
+\newcommand{\dom}{Dom}
+\newcommand{\fun}{aFunction}
+\newcommand{\sym}{sym}
+\newcommand{\halfline}{{\vspace{3pt}}}
+\newcommand{\tab}{{\hspace{1cm}}}
+\newcommand{\ball}[2]{B_{#1}(#2)}
+\newcommand{\llbracket}{[}
+\newcommand{\rrbracket}{]}
+\newcommand{\sing}[1]{\{{#1}\}}
+\newcommand{\pair}[2]{\{{#1},{#2}\}}
+\newcommand{\op}[2]{({#1},{#2})}
+\newcommand{\less}[1]{<_{#1}}
+\newcommand{\greater}[1]{>_{#1}}
+\newcommand{\leeq}[1]{{\leq}_{#1}}
+\newcommand{\supr}[1]{\mathrm{sup}_{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+
+\begin{document}
+
+\title{ELEMENTARY SET THEORY}
+
+\subtitle{An SAD3 Formalisation of the Appendix of \\"General Topology" 
+by John L. Kelley}
+
+\date{November 3, 2018}
+
+\maketitle
+
+
+\subsection{The Classification Axiom Scheme}
+
+
+Let $a,b,c,d,e,r,s,t,x,y,z$ stand for \emph{classes}.
+
+%# Let $a \neq b$ stand for not $a = b$.
+
+Let $a \in x$ stand for $a$ is an \emph{element} of $x$.
+
+\begin{axiom}[I]
+For each $x$ for each $y$ $x = y$ iff for each $z$ 
+$z \in x$ iff $z \in y$.
+\end{axiom}
+
+[set/-s]
+\begin{definition}[1] A \emph{set} is a class $x$ such that for some $y$ $x \in y$.
+\end{definition}
+
+
+\subsection{Elementary Algebra of Classes}
+
+
+\begin{definition}[2] $x \cup y = \{\text{set } u \mid u \in x \text{ or } u \in y \}$.
+\end{definition}
+
+\begin{definition}[3] $x \cap y = \{\text{set } u \mid u \in x \text{ and } u \in y \}$.
+\end{definition}
+
+Let the \emph{union} of $x$ and $y$ stand for $x \cup y$.
+Let the \emph{intersection} of $x$ and $y$ stand for $x \cap y$.
+
+\begin{theorem}[4a] $z \in x \cup y$ iff $z \in x$ or $z \in y$.
+\end{theorem}
+
+\begin{theorem}[4b] $z \in x \cap y$ iff $z \in x$ and $z \in y$.
+\end{theorem}
+
+\begin{theorem}[5a] $x \cup x = x$.
+\end{theorem}
+
+\begin{theorem}[5b] $x \cap x = x$.
+\end{theorem}
+
+\begin{theorem}[6a] $x \cup y = y \cup x$.
+\end{theorem}
+
+\begin{theorem}[6b] $x \cap y = y \cap x$.
+\end{theorem}
+
+\begin{theorem}[7a] $(x \cup y) \cup z = x \cup (y \cup z)$.
+\end{theorem}
+
+\begin{theorem}[7b] $(x \cap y) \cap z = x \cap (y \cap z)$.
+\end{theorem}
+
+\begin{theorem}[8a] $x \cap (y \cup z) = (x \cap y) \cup (x \cap z)$.
+\end{theorem}
+
+\begin{theorem}[8b] $x \cup (y \cap z) = (x \cup y) \cap (x \cup z)$.
+\end{theorem}
+
+Let $a \notin b$ stand for $a$ is not an element of $b$.
+
+\begin{definition}[10] $\sim x = \{\text{set } u \mid u \notin x\}$.
+Let the \emph{complement} of $x$ stand for $\sim x$.
+\end{definition}
+
+\begin{theorem}[11] $\sim (\sim x) = x$.
+\end{theorem}
+
+\begin{theorem}[12a] $\sim (x \cup y) = (\sim x) \cap (\sim y)$.
+\end{theorem}
+
+\begin{theorem}[12b] $\sim (x \cap y) = (\sim x) \cup (\sim y)$.
+\end{theorem}
+
+\begin{definition}[13] $x \sim y = x \cap (\sim y)$.
+\end{definition}
+
+\begin{theorem}[14] $x \cap (y \sim z) = (x \cap y) \sim z$.
+\end{theorem}
+
+\begin{definition}[15] $0 = \{\text{set } u \mid u \neq u\}$.
+Let the \emph{void class} stand for $0$.
+Let \emph{zero} stand for $0$.
+\end{definition}
+
+\begin{theorem}[16] $x \notin 0$.
+\end{theorem}
+
+\begin{theorem}[17a] $0 \cup x = x$.
+\end{theorem}
+
+\begin{theorem}[17b] $0 \cap x = 0$.
+\end{theorem}
+
+\begin{definition}[18] ${\cal U} = \{\text{set } u \mid u = u\}$.
+Let the \emph{universe} stand for ${\cal U}$.
+\end{definition}
+
+\begin{theorem}[19] $x \in {\cal U}$ iff $x$ is a set.
+\end{theorem}
+
+\begin{theorem}[20a] $x \cup {\cal U} = {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[20b] $x \cap {\cal U} = x$.
+\end{theorem}
+
+\begin{theorem}[21a] $\sim 0 = {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[21b] $\sim {\cal U} = 0$.
+\end{theorem}
+
+\begin{definition}[22] $\bigcap x = 
+\{set u \mid \text{ for each } y \text{ if } y \in x \text{ then } u \in y\}$.
+Let the \emph{intersection} of $x$ stand for $\bigcap x$.
+\end{definition}
+
+\begin{definition}[23] $\bigcup x = 
+\{set u \mid \text{ for some } y (y \in x \text{ and } u \in y)\}$.
+Let the \emph{union} of $x$ stand for $\bigcup x$.
+\end{definition}
+
+\begin{theorem}[24a] $\bigcap 0 = {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[24b] $\bigcup 0 = 0$.
+\end{theorem}
+
+\begin{definition}[25] 
+A \emph{subclass} of $y$ is a class $x$ such that each element of $x$ is an
+element of $y$. Let $x \subset y$ stand for $x$ is a subclass of $y$.
+Let $x$ is \emph{contained} in $y$ stand for $x \subset y$.
+\end{definition}
+
+
+\begin{proposition} $0 \subset 0$ and $0 \notin 0$.
+\end{proposition}
+
+\begin{theorem}[26a] $0 \subset x$.
+\end{theorem}
+
+\begin{theorem}[26b] $x \subset {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[27] $x = y$ iff $x \subset y$ and $y \subset x$.
+\end{theorem}
+
+\begin{theorem}[28] If $x \subset y$ and $y \subset z$ then $x \subset z$.
+\end{theorem}
+
+\begin{theorem}[29] $x \subset y$ iff $x \cup y = y$.
+\end{theorem}
+
+\begin{theorem}[30] $x \subset y$ iff $x \cap y = x$.
+\end{theorem}
+
+
+
+\begin{theorem}[31a] If $x \subset y$ then $\bigcup x \subset \bigcup y$.
+\end{theorem}
+
+\begin{theorem}[31a] If $x \subset y$ then $\bigcap y \subset \bigcap x$.
+\end{theorem}
+
+\begin{theorem}[32a] If $x \in y$ then $x \subset \bigcup y$.
+\end{theorem}
+
+\begin{theorem}[32b] If $x \in y$ then $\bigcap y \subset x$.
+\end{theorem}
+
+
+\subsection{Existence of Sets}
+
+
+\begin{axiom}[III] If $x$ is a set then there is a set $y$ such that for each
+$z$ if $z \subset x$ then $z \in y$.
+\end{axiom}
+
+\begin{theorem}[33] If $x$ is a set and $z \subset x$ then $z$ is a set.
+\end{theorem}
+
+\begin{theorem}[34a] $0 = \bigcap {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[34b] ${\cal U} = \bigcup {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[35] If $x \neq 0$ then $\bigcap x$ is a set.
+\end{theorem}
+
+
+\begin{definition}[36] $2^{x} = \{\text{set } y \mid y \subset x\}$.
+\end{definition}
+
+\begin{theorem}[37] ${\cal U} = 2^{{\cal U}}$.
+\end{theorem}
+
+\begin{theorem}[38a] If $x$ is a set then $2^{x}$ is a set.
+\end{theorem}
+\begin{proof} Let $x$ be a set.
+Take a set $y$ such that for each $z$ 
+if $z \subset x$ then $z \in y$ (by III).
+Then $2^{x} \subset y$.
+\end{proof}
+
+\begin{theorem}[38b] If $x$ is a set then $y \subset x$ iff $y \in 2^{x}$.
+\end{theorem}
+
+\begin{definition} ${\rm R} = \{\text{set } x \mid x \notin x\}$.
+\end{definition}
+
+\begin{lemma} ${\rm R}$ is not a set. \end{lemma}
+
+\begin{theorem}[39] ${\cal U}$ is not a set.
+\end{theorem}
+
+\begin{definition}[40] $\sing{x} = 
+\{\text{set } z \mid \text{ if } x \in {\cal U} \text{ then } z = x\}$.
+Let the \emph{singleton} of $x$ stand for $\sing{x}$.
+\end{definition}
+
+\begin{theorem}[41] If $x$ is a set then 
+for each $y$ $y \in \sing{x}$ iff $y = x$.
+\end{theorem}
+
+\begin{theorem}[42] If $x$ is a set then 
+$\sing{x}$ is a set.
+\end{theorem}
+\begin{proof} Let $x$ be a set. Then $\sing{x} \subset 2^{x}$. 
+$2^{x}$ is a class.
+\end{proof}
+
+\begin{theorem}[43] $\sing{x} = {\cal U}$ iff $x$ is not a set.
+\end{theorem}
+
+\begin{theorem}[44a] If $x$ is a set then $\bigcap \sing{x} = x$.
+\end{theorem}
+\begin{theorem}[44b] If $x$ is a set then $\bigcup \sing{x} = x$.
+\end{theorem}
+\begin{theorem}[44c] If $x$ is not a set then $\bigcap \sing{x} = 0$.
+\end{theorem}
+\begin{theorem}[44d] If $x$ is not a set then $\bigcup \sing{x} = {\cal U}$.
+\end{theorem}
+
+\begin{axiom}[IV] If $x$ is a set and $y$ is a set then $x \cup y$ is a set.
+\end{axiom}
+
+\begin{definition}[45] $\pair{x}{y} = \sing{x} \cup \sing{y}$.
+Let the \emph{unordered pair} of $x$ and $y$ stand for $\pair{x}{y}$.
+\end{definition}
+
+\begin{theorem}[46a] If $x$ is a set and $y$ is a set then $\pair{x}{y}$ is a set.
+\end{theorem}
+\begin{theorem}[46b] If $x$ is a set and $y$ is a set then
+$z \in \pair{x}{y}$ iff $z=x$ or $z=y$.
+\end{theorem}
+\begin{theorem}[46c] $\pair{x}{y} = {\cal U}$ iff $x$ is not a set or $y$ 
+is not a set.
+\end{theorem}
+
+\begin{theorem}[47a] If $x,y$ are sets then $\bigcap \pair{x}{y} = x \cap y$.
+\end{theorem}
+\begin{theorem}[47b] If $x,y$ are sets then $\bigcup \pair{x}{y} = x \cup y$.
+\end{theorem}
+\begin{proof} Let $x,y$ be sets.
+$\bigcup \pair{x}{y} \subset x \cup y$.
+$x \cup y \subset \bigcup \pair{x}{y}$.
+\end{proof}
+\begin{theorem}[47c] If $x$ is not a set or $y$ is not a set then
+$\bigcap \pair{x}{y} = 0$.
+\end{theorem}
+\begin{theorem}[47d] If $x$ is not a set or $y$ is not a set then
+$\bigcup \pair{x}{y} = {\cal U}$.
+\end{theorem}
+
+
+\subsection{Ordered Pairs}
+
+
+\begin{definition}[48] $\op{x}{y} = \pair{\sing{x}}{\pair{x}{y}}$.
+Let the \emph{ordered pair} of $x$ and $y$ stand for $\op{x}{y}$.
+\end{definition}
+
+\begin{theorem}[49a] $\op{x}{y}$ is a set iff $x$ is a set and $y$ is a set.
+\end{theorem}
+
+\begin{theorem}[49b] If $\op{x}{y}$ is not a set then $\op{x}{y} = {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[50] If $x$ and $y$ are sets then 
+  $\bigcup \op{x}{y} = \pair{x}{y}$ and   
+  $\bigcap \op{x}{y} = \sing{x}$ and
+  $\bigcup \bigcap \op{x}{y} = x$ and
+  $\bigcap \bigcap \op{x}{y} = x$ and 
+  $\bigcup \bigcup \op{x}{y} = x \cup y$ and
+  $\bigcap \bigcup \op{x}{y} = x \cap y$.
+\end{theorem}  
+
+\begin{theorem} If $x$ is not a set or $y$ is not a set then
+  $\bigcup \bigcap \op{x}{y} = 0$ and
+  $\bigcap \bigcap \op{x}{y} = {\cal U}$ and
+  $\bigcup \bigcup \op{x}{y} = {\cal U}$ and
+  $\bigcap \bigcup \op{x}{y} = 0$.
+\end{theorem}
+
+\begin{definition}[51] $1^{st} z = \bigcap \bigcap z$.
+Let the \emph{first coordinate} of $z$ stand for $1^{st} z$.
+\end{definition}
+
+\begin{definition}[52] $2^{nd} z = 
+(\bigcap \bigcup z) \cup ((\bigcup \bigcup z) \sim \bigcup \bigcap z)$. 
+Let the \emph{second coordinate} of $z$ stand for $2^{nd} z$.
+\end{definition}
+
+\begin{theorem}[53] $2^{nd} {\cal U} = {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[54a] If $x$ and $y$ are sets then $1^{st} \op{x}{y} = x$.
+\end{theorem}
+\begin{theorem}[54b] If $x$ and $y$ are sets then $2^{nd} \op{x}{y} = y$.
+\end{theorem}
+\begin{proof} Let $x$ and $y$ be sets.
+$2^{nd} \op{x}{y} = (\bigcap \bigcup \op{x}{y}) \cup 
+((\bigcup \bigcup \op{x}{y}) \sim \bigcup \bigcap \op{x}{y})
+= (x \cap y) \cup ((x \cup y) \sim x)
+= y$.
+\end{proof}
+\begin{theorem}[54c] If $x$ is not a set or $y$ is not a set then
+$1^{st} \op{x}{y} = {\cal U}$ and $2^{nd} \op{x}{y} = {\cal U}$.
+\end{theorem}
+
+\begin{theorem}[55] If $x$ and $y$ are sets and $\op{x}{y}=\op{r}{s}$ then
+$x = r$ and $y = s$.
+\end{theorem}
+
+
+\end{document}

@@ -1,0 +1,94 @@
+Log: Infinitude of Primes
+
+Folder: Desktop/Infinitude
+
+Original File: infinity_original.ftl 
+Runs with:
+./alice -vvvv -t 2 --depthlimit=8 -P eprover ~/Desktop/Infinitude/infinity_original.ftl
+(eprover time limit 2 sec)
+
+File to strip away / modify LaTeX commands:
+tex2ftl_original
+Runs with something like: 
+koepke@r100:~/P/Paskevich/sad-2.3-24$ sed -f ~/Desktop/Infinitude/tex2ftl_original examples/primes/test1.tex | ./alice -vvvv -P eprover
+
+File starting with some useful LaTeX macros:
+test1_original.tex
+
+
+Go two directions: clean up the code / put LaTeX on top
+Number the versions 00-99
+
+01: cleaned up the code. Some proofs have to be expanded. Possibly being later in the document means that more (irrelevant) premises are given to eprover. I have to learn how to fit in proof steps.
+
+Also put in some TaTeX macros for further work.
+
+01 works like this:
+
+[Reason] /home/koepke/Desktop/Infinitude/infinity_01.ftl: verification successful
+[Main] sections 241 - goals 49 - subgoals 127 - trivial 21 - proved 63
+[Main] symbols 598 - checks 454 - trivial 446 - proved 8 - unfolds 200
+[Main] parser 00:00.52 - reason 00:03.91 - prover 02:59.99/00:03.34
+[Main] total 03:04.43
+koepke@r100:~/P/Paskevich/sad-2.3-24$ ./alice -vvvv -t 5 --depthlimit=8 -P eprover ~/Desktop/Infinitude/infinity_01.ftl
+
+Works also with t 4 (seconds) but not with 3 seconds.
+
+02: putting in some layout structure from the test1.tex and further cleaning of the ForTheL:
+
+[Reason] /home/koepke/Desktop/Infinitude/infinity_02.ftl: verification successful
+[Main] sections 235 - goals 48 - subgoals 124 - trivial 22 - proved 61
+[Main] symbols 583 - checks 442 - trivial 434 - proved 8 - unfolds 195
+[Main] parser 00:00.49 - reason 00:03.49 - prover 02:19.84/00:03.16
+[Main] total 02:23.83
+koepke@r100:~/P/Paskevich/sad-2.3-24$ ./alice -vvvv -t 4 --depthlimit=8 -P eprover ~/Desktop/Infinitude/infinity_02.ftl 
+
+03: first complete insertion of LaTeX.
+[Reason] stdin: verification successful
+[Main] sections 235 - goals 48 - subgoals 125 - trivial 21 - proved 62
+[Main] symbols 583 - checks 442 - trivial 434 - proved 8 - unfolds 198
+[Main] parser 00:00.51 - reason 00:03.87 - prover 02:57.28/00:03.46
+[Main] total 03:01.67
+koepke@r100:~/P/Paskevich/sad-2.3-24$ sed -f ~/Desktop/Infinitude/tex2ftl_original ~/Desktop/Infinitude/infinity_03.tex | ./alice -vvvv -t 5 -P eprover
+
+infinity_04 with tex2ftl_00: most LaTeX inserted
+[Reason] stdin: verification successful
+[Main] sections 235 - goals 48 - subgoals 125 - trivial 21 - proved 62
+[Main] symbols 583 - checks 442 - trivial 434 - proved 8 - unfolds 198
+[Main] parser 00:00.49 - reason 00:03.51 - prover 02:49.47/00:03.31
+[Main] total 02:53.48
+koepke@r100:~/P/Paskevich/sad-2.3-24$ sed -f ~/Desktop/Infinitude/tex2ftl_00 ~/Desktop/Infinitude/infinity_04.tex | ./alice -vvvv -t 5 -P eprover
+
+Going to infinity_05 with tex2ftl_01
+LaTeX is now satisfying, also the question about the unnamed theorem environment, that required an extra "." has been solved by a hack.
+The files check like this:
+[Reason] stdin: verification successful
+[Main] sections 235 - goals 48 - subgoals 125 - trivial 21 - proved 62
+[Main] symbols 583 - checks 442 - trivial 434 - proved 8 - unfolds 198
+[Main] parser 00:00.63 - reason 00:06.47 - prover 04:13.20/00:05.47
+[Main] total 04:20.32
+koepke@r100:~/P/Paskevich/sad-2.3-24$ sed -f ~/Desktop/Infinitude/tex2ftl_01 ~/Desktop/Infinitude/infinity_05.tex | ./alice -vvvv -t 5 -P eprover
+
+There is however a problem with the BigProduct. It should be "defined" rather than "axiomatized", and the axioms at the moment are false, if
+factors =0 occur.
+This will be rectified in infinity_06 with tex2ftl_02.
+
+06/02 is a test file, where we want to introduce the right BigProducts.
+
+07/02 has a revised version of the BigProduct. It seems to be correct in
+its postulates of BigProduct and it runs:
+
+[Reason] stdin: verification successful
+[Main] sections 236 - goals 50 - subgoals 132 - trivial 23 - proved 64
+[Main] symbols 594 - checks 444 - trivial 436 - proved 8 - unfolds 236
+[Main] parser 00:00.50 - reason 00:03.37 - prover 03:06.84/00:03.68
+[Main] total 03:10.72
+koepke@r100:~/P/Paskevich/sad-2.3-24$ sed -f ~/Desktop/Infinitude/tex2ftl_02 ~/Desktop/Infinitude/infinity_07.tex | ./alice -vvv -t 5 -P eprover
+
+This is the version that I sent to colleagues.
+
+08/03 Experiment with combining similar SAD environments into lists.
+
+
+ 
+

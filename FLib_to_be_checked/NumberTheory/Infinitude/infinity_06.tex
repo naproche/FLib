@@ -1,0 +1,361 @@
+\newtheorem{signature}{Signature}
+\newtheorem{axiom}{Axiom}
+\newtheorem{signaturep}{Signature}
+\newtheorem{axiomp}{Axiom}
+\newtheorem{definitionp}{Definition}
+\newtheorem{theoremp}{Theorem}
+\newtheorem{lemmap}{Lemma}
+ 
+\newcommand{\power}{{\cal P}} 
+\newcommand{\preimg}[2]{{#1}^{-1}[#2]} 
+\newcommand{\Seq}[1]{\{1,\dots,#1\}}
+\newcommand{\Set}[2]{\{#1_1,\dots,#1_{#2}\}}
+\newcommand{\Product}[2]{\prod_{i=1}^{#2}{#1}_i}
+\newcommand{\subfunc}[2]{{#1}_{#2}}
+\newcommand{\CC}{{\Bbb C}}
+\newcommand{\RR}{{\Bbb R}}
+\newcommand{\QQ}{{\Bbb Q}}
+\newcommand{\ZZ}{{\Bbb Z}} 
+\newcommand{\NN}{{\Bbb N}}
+\newcommand{\NNplus}{{\Bbb N}^+}
+
+#[prove off]
+
+\title{There are infinitely many primes}
+\maketitle
+%#
+%# Version 18 March 2012
+%#
+\section{I. Foundations}
+
+
+\subsection{1. Sets}
+
+%%[set/-s] [element/-s] [belong/-s] [subset/-s]
+
+\begin{signature} SetSort.  A {\bf set} is a notion.
+Let $A,X,Y,Z$ denote sets.
+\end{signature}
+
+\begin{signature} ElmSort.  
+An {\bf element} is a notion.
+Let $x,y,z$ denote elements.
+\end{signature}
+
+\begin{signature} EOfElem.  
+An {\bf element of} $X$ is an element.
+Let $x$ belongs to $X$ stand for $x$ is an element of $X$.
+Let $x$ is in $X$ stand for $x$ belongs to $X$.
+Let $x \in X$ stand for $x$ is in $X$.
+\end{signature}
+
+\begin{definition} DefEmp.
+$\emptyset$ is a set that has no elements.
+Let $X$ is {\bf empty} stand for $X = \emptyset$.
+Let $X$ is {\bf nonempty} stand for $X \neq \emptyset$.
+\end{definition}
+
+\begin{definition} DefSub.  
+A {\bf subset} of $Y$ is a set $X$ such that
+every element of $X$ belongs to $Y$.
+Let $X \subseteq Y$ stand for $X$ is a subset of $Y$.
+\end{definition}
+
+\begin{lemma} SubRefl.
+$X \subseteq X$.
+\end{lemma}
+
+\begin{lemma} SubTrans.
+$X \subseteq Y \subseteq Z  \rightarrow  X \subseteq Z$.
+\end{lemma}
+
+\begin{axiom} SubASymm.
+$X \subseteq Y \subseteq X  \rightarrow  X = Y$.
+\end{axiom}
+
+
+\subsection{2. Functions}
+
+%%[function/-s]
+
+\begin{signature} FunSort.
+A {\bf function} is a notion.
+Let $a,f,g,p$ denote functions.
+\end{signature}
+
+\begin{signature} DomSet.
+$\text{dom} f$ is a set.
+Let the {\bf domain} of $f$ stand for $\text{dom} f$.
+\end{signature}
+
+\begin{signature} ImgElm.
+Let $x \in \text{dom} f$. $f(x)$ is an element.
+Let $\subfunc{f}{x}$ stand for $f(x)$.
+\end{signature}
+
+\begin{definition} DefSImg. 
+Let $X \subseteq \text{dom} f$. $f[X] = \{ f(x) | x \in X \}$.
+Let $\text{ran} f$ stand for $f[\text{dom} f]$.
+Let the {\bf range} of $f$ stand for $\text{ran} f$.
+
+Let a function {\bf from} $X$ stand for a function $f$
+such that $\text{dom} f = X$.
+Let a function {\bf from} $X$ {\bf to} $Y$ stand 
+for a function $f$ such that $\text{dom} f = X$
+and $\text{ran} f \subseteq Y$.
+
+Let $f : X$ stand for $f$ is a function from $X$.
+Let $f : X -> Y$ stand for $f$ is a function from $X$ to $Y$.
+\end{definition}
+
+\begin{lemma} ImgRng.
+Let $x \in \text{dom} f$. $f(x)$ belongs to $\text{ran} f$.
+\end{lemma}
+
+\begin{definition} DefRst.
+Let $X \subseteq \text{dom} f$. 
+$f \upharpoonright X$ is a function $g$ from $X$
+such that for every $x \in X$ $g(x) = f(x)$.
+\end{definition}
+
+\subsection{3. Numbers}
+
+%%[number/-s]
+
+\begin{signature} NatSort.
+A {\bf number} is a notion.
+Let i,j,k,l,m,n,q,r denote numbers.
+\end{signature}
+
+\begin{definition} Nat.
+$\NN$ is the set of numbers.
+\end{definition}
+
+\begin{signature} SortsC.  
+$0$ is a number.
+Let $x$ is {\bf nonzero} stand for $x \neq 0$.
+\end{signature}
+
+\begin{signature} SortsC.
+$1$ is a nonzero number.
+\end{signature}
+
+\begin{signature} SortsB.
+$m + n$ is a number.
+\end{signature}
+
+\begin{signature} SortsB.
+$m \cdot n$ is a number.
+\end{signature}
+
+\begin{axiom} AddAsso. $(m + n) + l = m + (n + l)$.\end{axiom}
+\begin{axiom} AddZero.  $m + 0 = m = 0 + m$. \end{axiom}
+\begin{axiom} AddComm.   $m + n = n + m$. \end{axiom}
+
+\begin{axiom} MulAsso.  
+$(m \cdot n) \cdot l = m \cdot (n \cdot l)$.
+\end{axiom}
+\begin{axiom} MulUnit.  $m \cdot 1 = m = 1 \cdot m$.\end{axiom}
+\begin{axiom} MulZero.  $m \cdot 0 = 0 = 0 \cdot m$.\end{axiom}
+\begin{axiom} MulComm.  $m \cdot n = n \cdot m$.\end{axiom}
+
+\begin{axiom} AMDistr.  
+$m \cdot (n + l) = (m \cdot n) + (m \cdot l)$ and
+$(n + l) \cdot m = (n \cdot m) + (l \cdot m)$.\end{axiom}
+
+\begin{axiom} AddCanc.  
+If $l + m = l + n$ or $m + l = n + l$ then $m = n$.\end{axiom}
+
+\begin{axiom} MulCanc.
+Assume that $l$ is nonzero. If 
+$l \cdot m = l \cdot n$ or $m \cdot l = n \cdot l$ 
+then $m = n$.\end{axiom}
+
+\begin{axiom} ZeroAdd.
+If $m + n = 0$ then $m = 0$ and $n = 0$.\end{axiom}
+
+\begin{lemma} ZeroMul.
+If $m \cdot n = 0$ then $m = 0$ or $n = 0$.
+\end{lemma}
+
+\begin{definition} DefLE.
+$m \leq n$ iff there exists $l$ such that $m + l = n$.
+\end{definition}
+
+\begin{definition} DefDiff.  Assume that $m \leq n$.
+$n - m$ is a number $l$ such that $m + l = n$.
+\end{definition}
+
+\begin{lemma} LERefl. $m \leq m$. \end{lemma}
+\begin{lemma} LETran. $m \leq n \leq l  \rightarrow  m \leq l$.
+\end{lemma}
+\begin{lemma} LEAsym. $m \leq n \leq m  \rightarrow  m = n$. 
+\end{lemma}
+
+Let $m < n$ stand for $m \neq n$ and $m \leq n$.
+
+\begin{axiom} LETotal. $m \leq n \vee n < m$. \end{axiom}
+
+\begin{lemma} MonAdd. Assume that $l < n$.
+Then $m + l < m + n$ and $l + m < n + m$.
+\end{lemma}
+
+\begin{lemma} MonMul. Assume that $m$ is nonzero and $l < n$.
+Then $m \cdot l < m \cdot n$ and $l \cdot m < n \cdot m$.
+\end{lemma}
+
+\begin{axiom} LENTr. 
+$n = 0$ or $n = 1$ or $1 < n$.\end{axiom}
+
+
+\begin{lemma} MonMul2. $m \neq 0 \rightarrow n \leq n \cdot m$.
+\end{lemma}
+\begin{proof}
+Let $m \neq 0$. Then $1 \leq m$.
+\end{proof}
+
+\begin{signature} IH. $m \precprec n$ is an atom.
+\end{signature}
+
+\begin{axiom} IH. $m < n \rightarrow m \precprec n$. \end{axiom}
+
+
+
+\subsection{4. Finite Sets and Sequences}
+
+\begin{definitionp} 
+$\Seq{n} = \{ i \in \NN | 1 \leq i \leq n \}$.
+\end{definitionp}
+
+
+
+\begin{lemmap}
+$\Seq{n} \subseteq \Seq{n+1}$.
+\end{lemmap}
+
+\begin{definitionp} 
+Let $p$ be a function such that 
+$\Seq{n} \subseteq \text{dom} p$. 
+$\Set{p}{n} = \{ p(i) | i \in \NN \wedge 1 \leq i \leq n \}$.
+\end{definitionp}
+
+\begin{definitionp} $p$ {\bf lists} $X$ in $n$ steps iff 
+$\Seq{n} = \text{dom} p$ and $X = \Set{p}{n}$.
+\end{definitionp}
+
+\begin{definitionp} $X$ is {\bf finite} iff there is a function
+$p$ and a number $n$ such that $p$ lists $X$ in $n$ steps.
+\end{definitionp}
+
+\begin{definitionp} $X$ is {\bf infinite} iff $X$ is not finite.
+\end{definitionp}
+
+\section{II. Prime Numbers}
+
+\subsection{1. Divisibility}
+
+%%[divide/-s] [divisor/-s]
+
+\begin{definition} DefDiv.
+$m$ {\bf divides} $n$ iff for some $l$ $n = m \cdot l$.
+Let $m | n$ denote $m$ divides $n$.
+Let a {\bf divisor} of $n$ denote a number that divides $n$.
+\end{definition}
+
+\begin{lemma} DefDiv1.
+$m | m \cdot l $.
+\end{lemma}
+
+\begin{definition} DefQuot.
+Assume that $m$ is nonzero and $m | n$.
+$\frac{n}{m}$ is a number $l$ such that $n = m \cdot l$.
+\end{definition}
+
+\begin{lemma} DivTrans. $l | m | n \rightarrow l | n$.
+\end{lemma}
+
+\begin{lemma} DivSum.
+Let $l | m$ and $l | n$. Then $l | m + n$.
+Indeed if $l$ is nonzero then 
+$m + n = l \cdot (\frac{m}{l} + \frac{n}{l})$.
+\end{lemma}
+
+\begin{lemma} DivMin.
+Let $l | m$ and $l | m + n$. Then $l | n$.
+\end{lemma}
+\begin{proof}
+Assume that $l,n$ are nonzero.
+Take $i$ such that $m = l \cdot i$. 
+Take $j$ such that $m + n = l \cdot j$.
+
+Let us show that $i \leq j$.
+Assume the contrary. Then $j < i$.
+$m+n = l \cdot j < l \cdot i = m$. 
+$m \leq m+n$.
+$m = m+n$. $n=0$.
+Contradiction. end.
+ 
+Take $k = j - i$.
+We have $(l \cdot i) + (l \cdot k) = (l \cdot i) + n$.
+Hence $n = l \cdot k$.
+\end{proof}
+
+\begin{lemma} DivLE.
+Let $m | n \neq 0$. Then $m \leq n$.
+\end{lemma}
+
+\begin{lemma} DivAsso.
+Let $l$ be nonzero and divide $m$.
+Then $n \cdot \frac{m}{l} = \frac{n \cdot m}{l}$.\end{lemma}
+\begin{proof}
+$(l \cdot n) \cdot \frac{m}{l} = l \cdot \frac{n \cdot m}{l}$.
+\end{proof}
+
+[/prove]
+
+\begin{definitionp}
+$\NNplus = \{n \in \NN | n \neq 0 \}$.
+\end{definitionp}
+
+\begin{signaturep}  
+Let $f$ be a function and $\Seq{n} \subseteq \text{dom} f$
+and $\text{ran} f \subseteq \NNplus$.
+$\Product{f}{n}$ is an element of $\NNplus$.
+\end{signaturep}
+
+\begin{axiomp} Let $f$ be a function and $\Seq{0} \subseteq \text{dom} f$
+and $\text{ran} f \subseteq \NNplus$.
+$\Product{f}{0}=1$.
+\end{axiomp}
+
+\begin{axiomp} Let $f$ be a function and $\Seq{n} \subseteq \text{dom} f$
+and $\text{ran} f \subseteq \NNplus$.
+If $n \neq 0$ then 
+$\Product{f}{n}=(\Product{f}{n-1})\cdot \subfunc{f}{n}$.
+\end{axiomp}
+
+\begin{lemma} MultProd.
+Let $1 \leq j \leq n$. Let $f$ be a function and 
+$\Seq{n} \subseteq \text{dom} f$ and $\text{ran} f \subseteq \NNplus$.
+$\subfunc{f}{j}$ divides $\Product{f}{n}$.
+\end{lemma}
+{\bf Proof} by induction on $n$.
+Let $1 \leq j \leq n$. Let $f$ be a function and 
+$\Seq{n} \subseteq \text{dom} f$ and $\text{ran} f \subseteq \NNplus$.
+$n \neq 0$.
+$\Product{f}{n}=(\Product{f}{n-1})\cdot \subfunc{f}{n}$.
+Case $j = n$. 
+Then $\subfunc{f}{j} = \subfunc{f}{n}$.
+$\subfunc{f}{n} |
+\subfunc{f}{n} \cdot (\Product{f}{n-1})$ (by DefDiv1).
+$\subfunc{f}{j} |(\Product{f}{n-1}) \cdot \subfunc{f}{n}$ (by MulComm). 
+qed.
+Case $j \neq n$. 
+Then $1 \leq j \leq n-1$. 
+$n-1 \precprec n$. 
+$\subfunc{f}{j}$ divides $\Product{f}{n-1}$.
+$\Product{f}{n-1}$ divides $\Product{f}{n}$.
+end.
+qed.
+
+

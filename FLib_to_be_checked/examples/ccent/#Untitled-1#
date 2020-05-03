@@ -1,0 +1,16 @@
+Proof.
+    We have ~ \-/ S = {1, -1}.
+    Indeed n belongs to \-/ S iff n has a prime divisor.
+
+    Assume that S is finite.
+    Then \-/ S is closed and ~ \-/ S is open.
+
+    Take p such that ArSeq(1,p) [= ~ \-/ S.
+    ArSeq(1,p) has an element that does not belong to {1, -1}.
+    proof.
+        1 + p and 1 - p belong to ArSeq(1,p).
+        1 + p !=  1 /\ 1 - p !=  1.
+        1 + p != -1 \/ 1 - p != -1.
+    end.
+    Contradiction.
+qed.

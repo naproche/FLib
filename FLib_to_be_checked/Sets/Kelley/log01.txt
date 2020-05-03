@@ -1,0 +1,17 @@
+Formalizing Kelley's Appendix in Naproche-SAD
+
+We work in the Isabelle jedit environment.
+We modify the Naproche-SAD source code as needed. In particular,
+certain inbuilt mechanisms are modified for our purposes and to get
+consistency: abstraction terms are registered as classes, 
+function definitions register their domains as classes.
+
+We use the ~/NAPROCHE/ directory which contains
+- Naproche-SAD in the directory ... Naproche-SAD/; there one finds a "stack"
+version of Naproche-SAD which can be built by "stack build". The sources compiled are
+in .../src/SAD/.
+
+- Isabelle as a runtime  .../isabelle/bin/isabelle. Mainly use isabelle jedit
+
+- eprover in the directory .../E
+

@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{enumerate, latexsym, amssymb, amsmath}
+\usepackage{framed, multicol}
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newtheorem{axiom}{Axiom}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{signature}{Signature}
+\newtheorem{proposition}{Proposition}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\event}{UITP 2018}
+\newcommand{\dom}{Dom}
+\newcommand{\fun}{aFunction}
+\newcommand{\sym}{sym}
+\newcommand{\halfline}{{\vspace{3pt}}}
+\newcommand{\tab}{{\hspace{1cm}}}
+\newcommand{\ball}[2]{B_{#1}(#2)}
+\newcommand{\llbracket}{[}
+\newcommand{\rrbracket}{]}
+\newcommand{\less}[1]{<_{#1}}
+\newcommand{\greater}[1]{>_{#1}}
+\newcommand{\leeq}[1]{{\leq}_{#1}}
+\newcommand{\supr}[1]{\mathrm{sup}_{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+
+\begin{document}
+
+\title{Set Theory}
+
+\author{Peter Koepke}
+
+\date{August 25, 2018}
+
+\maketitle
+
+
+\section{Preliminaries}
+
+\begin{forthel}
+Let $x,y,z$ stand for sets.
+Let $x \in y$ denote $x$ is an element of $y$.
+%# Let $x$ is \emph{in} $y$ denote $x$ is an element of $y$.
+Let $x \notin y$ denote $x$ is not an element of $y$.
+
+\begin{axiom} $(x \in y) \Rightarrow x -<- y$.
+\end{axiom} 
+
+\begin{theorem} $x \notin x$.
+\end{theorem}
+{\bf Proof} by induction on $x$. {\bf qed.}
+
+\begin{signature} The \emph{empty set} is the set that has no elements.
+Let $\emptyset$ denote the empty set.
+\end{signature}
+
+\begin{definition} $x$ is \emph{nonempty} iff $x$ has an element.
+\end{definition}
+
+\begin{definition} A subset of $y$ is a set $x$ such that every element 
+of $x$ is an element of $y$. 
+Let $x \subseteq y$ stand for $x$ is a subset of $y$.
+Let $y \supseteq x$ stand for $x$ is a subset of $y$.
+\end{definition}
+
+\begin{definition} A \emph{proper subset} of $y$ is a subset $x$ of $y$ such that there is an element of $y$ that is not an element of $x$.
+\end{definition}
+
+\begin{proposition} $x \subseteq x$. \end{proposition}
+
+\begin{proposition} If $x \subseteq y \subseteq x$ then $x = y$. \end{proposition}
+
+\begin{definition} $x \cup y = \{u \mid u \in x \text{ or } u \in y\}$. \end{definition}
+
+\begin{definition} $\{x\} = \{\text{sets }y \mid y = x\}$.\end{definition}
+\end{forthel}
+
+\section{Ordinal Numbers}
+
+\begin{forthel}
+[ordinal/-s]
+
+\begin{definition} $x$ is \emph{transitive} iff
+every element of $x$ is a subset of $x$.
+Let $\rm{Trans}(x)$ stand for $x$ is transitive.
+\end{definition}
+
+\begin{definition} 
+An \emph{ordinal} is a set $x$ such that $x$ is transitive and every element of $x$ is transitive.
+Let $\rm{Ord}(x)$ stand for $x$ is an ordinal.
+Let $\alpha, \beta, \gamma$ stand for ordinals.
+\end{definition}
+
+\begin{theorem} $\emptyset$ is an ordinal.
+\end{theorem}
+
+\begin{definition} $x + 1 = x \cup \{x\}$.
+\end{definition}
+
+\begin{theorem}
+$\alpha + 1$ is an ordinal.
+\end{theorem}
+
+\begin{theorem} If $\rm{Ord}(\beta)$ and $\alpha \in \beta$ then
+$\rm{Ord}(\alpha)$.
+\end{theorem}
+
+\begin{theorem} $(\alpha \in \beta) \wedge (\beta \in \gamma) 
+\Rightarrow (\alpha \in \gamma)$.
+\end{theorem}
+
+\end{forthel}
+
+\end{document}

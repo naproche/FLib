@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>LaTeX Macros</title>
+</head>
+<body>
+<h1>LaTeX Macros</h1>
+
+One can create new &quot;commands&quot; for combinations that are used
+often.
+<br>
+These are called <em>macros</em>. The format is as follows (the brackets
+are essential):
+
+<blockquote>
+<code>
+\newcommand{\<i>name</i>}[<i>no_of_parameters</i>]{<i>defn_of_command</i>}
+</code>
+</blockquote>
+
+One can have a macro whose first argument is optional (note: when the first
+argument is specified, it has to be enclosed in square brackets):
+
+<blockquote>
+<code>
+\newcommand{\<i>name</i>}[<i>no_of_parameters</i>][<i>default_1<sup>st</sup>_variable</i>]{<i>defn_of_command</i>}
+</code>
+</blockquote>
+
+<p>
+
+When the macro is invoked (with all its parameters specified), it is
+replaced by its definition, after the parameters are substituted with the
+specified values.
+
+<p>
+
+If the number of parameters is zero, the argument
+<code>[<i>no_of_parameters</i>]</code> can be omitted, or used as
+<code>[0]</code>.
+
+<br>
+
+There can be at most 9 parameters. They are referred to in the definition
+of command by <code>#1</code>, <code>#2</code>,..., <code>#9</code>.
+
+
+<p> To redefine an already existing command, one has to use
+<code>\renewcommand</code>.
+
+<br>
+The command <code>\providecommand</code> defines the command only if it
+does not already exist; otherwise, it does not change its meaning.
+
+<p>
+Here are a few examples:
+
+<blockquote>
+<code>
+\newcommand{\R}{{\mathbb R}}
+<br>
+\renewcommand{\vector}[1]{(x_1,x_2,\ldots,x_{#1})}
+<br>
+\newcommand{\avector}[2]{(#1_1,#1_2,\ldots,#1_{#2})}
+<br>
+\newcommand{\aDEFvector}[2][a]{(#1_1,#1_2,\ldots,#1_{#2})}
+</code>
+</blockquote>
+
+Remarks:
+<ul>
+<li> Since we might use <code>\R</code> as index etc., it does not hurt
+to put one extra pair of curly brackets around it (the outer pair is part
+of the <code>\newcommand</code> syntax, and will be stripped when the
+replacement of <code>\R</code> by its meaning takes place).
+
+<li> The command <code>\vector</code> is already defined in LaTeX, and
+using <code>\newcommand{\vector}...</code> generates an error message.
+Therefore we have to use <code>\renewcommand</code> to redefine it.
+
+<li> <b>WARNING:</b> redefining commands should be done with great care:
+since a given command might be used in various LaTeX constructions, the
+effect can exceed our expectations.
+</ul>
+<br>
+
+Here is a piece of LaTeX code using them:
+
+<pre>
+<blockquote>
+\documentclass{article}
+\usepackage{amssymb,amsmath}
+
+\newcommand{\R}{{\mathbb R}}
+
+\renewcommand{\vector}[1]{(x_1,x_2,\ldots,x_{#1})}
+\newcommand{\avector}[2]{(#1_1,#1_2,\ldots,#1_{#2})}
+\newcommand{\aDEFvector}[2][a]{(#1_1,#1_2,\ldots,#1_{#2})}
+
+
+\begin{document}
+
+Consider the following vectors with entries in $\R$: $\mathbf
+x=\vector{6}$, $\mathbf u=\avector{u}{7}$, $\mathbf a=\aDEFvector{8}$,
+$\mathbf w=\aDEFvector[w]{n+1}$.
+
+\end{document}
+</blockquote>
+</pre>
+
+and the approximate way it would look:
+
+<font size="+1">
+<blockquote>
+Consider the following vectors with entries in <b>R</b>:
+<b>x</b>=<i>(x<sub>1</sub>, x<sub>2</sub>, ... ,x<sub>6</sub>)</i>, 
+<b>u</b>=<i>(u<sub>1</sub>, u<sub>2</sub>, ... , u<sub>7</sub>)</i>,
+<b>a</b>=<i>(a<sub>1</sub>, a<sub>2</sub>, ... , a<sub>8</sub>)</i>,
+<b>w</b>=<i>(w<sub>1</sub>, w<sub>2</sub>, ... , w<sub>n+1</sub>)</i>.
+</blockquote>
+</font>
+
+</body> </html>

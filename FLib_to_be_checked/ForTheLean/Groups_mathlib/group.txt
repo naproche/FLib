@@ -1,0 +1,185 @@
+[Parser] "/home/koepke/V/2019/SS/Praktikum/group.lean.ftl"
+parsing successful
+hypothesis.
+  assume forall v0 ((HeadTerm :: aType(v0)) implies aClass(v0)).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aTypeWithMultiplication(v0)) implies aType(v0)).
+
+hypothesis.
+  assume (aTypeWithMultiplication(alpha) and (aElementOf(a,alpha) and aElementOf(b,alpha))).
+  assume forall v0 ((HeadTerm :: v0 = a*^{alpha}b) implies aElementOf(v0,alpha)).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aSemigroup(v0)) iff (aTypeWithMultiplication(v0) and forall v1 forall v2 forall v3 (((aElementOf(v1,v0) and aElementOf(v2,v0)) and aElementOf(v3,v0)) implies (v1*^{v0}v2)*^{v0}v3 = v1*^{v0}(v2*^{v0}v3)))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aCommutativeSemigroup(v0)) iff (aSemigroup(v0) and forall v1 forall v2 ((aElementOf(v1,v0) and aElementOf(v2,v0)) implies v1*^{v0}v2 = v2*^{v0}v1))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aSemigroupWithLeftCancellation(v0)) iff (aSemigroup(v0) and forall v1 forall v2 forall v3 (((aElementOf(v1,v0) and aElementOf(v2,v0)) and aElementOf(v3,v0)) implies (v1*^{v0}v2 = v1*^{v0}v3 implies v2 = v3)))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aSemigroupWithRightCancellation(v0)) iff (aSemigroup(v0) and forall v1 forall v2 forall v3 (((aElementOf(v1,v0) and aElementOf(v2,v0)) and aElementOf(v3,v0)) implies (v1*^{v0}v2 = v3*^{v0}v2 implies v1 = v3)))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aTypeWithOne(v0)) implies aType(v0)).
+
+hypothesis.
+  assume aTypeWithOne(alpha).
+  assume forall v0 ((HeadTerm :: v0 = 1^{alpha}) implies aElementOf(v0,alpha)).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aMonoid(v0)) iff (aSemigroup(v0) and ((aTypeWithOne(v0) and forall v1 (aElementOf(v1,v0) implies 1^{v0}*^{v0}v1 = v1)) and forall v1 (aElementOf(v1,v0) implies v1*^{v0}1^{v0} = v1)))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aCommutativeMonoid(v0)) iff (aMonoid(v0) and aCommutativeSemigroup(v0))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aTypeWithInverses(v0)) implies aType(v0)).
+
+hypothesis.
+  assume (aTypeWithInverses(alpha) and aElementOf(a,alpha)).
+  assume forall v0 ((HeadTerm :: v0 = a^{-1,alpha}) implies aElementOf(v0,alpha)).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aGroup(v0)) iff (aMonoid(v0) and (aTypeWithInverses(v0) and forall v1 (aElementOf(v1,v0) implies (v1^{-1,v0})*^{v0}v1 = 1^{v0})))).
+
+hypothesis.
+  assume forall v0 ((HeadTerm :: aCommutativeGroup(v0)) iff (aGroup(v0) and aCommutativeMonoid(v0))).
+
+conjecture mul_left_comm.
+  assume aCommutativeSemigroup(alpha).
+  forall v0 forall v1 forall v2 (((aElementOf(v0,alpha) and aElementOf(v1,alpha)) and aElementOf(v2,alpha)) implies v0*^{alpha}(v1*^{alpha}v2) = v1*^{alpha}(v0*^{alpha}v2)).
+
+conjecture mul_right_comm.
+  assume aCommutativeSemigroup(alpha).
+  forall v0 forall v1 forall v2 (((aElementOf(v0,alpha) and aElementOf(v1,alpha)) and aElementOf(v2,alpha)) implies v0*^{alpha}(v1*^{alpha}v2) = v0*^{alpha}(v2*^{alpha}v1)).
+
+conjecture mul_left_cancel_iff.
+  assume aSemigroupWithLeftCancellation(alpha).
+  forall v0 forall v1 forall v2 (((aElementOf(v0,alpha) and aElementOf(v1,alpha)) and aElementOf(v2,alpha)) implies (v0*^{alpha}v1 = v0*^{alpha}v2 iff v1 = v2)).
+
+conjecture mul_right_cancel_iff.
+  assume aSemigroupWithRightCancellation(alpha).
+  forall v0 forall v1 forall v2 (((aElementOf(v0,alpha) and aElementOf(v1,alpha)) and aElementOf(v2,alpha)) implies (v1*^{alpha}v0 = v2*^{alpha}v0 iff v1 = v2)).
+
+conjecture inv_mul_cancel_left.
+  assume aGroup(alpha).
+  forall v0 forall v1 ((aElementOf(v0,alpha) and aElementOf(v1,alpha)) implies (v0^{-1,alpha})*^{alpha}(v0*^{alpha}v1) = v1).
+
+conjecture inv_mul_cancel_right.
+  assume aGroup(alpha).
+  forall v0 forall v1 ((aElementOf(v0,alpha) and aElementOf(v1,alpha)) implies v0*^{alpha}((v1^{-1,alpha})*^{alpha}v1) = v0).
+
+conjecture inv_eq_of_mul_eq_one.
+  assume aGroup(alpha).
+  assume ((aElementOf(a,alpha) and aElementOf(b,alpha)) and a*^{alpha}b = 1^{alpha}).
+  a^{-1,alpha} = b.
+
+conjecture one_inv.
+  assume aGroup(alpha).
+  1^{alpha}^{-1,alpha} = 1^{alpha}.
+
+conjecture inv_inv.
+  assume aGroup(alpha).
+  assume aElementOf(a,alpha).
+  (a^{-1,alpha})^{-1,alpha} = a.
+
+conjecture mul_right_inv.
+  assume aGroup(alpha).
+  assume aElementOf(a,alpha).
+  a*^{alpha}(a^{-1,alpha}) = 1^{alpha}.
+
+conjecture inv_inj.
+  assume aGroup(alpha).
+  assume ((aElementOf(a,alpha) and aElementOf(b,alpha)) and a^{-1,alpha} = b^{-1,alpha}).
+  a = b.
+
+conjecture group_mul_left_cancel.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and a*^{alpha}b = a*^{alpha}c).
+  b = c.
+
+conjecture group_mul_right_cancel.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and a*^{alpha}b = c*^{alpha}b).
+  a = c.
+  proof.
+    ((a = (a*^{alpha}b)*^{alpha}(b^{-1,alpha}) and (a*^{alpha}b)*^{alpha}(b^{-1,alpha}) = (c*^{alpha}b)*^{alpha}(b^{-1,alpha})) and (c*^{alpha}b)*^{alpha}(b^{-1,alpha}) = c).
+  qed.
+
+conjecture mul_inv_cancel_left.
+  assume aGroup(alpha).
+  assume (aElementOf(a,alpha) and aElementOf(b,alpha)).
+  a*^{alpha}((a^{-1,alpha})*^{alpha}b) = b.
+
+conjecture mul_inv_cancel_right.
+  assume aGroup(alpha).
+  assume (aElementOf(a,alpha) and aElementOf(b,alpha)).
+  (a*^{alpha}b)*^{alpha}(b^{-1,alpha}) = a.
+
+conjecture mul_inv_rev.
+  assume aGroup(alpha).
+  assume (aElementOf(a,alpha) and aElementOf(b,alpha)).
+  (a*^{alpha}b)^{-1,alpha} = (b^{-1,alpha})*^{alpha}(a^{-1,alpha}).
+  proof.
+    (a*^{alpha}b)*^{alpha}((b^{-1,alpha})*^{alpha}(a^{-1,alpha})) = 1^{alpha}.
+  qed.
+
+conjecture eq_inv_of_eq_inv.
+  assume aGroup(alpha).
+  assume ((aElementOf(a,alpha) and aElementOf(b,alpha)) and a = b^{-1,alpha}).
+  b = a^{-1,alpha}.
+
+conjecture eq_inv_of_mul_eq_one.
+  assume aGroup(alpha).
+  assume ((aElementOf(a,alpha) and aElementOf(b,alpha)) and a*^{alpha}b = 1^{alpha}).
+  a = b^{-1,alpha}.
+
+conjecture eq_mul_inv_of_mul_eq.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and a*^{alpha}c = b).
+  a = b*^{alpha}(c^{-1,alpha}).
+
+conjecture eq_inv_mul_of_mul_eq.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and b*^{alpha}a = c).
+  a = (b^{-1,alpha})*^{alpha}c.
+
+conjecture inv_mul_eq_of_eq_mul.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and b = a*^{alpha}c).
+  (a^{-1,alpha})*^{alpha}b = c.
+
+conjecture mul_inv_eq_of_eq_mul.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and a = c*^{alpha}b).
+  a*^{alpha}(b^{-1,alpha}) = c.
+
+conjecture eq_mul_of_mul_inv_eq.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and a*^{alpha}(c^{-1,alpha}) = b).
+  a = b*^{alpha}c.
+
+conjecture eq_mul_of_inv_mul_eq.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and (b^{-1,alpha})*^{alpha}a = c).
+  a = b*^{alpha}c.
+
+conjecture mul_eq_of_eq_inv_mul.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and b = (a^{-1,alpha})*^{alpha}c).
+  a*^{alpha}b = c.
+
+conjecture mul_eq_of_eq_mul_inv.
+  assume aGroup(alpha).
+  assume (((aElementOf(a,alpha) and aElementOf(b,alpha)) and aElementOf(c,alpha)) and a = c*^{alpha}(b^{-1,alpha})).
+  a*^{alpha}b = c.
+
+conjecture mul_inv.
+  assume aCommutativeGroup(alpha).
+  assume (aElementOf(a,alpha) and aElementOf(b,alpha)).
+  (a*^{alpha}b)^{-1,alpha} = (a^{-1,alpha})*^{alpha}(b^{-1,alpha}).
+
+[Main] total 00:00.20

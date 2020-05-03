@@ -1,0 +1,86 @@
+\newtheorem{signature}{Signature}
+\newtheorem{axiom}{Axiom}
+\newcommand{\power}{{\cal P}}
+\section{There are infinitely many primes}
+%#
+%# Version 15 March 2012
+%#
+\section{I. Foundations}
+
+
+\subsection{1. Sets}
+
+%% [set/-s] [element/-s] [belong/-s] [subset/-s]
+
+\begin{signature}
+A {\bf set} is a notion.
+Let $X,Y,Z$ stand for sets. 
+\end{signature}
+
+\begin{signature}
+An {\bf element} is a notion.
+Let $x,y,z$ stand for elements.
+\end{signature}
+
+\begin{signature}
+An {\bf element of} $X$ is a notion.
+Let $x$ {\bf belongs to} $X$ stand for $x$ is an element of $X$.
+Let $x \in X$ stand for $x$ is an element of $X$.
+\end{signature}
+
+\begin{definition}
+A {\bf subset} of $Y$ is a set $X$ such that
+every element of $X$ belongs to Y.
+Let $X \subseteq Y$ stand for $X$ is a subset of $Y$.
+\end{definition}
+
+\begin{lemma}$X \subseteq X$.\end{lemma}
+
+\begin{lemma}
+$X \subseteq Y \subseteq Z  \rightarrow  X \subseteq Z$.
+\end{lemma}
+
+\begin{definition}
+$\emptyset$ is a set that has no elements.
+Let $X$ is empty stand for $X = \emptyset$.
+Let $X$ is nonempty stand for $X \neq \emptyset$.
+\end{definition}
+
+\begin{axiom}
+$X \subseteq Y \subseteq X  \rightarrow  X = Y$.
+\end{axiom}
+
+\begin{lemma}
+If $X$ has no elements then $X=\emptyset$.
+\end{lemma}
+
+\begin{lemma}$x,y \in \{x,y\}$. If $z \in \{x,y\}$ then $z=x$ or $z=y$.
+\end{lemma}
+
+\begin{lemma}
+$\{x,y\}$ is a set.
+\end{lemma} 
+
+\begin{definition}
+Assume that every element of $X$ is a set.
+$\bigcup X = \{ u | u \text{ is an element of some element of } X\}$.
+\end{definition}
+
+\begin{axiom}
+Assume that every element of $X$ is a set.
+$\bigcup X$ is a set.
+\end{axiom}
+
+\begin{definition}
+$\power(X) = \{\text{set} Y | Y \subseteq X \}$.
+\end{definition}
+
+\begin{axiom}
+$\power(X)$ is a set.
+\end{axiom}
+
+
+
+
+
+

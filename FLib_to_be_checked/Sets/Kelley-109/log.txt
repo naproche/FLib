@@ -1,0 +1,53 @@
+8.4.2019
+
+Welche Konfiguration benutzen wir:
+Isabelle: isabelle/bin/isabelle jedit
+
+Isabelle uses as Naproche-component:
+init_component "/home/koepke/NAPROCHE-Test/Naproche-SAD"
+This entry made in ~/isabelle/etc/settings:172
+
+Naproche-SAD is coded in the directory
+~/NAPROCHE-Test/Naproche-SAD/src/SAD
+and is compiled by:
+koepke@dell:~/NAPROCHE-Test/Naproche-SAD$ stack build
+
+This build can also be used independently of Isabelle with
+koepke@dell:~/NAPROCHE-Test/Naproche-SAD$ stack exec Naproche-SAD -- /home/koepke/Naproche-SAD/examples/ordinals08.ftl -vvvvvv >> test.txt
+Then one can inspect the file ~/NAPROCHE-Test/Naproche-SAD/test.txt
+and vary the verbosity
+
+The present Naproche has the ontology of the file on ordinals:
+~/Naproche-SAD/examples/ordinals08.ftl
+(Hardcoded "classes",+
+Signature: An object is a notion.
+Axiom: Any element of any class is an object.
+Definition: A set is a class that is an object.)
+
+Training files: ordinals08, and also Kelley
+
+Put the Training files into ~/NAPROCHE-Test/Naproche-SAD/Kelley
+as
+Sections_1-56_original.ftl
+
+We adapt Naproche-SAD to the notation from Kelley by disabling
+some inbuilt notations like ( , ) for ordered pairs or { , ,,,} 
+for finite sets.
+This is done at the following places:
+finite sets: { , ,,,}:
+ForThel/Statement.hs:384 change symbSetNotation
+ordered pairs: ( , ):
+Forthel/Base.hs:84 change part of initFS
+
+We have closed Sections_1-56_original.ftl for the moment and
+are turning to an ontology with objects, sets, and classes in
+Sections_1-56_with_objects.ftl
+
+There are some difficulties with some arguments, that fail if not
+everything is a class. Therefore we have to pull some set existence
+properties forward as axioms.
+
+ 
+
+
+

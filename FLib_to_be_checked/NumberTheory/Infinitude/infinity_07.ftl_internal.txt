@@ -1,0 +1,278 @@
+[InStr ISlibr "examples"
+,InStr ISprdb "provers/provers.dat"
+,InStr ISprvr "spass"
+,InInt IItlim 3
+,InInt IIdpth 7
+,InInt IIchtl 1
+,InInt IIchdp 3
+,InBin IBprov True
+,InBin IBchck True
+,InBin IBsign True
+,InBin IBinfo True
+,InBin IBthes True
+,InBin IBfilt True
+,InBin IBskip False
+,InBin IBflat False
+,InBin IBPgls True
+,InBin IBPrsn False
+,InBin IBPsct False
+,InBin IBPchk False
+,InBin IBPprv False
+,InBin IBPunf False
+,InBin IBPtsk False
+,InStr ISprvr "eprover"
+,hypothesis SetSort.
+  forall v0 ((DHD :: aSet(v0)) implies truth).
+,hypothesis ElmSort.
+  forall v0 ((DHD :: aElement(v0)) implies truth).
+,hypothesis EOfElem.
+  assume aSet(X).
+  forall v0 ((DHD :: aElementOf(v0,X)) implies aElement(v0)).
+,hypothesis DefEmp.
+  forall v0 ((DHD :: v0 = \emptyset) iff (aSet(v0) and not exists v1 aElementOf(v1,v0))).
+,hypothesis DefSub.
+  assume aSet(Y).
+  forall v0 ((DHD :: aSubsetOf(v0,Y)) iff (aSet(v0) and forall v1 (aElementOf(v1,v0) implies aElementOf(v1,Y)))).
+,conjecture SubRefl.
+  assume aSet(X).
+  aSubsetOf(X,X).
+,conjecture SubTrans.
+  assume ((aSet(X) and aSet(Y)) and aSet(Z)).
+  ((aSubsetOf(X,Y) and aSubsetOf(Y,Z)) implies aSubsetOf(X,Z)).
+,hypothesis SubASymm.
+  assume (aSet(X) and aSet(Y)).
+  ((aSubsetOf(X,Y) and aSubsetOf(Y,X)) implies X = Y).
+,hypothesis FunSort.
+  forall v0 ((DHD :: aFunction(v0)) implies truth).
+,hypothesis DomSet.
+  assume aFunction(f).
+  forall v0 ((DHD :: v0 = dom.(f)) implies aSet(v0)).
+,hypothesis ImgElm.
+  assume aFunction(f).
+  assume aElementOf(x,dom.(f)).
+  forall v0 ((DHD :: v0 = .(.)(f,x)) implies aElement(v0)).
+,hypothesis DefSImg.
+  assume aFunction(f).
+  assume aSubsetOf(X,dom.(f)).
+  forall v0 ((DHD :: v0 = .[.](f,X)) iff (aSet(v0) and forall v1 (aElementOf(v1,v0) iff exists v2 (aElementOf(v2,X) and .(.)(f,v2) = v1)))).
+,conjecture ImgRng.
+  assume aFunction(f).
+  assume aElementOf(x,dom.(f)).
+  aElementOf(.(.)(f,x),.[.](f,dom.(f))).
+,hypothesis DefRst.
+  assume aFunction(f).
+  assume aSubsetOf(X,dom.(f)).
+  forall v0 ((DHD :: v0 = .\upharpoonright.(f,X)) iff ((aFunction(v0) and dom.(v0) = X) and forall v1 (aElementOf(v1,X) implies .(.)(v0,v1) = .(.)(f,v1)))).
+,hypothesis NatSort.
+  forall v0 ((DHD :: aNumber(v0)) implies truth).
+,hypothesis Nat.
+  forall v0 ((DHD :: v0 = \NN) iff (aSet(v0) and forall v1 (aElementOf(v1,v0) iff aNumber(v1)))).
+,hypothesis SortsC.
+  forall v0 ((DHD :: v0 = 0) implies aNumber(v0)).
+,hypothesis SortsC.
+  forall v0 ((DHD :: v0 = 1) implies (aNumber(v0) and not v0 = 0)).
+,hypothesis SortsB.
+  assume (aNumber(m) and aNumber(n)).
+  forall v0 ((DHD :: v0 = .+.(m,n)) implies aNumber(v0)).
+,hypothesis SortsB.
+  assume (aNumber(m) and aNumber(n)).
+  forall v0 ((DHD :: v0 = .\cdot.(m,n)) implies aNumber(v0)).
+,hypothesis AddAsso.
+  assume ((aNumber(m) and aNumber(n)) and aNumber(l)).
+  .+.(.+.(m,n),l) = .+.(m,.+.(n,l)).
+,hypothesis AddZero.
+  assume aNumber(m).
+  (.+.(m,0) = m and m = .+.(0,m)).
+,hypothesis AddComm.
+  assume (aNumber(m) and aNumber(n)).
+  .+.(m,n) = .+.(n,m).
+,hypothesis MulAsso.
+  assume ((aNumber(m) and aNumber(n)) and aNumber(l)).
+  .\cdot.(.\cdot.(m,n),l) = .\cdot.(m,.\cdot.(n,l)).
+,hypothesis MulUnit.
+  assume aNumber(m).
+  (.\cdot.(m,1) = m and m = .\cdot.(1,m)).
+,hypothesis MulZero.
+  assume aNumber(m).
+  (.\cdot.(m,0) = 0 and 0 = .\cdot.(0,m)).
+,hypothesis MulComm.
+  assume (aNumber(m) and aNumber(n)).
+  .\cdot.(m,n) = .\cdot.(n,m).
+,hypothesis AMDistr.
+  assume ((aNumber(m) and aNumber(n)) and aNumber(l)).
+  (.\cdot.(m,.+.(n,l)) = .+.(.\cdot.(m,n),.\cdot.(m,l)) and .\cdot.(.+.(n,l),m) = .+.(.\cdot.(n,m),.\cdot.(l,m))).
+,hypothesis AddCanc.
+  assume ((aNumber(l) and aNumber(m)) and aNumber(n)).
+  ((.+.(l,m) = .+.(l,n) or .+.(m,l) = .+.(n,l)) implies m = n).
+,hypothesis MulCanc.
+  assume aNumber(l).
+  assume not l = 0.
+  assume (aNumber(m) and aNumber(n)).
+  ((.\cdot.(l,m) = .\cdot.(l,n) or .\cdot.(m,l) = .\cdot.(n,l)) implies m = n).
+,hypothesis ZeroAdd.
+  assume (aNumber(m) and aNumber(n)).
+  (.+.(m,n) = 0 implies (m = 0 and n = 0)).
+,conjecture ZeroMul.
+  assume (aNumber(m) and aNumber(n)).
+  (.\cdot.(m,n) = 0 implies (m = 0 or n = 0)).
+,hypothesis DefLE.
+  assume (aNumber(m) and aNumber(n)).
+  ((DHD :: .\leq.(m,n)) iff exists v0 (aNumber(v0) and .+.(m,v0) = n)).
+,hypothesis DefDiff.
+  assume (aNumber(m) and aNumber(n)).
+  assume .\leq.(m,n).
+  forall v0 ((DHD :: v0 = .-.(n,m)) iff (aNumber(v0) and .+.(m,v0) = n)).
+,conjecture LERefl.
+  assume aNumber(m).
+  .\leq.(m,m).
+,conjecture LETran.
+  assume ((aNumber(m) and aNumber(n)) and aNumber(l)).
+  ((.\leq.(m,n) and .\leq.(n,l)) implies .\leq.(m,l)).
+,conjecture LEAsym.
+  assume (aNumber(m) and aNumber(n)).
+  ((.\leq.(m,n) and .\leq.(n,m)) implies m = n).
+,hypothesis LETotal.
+  assume (aNumber(m) and aNumber(n)).
+  (.\leq.(m,n) or (not n = m and .\leq.(n,m))).
+,conjecture MonAdd.
+  assume (aNumber(l) and aNumber(n)).
+  assume (not l = n and .\leq.(l,n)).
+  assume aNumber(m).
+  ((not .+.(m,l) = .+.(m,n) and .\leq.(.+.(m,l),.+.(m,n))) and (not .+.(l,m) = .+.(n,m) and .\leq.(.+.(l,m),.+.(n,m)))).
+,conjecture MonMul.
+  assume ((aNumber(m) and aNumber(l)) and aNumber(n)).
+  assume (not m = 0 and (not l = n and .\leq.(l,n))).
+  ((not .\cdot.(m,l) = .\cdot.(m,n) and .\leq.(.\cdot.(m,l),.\cdot.(m,n))) and (not .\cdot.(l,m) = .\cdot.(n,m) and .\leq.(.\cdot.(l,m),.\cdot.(n,m)))).
+,hypothesis LENTr.
+  assume aNumber(n).
+  ((n = 0 or n = 1) or (not 1 = n and .\leq.(1,n))).
+,conjecture MonMul2.
+  assume (aNumber(m) and aNumber(n)).
+  (not m = 0 implies .\leq.(n,.\cdot.(n,m))).
+  proof.
+    assume not m = 0.
+    .\leq.(1,m).
+  qed.
+,hypothesis InbuiltForthelInductionRelation.
+  assume (aNumber(m) and aNumber(n)).
+  ((DHD :: iLess(m,n)) implies truth).
+,hypothesis EmbeddingLessIntoInductionRelation.
+  assume (aNumber(m) and aNumber(n)).
+  ((not m = n and .\leq.(m,n)) implies iLess(m,n)).
+,hypothesis.
+  assume (aNumber(m) and aNumber(n)).
+  forall v0 ((DHD :: v0 = \Seq{.}{.}(m,n)) iff (aSet(v0) and forall v1 (aElementOf(v1,v0) iff (aElementOf(v1,\NN) and (.\leq.(m,v1) and .\leq.(v1,n)))))).
+,hypothesis.
+  assume (aNumber(m) and aNumber(n)).
+  assume (aFunction(f) and aSubsetOf(\Seq{.}{.}(m,n),dom.(f))).
+  forall v0 ((DHD :: v0 = \Set{.}{.}{.}(f,m,n)) iff (aSet(v0) and forall v1 (aElementOf(v1,v0) iff exists v2 ((aElementOf(v2,\NN) and (.\leq.(m,v2) and .\leq.(v2,n))) and .(.)(f,v2) = v1)))).
+,hypothesis.
+  assume ((aFunction(f) and aSet(X)) and aNumber(n)).
+  ((DHD :: doListsInSteps(f,X,n)) iff (dom.(f) = \Seq{.}{.}(1,n) and X = \Set{.}{.}{.}(f,1,n))).
+,hypothesis.
+  assume aSet(X).
+  ((DHD :: isFinite(X)) iff exists v0 (aFunction(v0) and exists v1 (aNumber(v1) and doListsInSteps(v0,X,v1)))).
+,hypothesis.
+  assume aSet(X).
+  ((DHD :: isInfinite(X)) iff not isFinite(X)).
+,hypothesis DefDiv.
+  assume (aNumber(m) and aNumber(n)).
+  ((DHD :: doDivides(m,n)) iff exists v0 (aNumber(v0) and n = .\cdot.(m,v0))).
+,hypothesis DefQuot.
+  assume (aNumber(m) and aNumber(n)).
+  assume (not m = 0 and doDivides(m,n)).
+  forall v0 ((DHD :: v0 = \frac{.}{.}(n,m)) iff (aNumber(v0) and n = .\cdot.(m,v0))).
+,conjecture DivTrans.
+  assume ((aNumber(l) and aNumber(m)) and aNumber(n)).
+  ((doDivides(l,m) and doDivides(m,n)) implies doDivides(l,n)).
+,conjecture DivSum.
+  assume ((aNumber(l) and aNumber(m)) and aNumber(n)).
+  assume (doDivides(l,m) and doDivides(l,n)).
+  doDivides(l,.+.(m,n)).
+  proof.
+    (not l = 0 implies .+.(m,n) = .\cdot.(l,.+.(\frac{.}{.}(m,l),\frac{.}{.}(n,l)))).
+  qed.
+,conjecture DivMin.
+  assume ((aNumber(l) and aNumber(m)) and aNumber(n)).
+  assume (doDivides(l,m) and doDivides(l,.+.(m,n))).
+  doDivides(l,n).
+  proof.
+    assume (not l = 0 and not n = 0).
+    (aNumber(i) and m = .\cdot.(l,i)).
+    (aNumber(j) and .+.(m,n) = .\cdot.(l,j)).
+    .\leq.(i,j).
+    proof.
+      assume not thesis.
+      (not j = i and .\leq.(j,i)).
+      ((.+.(m,n) = .\cdot.(l,j) and (not .\cdot.(l,j) = .\cdot.(l,i) and .\leq.(.\cdot.(l,j),.\cdot.(l,i)))) and .\cdot.(l,i) = m).
+      .\leq.(m,.+.(m,n)).
+      m = .+.(m,n).
+      n = 0.
+      contradiction.
+    qed.
+    k = .-.(j,i).
+    .+.(.\cdot.(l,i),.\cdot.(l,k)) = .+.(.\cdot.(l,i),n).
+    n = .\cdot.(l,k).
+  qed.
+,conjecture DivLE.
+  assume (aNumber(m) and aNumber(n)).
+  assume (doDivides(m,n) and not n = 0).
+  .\leq.(m,n).
+,conjecture DivAsso.
+  assume (aNumber(l) and aNumber(m)).
+  assume (not l = 0 and doDivides(l,m)).
+  assume aNumber(n).
+  .\cdot.(n,\frac{.}{.}(m,l)) = \frac{.}{.}(.\cdot.(n,m),l).
+  proof.
+    .\cdot.(.\cdot.(l,n),\frac{.}{.}(m,l)) = .\cdot.(l,\frac{.}{.}(.\cdot.(n,m),l)).
+  qed.
+,hypothesis.
+  forall v0 ((DHD :: v0 = \NNplus) iff (aSet(v0) and forall v1 (aElementOf(v1,v0) iff (aElementOf(v1,\NN) and not v1 = 0)))).
+,hypothesis.
+  assume (aNumber(m) and aNumber(n)).
+  assume (aFunction(f) and (dom.(f) = \Seq{.}{.}(m,n) and aSubsetOf(.[.](f,dom.(f)),\NNplus))).
+  forall v0 ((DHD :: v0 = \Product{.}{.}{.}(f,m,n)) implies aElementOf(v0,\NNplus)).
+,hypothesis MultProd.
+  assume (aNumber(m) and aNumber(n)).
+  assume (aFunction(f) and (dom.(f) = \Seq{.}{.}(m,n) and aSubsetOf(.[.](f,dom.(f)),\NNplus))).
+  assume aNumber(j).
+  assume (.\leq.(m,j) and .\leq.(j,n)).
+  doDivides(.(.)(f,j),\Product{.}{.}{.}(f,m,n)).
+,hypothesis DefPrime.
+  assume aNumber(q).
+  ((DHD :: isPrime(q)) iff ((not q = 0 and not q = 1) and forall v0 ((aNumber(v0) and doDivides(v0,q)) implies (v0 = 1 or v0 = q)))).
+,conjecture PrimDiv.
+  forall v0 ((aNumber(v0) and (not v0 = 0 and not v0 = 1)) implies ((DIH :: forall v1 ((aNumber(v1) and (not v1 = 0 and not v1 = 1)) implies (iLess(v1,v0) implies exists v2 ((aNumber(v2) and doDivides(v2,v1)) and isPrime(v2))))) implies exists v1 ((aNumber(v1) and doDivides(v1,v0)) and isPrime(v1)))).
+  proof.
+    assume aNumber(k).
+    assume (not k = 0 and not k = 1).
+    ((DCH :: isPrime(k)) implies thesis).
+    ((DCH :: not isPrime(k)) implies thesis).
+    proof.
+      ((aNumber(m) and doDivides(m,k)) and (not m = 1 and not m = k)).
+      ((not m = 0 and not m = 1) and iLess(m,k)).
+      ((aNumber(n) and doDivides(n,m)) and isPrime(n)).
+      ((aNumber(n) and doDivides(n,k)) and isPrime(n)).
+    qed.
+  qed.
+,conjecture.
+  isInfinite(cS:3167).
+  proof.
+    assume (A = cS:3192 and isFinite(A)).
+    (aFunction(p) and (aNumber(r) and doListsInSteps(p,A,r))).
+    aSubsetOf(.[.](p,dom.(p)),\NNplus).
+    not \Product{.}{.}{.}(p,1,r) = 0.
+    n = .+.(\Product{.}{.}{.}(p,1,r),1).
+    (not n = 0 and not n = 1).
+    ((aNumber(q) and doDivides(q,n)) and isPrime(q)).
+    not aElementOf(q,A).
+    proof.
+      assume not thesis.
+      (aNumber(i) and ((.\leq.(1,i) and .\leq.(i,r)) and q = .(.)(p,i))).
+      doDivides(.(.)(p,i),\Product{.}{.}{.}(p,1,r)).
+      doDivides(q,1).
+      contradiction.
+    qed.
+    not A = cS:3437.
+  qed.
+]

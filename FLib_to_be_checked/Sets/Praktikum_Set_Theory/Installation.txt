@@ -1,0 +1,112 @@
+In Ubuntu 18.04
+
+1. Install git:
+@peter:~$ sudo apt install git
+[sudo] Passwort für peter:
+...
+
+2. Clone Naproche-SAD:
+@peter:~$ git clone https://github.com/Naproche/Naproche-SAD.git
+...
+Copies current version of Naproche-SAD in new folder Naproche-SAD
+and arranges for further updating via "git pull"
+
+3. Change to folder Naproche-SAD:
+@peter:~$ cd Naproche-SAD
+@peter:~/Naproche-SAD$ dir
+app  examples  Isabelle  package.yaml  README.md  src	      test
+etc  init.opt  LICENSE	 provers.dat   Setup.hs   stack.yaml  TODO.md
+
+4. Read README.md:
+@peter:~/Naproche-SAD$ gedit README.md &
+[1] 12304
+
+5. Follow README.md
+
+6. Install the Haskell Tool Stack:
+@peter:~/Naproche-SAD$ wget -qO- https://get.haskellstack.org/ | sh
+Follow instructions given on screen
+
+7. Building Naproche-SAD with stack:
+@peter:~/Naproche-SAD$ stack build
+This results in an ERROR
+AesonException "Error in $.packages.cassava.constraints.flags['bytestring--lt-0_10_4']: Invalid flag name: \"bytestring--lt-0_10_4\""
+
+Google shows that the latest version of stack is not compatible
+with Ubuntu 18.04
+
+Indeed downloading and installing the latest stack per the instructions at https://docs.haskellstack.org/en/stable/README/ works.
+
+Removing ~/.stack and /usr/bin/stack should be sufficient.
+@peter:~/Naproche-SAD$ rm -r ~/.stack
+@peter:~/Naproche-SAD$ sudo rm -r /usr/bin/stack
+@peter:~/Naproche-SAD$ wget -qO- https://get.haskellstack.org/ | sh
+Follow instructions, but do NOT upgrade stack to current version
+
+7. Building Naproche-SAD with stack:
+@peter:~/Naproche-SAD$ stack build
+Can take a long time if e.g. the Haskell compiler has to be installed
+
+8. Testing Naproche-SAD with an example in the examples/ directory:
+@peter:~/Naproche-SAD$ stack exec Naproche-SAD -- examples/powerset.ftl
+Since eprover is not yet installed:
+[Export] Error: Failed to run "eprover": does not exist
+We expect to install eprover through isabelle.
+
+9. Install Isabelle from the current version:
+  * "Quick start in 30min" according to README_REPOSITORY
+    (  * "Quick start in 30min" according to README_REPOSITORY
+    (https://isabelle.in.tum.de/repos/isabelle/raw-file/tip/README_REPOSITORY))
+
+10. Install mercurial
+Installation a la website does not work, but Ubuntu suggests:
+@peter:~/mercurial-4.9rc0$ sudo apt install mercurial
+
+11. Clone Isabelle with mercurial:
+@peter:~$ hg clone https://isabelle.in.tum.de/repos/isabelle
+
+12. Follow the instructions in the 30min Quick start:
+ hg clone https://isabelle.in.tum.de/repos/isabelle
+
+    cd isabelle
+
+    ./bin/isabelle components -I
+
+    ./bin/isabelle components -a
+
+The latter needs curl for downloading from the internet. So we 
+13. Install curl:
+@peter:~/isabelle$ sudo apt install curl
+
+Now we can run:
+./bin/isabelle components -a
+
+
+
+ Use Isabelle/jEdit to edit $ISABELLE_HOME_USER/etc/settings to include
+    the Naproche-SAD directory as Isabelle component. E.g. like this:
+
+        init_component "$USER_HOME/Naproche-SAD"
+
+In my case:
+
+I inserted
+
+init_component "/home/peter/Naproche-SAD"
+
+in the beginning of /home/peter/isabelle/etc/settings 
+
+Now put Isabelle and Naproche together as follows:
+@peter:~$ cd Naproche-SAD
+@peter:~/Naproche-SAD$ ~/isabelle/bin/isabelle build -d Isabelle Naproche-Build
+### Missing /home/peter/Naproche-SAD/Isabelle/naproche.jar
+Building Haskell ...
+Skipping theories "Test" (undefined ISABELLE_GHC_STACK)
+Finished Haskell (0:00:01 elapsed time)
+Running Naproche-Build ...
+Finished Naproche-Build (0:00:17 elapsed time, 0:00:30 cpu time, factor 1.78)
+0:00:44 elapsed time, 0:00:32 cpu time, factor 0.73
+
+
+
+

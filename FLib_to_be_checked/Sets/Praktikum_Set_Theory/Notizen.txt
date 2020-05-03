@@ -1,0 +1,203 @@
+Ankündigung Praktikum:
+
+Schreiben Ayers wegen des Vortrags?
+
+22.10.
+29.10. Besprechung
+Termin/Raum??
+
+
+
+
+
+Was will das Praktikum?
+Leute näher an Haskell führen?
+Die gewünschte AG aufbauen?
+(Hennes + LaTeX Input? + Isabelle?
++ Spracherweiterung um "alle" sprachlichen Äquivalenzen
+(inkl. Nebensätze etc)
++ Verschönerung von Axiomen und Sätzen, so dass
+mehrere "Behauptungen" stehen können, statt nur einer.
+
+Anschluss an andere Beweiser
+
+Stellschrauben: Sprachliche Erweiterungen: Offensichtlich und (deswegen) 
+eindeutige Sprache; vielleicht die Sprache maximal erweitern mit
+einer Datenbank von möglichen Parsings etc.
+
+Wie ist es mit der grammatikalischen Richtigkeit?
+
+
+
+
+
+Praktikumsaufgaben:
+
+
+
+Es gibt einen grundsätzlichen Teil über formale Mathematik, mit
+Seminarvorträgen. Im Anschluss können auch sehr praktische
+Arbeiten durchgeführt werden.
+
+1. Noch Teile aus Rudin formalisieren.
+2. Webseite pflegen
+3. Formalisierungen, die sich mit Isabelle überschneiden,
+z.B. projective Geometry.
+4. Rest von Kelley erledigen.
+5. andere Beweiser anschließen, insbesondere Vampire,
+und Leistungen vergleichen.
+6.
+
+Seminarteil des Logik-Praktikums vom 23.11. - 21.12.2018,
+Freitag 12:15 - 14:00, Raum XXXXX
+
+Liebe Frau ...,
+
+wir beginnen unser Praktikum mit einer Einführung in das 
+Beweis-System Isabelle anhand des Artikels
+"Programming and Proving in Isabelle/HOL".
+(http://...)
+Der Inhalt wird in 4 Vorträgen mit Beispielen und
+Vorführungen vorgestellt. Bitte installieren Sie dazu die
+aktuelle Version von Isabelle (http://...) auf Ihrem Laptop,
+bevorzugt unter einer Standarddistribution von Linux.
+Wir wollen parallel dazu das Bonner System Naproche-SAD
+benutzen, indem wir einige Definitionen, Aussagen und
+Beweise in Naproche-SAD formulieren und überprüfen.
+Informationen zu der Installation von Naproche-SAD gibt es
+bei unseren ersten Sitzung am 23.11.
+ 
+Zur Vortragseinteilung: den ersten Vortrag werde ich halten.
+Für die weiteren drei Vorträge mailen Sie mir bitte 
+bis zum .... Ihre Prioritäten in einer Dreierliste; ich werde Ihnen
+bald danach die Einteilung zuschicken.
+
+Vortragsliste mit Angabe der Teile in "Programming and Proving in Isabelle/HOL": 
+Freitag 23.11., Teile 1 - 2.2 (S. 3-13): Koepke
+30.11., 2.3 - 2.5 (S. 13-23):
+7.12., 3.1 - 3.5.2 (S. 25-37):  
+14.12., 4 - 4.4.2 (S. 41-53): 
+am 21.12. (Termin evtl. früher wg. Weihnachten),
+werden die individuelle Praktikumsprojekte vergeben.
+
+Viele Grüße,
+
+Peter Koepke
+
+
+
+Der Übergang zu Naproche/SAD
+Oder schon Naproche/SAD parallel zu den Argumenten?
+
+Natural Proof Checking with SAD
+
+Hennes: How to express the previous in SAD?
+
+Praktikumsprojekt:
+Formalizing "Set Theory"
+Start "Cardinalities".
+We are not working in the theory of the lecture, but we use the
+theory built into Naproche-SAD. What is that theory at the moment?
+Can we accept that as an alternative set theory with inbuilt support
+for abstraction terms and functions. In that alternative set theory
+can develop a theory of ordinals, cardinals.
+
+Ordinal Numbers: [37-43], Ordinal induction through the 
+SAD induction mechanism,  [45-46], Ordinal recursion through the
+SAD function mechanism, [49-52] [Julius und Kaya]
+
+Axiom of Choice may conflict with inbuilt choice operator.
+So we can show: [72-75] as consequences of inbuilt axioms, but
+not the reverse directions.
+
+Cardinals has already started [Alexander und Marcel]
+
+Closed unbounded and stationary sets.
+
+-----------
+Perspectives of Naproche-SAD:
+
+On the horizon is the vision of fully formal textbook mathematics.
+
+The formalization experience so far yields a mixed picture:
+- some formalizations work straightforwardly and appear very natural
+- there are serious difficulties with texts which appear
+equally formal and detailled
+
+So far, the process of formalization appears delicate.
+A great many aspects have to be considered in the setup of 
+background theories, in the arrangement of the material to be 
+formalized, and in the specific natural language formulations.
+
+The natural language formulations have to been done extremely carefully, since the human parsing using semantic knowledge is 
+replaced by an artful system of purely syntactic parsing which
+tries to emulate the semantic approach.
+
+Another important component is the ontological checking of
+texts at run-time which requires to carry out a considerable
+number of side proofs. These could also overwhelm the proving
+capacities. Experiments will have to be conducted to see how
+much side proving will be necessary in advanced texts.
+A particular example are function definitions, where sethood of
+domains, existence and uniqueness, and sometime recursivity have
+to be proved.
+
+[The system appears rather "autistic" in that it requires everything
+to be completely clear when local parsing routines are carried
+out]
+
+If the totality of first-order proving tasks becomes too great, one
+would have to think about restrictions of the arbitrary 
+first-order soft typing.
+
+
+Gespräch Frerix morgen: Hennes Termrewriting?
+(Kontakt, Grüße Kohlhase?)
+
+Besuch Wenzel:
+Donnerstag Praktikumsgruppe
+Beratung über weitere Möglichkeiten und weiteres Vorgehen
+
+================================================================
+* 2019 ist das Jahr, in dem eindrucksvolle Formalisierungen entstehen
+* müssen, und in dem ich die Software lernen muss; ohne Assistent nicht zu vielen Tagungen! Eher Geld für einzelne Kontakte einsetzen.
+Kelley, Mengenlehre?
+
+- Februar/März 2019: Haskell / Programmieren / Formalisierung von
+Kelley. Learn you a Haskell, vielleicht mit Blick in SAD!
+- April AITP Obergurgl
+- Mai Big Proof Edinburgh
+- Juli Prag
+
+Eventuell die andere Tagung in Prag kurz halten? CLMPST?
+Dazu so etwas wie CADE? IJCAR 2020 (Paris)
+
+"Abschließendes" Gespräch mir Frerix über Naproche-SAD
+
+Drei wesentliche Kritikpunkte:
+1. Keine Informationen über den Beweisprozess, nur Success/Fail
+2. Keine Kontrolle über den Beweisprozess, auch nicht
+optional, sondern dem eprover "ausgeliefert"
+3. (Hauptsächlicher Punkt) Es gibt kein Korrektheitszertifikat.
+Es wird kein Beweisobjekt erzeugt, das unabhängig überprüft werden
+könnte.
+
+Diskussion über Korrektheit:
+- trusted kernel?
+- eprover gibt Beweisobjekte zurück (die von Sledgehammer genutzt
+werden?), die (schwer) lesbar sind. Kann man diese Dateien
+zusammen mit Reasoner-Informationen zu einem Beweisobjekt kombinieren?
+
+
+
+
+
+
+
+
+
+
+
+
+
+

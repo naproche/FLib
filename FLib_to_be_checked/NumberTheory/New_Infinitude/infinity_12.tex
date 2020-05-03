@@ -1,0 +1,291 @@
+\documentclass{letter}
+\usepackage{amsmath,amssymb,bbm}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\precprec}{\prec\!\!\!\prec}
+\newcommand{\section}[1]{\medskip\bigskip
+
+\noindent\textbf{\LARGE #1}}
+\newcommand{\subsection}[1]{\medskip\bigskip
+
+\noindent\textbf{\Large #1}}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmstrong}[1]{\textbf{#1}}
+\newcommand{\tmtextbf}[1]{{\bfseries{#1}}}
+\newcommand{\tmtextit}[1]{{\itshape{#1}}}
+\newcommand{\tmtextup}[1]{{\upshape{#1}}}
+\newenvironment{itemizeminus}{\begin{itemize} \renewcommand{\labelitemi}{$-$}\renewcommand{\labelitemii}{$-$}\renewcommand{\labelitemiii}{$-$}\renewcommand{\labelitemiv}{$-$}}{\end{itemize}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newtheorem{lemma}{Lemma}
+%%%%%%%%%% End TeXmacs macros
+
+\begin{document}
+
+\title{There are infinitely many primes}\author{}\maketitle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Suggestions:}
+
+Ad hoc extensions to SAD, to be used as proof of concept for a subsequent
+project of extensive structural changes and extensions to the ForTheL
+language.
+
+Work with the established top level sections of SAD. Complement the official
+form with some abbreviated forms. Try to keep the sentence structure close to
+the official form, so that the changes to the SAD code are only superficial.
+
+E.g. ``Work with X'' can be derived from the official ``Signature. X is a
+notion.'' \ by replacing ``Signature.'' by ``Work with'' and ``is a notion''
+by `` ''. Or a listing of axiom can be carried out by sentences of the form ``
+- the\_commutativity\_of\_addition: $m + n = n + m$'' instead of ``Axiom
+the\_commutativity\_of\_addition. $m + n = n + m$.'' again by replacing \
+``Axiom'' by ``-'' and the first ``.'' by ``:''.
+
+These changes have to be be carried out so that the function of each sentence
+is uniquely identifiable by human readers and by the system.
+
+Later, the controlled language ForTheL is to be turned into a controlled
+language with grammatical correctness requirements and a rich spectrum of
+common mathematical phrases.
+
+Examples:
+
+{\tmstrong{Signature extensions}}: Signature. Let ... . Let ... . X is a
+notion.
+
+One sentence version: (We) (also) Work with X. Fix the relation ... . The
+constant X is a number ... . We require that an element is a ... . The term $f
+\left( x \right)$ is a set. The {\tmem{domain}} is ... (Here, the introduction
+is signaled by {\tmem{italics}}.
+
+Short version with premises: Given (that) ... fix the relation/constant/term.
+
+{\tmstrong{Axiom}}: Axiom. Let ... . Let ... . Statement.
+
+One sentence version: (We) presuppose that Statement.
+
+Short version with premises: For ... postulate that .... .
+
+List of axioms: `` - the\_commutativity\_of\_addition: $m + n = n + m$'', see
+above.
+
+{\tmstrong{Definitions}}: Definition. Let ... . Let ... . Statement.
+
+One sentence version: (We) define .... .
+
+Short version with premises: Define, for ..., t=... . Define, for ..., ... .
+
+List of definitions: `` .....
+
+{\tmstrong{Claims}}:
+
+``Note that .... .'' anstelle von ``We have ....''
+
+``Obviously/Trivially ...'' (To be used when no proof is given)
+
+...
+
+{\tmstrong{Induction.}} SAD handles inductions with a inbuilt special
+relation, which nevertheless has to be invoked by a signature extension:
+
+Signature IH. m -<- n is an atom. Axiom IH. m < n => m -<- n.
+
+These commands could be be invoked instead by something like: ``We can carry
+out inductions on the relation $<$.''
+
+In the case of natural numbers, the Axiom IH is a version of the induction
+axiom (schema) of first-order Peano arithmetic.
+
+\section{I. Foundations}
+
+We work with {\tmem{sets}}. Let $A, X, Y, Z$ denote sets. We also work with
+{\tmem{elements}}. Let $x, y, z$ denote elements. We require that an
+{\tmem{element}} of $X$ is an element. Let $x$ {\tmem{belongs to}} $X$ stand
+for $x$ is an element of $X$. Let $x$ {\tmem{is in }}$X$ stand for $x$ is an
+element of $X$. Let $x \in X$ stand for $x$ is an element of $X$. The constant
+$\emptyset$ is a set that has no elements. $X$ is {\tmem{empty}} stands for $X
+= \emptyset$. $X$ is {\tmem{nonempty}} stands for $X \neq \emptyset$. Define a
+{\tmem{subset}} of $Y$ as a set such that every element of $X$ belongs to $Y$.
+$X \subseteq Y$ stands for $X$ is a subset of $Y$.
+
+We can show that (a) $X \subseteq X$ (reflexivity). (b) $X \subseteq Y
+\subseteq Z \rightarrow X \subseteq Z$ (transitivity). (c) \ $X \subseteq Y
+\subseteq X \rightarrow X = Y$ (symmetry).
+
+We also work with functions. Let $f, g, h$ denote functions. The
+{\tmem{domain}} of $f$ is a set. Given $x \in \tmop{dom} f$, the term $f
+\left( x \right)$ is an element. Let $f_x$ stand for $f \left( x \right)$.
+Define for $X \subseteq \tmop{dom} f$ the term $f \left[ X \right] = \left\{ f
+\left( x \right)  \left| \right. x \in X \right\}$. Let $\tmop{ran} f$ stand
+for $f \left[ \tmop{dom} f \right]$. Let the {\tmem{range}} of $f$ also stand
+for $f \left[ \tmop{dom} f \right]$. A function {\tmem{from}} $X$ denotes a
+function $f$ such that $\tmop{dom} f = X$. A function {\tmem{from}} $X$
+{\tmem{to}} $Y$ denotes a function $f$ such that $\tmop{dom} f = X$ and
+$\tmop{ran} f \subseteq Y$. $f : X$ means that $f$ is a function from $X$. $f
+: X \rightarrow Y$ means that $f$ is a function from $X$ to $Y$.
+
+Note that if $x \in \tmop{dom} f$ then $f \left( x \right) \in \tmop{ran} f$.
+
+Define for $X \subseteq \tmop{dom} f$ the term $f \upharpoonright X$ to be a
+function $g$ from $X$ such that $g \left( x \right) = f \left( x \right)$ for
+every $x \in X$.
+
+We work with {\tmem{numbers}}. Let $i, j, k, l, m, n, q, r$ denote numbers.
+Define $\mathbbm{N}$ to be the set of numbers. The constant $0$ is a number.
+Let $x$ is {\tmem{nonzero}} stand for $x \neq 0$. The constant $1$ is a
+nonzero number. The term $m + n$ is a number. Let the {\tmem{sum}} of $m$ and
+$n$ stand for $m + n$. The term $m \cdot n$ is a number. Let the {\tmem{sum}}
+of $m$ and $n$ stand for $m \cdot n$. We assume the following axioms.
+\begin{itemizeminus}
+  \item the associativity of addition: $\left( m + n \right) + l = m + \left(
+  n + l \right)$;
+  
+  \item the neutrality of 0: $m + 0 = 0 + m = m$;
+  
+  \item the commutativity of addition: $m + n = n + m$;
+  
+  \item the associativity of multiplication: $\left( m \cdot n \right) \cdot l
+  = m \cdot \left( n \cdot l \right)$;
+  
+  \item the neutrality of 1: $m \cdot 1 = 1 \cdot m = m$;
+  
+  \item $m \cdot 0 = 0 = 0 \cdot m$;
+  
+  \item the commutativity of multiplication: $m \cdot n = n \cdot m$;
+  
+  \item distributivity: $m \cdot \left( n + l \right) = \left( m \cdot n
+  \right) + \left( m \cdot l \right)$, and $\left( n + l \right) \cdot m =
+  \left( n \cdot m \right) + \left( l \cdot m \right)$;
+  
+  \item additive cancellation: if $l + m = l + n$ or $m + l = n + l$ then $m =
+  n$;
+  
+  \item multiplicative cancellation: Assume that $l$ is nonzero. Then $l + m =
+  l + n$ or $m + l = n + l$ implies $m = n$;
+  
+  \item if $m + n = 0$ then $m = 0$ and $n = 0$.
+\end{itemizeminus}
+We can show that if $m \cdot n = 0$ then $m = 0$ or $n = 0$.
+
+Define $m \leq n$ iff there exists $l$ such that $m + l = n$. Define for $m
+\leq n$ the expression $n - m$ to be a number such that $m + l = n$. Let $m <
+n$ stand for $m \neq n$ and $m \leq n$.
+
+Obviously, $m \leqslant m$; $m \leqslant n \leqslant l \rightarrow m \leq l$;
+and $m \leq n \leq m \rightarrow m = n$. Furthermore, $m \leq n$ or $n < m$;
+for $l < n$ we have $m + l < m + n$ and $l + m < n + m$; and for $m$ nonzero
+and $l < n$ we have $m \cdot l < m \cdot n$ and $l \cdot m < n \cdot m$. We
+presuppose that for every number $n$ we have $n = 0$ or $n = 1$ or $1 < n$. We
+can prove that $m \neq 0$ implies $n \leqslant n \cdot m$. Indeed observe that
+$1 \leqslant m$.
+
+We can carry out inductions on the relation $<$.
+
+Define $\left\{ m, \ldots, n \right\} = \left\{ i \in \mathbbm{N} \left|
+\right. m \leq i \leq n \right\}$. For a function $f$ such that $\left\{ m,
+\ldots, n \right\} \subseteq \tmop{dom} f$ let $\left\{ f_m, \ldots, f_n
+\right\} = \left\{ f \left( i \right)  \left| m \leq i \leq n \right.
+\right\}$. We say that $f$ {\tmem{lists}} $X$ {\tmem{in}} $n$ {\tmem{steps}}
+iff $\tmop{dom} f = \left\{ 1, \ldots, n \right\}$ and $X = \left\{ f_m,
+\ldots, f_n \right\}$. $X$ is called {\tmem{finite}} iff there is a function
+$f$ and a number $n$ such that $f$ lists $X$ in $n$ steps. $X$ is called
+{\tmem{infinite}} iff $X$ is not finite.
+
+
+
+\section{II. Prime Numbers}
+
+\subsection{1. Divisibility}
+
+We define that $m$ {\tmem{divides}} $n$, $m \left| n \right. $, \ iff for some
+\ $l$ $n = m \cdot l$. A {\tmem{divisor}} of $n$ is defined as a number that
+divides $n$. For $m$ nonzero and $m \left| \right. n$, $\frac{n}{m}$ is
+defined as a number $l$ such that $n = m \cdot l$. \
+
+Obviously, $l |m| n \rightarrow l|n$ (transitivity of divisibility); and if
+$l|m$ and $l|n$ then $l|m + n$. Indeed if $l$ is nonzero then $m + n = l \cdot
+( \frac{m}{l} + \frac{n}{l})$.
+
+\begin{lemma}
+  DivMin. Let $l|m$ and $l|m + n$. Then $l|n$.
+\end{lemma}
+
+\begin{proof}
+  Assume that $l, n$ are nonzero. Take $i$ such that $m = l \cdot i$. Take $j$
+  such that $m + n = l \cdot j$.
+  
+  Let us show that $i \leq j$. Assume the contrary. Then $j < i$. $m + n = l
+  \cdot j < l \cdot i = m$. $m \leq m + n$. $m = m + n$. $n = 0$.
+  Contradiction.
+  
+  Take $k = j - i$. We have $(l \cdot i) + (l \cdot k) = (l \cdot i) + n$.
+  Hence $n = l \cdot k$.
+\end{proof}
+
+We can show: if $m|n \neq 0$, then $m \leq n$.
+
+\begin{lemma}
+  DivAsso. Let $l$ be nonzero and divide $m$. Then $n \cdot \frac{m}{l} =
+  \frac{n \cdot m}{l}$.
+\end{lemma}
+
+\begin{proof}
+  $(l \cdot n) \cdot \frac{m}{l} = l \cdot \frac{n \cdot m}{l}$.
+\end{proof}
+
+Define $\mathbbm{N}^+ = \left\{ n \in \mathbbm{N} \left| \right. n \neq 0
+\right\}$.
+
+For $f : \left\{ m, \ldots, n \right\} \rightarrow \mathbbm{N}^+$ consider
+$\prod_{i = m}^n f_i$ which is an element of $\mathbbm{N}^+$. We presuppose
+that for $f : \{m, \ldots, n\}- > \mathbbm{N}^+$ and $m \leq j \leq n$, $f_j$
+divides $\prod_{i = m}^n f_i$.
+
+\subsection{2. Primes}
+
+Let $m$ is {\tmem{trivial}} stand for $m = 0$ or $m = 1$. Let $m$ is
+{\tmem{nontrivial}} stand for $m \neq 0$ and $m \neq 1$. We call a number $q$
+{\tmem{prime}} iff $q$ is nontrivial and for every divisor $m$ of $q$ we have
+$m = 1$ or $m = q$. We say that $m$ is {\tmem{compound}} for $m$ is not prime.
+
+\begin{lemma}
+  PrimDiv. Every nontrivial $k$ has a prime divisor.
+\end{lemma}
+
+\tmtextbf{Proof} by induction on $k$. Let $k$ be nontrivial. Case $k$ is
+prime. Obvious. Case $k$ is compound. Take a divisor $m$ of $k$ such that $m
+\neq 1$ and $m \neq k$. $m \neq 0$. $m$ is nontrivial and $m \precprec k$.
+Take a prime divisor $n$ of $m$. $n$ is a prime divisor of $k$. end. qed.
+
+{\noindent}\tmtextbf{Theorem \tmtextup{1}. }\tmtextit{The set of prime numbers
+is infinite.}{\hspace*{\fill}}{\medskip}
+
+\begin{proof}
+  Let $A$ be a finite set of prime numbers. Take a function $p$ and a number
+  $r$ such that $p$ lists $A$ in $r$ steps. $\text{\tmop{ran}} p \subseteq
+  \mathbbm{N}^+$. $\prod_{i = 1}^r p_i \neq 0$. Take $n = \prod_{i = 1}^r p_i
+  + 1$. $n$ is nontrivial. Take a prime divisor $q$ of $n$.
+  
+  Let us show that $q$ is not an element of $A$. Assume the contrary. Take $i$
+  such that ($1 \leq i \leq r$ and $q = p_i$). $p_i$ divides $\prod_{i = 1}^r
+  p_i$ (by MultProd). Then $q$ divides $1$ (by DivMin). Contradiction. qed.
+  
+  Hence $A$ is not the set of prime numbers.
+\end{proof}
+
+\end{document}
