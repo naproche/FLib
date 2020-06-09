@@ -2,6 +2,10 @@
 
 The goal of this project is to formalize some linear algebra in ForTheL.
 
+Details are given in this [project report](Report.pdf).
+
+The project is being continued with formalizations of [represenation theory of algebras](./representations).
+
 ## Getting Started
 
 ### Prerequisites
@@ -20,7 +24,7 @@ This project was developed to build a mathematical library for the formalization
 
 It is based on the lean file found under https://github.com/kckennylau/Lean/blob/master/linear_algebra/vector_space.lean.
 
-An updated version of this (working with the current mathlib) can be found in our repository.
+This [updated version](vector_space.lean) works with the current mathlib.
 
 The lean file uses the mathlib https://github.com/leanprover-community/mathlib.
 
