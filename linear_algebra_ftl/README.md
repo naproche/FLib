@@ -4,7 +4,7 @@ The goal of this project is to formalize some linear algebra in ForTheL.
 
 Details are given in this [project report](Report.pdf).
 
-The project is being continued with formalizations of [represenation theory of algebras](./representations).
+The project is being continued with formalizations of [represenation theory of algebras](../representations).
 
 ## Getting Started
 
