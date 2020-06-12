@@ -4,7 +4,7 @@
 #
 
 #[prove off]
-[read ForTheLib/Sets/sets.ftl]
+[read ForTheLib/Foundations/classes.ftl]
 #[prove on]
 
 
@@ -55,6 +55,9 @@ of g at x for all elements x of the domain of f. Then f is equal to g.
 
 Axiom FoundMap045. Let f and g be maps. Assume that the domain of g is the codomain of f. Then the
 composition of g and f is a map from the domain of f to the codomain of g.
+
+Lemma FoundMap047. Let f and g be maps. Assume that the domain of g is the codomain of f. Then the
+composition of g and f is a map.
 
 Lemma FoundMap050. Let f and g be maps. Assume that the domain of g is the codomain of f. Then the
 domain of the composition of g and f is the domain of f.
@@ -147,3 +150,16 @@ qed.
 
 Axiom FoundMap125. Let f be a map. f is invertible iff there is a map g from codom(f) to dom(f) such
 that f \circ g = id_{dom(g)} and g \circ f = id_{dom(f)}.
+
+
+# Constant maps
+
+Axiom FoundMap130. Let f be a map. f is constant iff range(f) = {a} for some object a.
+
+Proposition FoundMap135. Let f be a map. Assume that the domain of f has an element. f is constant
+iff there is an object a such that f(x) = a for all elements x of the domain of f.
+
+
+# 2. Homomorphisms
+
+Signature FoundMap150. A homomorphism is a map.
