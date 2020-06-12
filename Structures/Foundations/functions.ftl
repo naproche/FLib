@@ -159,3 +159,42 @@ that f(x) = 0.
 
 Definition FoundFun140. Let X be an object. A binary function on X is a function f such that (x,y)
 is an element of the domain of f for all elements x,y of X.
+
+
+# 12. Functions and operations on classes
+
+Proposition FoundFun200. Let x,y be classes and f be a function. Assume that x \subseteq y. Then
+
+  f^{-1}[x] \subseteq f^{-1}[y].
+
+Proof. [prove off] qed.
+
+
+Proposition FoundFun205. Let x,y be classes and f be a function. Then
+
+  f^{-1}[x \cup y] = f^{-1}[x] \cup f^{-1}[y].
+
+Proof. [prove off] qed.
+
+
+Proposition FoundFun210. Let x,y be classes and f be a function. Then
+
+  f^{-1}[x \cap y] = f^{-1}[x] \cap f^{-1}[y].
+
+Proof. [prove off] qed.
+
+
+Proposition FoundFun215. Let X,Y be classes and f be a function. Assume that every element of X is a
+class. Assume that Y = {f^{-1}[x] | x \in X}. Then
+
+  f^{-1}[\bigcup X] = \bigcup Y.
+
+Proof. [prove off] qed.
+
+
+Proposition FoundFun220. Let X,Y be classes and f be a function. Assume that every element of X is a
+class. Assume that Y = {f^{-1}[x] | x \in X}. Assume that X is nonempty. Then
+
+  f^{-1}[\bigcap X] = \bigcap Y.
+
+Proof. [prove off] qed.
