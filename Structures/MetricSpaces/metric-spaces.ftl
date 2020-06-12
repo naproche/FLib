@@ -6,6 +6,7 @@
 #[prove off]
 [read ForTheLib/RealNumbers/real-valued-functions.ftl]
 [read ForTheLib/Foundations/structures.ftl]
+[read ForTheLib/Foundations/types.ftl]
 #[prove on]
 
 
@@ -36,13 +37,7 @@ qed.
 
 # 2. Metric spaces
 
-Signature MetMs010. A metric space is a structure.
-
-
-Axiom MetMs015. Every metric space is a small structure.
-
-
-Proposition MetMs020. The carrier of any metric space is a set.
+Signature MetMs010. A metric space is a small structure.
 
 
 Signature MetMs024. dist is a distance function on every metric space.
@@ -101,27 +96,41 @@ Proof.
 qed.
 
 
-# 2.1 Equality
+# 3. MET
 
-Lemma MetMs035. Let X be a metric space. Then for all elements x,y of the carrier of X we have
-(X(x),X(y)) \in dom(dist).
+Signature MetMs040. MET is a type.
 
-Proof.
-  Let x,y be elements of the carrier of X. Then X(x) and X(y) are elements of X.
-  (X(x),X(y)) \in dom(dist) (by MetMs025).
-qed.
+Axiom MetMs045. MET = {X | X is a metric space}.
 
 
-Axiom MetMs036. Let X,Y be metric spaces. If
+Signature MetMs050. MET_{metric} is a function of MET.
 
-  the carrier of X is equal to the carrier of Y and
-
-  for all elements x,y of the carrier of X we have dist(X(x),X(y)) = dist(Y(x),Y(y))
-
-then X = Y.
+Axiom MetMs055. Let M be a metric space. Let X be the domain of M. Let d be a function of X \times X
+such that d(x,y) = dist(M(x),M(y)) for all x,y \in X. Then MET_{metric}(M) = (X,d).
 
 
-# 2.2 Construction of metric spaces.
+Proposition MetMs060. MET_{metric} is an instantiation of MET.
 
-Axiom MetMs050. Let X be a set and d be a metric on X. There is a metric space M such that X is the
-carrier of M and for all x,y \in X we have dist(M(x),M(y)) = d(x,y).
+Proof. [prove off] qed.
+
+
+Proposition MetMs065. Let M be a metric space and X be the domain of M. Let d be a function of
+X \times X such that d(x,y) = dist(M(x),M(y)) for all x,y \in X. Then d is a metric on X.
+
+Proof. [prove off] qed.
+
+
+Proposition MetMs065. Let X be a set and d be a metric on X. Then (X,d) is an instance of MET.
+
+Proof. [prove off] qed.
+
+
+Proposition MetMs070. Let M,N be metric spaces. If
+
+  the domain of M is equal to the domain of N and
+
+  dist(M(x),M(y)) = dist(N(x),N(y)) for all elements x,y of the domain of M
+
+then M = N.
+
+Proof. [prove off] qed.
