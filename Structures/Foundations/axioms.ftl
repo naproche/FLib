@@ -10,7 +10,7 @@
 
 Signature. An axiom is a notion.
 
-Signature. Let A be an axiom and X be an object. X satisfies A is a relation.
+Signature. Let A be an axiom and X be an object. X satisfies A is an atom.
 
 
 Let X satisfies A and B stand for X satisfies A and X satisfies B.

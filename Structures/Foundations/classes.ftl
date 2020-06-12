@@ -299,15 +299,13 @@ x \setminus (x \setminus y) = y.
 
 # 5. Atoms
 
-Definition FoundCl215. An atom is an object that is not a class.
-
-Let an urelement stand for an atom.
+Definition FoundCl215. An urelement is an object that is not a class.
 
 
 # 6. Transitive classes
 
-Axiom FoundCl220. Let x be a class. x is transitive iff every element of x that is not an atom is a
-subclass of x.
+Axiom FoundCl220. Let x be a class. x is transitive iff every element of x that is not an urelement
+is a subclass of x.
 
 
 Proposition FoundCl225. Let x be a class. Assume that every element of x is a transitive class. Then
@@ -352,8 +350,8 @@ Proof. [prove off] qed.
 
 # 7. Inductive classes
 
-Axiom FoundCl265. Let x be a class. x is inductive iff 0 \in x and the successor of every element of
-x lies in x.
+Axiom FoundCl265. Let x be a class. x is inductive iff 0 \in x and succ(y) lies in x for all
+y \in x.
 
 
 # 8. Bounded classes

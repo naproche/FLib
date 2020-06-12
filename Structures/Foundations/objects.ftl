@@ -134,6 +134,9 @@ Signature. Let C be an object. Obj(C) is an object.
 
 Signature. Let C be an object. Hom(C) is an object.
 
+Signature. Let x be an object. arity(x) is an object.
+Let the arity of x stand for arity(x).
+
 
 # 2.2.2 Function-like objects
 
@@ -155,7 +158,6 @@ Signature. Let f be an object. A value of f is an object.
 # 2.2.3 Number-like objects
 
 Signature. Let a be an object. succ(a) is an object.
-Let the successor of a stand for succ(a).
 
 Signature. Let a be an object. -a is an object.
 Let the negative of a stand for -a.
@@ -168,6 +170,30 @@ Let the root of a stand for \sqrt(a).
 
 Signature. Let a be an object. \sig(a) is an object.
 Let the sign of a stand for \sig(a).
+
+Signature. Let a be an object. A predecessor of a is an object.
+
+Signature. Let a be an object. A direct predecessor of a is an object.
+
+Signature. Let a be an object. A successor of a is an object.
+
+Signature. Let a be an object. A direct successor of a is an object.
+
+Signature. Let X be an object. A maximal element of X is an object.
+
+Signature. Let X be an object. A minimal element of X is an object.
+
+Signature. Let X be an object. A greatest element of X is an object.
+
+Signature. Let X be an object. A least element of X is an object.
+
+Signature. Let X be an object. An upper bound of X is an object.
+
+Signature. Let X be an object. A lower bound of X is an object.
+
+Signature. Let X be an object. A supremum of X is an object.
+
+Signature. Let X be an object. An infimum of X is an object.
 
 
 # 2.2.4 Structures
@@ -220,7 +246,7 @@ Signature. forget is an object.
 
 # 3.1 Binary relations
 
-Signature. Let x,y be objects. x \subseteq y is a relation.
+Signature. Let x,y be objects. x \subseteq y is an atom.
 Let x \subset    y stand for x \subseteq y.
 Let x \nsubset   y stand for not x \subset y.
 Let x \nsubseteq y stand for not x \subset y.
@@ -231,84 +257,89 @@ Let x \nsupset   y stand for not x \supset y.
 Let x \nsupseteq y stand for not x \supset y.
 Let x \supsetneq y stand for x \supset y and x \neq y.
 
-Signature. Let f,a be objects. f is continuous at a is a relation.
+Signature. Let f,a be objects. f is continuous at a is an atom.
 
-Signature. Let a,b be objects. a is open in b is a relation.
+Signature. Let a,b be objects. a is open in b is an atom.
 
-Signature. Let a,b be objects. a is closed in b is a relation.
+Signature. Let a,b be objects. a is closed in b is an atom.
 
-Signature. Let a,b be objects. a is clopen in b is a relation.
+Signature. Let a,b be objects. a is clopen in b is an atom.
 
-Signature. Let a,b be objects. a < b is a relation.
+Signature. Let a,b be objects. a < b is an atom.
 Let a is less than b stand for a < b.
 Let a > b stand for b < a.
 Let a is greater than b stand for a > b.
 
-Signature. Let a,b be objects. a \leq b is a relation.
+Signature. Let a,b be objects. a \leq b is an atom.
 Let a is less than or equal to b stand for a \leq b.
 Let a \geq b stand for b \leq a.
 Let a is greater than or equal to b stand for a \geq b.
 
-Signature. Let x,y be objects. x \mid y is a relation.
+Signature. Let x,y be objects. x \mid y is an atom.
 Let n \nmid m stand for not (n \mid m).
 Let n divides m stand for n \mid m.
 
-Signature. Let x,y be objects. x \equiv y is a relation.
+Signature. Let x,y be objects. x \equiv y is an atom.
 
-Signature. Let f,x be a objects. f is symmetric on x is a relation.
+Signature. Let f,x be a objects. f is symmetric on x is an atom.
 
-Signature. Let f,x be a objects. f is subadditive on x is a relation.
+Signature. Let f,x be a objects. f is subadditive on x is an atom.
 
-Signature. Let f,x be a objects. f is positive definite on x is a relation.
+Signature. Let f,x be a objects. f is positive definite on x is an atom.
 
-Signature. Let x,y be objects. x and y are equivalent is a relation.
+Signature. Let x,y be objects. x and y are equivalent is an atom.
 
 
 # 3.2 Unary relations
 
-Signature. Let f be an object. f is injective is a relation.
+Signature. Let f be an object. f is injective is an atom.
 
-Signature. Let f be an object. f is surjective is a relation.
+Signature. Let f be an object. f is surjective is an atom.
 
-Signature. Let f be an object. f is bijective is a relation.
+Signature. Let f be an object. f is bijective is an atom.
 
-Signature. Let a be an object. a is monotonic is a relation.
+Signature. Let a be an object. a is monotone is an atom.
+Let a is monotonic stand for a is monotone.
 Let a is isotone stand for a is monotonic.
 Let a is orderpreserving stand for a is monotonic.
 
-Signature. Let a be an object. a is antimonotone is a relation.
+Signature. Let a be an object. a is antimonotone is an atom.
 Let a is antitone stand for a is antimonotone.
 Let a is orderreversing stand for a is antimonotone.
 
-Signature. Let a be an object. a is strictly monotonic is a relation.
+Signature. Let a be an object. a is strictly monotonic is an atom.
 
-Signature. Let a be an object. a is monotonically increasing is a relation.
+Signature. Let a be an object. a is monotonically increasing is an atom.
 
-Signature. Let a be an object. a is monotonically decreasing is a relation.
+Signature. Let a be an object. a is monotonically decreasing is an atom.
 
-Signature. Let a be an object. a is strictly monotonically increasing is a relation.
+Signature. Let a be an object. a is strictly monotonically increasing is an atom.
 
-Signature. Let a be an object. a is strictly monotonically decreasing is a relation.
+Signature. Let a be an object. a is strictly monotonically decreasing is an atom.
 
-Signature. Let f be an object. f is continuous is a relation.
+Signature. Let f be an object. f is continuous is an atom.
 
-Signature. Let a be an object. a is transitive is a relation.
+Signature. Let a be an object. a is transitive is an atom.
 
-Signature. Let a be an object. a is inductive is a relation.
+Signature. Let a be an object. a is inductive is an atom.
 
-Signature. Let A be an object. A is open is a relation.
+Signature. Let A be an object. A is open is an atom.
 
-Signature. Let A be an object. A is closed is a relation.
+Signature. Let A be an object. A is closed is an atom.
 
-Signature. Let A be an object. A is clopen is a relation.
+Signature. Let A be an object. A is clopen is an atom.
 
-Signature. Let X be an object. X is small is a relation.
+Signature. Let X be an object. X is small is an atom.
 
-Signature. Let X be an object. X is large is a relation.
+Signature. Let X be an object. X is large is an atom.
 
-Signature. Let X be an object. X is locally small is a relation.
+Signature. Let X be an object. X is locally small is an atom.
 
-Signature. Let f be an object. f is invertible is a relation.
+Signature. Let f be an object. f is invertible is an atom.
+
+Signature. Let X be an object. X is bounded is an atom.
+
+Signature. Let f be an object. f is constant is an atom.
 
 
 # 4. Definitions
@@ -324,3 +355,4 @@ Definition. Let x be an object. x is nonnegative iff x \geq 0.
 
 Definition. Let X be an object. A subcollection of X is an object A such that every element of A is
 an element of X.
+
