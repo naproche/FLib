@@ -472,12 +472,83 @@ end.
 f : ^{kappa}2 /leftrightarrow /PP kappa.
 qed.
 
+Lemma. Let x,y /in /VV. Let x /tilde y. Then /PP x /tilde /PP y.
+Proof.
+Take a zffunction f such that f : x /leftrightarrow y.
+Define g[M] = f^[M] for M in /PP x.
+Then g : /PP x /rightarrow /PP y.
+Proof.
+  Let M /in /PP x.
+  Then M /in /VV /\ M /subset x.
+  Then f^[M] /in /VV /\ f^[M] /subset y.
+  Then g[M] /in /PP y.
+end.
+g is injective.
+Proof.
+  Let M1, M2 /in /PP x. Let M1 /neq M2.
+  Then exists z (z /in M1 /setminus M2 \/ z /in M2 /setminus M1).
+  Proof.
+    (not (M1 /subset M2)) \/ (not (M2 /subset M1)).
+  end.
+  Take a zfset z such that (z /in M1 /setminus M2 \/ z /in M2 /setminus M1).
+  g[M1] /neq g[M2].
+  Proof.
+    Case z /in M1 /setminus M2.
+      f[z] /in g[M1].
+      f[z] /notin g[M2].
+    end.
+    Case z /in M2 /setminus M1.
+      f[z] /in g[M2].
+      f[z] /notin g[M1].
+    end.
+  end. 
+end.
+ran(g) = /PP y.
+Proof.
+  Let N /in /PP y.
+  Let M = (f^{-1})^[N].
+  Then M /subset x.
+  f^[M] /subset N.
+  Proof.
+    Let z /in f^[M].
+    Take a zfset m such that m /in M /\ z = f[m].
+    Take a zfset n such that n /in N /\ (f^{-1})[n] = m.
+    Then f[m] = n.
+    Then z /in N.
+  end.
+  N /subset f^[M].
+  Proof.
+    Let n /in N.
+    Take a zfset m such that m /in M /\ m = (f^{-1})[n].
+    Then f[m] = n.
+    Then n /in f^[M].
+  end.
+  Then f^[M] = N.
+  Then g[M] = N.
+  Then N /in ran(g).
+end.
+Then g : /PP x /leftrightarrow /PP y.
+qed.
+
+Lemma. Let x /in /VV. Then Card(/PP x) = 2 ^3 Card(x).
+Proof.
+Take a cardinal kappa such that kappa = Card(x).
+Then Card(/PP x) = Card(/PP kappa).
+Card(/PP kappa) = 2 ^3 kappa.
+qed.
+
 
 Lemma. Let kappa /in /Card. Then kappa /in 2 ^3 kappa.
 Proof.
 2 ^3 kappa = Card(/PP kappa).
 kappa < /PP kappa.
-Then Card(kappa) /in Card(2 ^3 kappa).
+Forall x,y /in /VV (x < y => Card(x) /in Card(y)).
+Proof.
+  Let x,y /in /VV. Let x < y.
+  Then Card(x) /subset Card(y).
+  Card(x) /neq Card(y).
+end.
+Then Card(kappa) /in Card(/PP kappa).
 qed.
 
 
@@ -552,7 +623,17 @@ Proof.
 end.
 qed.
 
-
+Lemma. Let alpha, beta, gamma /in /Card. Let alpha /subset beta. Then alpha ^3 gamma /subset beta ^3 gamma.
+Proof.
+^{gamma}alpha /subset ^{gamma}beta.
+Proof.
+  Let f /in ^{gamma}alpha.
+  Then f : gamma /rightarrow alpha.
+  Then f : gamma /rightarrow alpha.
+  Then f /in ^{gamma}beta.
+end.
+Then Card(^{gamma}alpha) /subset Card(^{gamma}beta).
+qed.
 
 
 # Alefs
@@ -1413,18 +1494,6 @@ Case 2 ^3 Alef[beta] /in Alef[alpha + 1].
 end.
 
 qed.
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

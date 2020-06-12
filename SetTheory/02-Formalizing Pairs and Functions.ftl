@@ -314,7 +314,7 @@ qed.
 
 Lemma. Contradiction.
 
-# Contradictory Axiom. So no everything can be proven.
+# Contradictory Axiom. So now everything can be proven.
 # /PP /VV = /VV and Id is an injective function Id : /PP /VV /rightarrow /VV.
 # Therefore we need to distinguish between zf-sets and proper classes.
 

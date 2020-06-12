@@ -47,7 +47,7 @@ ran(f)      - the range of f
 f^[M]       - the image of M under a zffunction f
 f /caret M  - the image of M under a function f, basically the same as f^[M], but it is important that we
                 only write down the image of zffunctions, otherwise we create sets whose object might be proper classes
-g /circ f   - the composition of two zwfunctions f and g, for compatible functions
+g /circ f   - the composition of two zffunctions f and g, for compatible functions
 f : A rightarrow B      - f is a zffunction from A to B
 f : A harpoonright B    - f is a partial function from A to B (not used yet)
 f : A /leftrightarrow B - f is a bijective zffunction from A to B
@@ -55,7 +55,7 @@ f^{-1}      - the inverse of f for injective zffunctions f (otherwise in inverse
 f /upharpoonright M     - the restricton of f to M for M /subset Dom(f)
 f ^ n       - for integers n the n--fold composition of f with itself, for proper functions f (only defined                     to proof some lemmas, not used later-on)
 ^{A}B       - the class of zffunctions from A to B
-
+g /comp f   - the pointwise composition of functions
 
 
 Relations:
@@ -85,6 +85,17 @@ Cardset(x)      - the set of ordinals alpha which are equipotent to x
 Card(x)         - the cardinality of x, defined as the intersection of Card(x)
 
 
+Notions:
+Alef        - the Alef function
+Beth        - the Beth function
+Gimel       - the Gimel function
+
+Sequences of Cardinals
+/sumset     - the set for the sum of a sequence of cardinals
+/sum        - the sum of a s.o.c.
+/prodset    - the set for the product of a s.o.c.
+/prod       - the product of a s.o.c.
+
 
 Arithmetic:
 alpha + beta    - ordinal addition
@@ -93,8 +104,10 @@ alpha ^ beta    - ordinal exponentiation
 kappa +3 lambda - cadrinal addition
 kappa *3 lambda - cardinal multiplication
 kappa ^3 lambda - cardinal exponentiation
+kappa ^< lambda - the union of kappa ^3 v for v smaller than lambda
 alpha - 1       - the predecessor of alpha for successors alpha
 
+(a,b) /sim (x, y)   - used to define cardinal addition a +3 b for cardinals a,b
 
 
 Others:

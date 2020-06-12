@@ -466,6 +466,9 @@ Proof.
   Case beta = 0. end.
   Case beta /in /Lim.
     Then alpha + beta = {zfset x | exists gamma /in beta (x /in (alpha + gamma))}.
+    0 /in beta.
+    Forall y /in alpha y /in alpha + 0.
+    Then forall y /in alpha y /in alpha + beta.
   end.
   Case beta /in /Succ.
     Take an ordinal gamma such that beta = gamma + 1.

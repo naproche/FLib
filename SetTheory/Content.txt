@@ -284,6 +284,31 @@ Main results:
 
 
 
+13-Gimel Function
+
+In this section the Beth-Numbers and the Gimel function is introduced.
+We show that the values of the continuum function only depend on the Gimel function on we proof a calculation rule
+for the value of 2 ^ kappa depending on the Gimel function.
+
+Main results:
+
+- kappa < Gimel[kappa]
+- for regular cardinals 2 ^ kappa = Gimel[kappa]
+- for singular cardinals 2 ^ kappa = 2 ^ <kappa or 2 ^ kappa = Gimel[2 ^ <kappa]
+
+
+
+
+
+14-Cardinal Exponentiation
+
+In the last section we examined the value of the continuum function depending on the Gimel function.
+Now we examine arbitrary cardinal exponentiation and proof a calculation rule.
+
+Main results:
+
+- the value of kappa ^ lambda depending on the relation between kappa and lambda
+
 
 
 

@@ -1262,7 +1262,7 @@ qed.
 Lemma. cof(Alef[/NN]) = /NN.
 
 
-# New Lemma
+
 Lemma. Let x be a zfset. Let x /neq /emptyset. Let alpha /in /Ord. Let Card(x) /subset alpha. Then exists f (f : alpha /rightarrow x /\ ran(f) = x).
 Proof.
 Take a zffunction g such that g : Card(x) /leftrightarrow x.
