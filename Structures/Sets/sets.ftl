@@ -20,7 +20,10 @@ Definition SetSet010. Let x be an object. A subset of x is a set y such that y \
 Definition SetSet015. Let x be an object. A superset of x is a set y such that y \supseteq x.
 
 
-Definition SetSet020. An element is an object x such that x is an atom or x is a set.
+Proposition SetSet017. Let A be an object. Every subset of A is a subcollection of A.
+
+
+Definition SetSet020. An element is an object x such that x is an urelement or x is a set.
 
 
 # 2. The ZFU axioms
@@ -98,6 +101,18 @@ qed.
 Proposition SetSet075. Let x be an element. `{x}` = `{x,x}`.
 
 Corollary SetSet080. Let x be an element. `{x}` is a set.
+
+
+Proposition SetSet080. Let x be a set and y be a class. Assume that y = {a | a is a subset of x}.
+Then y is the powerset of x.
+
+Proof. [prove off] qed.
+
+
+Proposition SetSet082. Let x,y be sets. Assume that every element of y lies in x. Then y is a subset
+of x.
+
+Proof. [prove off] qed.
 
 
 # Separation
