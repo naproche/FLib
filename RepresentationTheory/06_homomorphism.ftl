@@ -9,7 +9,7 @@ Definition. Let V and W be objects. A homomorphism over K from V to W is a map f
  and (for all u,v < V             : f(u +{V} v) = f(u) +{W} f(v))
  and (for all a < K for all v < V : f(a @{V} v) = a @{W} f(v)).
 
-Let linear stand for homomorphism.
+Let f is linear over K from V to W stand for f is a homomorphism over K from V to W.
 
 Axiom. Let V and W be vector spaces over K.
  |Hom(K,V,W)| is the set of maps f such that f is linear over K from V to W.

@@ -3,6 +3,8 @@
 
 Let K denote a field.
 
+[prove off]
+
 Theorem. Let A be an algebra over K. Let M1,M2 be modules over A over K. Let f be a modulehom over A
  over K from M1 to M2. Hom(K,A,f,-) is a covariant natural transformation
  from Hom(K,A,M2,-) to Hom(K,A,M1,-) over Mod(K,A) to Mod(K,K).
@@ -16,3 +18,5 @@ Theorem. Let A be an algebra over K. Let N1,N2 be modules over A over K. Let f b
 Proof.
 
 Qed.
+
+[prove on]

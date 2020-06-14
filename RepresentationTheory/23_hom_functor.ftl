@@ -113,7 +113,9 @@ Proof.
     sub(K,Hom(K,M,N2),Hom(K,A,M,N2)).
     f*g < Hom(K,A,M,N2).
     a @{Hom(K,A,M,N2)} (f*g) = a @{Hom(K,M,N2)} (f*g).
-    Let us show that f*(a @{Hom(K,M,N1)} g) = a @{Hom(K,M,N2)} (f*g)
+    Let us show that f*(a @{Hom(K,M,N1)} g) = a @{Hom(K,M,N2)} (f*g).
+     f*(a @{Hom(K,M,N1)} g) is a map.
+     a @{Hom(K,M,N2)} (f*g) is a map.
      Dmn(f*(a @{Hom(K,M,N1)} g)) = |M|.
      Let us show that a @{Hom(K,M,N2)} (f*g) < Hom(K,M,N2).
       f*g < Hom(K,M,N2).
@@ -140,19 +142,16 @@ Proof.
       f*g < Hom(K,M,N2).
       a @{N2} (f*g)(x) = (a @{Hom(K,M,N2)} (f*g))(x).
      qed.
+     Therefore the thesis (by MapExt).
     qed.
     a @{Hom(K,M,N2)} (f*g) = a @@{Hom(K,M,N2)} (f*g).
    qed.
   qed.
  qed.
 
-# and (for all X << Ob{C} : F(1{X,C}) = 1{F(X),D})
-# and (for all X,Y,Z << Ob{C} and all f << C(X,Y) and all g << C(Y,Z) : F(g*f) = F(g)*F(f)).
-Qed.
-
-
-Theorem. Let A be an algebra over K. Let N be a module over A over K.
- Hom(K,A,-,N) is a contravariant functor from Mod(K,A) to Mod(K,K).
-Proof.
- # similar
+[prove off]
+ For all N < Mod(K,A) : F(1{N,Mod(K,A)}) = 1{F(N),Mod(K,K)}.
+ For all N1,N2,N3 < Mod(K,A) and all f << Mod(K,A)(N1,N2) and all g << Mod(K,A)(N2,N3) :
+ F(g*f) = F(g)*F(f).
+[prove on]
 Qed.

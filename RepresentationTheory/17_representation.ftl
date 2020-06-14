@@ -1,5 +1,8 @@
+[read RepresentationTheory/09_subspace.ftl]
 [read RepresentationTheory/14_endomorphism.ftl]
 [read RepresentationTheory/16_algebra_and_module.ftl]
+
+Let K denote a field.
 
 Definition AlgebraHom. Let A,B be objects. An algebrahom over K from A to B is a map f such that
      (A,B are algebras over K)
@@ -10,6 +13,59 @@ Definition AlgebraHom. Let A,B be objects. An algebrahom over K from A to B is a
 Theorem. Let A be an algebra over K. Then id{|A|} is an algebrahom over K from A to A.
 Proof.
  id{|A|} is linear over K from A to A.
+Qed.
+
+Theorem. Let V be a vector space over K. Endo(K,V) is an algebra over K.
+Proof.
+ Take A = Endo(K,V).
+ A is a vector space over K.
+ A is a ring.
+ Let us show that for all x < K and all f,g < A :
+ x @{A} (f *{A} g) = (x @{A} f) *{A} g = f *{A} (x @{A} g).
+  Let x < K. Let f,g < A.
+  Let us show that for all v < V : (x @{A} (f *{A} g))(v) = ((x @{A} f) *{A} g)(v).
+   Let v < V.
+   (x @{A} (f *{A} g))(v) = x @{V} (f *{A} g)(v).
+   x @{V} (f *{A} g)(v) = x @{V} (f*g)(v).
+   x @{V} (f*g)(v) = x @{V} f(g(v)).
+   Let us show that x @{V} f(g(v)) = (x @{A} f)(g(v)).
+    x < K.
+    f < Hom(K,V,V).
+    For all w < V : (x @{Hom(K,V,V)} f)(w) = x @{V} f(w) (by MapSmul).
+    g(v) < V.
+   qed.
+   (x @{A} f)(g(v)) = ((x @{A} f)*g)(v).
+   x @{A} f < A.
+   ((x @{A} f)*g)(v) = ((x @{A} f) *{A} g)(v).
+  qed.
+  x @{A} (f *{A} g), (x @{A} f) *{A} g < A.
+  Dmn(x @{A} (f *{A} g)) = |V|.
+  Dmn((x @{A} f) *{A} g) = |V|.
+  Thus x @{A} (f *{A} g) = (x @{A} f) *{A} g.
+  Let us show that for all v < V : ((x @{A} f) *{A} g)(v) = (f *{A} (x @{A} g))(v).
+   Let v < V.
+   ((x @{A} f) *{A} g)(v) = ((x @{A} f)*g)(v).
+   ((x @{A} f)*g)(v) = (x @{A} f)(g(v)).
+   Let us show that (x @{A} f)(g(v)) = x @{V} f(g(v)).
+    x < K.
+    f < Hom(K,V,V).
+    For all w < V : (x @{Hom(K,V,V)} f)(w) = x @{V} f(w) (by MapSmul).
+    g(v) < V.
+   qed.
+   Let us show that x @{V} f(g(v)) = f(x @{V} g(v)).
+    f is linear over K from V to V.
+    x < K.
+    g(v) < V.
+   qed.
+   f(x @{V} g(v)) = f((x @{A} g)(v)).
+   f((x @{A} g)(v)) = (f*(x @{A} g))(v).
+   (f*(x @{A} g))(v) = (f *{A} (x @{A} g))(v).
+  qed.
+  f *{A} (x @{A} g) < A.
+  Dmn(f *{A} (x @{A} g)) = |V|.
+  Thus (x @{A} f) *{A} g = f *{A} (x @{A} g).
+ qed.
+ Therefore the thesis (by Algebra).
 Qed.
 
 Definition Representation. Let A,V be objects. A representation of A in V over K is an object p such that
@@ -23,20 +79,26 @@ Let rep(p,K,A,V) stand for (A is an algebra over K and V is a vector space over 
 # every representation gives a module
 
 Axiom. Let rep(p,K,A,V).  |rep2mod(p,K,A,V)| = |V|.
-Axiom. Let rep(p,K,A,V). 0{rep2mod(p,K,A,V)} = 0{V}.
-Axiom. Let rep(p,K,A,V). For all v,w < V :              v +{rep2mod(p,K,A,V)} w = v +{V} w.
-Axiom. Let rep(p,K,A,V). For all v < V :                  ~{rep2mod(p,K,A,V)} v = ~{V} v.
-Axiom. Let rep(p,K,A,V). For all x < K and all v < V :  x @{rep2mod(p,K,A,V)} v = x @{V} v.
 Axiom. Let rep(p,K,A,V). For all a < A and all v < V : a @@{rep2mod(p,K,A,V)} v = p(a)(v).
+
+Lemma. Let rep(p,K,A,V). rep2mod(p,K,A,V) is a subspace of V over K.
+Proof.
+ V is a vector space over K.
+ |rep2mod(p,K,A,V)| = |V|.
+Qed.
+
+Theorem. Let rep(p,K,A,V). rep2mod(p,K,A,V) is a vector space over K.
+Theorem. Let rep(p,K,A,V). Let v,w < V.          v +{rep2mod(p,K,A,V)} w = v +{V} w.
+Theorem. Let rep(p,K,A,V). Let v < V.              ~{rep2mod(p,K,A,V)} v =   ~{V} v.
+Theorem. Let rep(p,K,A,V). Let x < K. Let v < V. x @{rep2mod(p,K,A,V)} v = x @{V} v.
+Proof.
+ rep2mod(p,K,A,V) is a subspace of V over K.
+Qed.
 
 Theorem. Let rep(p,K,A,V). rep2mod(p,K,A,V) is a module over A over K.
 Proof.
  Take M = rep2mod(p,K,A,V).
- Let us show that M is a vector space over K.
-  |M| = |V|.
-  Thus M is a subspace of V over K.
- qed.
-
+ M is a vector space over K.
  Endo(K,V) is a vector space over K.
  p is linear over K from A to Endo(K,V).
  Dmn(p) = |A|.

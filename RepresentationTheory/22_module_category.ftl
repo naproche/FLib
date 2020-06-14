@@ -8,7 +8,7 @@ Axiom ModOb.  Let A be an algebra over K. Ob{Mod(K,A)} is the set of modules ove
 Axiom ModMor. Let A be an algebra over K. Let M,N << Ob{Mod(K,A)}. Mod(K,A)(M,N) = |Hom(K,A,M,N)|.
 Axiom ModId.  Let A be an algebra over K. Let M << Ob{Mod(K,A)}.  1{M,Mod(K,A)} = id{|M|}.
 
-Lemma ModuleHomComp. Let A be an algebra over K. Let L,M,N be modules over A over K.
+Theorem ModuleHomComp. Let A be an algebra over K. Let L,M,N be modules over A over K.
  Let f < Hom(K,A,L,M). Let g < Hom(K,A,M,N). Then g*f < Hom(K,A,L,N).
 Proof.
  For all modules M1,M2 over A over K :

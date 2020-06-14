@@ -7,7 +7,7 @@ Axiom. Let f,g be maps. f*g is a map.
 Axiom. Let f,g be maps. Dmn(f*g) = Dmn(g).
 Axiom. Let f,g be maps. Let x be an object. (f*g)(x) = f(g(x)).
 
-Definition. Let f,g objects.
+Definition. Let f,g be objects.
  f and g are composable iff for all x << Dmn(g) we have g(x) << Dmn(f).
 
 Theorem. Let f be a map. Let A be a set. Let id{A} and f be composable. Then id{A}*f = f.

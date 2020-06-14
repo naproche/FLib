@@ -1,8 +1,10 @@
 [read RepresentationTheory/05_vector_space.ftl]
 
-Definition. Let K be a field. Let V be a vector space over K.
-A subspace of V over K is an object U such that
-     (|U| is subset of |V|)
+Let K denote a field.
+
+Definition. Let V be an object. A subspace of V over K is an object U such that
+     (V is a vector space over K)
+ and (|U| is subset of |V|)
  and (0{V} < U)
  and (for all u,v < U             : u +{V} v < U)
  and (for all a < K and all u < U : a @{V} u < U).
@@ -14,8 +16,8 @@ Axiom SubAdd.  Let sub(K,V,U). Let u,v < (U).       u +{U} v = u +{V} v.
 Axiom SubNeg.  Let sub(K,V,U). Let u < U.             ~{U} u = ~{V} u.
 Axiom SubSmul. Let sub(K,V,U). Let a < K and u < U. a @{U} u = a @{V} u.
 
-# Especially, every structure with the same carrier as V is forced to inherit its vector space structure.
-# This follows from the next theorem and becomes useful later on.
+# Especially, every structure with the same carrier as V is forced to inherit its vector space
+# structure. This follows from the next theorem and becomes useful later on.
 
 Theorem. Let V be a vector space over K. Let W be an object. Assume |V|=|W|.
  Then W is a subspace of V over K.

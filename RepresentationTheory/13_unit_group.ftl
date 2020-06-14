@@ -1,6 +1,8 @@
 [read RepresentationTheory/11_group.ftl]
 [read RepresentationTheory/12_ring.ftl]
 
+Let R denote a Ring.
+
 Axiom. |Un(R)| is a set.
 Axiom. |Un(R)| = {r | r < R and there is s < R such that (r *{R} s = 1{R} and s *{R} r = 1{R})}.
 

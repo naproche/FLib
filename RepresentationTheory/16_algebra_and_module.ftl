@@ -29,59 +29,6 @@ Proof.
  qed.
 Qed.
 
-Theorem. Let V be a vector space over K. Endo(K,V) is an algebra over K.
-Proof.
- Take A = Endo(K,V).
- A is a vector space over K.
- A is a ring.
- Let us show that for all x < K and all f,g < A :
- x @{A} (f *{A} g) = (x @{A} f) *{A} g = f *{A} (x @{A} g).
-  Let x < K. Let f,g < A.
-  Let us show that for all v < V : (x @{A} (f *{A} g))(v) = ((x @{A} f) *{A} g)(v).
-   Let v < V.
-   (x @{A} (f *{A} g))(v) = x @{V} (f *{A} g)(v).
-   x @{V} (f *{A} g)(v) = x @{V} (f*g)(v).
-   x @{V} (f*g)(v) = x @{V} f(g(v)).
-   Let us show that x @{V} f(g(v)) = (x @{A} f)(g(v)).
-    x < K.
-    f < Hom(K,V,V).
-    For all w < V : (x @{Hom(K,V,V)} f)(w) = x @{V} f(w) (by MapSmul).
-    g(v) < V.
-   qed.
-   (x @{A} f)(g(v)) = ((x @{A} f)*g)(v).
-   x @{A} f < A.
-   ((x @{A} f)*g)(v) = ((x @{A} f) *{A} g)(v).
-  qed.
-  x @{A} (f *{A} g), (x @{A} f) *{A} g < A.
-  Dmn(x @{A} (f *{A} g)) = |V|.
-  Dmn((x @{A} f) *{A} g) = |V|.
-  Thus x @{A} (f *{A} g) = (x @{A} f) *{A} g.
-  Let us show that for all v < V : ((x @{A} f) *{A} g)(v) = (f *{A} (x @{A} g))(v).
-   Let v < V.
-   ((x @{A} f) *{A} g)(v) = ((x @{A} f)*g)(v).
-   ((x @{A} f)*g)(v) = (x @{A} f)(g(v)).
-   Let us show that (x @{A} f)(g(v)) = x @{V} f(g(v)).
-    x < K.
-    f < Hom(K,V,V).
-    For all w < V : (x @{Hom(K,V,V)} f)(w) = x @{V} f(w) (by MapSmul).
-    g(v) < V.
-   qed.
-   Let us show that x @{V} f(g(v)) = f(x @{V} g(v)).
-    f is linear over K from V to V.
-    x < K.
-    g(v) < V.
-   qed.
-   f(x @{V} g(v)) = f((x @{A} g)(v)).
-   f((x @{A} g)(v)) = (f*(x @{A} g))(v).
-   (f*(x @{A} g))(v) = (f *{A} (x @{A} g))(v).
-  qed.
-  f *{A} (x @{A} g) < A.
-  Dmn(f *{A} (x @{A} g)) = |V|.
-  Thus (x @{A} f) *{A} g = f *{A} (x @{A} g).
- qed.
- Therefore the thesis (by Algebra).
-Qed.
-
 Definition Module. Let A be an object. A module over A over K is an object V such that
      (A is an algebra over K)
  and (V is a vector space over K)

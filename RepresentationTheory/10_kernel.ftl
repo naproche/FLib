@@ -1,6 +1,8 @@
 [read RepresentationTheory/06_homomorphism.ftl]
 [read RepresentationTheory/09_subspace.ftl]
 
+Let K denote a field.
+
 Axiom. Let V,W be vector spaces over K. Let f < Hom(K,V,W). |Ker(f)| is a set.
 Axiom. Let V,W be vector spaces over K. Let f < Hom(K,V,W). |Ker(f)| = {v | v < V and f(v) = 0{W}}.
 
