@@ -1,4 +1,3 @@
-[read RepresentationTheory/01_map.ftl]
 [read RepresentationTheory/06_homomorphism.ftl]
 [read RepresentationTheory/09_subspace.ftl]
 [read RepresentationTheory/16_algebra_and_module.ftl]
@@ -14,7 +13,7 @@ Definition ModuleHom. Let A,M,N be objects.
  and (for all a < A and all x < M : f(a @@{M} x) = a @@{N} f(x)).
 
 Axiom. Let A be an algebra over K. Let M,N be modules over A over K.
- |Hom(K,A,M,N)| is the set of maps f such that f is a modulehom over A over K from M to N.
+ |Hom(K,A,M,N)| is the set of modulehoms over A over K from M to N.
 
 Lemma. Let A be an algebra over K. Let M,N be modules over A over K.
  |Hom(K,A,M,N)| is a subset of |Hom(K,M,N)|.
@@ -164,7 +163,7 @@ Proof.
  Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
 Qed.
 
-Theorem ModuleHomAdd. Let A be an algebra over K. Let M,N be modules over A over K.
+Theorem ModuleHomZero. Let A be an algebra over K. Let M,N be modules over A over K.
  0{Hom(K,A,M,N)} is a map h such that Dmn(h) = |M| and
  for all v < M : h(v) = 0{N}.
 Proof.
