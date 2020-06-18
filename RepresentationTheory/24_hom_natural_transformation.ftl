@@ -1,10 +1,12 @@
+[prove off]
 [read RepresentationTheory/21_natural_transformation.ftl]
 [read RepresentationTheory/23_hom_functor.ftl]
+[prove on]
 
 Let K denote a field.
 
 Theorem. Let A be an algebra over K. Let M1,M2 be modules over A over K. Let f be a modulehom over A
- over K from M1 to M2. Hom(K,A,f,-) is a covariant natural transformation
+ over K from M1 to M2. Hom(K,A,f,-) is a natural transformation
  from Hom(K,A,M2,-) to Hom(K,A,M1,-) over Mod(K,A) to Mod(K,K).
 Proof.
  Mod(K,A) is a category.
@@ -12,10 +14,10 @@ Proof.
  Mod(K,K) is a category.
  Take F = Hom(K,A,M2,-).
  Take G = Hom(K,A,M1,-).
- F is a covariant functor from Mod(K,A) to Mod(K,K).
- G is a covariant functor from Mod(K,A) to Mod(K,K).
+ F is a functor from Mod(K,A) to Mod(K,K).
+ G is a functor from Mod(K,A) to Mod(K,K).
  Take n = Hom(K,A,f,-).
- Let us show that n is a covariant natural transformation from F to G over Mod(K,A) to Mod(K,K).
+ Let us show that n is a natural transformation from F to G over Mod(K,A) to Mod(K,K).
   Let us show that for all N < Mod(K,A) : n(N) << Mod(K,K)(F(N),G(N)).
    Let N < Mod(K,A).
    N is a module over A over K.
@@ -43,19 +45,19 @@ Proof.
     Dmn(Hom(K,A,M1,h)*Hom(K,A,f,N1)) = |Hom(K,A,M2,N1)|.
    Hom(K,A,f,N2),Hom(K,A,M2,h) are maps.
    Hom(K,A,f,N2)*Hom(K,A,M2,h) is a map.
-   Dmn(Hom(K,A,M2,h)) = |Hom(K,A,M2,N1)| (by CoHomFun).
+   Dmn(Hom(K,A,M2,h)) = |Hom(K,A,M2,N1)| (by HomFun).
    Dmn(Hom(K,A,f,N2)*Hom(K,A,M2,h)) = |Hom(K,A,M2,N1)|.
    Let us show that for all g < Hom(K,A,M2,N1) : (Hom(K,A,M1,h)*Hom(K,A,f,N1))(g) = h*(g*f).
     Let g < Hom(K,A,M2,N1).
     (Hom(K,A,M1,h)*Hom(K,A,f,N1))(g) = Hom(K,A,M1,h)(Hom(K,A,f,N1)(g)).
     Hom(K,A,f,N1)(g) = g*f (by ContraHomFun).
     g*f < Hom(K,A,M1,N1) (by ModuleHomComp).
-    Hom(K,A,M1,h)(g*f) = h*(g*f) (by CoHomFun).
+    Hom(K,A,M1,h)(g*f) = h*(g*f) (by HomFun).
    qed.
    Let us show that for all g < Hom(K,A,M2,N1) : (Hom(K,A,f,N2)*Hom(K,A,M2,h))(g) = (h*g)*f.
     Let g < Hom(K,A,M2,N1).
     (Hom(K,A,f,N2)*Hom(K,A,M2,h))(g) = Hom(K,A,f,N2)(Hom(K,A,M2,h)(g)).
-    Hom(K,A,M2,h)(g) = h*g (by CoHomFun).
+    Hom(K,A,M2,h)(g) = h*g (by HomFun).
     Let us show that h*g < Hom(K,A,M2,N2).
      K is a field.
      A is an algebra over K.

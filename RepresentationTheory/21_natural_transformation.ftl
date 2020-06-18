@@ -1,8 +1,8 @@
 [read RepresentationTheory/20_functor.ftl]
 
 Definition. Let C,D,F,G be objects.
- A covariant natural transformation from F to G over C to D is an object n such that
-     (F,G are covariant functors from C to D)
+ A natural transformation from F to G over C to D is an object n such that
+     (F,G are functors from C to D)
  and (for all X << Ob{C} : n(X) << D(F(X),G(X)))
  and (for all X,Y << Ob{C} and all h << C(X,Y) : G(h)*n(X) = n(Y)*F(h)).
 

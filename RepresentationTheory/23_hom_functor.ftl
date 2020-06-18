@@ -6,7 +6,7 @@ Let K denote a field.
 Axiom. Let K,A,x,y be objects. Hom(K,A,x,-)(y) = Hom(K,A,x,y).
 Axiom. Let K,A,x,y be objects. Hom(K,A,-,y)(x) = Hom(K,A,x,y).
 
-Axiom CoHomFun. Let A be an algebra over K. Let M,N1,N2 be modules over A over K.
+Axiom HomFun. Let A be an algebra over K. Let M,N1,N2 be modules over A over K.
  Let f < Hom(K,A,N1,N2). Hom(K,A,M,f) is a map F such that
  Dmn(F) = |Hom(K,A,M,N1)| and for all g < Hom(K,A,M,N1) : F(g) = f*g.
 
@@ -15,7 +15,7 @@ Axiom ContraHomFun. Let A be an algebra over K. Let M1,M2,N be modules over A ov
  Dmn(F) = |Hom(K,A,M2,N)| and for all g < Hom(K,A,M2,N) : F(g) = g*f.
 
 Theorem. Let A be an algebra over K. Let M be a module over A over K.
- Hom(K,A,M,-) is a covariant functor from Mod(K,A) to Mod(K,K).
+ Hom(K,A,M,-) is a functor from Mod(K,A) to Mod(K,K).
 Proof.
  Take F = Hom(K,A,M,-).
  Mod(K,A) and Mod(K,K) are categories.
@@ -43,7 +43,7 @@ Proof.
     Dmn(Hom(K,A,M,f)) = |Hom(K,A,M,N1)|.
     Let us show that for all g < Hom(K,A,M,N1) : Hom(K,A,M,f)(g) < Hom(K,A,M,N2).
      Let g < Hom(K,A,M,N1).
-     Hom(K,A,M,f)(g) = f*g (by CoHomFun).
+     Hom(K,A,M,f)(g) = f*g (by HomFun).
      Let us show that f*g < Hom(K,A,M,N2).
       M,N1,N2 < Mod(K,A).
       g << Mod(K,A)(M,N1) (by ModMor).
@@ -53,49 +53,54 @@ Proof.
      qed.
     qed.
    qed.
-   For all g < Hom(K,A,M,N1) : Hom(K,A,M,f)(g) = f*g (by CoHomFun).
+   For all g < Hom(K,A,M,N1) : Hom(K,A,M,f)(g) = f*g (by HomFun).
    Let us show that for all g,h < Hom(K,A,M,N1) :
    F(f)(g +{Hom(K,A,M,N1)} h) = F(f)(g) +{Hom(K,A,M,N2)} F(f)(h).
     Let g,h < Hom(K,A,M,N1).
     Hom(K,A,M,N1) is a vector space over K.
     g +{Hom(K,A,M,N1)} h < Hom(K,A,M,N1) (by VectorSpace).
-    F(f)(g +{Hom(K,A,M,N1)} h) = f*(g +{Hom(K,A,M,N1)} h) (by CoHomFun).
+    F(f)(g +{Hom(K,A,M,N1)} h) = f*(g +{Hom(K,A,M,N1)} h) (by HomFun).
     F(f)(g) = f*g.
     F(f)(h) = f*h.
     M,N1 are modules over A over K.
-    Let us show that Dmn(f*(g +{Hom(K,A,M,N1)} h)) = |M|.
-     g +{Hom(K,A,M,N1)} h < Hom(K,A,M,N1).
-     g +{Hom(K,A,M,N1)} h is a modulehom over A over K from M to N1.
-     g +{Hom(K,A,M,N1)} h is from |M| to |N1|.
-    qed.
-    Let us show that Dmn((f*g) +{Hom(K,A,M,N2)} (f*h)) = |M|.
-     f*g < Hom(K,A,M,N2).
-     f*h < Hom(K,A,M,N2).
-     Hom(K,A,M,N2) is a vector space over K.
-     (f*g) +{Hom(K,A,M,N2)} (f*h) < Hom(K,A,M,N2) (by VectorSpace).
-     (f*g) +{Hom(K,A,M,N2)} (f*h) is a modulehom over A over K from M to N2.
-    qed.
-    Let us show that for all x < M : (f*(g +{Hom(K,A,M,N1)} h))(x)
-                                     = ((f*g) +{Hom(K,A,M,N2)} (f*h))(x).
-     Let x < M.
-     f and g +{Hom(K,A,M,N1)} h are maps.
-     (f*(g +{Hom(K,A,M,N1)} h))(x) = f((g +{Hom(K,A,M,N1)} h)(x)).
-     M,N1 are modules over A over K.
-     g,h < Hom(K,A,M,N1).
-     (g +{Hom(K,A,M,N1)} h)(x) = g(x) +{N1} h(x) (by ModuleHomAdd).
-     f((g +{Hom(K,A,M,N1)} h)(x)) = f(g(x) +{N1} h(x)).
-     Let us show that f(g(x) +{N1} h(x)) = f(g(x)) +{N2} f(h(x)).
-      f is a modulehom over A over K from N1 to N2.
-      g,h are modulehoms over A over K from M to N1.
-      g,h are from |M| to |N1|.
-      g(x),h(x) < N1.
+    Let us show that f*(g +{Hom(K,A,M,N1)} h) = (f*g) +{Hom(K,A,M,N2)} (f*h).
+     f*(g +{Hom(K,A,M,N1)} h) is a map.
+     (f*g) +{Hom(K,A,M,N2)} (f*h) is a map.
+     Let us show that Dmn(f*(g +{Hom(K,A,M,N1)} h)) = |M|.
+      g +{Hom(K,A,M,N1)} h < Hom(K,A,M,N1).
+      g +{Hom(K,A,M,N1)} h is a modulehom over A over K from M to N1.
+      g +{Hom(K,A,M,N1)} h is from |M| to |N1|.
+      qed.
+     Let us show that Dmn((f*g) +{Hom(K,A,M,N2)} (f*h)) = |M|.
+      f*g < Hom(K,A,M,N2).
+      f*h < Hom(K,A,M,N2).
+      Hom(K,A,M,N2) is a vector space over K.
+      (f*g) +{Hom(K,A,M,N2)} (f*h) < Hom(K,A,M,N2) (by VectorSpace).
+      (f*g) +{Hom(K,A,M,N2)} (f*h) is a modulehom over A over K from M to N2.
      qed.
-     f(g(x)) +{N2} f(h(x)) = (f*g)(x) +{N2} (f*h)(x).
-     Let us show that (f*g)(x) +{N2} (f*h)(x) = ((f*g) +{Hom(K,A,M,N2)} (f*h))(x).
-      M,N2 are modules over A over K.
-      f*g,f*h < Hom(K,A,M,N2).
-      ((f*g) +{Hom(K,A,M,N2)} (f*h))(x) = (f*g)(x) +{N2} (f*h)(x) (by ModuleHomAdd).
+     Let us show that for all x < M : (f*(g +{Hom(K,A,M,N1)} h))(x)
+                                      = ((f*g) +{Hom(K,A,M,N2)} (f*h))(x).
+      Let x < M.
+      f and g +{Hom(K,A,M,N1)} h are maps.
+      (f*(g +{Hom(K,A,M,N1)} h))(x) = f((g +{Hom(K,A,M,N1)} h)(x)).
+      M,N1 are modules over A over K.
+      g,h < Hom(K,A,M,N1).
+      (g +{Hom(K,A,M,N1)} h)(x) = g(x) +{N1} h(x) (by ModuleHomAdd).
+      f((g +{Hom(K,A,M,N1)} h)(x)) = f(g(x) +{N1} h(x)).
+      Let us show that f(g(x) +{N1} h(x)) = f(g(x)) +{N2} f(h(x)).
+       f is a modulehom over A over K from N1 to N2.
+       g,h are modulehoms over A over K from M to N1.
+       g,h are from |M| to |N1|.
+       g(x),h(x) < N1.
+      qed.
+      f(g(x)) +{N2} f(h(x)) = (f*g)(x) +{N2} (f*h)(x).
+      Let us show that (f*g)(x) +{N2} (f*h)(x) = ((f*g) +{Hom(K,A,M,N2)} (f*h))(x).
+       M,N2 are modules over A over K.
+       f*g,f*h < Hom(K,A,M,N2).
+       ((f*g) +{Hom(K,A,M,N2)} (f*h))(x) = (f*g)(x) +{N2} (f*h)(x) (by ModuleHomAdd).
+      qed.
      qed.
+     Therefore the thesis (by MapExt).
     qed.
    qed.
    Let us show that for all a < K and all g < Hom(K,A,M,N1) :
@@ -104,7 +109,7 @@ Proof.
     Hom(K,A,M,N1) is a vector space over K.
     a @@{Hom(K,A,M,N1)} g = a @{Hom(K,A,M,N1)} g.
     a @{Hom(K,A,M,N1)} g < Hom(K,A,M,N1) (by VectorSpace).
-    F(f)(a @{Hom(K,A,M,N1)} g) = f*(a @{Hom(K,A,M,N1)} g) (by CoHomFun).
+    F(f)(a @{Hom(K,A,M,N1)} g) = f*(a @{Hom(K,A,M,N1)} g) (by HomFun).
     F(f)(g) = f*g.
     f*g < Hom(K,A,M,N2).
     Let us show that f*(a @{Hom(K,A,M,N1)} g) = a @{Hom(K,A,M,N2)} (f*g).
@@ -179,7 +184,7 @@ Proof.
    Dmn(id{|Hom(K,A,M,N)|}) = |Hom(K,A,M,N)|.
    Let us show that for all g < Hom(K,A,M,N) : Hom(K,A,M,id{|N|})(g) = id{|Hom(K,A,M,N)|}(g).
     Let g < Hom(K,A,M,N).
-    Hom(K,A,M,id{|N|})(g) = id{|N|}*g (by CoHomFun).
+    Hom(K,A,M,id{|N|})(g) = id{|N|}*g (by HomFun).
     Let us show that id{|N|}*g = g.
      g is a modulehom over A over K from M to N.
      g is from |M| to |N|.
@@ -225,18 +230,18 @@ Proof.
    Let us show that F(g*f)(h) = (g*f)*h.
     N1,N3 are modules over A over K.
     g*f < Hom(K,A,N1,N3).
-    For all i < Hom(K,A,M,N1) : Hom(K,A,M,g*f)(i) = (g*f)*i (by CoHomFun).
+    For all i < Hom(K,A,M,N1) : Hom(K,A,M,g*f)(i) = (g*f)*i (by HomFun).
    qed.
    Let us show that (F(g)*F(f))(h) = g*(f*h).    
     (F(g)*F(f))(h) = F(g)(F(f)(h)).
     N1,N2 are modules over A over K.
     f < Hom(K,A,N1,N2).
-    For all i < Hom(K,A,M,N1) : Hom(K,A,M,f)(i) = f*i (by CoHomFun).
+    For all i < Hom(K,A,M,N1) : Hom(K,A,M,f)(i) = f*i (by HomFun).
     F(f)(h) = f*h.
     f*h < Hom(K,A,M,N2) (by ModuleHomComp).
     N2,N3 are modules over A over K.
     g < Hom(K,A,N2,N3).
-    For all i < Hom(K,A,M,N2) : Hom(K,A,M,g)(i) = g*i (by CoHomFun).
+    For all i < Hom(K,A,M,N2) : Hom(K,A,M,g)(i) = g*i (by HomFun).
     F(g)(f*h) = g*(f*h).
    qed.
    Let us show that (g*f)*h = g*(f*h).   
