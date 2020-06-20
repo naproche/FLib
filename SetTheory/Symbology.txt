@@ -1,0 +1,159 @@
+This is an explanation of the important symbols and abbreviations in the following files.
+
+
+Classes:
+/VV - The universe, class of all zfsets
+/Ord - Class of all ordinals
+/Lim - Class of limit ordinals
+/Succ - Class of successor ordinals
+/Cd - Class of all cardinals
+/Card - Class of all infinite cardinals
+/BigCard - Class of all infinite cardinals of uncountable cofinality
+/Ind - Class of inductive sets
+/NN - Set of natural numbers, regarded as an ordinal itself - defined as the intersection of /Ind
+/Trans - Class of transitive sets
+Trans(x)        - x is transitive
+
+
+General Syntax / Set Arithmetic:
+x /in y     - x is an element of y
+x /notin y  - x is not an element of y
+x /neq y    - x != y
+x /subset y - x is a subset of y
+<x,y>       - the (unordered) pair of x and y for zfsets x,y
+(x,y)       - the ordered pair of x and y
+/bigcup A   - the union of the elements of A
+/bigcap A   - the intersection of the elements of A
+/PP x       - the powerset of x
+x /cup y    - the union of x and y
+x /cap y    - the intersection of x and y
+<x>         - the singleton of x
+x+1         - the union of x and <x>, first defined for zfsets, later for ordinals after proofing that alpha+1 is again an ordinal
+x /setminus y - the set difference of x and y
+A /times B  - the cartesian product of the classes A and B
+
+
+Abbreviations/synonyms:
+/emptyset - the empty set
+0 - synonym for /emptyset, used in an ordinal context
+1 - the natural number 1, defined as 0+1
+2 - the natural number 2, defined as 1+1
+
+
+
+
+
+
+Functions:
+Dom(f)      - the domain of a function f (already integrated; per axiom this is a set (class))
+ran(f)      - the range of f
+f^[M]       - the image of M under a zffunction f
+f /caret M  - the image of M under a function f, basically the same as f^[M], but it is important that we
+                only write down the image of zffunctions, otherwise we create sets whose object might be proper classes
+g /circ f   - the composition of two zffunctions f and g, for compatible functions
+f : A rightarrow B      - f is a zffunction from A to B
+f : A harpoonright B    - f is a partial function from A to B (not used yet)
+f : A /leftrightarrow B - f is a bijective zffunction from A to B
+f^{-1}      - the inverse of f for injective zffunctions f (otherwise in inverse would not be a function)
+f /upharpoonright M     - the restricton of f to M for M /subset Dom(f)
+f ^ n       - for integers n the n--fold composition of f with itself, for proper functions f (only defined                     to proof some lemmas, not used later-on)
+^{A}B       - the class of zffunctions from A to B
+g /comp f   - the pointwise composition of functions
+
+
+Relations:
+x - R - y       - for relations R, meaning that (x,y) /in R
+reldomain(R)    - domain of R for relations R
+relrange(R)     - range of R for relations R
+relfield(R)     - field of R for relations R
+sset(R,x)       - class of zfsets y such that y - R - x
+R /restrict A   - restriction of R to a subset A of its field
+ref(R)          - R is reflexive
+irref(R)        - R is irreflexive
+sym(R)          - R is symmetric
+antisym(R)      - R is antisymmetric
+reltrans(R)     - R is transitive as a relation
+con(R)          - R is connex
+eqrel(R)        - R is an equivalence relation
+[x]-R           - the equivalence class of x for an equivalence relation R
+
+    
+
+
+Cardinals:
+x /tilde y      - the is a bijection between x and y
+x <= y          - there is an injection from x to y
+x < y           - x <= y /\ not (x /tilde y)
+Cardset(x)      - the set of ordinals alpha which are equipotent to x
+Card(x)         - the cardinality of x, defined as the intersection of Card(x)
+
+
+Notions:
+Alef        - the Alef function
+Beth        - the Beth function
+Gimel       - the Gimel function
+
+Sequences of Cardinals
+/sumset     - the set for the sum of a sequence of cardinals
+/sum        - the sum of a s.o.c.
+/prodset    - the set for the product of a s.o.c.
+/prod       - the product of a s.o.c.
+
+
+Arithmetic:
+alpha + beta    - ordinal addition
+alpha * beta    - ordinal multiplication
+alpha ^ beta    - ordinal exponentiation
+kappa +3 lambda - cadrinal addition
+kappa *3 lambda - cardinal multiplication
+kappa ^3 lambda - cardinal exponentiation
+kappa ^< lambda - the union of kappa ^3 v for v smaller than lambda
+alpha - 1       - the predecessor of alpha for successors alpha
+
+(a,b) /sim (x, y)   - used to define cardinal addition a +3 b for cardinals a,b
+
+
+Others:
+
+rk      - the rank function, giving every zfset its rank
+rk+     - the same as rk, but 1 more, used as an abbreviation
+Plus    - function that gives every ordinal its next bigger cardinal
+eps     - the relation corresponding to epsilon, x - eps - y iff x /in y
+epsrest(x)  - the restriction of the relation x such that the domain is x
+epshomo - zffunction respecting the relation eps
+
+TCol /res R     - the transitive collapse of a strongly wellfounded relation R
+relotp(R)       - the ordertype of R for a strong wellorder R
+otp(x)          - the ordertype of x for a subset x of /Ord.
+TCsets(R,x)     - the class of transitively closed sets around x wrt a strongly wellfounded relation R
+TC(R,x)         - the transitive closure of x wrt a strongly wellfounded relation R.
+TC(x)           - the transitive closure of a zfset x
+
+(a1,b1) <2 (a2,b2)  - the goedel ordering for pairs of ordinals
+goedel          - the goedel ordering, as a relation
+Goed            - the transitive closure of the goedel ordering
+
+pr1, pr2        - a function, the projection of an ordered pair to its first / second value, only used in the                               context of the goedel pairing
+Goed1, Goed2    - the inverse functions of Goed, as a function from /Ord to /Ord, only used once
+
+otpfunc(x)      - the bijective function from x /subset /Ord to its transitive collapse
+cofset(lambda)  - the set of otp(x) for x cofinal in lambda
+cofset2(lambda) - the set of Card(x) for x cofinal in lambda
+cof(x)          - the cofinality of lambda, definied as /bigcap cofset(lambda) 
+                        ( coincides with /bigcup cofset2(lambda) )
+
+X /cof kappa    - X is cofinal in kappa
+X /closed kappa - X is closed in kappa
+X /club kappa   - X is closed unbounded in kappa
+Cl(kappa)       - The set of club subsets of kappa
+Club(kappa)     - the club-filter of kappa
+NS(kappa)       - the non-stationary ideal of kappa
+/triangle(X,kappa)      - the diagonal intersection of a sequence of subsets of kappa
+/vartriangle(X,kappa)   - the diagonal union of a sequence of subsets of kappa
+
+
+
+
+
+
+
