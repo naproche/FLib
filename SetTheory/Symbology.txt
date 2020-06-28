@@ -6,10 +6,13 @@ Classes:
 /Ord - Class of all ordinals
 /Lim - Class of limit ordinals
 /Succ - Class of successor ordinals
-/Card - Class of all cardinals
+/Cd - Class of all cardinals
+/Card - Class of all infinite cardinals
+/BigCard - Class of all infinite cardinals of uncountable cofinality
 /Ind - Class of inductive sets
 /NN - Set of natural numbers, regarded as an ordinal itself - defined as the intersection of /Ind
 /Trans - Class of transitive sets
+Trans(x)        - x is transitive
 
 
 General Syntax / Set Arithmetic:
@@ -126,12 +129,6 @@ TCsets(R,x)     - the class of transitively closed sets around x wrt a strongly 
 TC(R,x)         - the transitive closure of x wrt a strongly wellfounded relation R.
 TC(x)           - the transitive closure of a zfset x
 
-otpfunc(x)      - the bijective function from x /subset /Ord to its transitive collapse
-cofset(lambda)  - the set of otp(x) for x cofinal in lambda
-cofset2(lambda) - the set of Card(x) for x cofinal in lambda
-cof(x)          - the cofinality of lambda, definied as /bigcap cofset(lambda) 
-                        ( coincides with /bigcup cofset2(lambda) )
-
 (a1,b1) <2 (a2,b2)  - the goedel ordering for pairs of ordinals
 goedel          - the goedel ordering, as a relation
 Goed            - the transitive closure of the goedel ordering
@@ -139,9 +136,20 @@ Goed            - the transitive closure of the goedel ordering
 pr1, pr2        - a function, the projection of an ordered pair to its first / second value, only used in the                               context of the goedel pairing
 Goed1, Goed2    - the inverse functions of Goed, as a function from /Ord to /Ord, only used once
 
-Trans(x)        - x is transitive
+otpfunc(x)      - the bijective function from x /subset /Ord to its transitive collapse
+cofset(lambda)  - the set of otp(x) for x cofinal in lambda
+cofset2(lambda) - the set of Card(x) for x cofinal in lambda
+cof(x)          - the cofinality of lambda, definied as /bigcap cofset(lambda) 
+                        ( coincides with /bigcup cofset2(lambda) )
 
-
+X /cof kappa    - X is cofinal in kappa
+X /closed kappa - X is closed in kappa
+X /club kappa   - X is closed unbounded in kappa
+Cl(kappa)       - The set of club subsets of kappa
+Club(kappa)     - the club-filter of kappa
+NS(kappa)       - the non-stationary ideal of kappa
+/triangle(X,kappa)      - the diagonal intersection of a sequence of subsets of kappa
+/vartriangle(X,kappa)   - the diagonal union of a sequence of subsets of kappa
 
 
 

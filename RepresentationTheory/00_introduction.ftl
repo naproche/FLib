@@ -1,8 +1,11 @@
 [synonym member/-s]
 [synonym map/-s]
 [synonym space/-s]
+[synonym homomorphism/-s]
 [synonym algebra/-s]
+[synonym algebrahom/-s]
 [synonym module/-s]
+[synonym modulehom/-s]
 [synonym category/categories]
 [synonym functor/-s]
 [synonym vertex/vertices]
@@ -15,7 +18,6 @@ Let x << A stand for x is a member of A.
 Signature. Let f,x be objects. f(x) is an object.
 Signature. Dmn is an object.   # Dom(f) would lead to ambiguity errors.
 Signature. Let A be an object. id{A} is an object.
-Signature. Let f,A be objects. f|A is an object.
 Signature. Let f,g be objects. f*g is an object.
 Signature. Let f be an object. f^(-1) is an object.
 
@@ -40,7 +42,7 @@ Signature. Let f,x,y be objects. f(x,y) is an object.
 Signature. dual is an object.
 Signature. V2ddV is an object.
 Signature. Un is an object.
-Signature. End is an object.
+Signature. Endo is an object.   #"End" can cause problems in proofs.
 Signature. Aut is an object.
 Signature. Ker is an object.
 
@@ -57,3 +59,14 @@ Signature. 0 is an object.
 Signature. 1 is an object.
 Signature. st is an object.
 Signature. tl is an object.
+
+
+Axiom. Let A be a set. Let x be an object. x << A iff x is an element of A.
+
+Definition Subset. Let B be an object. A subset of B is a set A such that
+ for all x << A : x << B.
+
+Axiom SetExt. Let A,B be sets. Assume A is subset of B. Assume B is subset of A. Then A = B.
+
+Axiom. Let A be a set. Let a << A. A\{a} is a set.
+Axiom. Let A be a set. Let a << A. A\{a} = {x | x << A and x != a}.

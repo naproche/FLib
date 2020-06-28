@@ -1,38 +1,23 @@
-[read representations/1_linear_algebra_axioms.ftl]
+[read RepresentationTheory/09_subspace.ftl]
+[read RepresentationTheory/14_endomorphism.ftl]
+[read RepresentationTheory/16_algebra_and_module.ftl]
 
 Let K denote a field.
 
-# 1.1 K-algebras
+Definition AlgebraHom. Let A,B be objects. An algebrahom over K from A to B is a map f such that
+     (A,B are algebras over K)
+ and (f is linear over K from A to B)
+ and (for all a,b < A : f(a *{A} b) = f(a) *{B} f(b))
+ and (f(1{A}) = 1{B}).
 
-Definition Algebra. An algebra over K is an object A such that
-     (A is a vector space over K)
- and (A is a ring)
- and (for all x < K and all a,b < A : x @{A} (a *{A} b) = (x @{A} a) *{A} b = a *{A} (x @{A} b)).
-
-Theorem. K is an algebra over K.
+Theorem. Let A be an algebra over K. Then id{|A|} is an algebrahom over K from A to A.
 Proof.
- K is a vector space over K.
- Let us show that K is a ring.
-  K is an abelian group.
-  1{K} < K.
-  For all a,b < K   : a *{K} b < K.
-  For all a < K     :       a *{K} 1{K} = a.
-  For all a < K     :       1{K} *{K} a = a.
-  For all a,b,c < K : a *{K} (b *{K} c) = (a *{K} b) *{K} c (by Field).
-  For all a,b,c < K : a *{K} (b +{K} c) = (a *{K} b) +{K} (a *{K} c) (by Field).
-  For all a,b,c < K : (a +{K} b) *{K} c = (a *{K} c) +{K} (b *{K} c) (by Field).  
- qed.
- Let us show that for all x < K and all a,b < K :
- x @{K} (a *{K} b) = (x @{K} a) *{K} b = a *{K} (x @{K} b).
-  Let x,a,b < K.
-  x *{K} (a *{K} b) = (x *{K} a) *{K} b.
-  (x *{K} a) *{K} b = (a *{K} x) *{K} b = a *{K} (x *{K} b).
- qed.
+ id{|A|} is linear over K from A to A.
 Qed.
 
-Theorem. Let V be a vector space over K. Then End(K,V) is an algebra over K.
+Theorem. Let V be a vector space over K. Endo(K,V) is an algebra over K.
 Proof.
- Take A = End(K,V).
+ Take A = Endo(K,V).
  A is a vector space over K.
  A is a ring.
  Let us show that for all x < K and all f,g < A :
@@ -83,97 +68,39 @@ Proof.
  Therefore the thesis (by Algebra).
 Qed.
 
-
-# 1.2 K-algebra homomorphisms
-
-Definition. Let A,B be objects. An algebrahom over K from A to B is a map f such that
-     (A,B are algebras over K)
- and (f is linear over K from A to B)
- and (for all a,b < A : f(a *{A} b) = f(a) *{B} f(b))
- and (f(1{A}) = 1{B}).
-
-Theorem. Let A be an algebra over K. Then id{|A|} is an algebrahom over K from A to A.
-Proof.
- id{|A|} is linear over K from A to A.
-Qed.
-
-
-# 1.3 representations and A-modules
-
-Definition. Let A,V be objects. A representation of A in V over K is an object p such that
+Definition Representation. Let A,V be objects. A representation of A in V over K is an object p such that
      (A is an algebra over K)
  and (V is a vector space over K)
- and (p is an algebrahom over K from A to End(K,V)).
+ and (p is an algebrahom over K from A to Endo(K,V)).
 
 Let rep(p,K,A,V) stand for (A is an algebra over K and V is a vector space over K
                             and p is a representation of A in V over K).
 
-Definition. Let A be an object. A module over A over K is an object V such that
-     (A is an algebra over K)
- and (V is a vector space over K)
- and (for all a < A and all v < V : a @@{V} v < V)
- and (for all a < A and all v,w < V :             a @@{V} (v +{V} w) = (a @@{V} v) +{V} (a @@{V} w))
- and (for all x < K and all a < A and all v < V : a @@{V} (x @{V} v) = x @{V} (a @@{V} v))
- and (for all a,b < A and all v < V :             (a +{A} b) @@{V} v = (a @@{V} v) +{V} (b @@{V} v))
- and (for all x < K and all a < A and all v < V : (x @{A} a) @@{V} v = x @{V} (a @@{V} v))
- and (for all a,b < A and all v < V :             (a *{A} b) @@{V} v = a @@{V} (b @@{V} v))
- and (for all v < V :                                   1{A} @@{V} v = v).
-
-Axiom. Let V be a vector space over K. Let x < K and v < V. x @@{V} v = x @{V} v.
-
-Theorem. Let V be a vector space over K. V is a module over K over K.
-Proof.
- K is an algebra over K.
- V is a vector space over K.
- For all a < K and all v < V : a @@{V} v < V.
- Let us show that for all a < K and all v,w < V : a @@{V} (v +{V} w) = (a @@{V} v) +{V} (a @@{V} w).
-  Let a < K and v,w < V.
- a @{V} (v +{V} w) = (a @{V} v) +{V} (a @{V} w) (by VectorSpace).
- qed.
- Let us show that for all x,a < K and all v < V : a @@{V} (x @{V} v) = x @{V} (a @@{V} v).
-  Let x,a < K and v < V.
-  a @{V} (x @{V} v) = x @{V} (a @{V} v) (by VectorSpace).
- qed.
- Let us show that for all a,b < K and all v < V : (a +{K} b) @@{V} v = (a @@{V} v) +{V} (b @@{V} v).
-  Let a,b < K and v < V.
-  (a +{K} b) @{V} v = (a @{V} v) +{V} (b @{V} v) (by VectorSpace).
-  a +{K} b < K.
- qed.
- Let us show that for all x,a < K and all v < V : (x @{K} a) @@{V} v = x @{V} (a @@{V} v).
-  Let x,a < K and v < V.
-  (x *{K} a) @{V} v = x @{V} (a @{V} v) (by VectorSpace).
-  x @{K} a = x *{K} a < K.
- qed.
- Let us show that for all a,b < K and all v < V : (a *{K} b) @@{V} v = a @@{V} (b @@{V} v).
-  Let a,b < K and v < V.
-  a *{K} b < K.
-  (a *{K} b) @@{V} v = (a *{K} b) @{V} v.
-  a @@{V} (b @@{V} v) = a @{V} (b @{V} v).
-  (a *{K} b) @{V} v = a @{V} (b @{V} v) (by VectorSpace).
- qed.
- For all v < V : 1{K} @@{V} v = v.
-Qed.
-
-
-# 1.3.1 every representation gives a module
+# every representation gives a module
 
 Axiom. Let rep(p,K,A,V).  |rep2mod(p,K,A,V)| = |V|.
-Axiom. Let rep(p,K,A,V). 0{rep2mod(p,K,A,V)} = 0{V}.
-Axiom. Let rep(p,K,A,V). For all v,w < V :              v +{rep2mod(p,K,A,V)} w = v +{V} w.
-Axiom. Let rep(p,K,A,V). For all v < V :                  ~{rep2mod(p,K,A,V)} v = ~{V} v.
-Axiom. Let rep(p,K,A,V). For all x < K and all v < V :  x @{rep2mod(p,K,A,V)} v = x @{V} v.
 Axiom. Let rep(p,K,A,V). For all a < A and all v < V : a @@{rep2mod(p,K,A,V)} v = p(a)(v).
+
+Lemma. Let rep(p,K,A,V). rep2mod(p,K,A,V) is a subspace of V over K.
+Proof.
+ V is a vector space over K.
+ |rep2mod(p,K,A,V)| = |V|.
+Qed.
+
+Theorem. Let rep(p,K,A,V). rep2mod(p,K,A,V) is a vector space over K.
+Theorem. Let rep(p,K,A,V). Let v,w < V.          v +{rep2mod(p,K,A,V)} w = v +{V} w.
+Theorem. Let rep(p,K,A,V). Let v < V.              ~{rep2mod(p,K,A,V)} v =   ~{V} v.
+Theorem. Let rep(p,K,A,V). Let x < K. Let v < V. x @{rep2mod(p,K,A,V)} v = x @{V} v.
+Proof.
+ rep2mod(p,K,A,V) is a subspace of V over K.
+Qed.
 
 Theorem. Let rep(p,K,A,V). rep2mod(p,K,A,V) is a module over A over K.
 Proof.
  Take M = rep2mod(p,K,A,V).
- Let us show that M is a vector space over K.
-  |M| = |V|.
-  Thus M is a subspace of V over K.
- qed.
-
- Then End(K,V) is a vector space over K.
- p is linear over K from A to End(K,V).
+ M is a vector space over K.
+ Endo(K,V) is a vector space over K.
+ p is linear over K from A to Endo(K,V).
  Dmn(p) = |A|.
 
  Let us show that M is a module over A over K.
@@ -233,12 +160,12 @@ Proof.
     p(a +{A} b) is linear over K from V to V.
     v << Dmn(p(a +{A} b)).
     (a +{A} b) @@{M} v = p(a +{A} b)(v).
-    p(a) +{End(K,V)} p(b) is a map.
-    Let us show that p(a +{A} b) = p(a) +{End(K,V)} p(b).
-     p is an algebrahom over K from A to End(K,V).
+    p(a) +{Endo(K,V)} p(b) is a map.
+    Let us show that p(a +{A} b) = p(a) +{Endo(K,V)} p(b).
+     p is an algebrahom over K from A to Endo(K,V).
     qed.
-    v << Dmn(p(a) +{End(K,V)} p(b)).
-    p(a +{A} b)(v) = (p(a) +{End(K,V)} p(b))(v).
+    v << Dmn(p(a) +{Endo(K,V)} p(b)).
+    p(a +{A} b)(v) = (p(a) +{Endo(K,V)} p(b))(v).
     p(a), p(b) < Hom(K,V,V).
     (p(a) +{Hom(K,V,V)} p(b))(v) = p(a)(v) +{V} p(b)(v) (by MapAdd).
     p(a)(v) +{V} p(b)(v) = (a @@{M} v) +{V} (b @@{M} v).
@@ -259,13 +186,13 @@ Proof.
     p(x @{A} a) is linear over K from V to V.
     v << Dmn(p(x @{A} a)).
     (x @{A} a) @@{M} v = p(x @{A} a)(v).
-    x @{End(K,V)} p(a) is a map.
-    Let us show that p(x @{A} a) = x @{End(K,V)} p(a).
-     p is an algebrahom over K from A to End(K,V).
+    x @{Endo(K,V)} p(a) is a map.
+    Let us show that p(x @{A} a) = x @{Endo(K,V)} p(a).
+     p is an algebrahom over K from A to Endo(K,V).
     qed.
-    v << Dmn(x @{End(K,V)} p(a)).
-    p(x @{A} a)(v) = (x @{End(K,V)} p(a))(v).
-    (x @{End(K,V)} p(a))(v) = x @{V} p(a)(v).
+    v << Dmn(x @{Endo(K,V)} p(a)).
+    p(x @{A} a)(v) = (x @{Endo(K,V)} p(a))(v).
+    (x @{Endo(K,V)} p(a))(v) = x @{V} p(a)(v).
     x @{V} p(a)(v) = x @{V} (a @@{M} v).
    qed.
   qed.
@@ -286,11 +213,11 @@ Proof.
     p(a *{A} b) is linear over K from V to V.
     v << Dmn(p(a *{A} b)).
     (a *{A} b) @@{M} v = p(a *{A} b)(v).
-    p(a) *{End(K,V)} p(b) is a map.
+    p(a) *{Endo(K,V)} p(b) is a map.
     Let us show that p(a *{A} b) = p(a)*p(b).
-     p is an algebrahom over K from A to End(K,V).
-     p(a *{A} b) = p(a) *{End(K,V)} p(b).
-     p(a) *{End(K,V)} p(b) = p(a)*p(b).
+     p is an algebrahom over K from A to Endo(K,V).
+     p(a *{A} b) = p(a) *{Endo(K,V)} p(b).
+     p(a) *{Endo(K,V)} p(b) = p(a)*p(b).
     qed.
     v << Dmn(p(a)*p(b)).
     p(a *{A} b)(v) = (p(a)*p(b))(v).
@@ -303,15 +230,15 @@ Proof.
   Let us show that for all v < M : 1{A} @@{M} v = v.
    Let v < M.
    1{A} << Dmn(p).
-   p is an algebrahom over K from A to End(K,V).
-   p(1{A}) = 1{End(K,V)}.
-   1{A} @@{M} v = p(1{A})(v) = 1{End(K,V)}(v) = id{|V|}(v) = v.
+   p is an algebrahom over K from A to Endo(K,V).
+   p(1{A}) = 1{Endo(K,V)}.
+   1{A} @@{M} v = p(1{A})(v) = 1{Endo(K,V)}(v) = id{|V|}(v) = v.
   qed.
  qed.
 Qed.
 
 
-# 1.3.2 every module gives a representation
+# every module gives a representation
 
 Axiom. Let A be an algebra over K. Let V be a module over A over K.
  mod2rep(K,A,V) is a map p such that Dmn(p) = |A| and for all a < A :
@@ -322,16 +249,16 @@ Theorem. Let A be an algebra over K. Let V be a module over A over K.
 Proof.
  Take a map p such that p = mod2rep(K,A,V).
  A is a vector space over K.
- Then End(K,V) is a vector space over K.
+ Endo(K,V) is a vector space over K.
  |A| is a set.
- |End(K,V)| is a set.
- Let us show that p is linear over K from A to End(K,V).
-  Let us show that p is a map from |A| to |End(K,V)|.
+ |Endo(K,V)| is a set.
+ Let us show that p is linear over K from A to Endo(K,V).
+  Let us show that p is a map from |A| to |Endo(K,V)|.
    p is a map.
    Dmn(p) = |A|.
    For all a < A : a << Dmn(p).
-   |End(K,V)| is a set.
-   Let us show that for all a < A : p(a) < End(K,V).
+   |Endo(K,V)| is a set.
+   Let us show that for all a < A : p(a) < Endo(K,V).
     Let a < A.
     p(a) is a map.
     Let us show that p(a) is linear over K from V to V.
@@ -356,9 +283,9 @@ Proof.
     qed.
    qed.  
   qed.
-  Let us show that for all a,b < A : p(a +{A} b) = p(a) +{End(K,V)} p(b).
+  Let us show that for all a,b < A : p(a +{A} b) = p(a) +{Endo(K,V)} p(b).
    Let a,b < A.
-   Let us show that for all v < V : p(a +{A} b)(v) = (p(a) +{End(K,V)} p(b))(v).
+   Let us show that for all v < V : p(a +{A} b)(v) = (p(a) +{Endo(K,V)} p(b))(v).
     Let v < V.
     a +{A} b < A.
     p(a +{A} b)(v) = (a +{A} b) @@{V} v.
@@ -367,41 +294,41 @@ Proof.
     (a @@{V} v) +{V} (b @@{V} v) = p(a)(v) +{V} p(b)(v) = (p(a) +{Hom(K,V,V)} p(b))(v).
    qed.
   qed.
-  Let us show that for all x < K and all a < A : p(x @{A} a) = x @{End(K,V)} p(a).
+  Let us show that for all x < K and all a < A : p(x @{A} a) = x @{Endo(K,V)} p(a).
    Let x < K and a < A.
-   Let us show that for all v < V : p(x @{A} a)(v) = (x @{End(K,V)} p(a))(v).
+   Let us show that for all v < V : p(x @{A} a)(v) = (x @{Endo(K,V)} p(a))(v).
     Let v < V.
     x @{A} a < A.
     p(x @{A} a)(v) = (x @{A} a) @@{V} v.
     (x @{A} a) @@{V} v = x @{V} (a @@{V} v) (by Algebra).
     x @{V} (a @@{V} v) = x @{V} p(a)(v).
-    x @{V} p(a)(v) = (x @{End(K,V)} p(a))(v).
+    x @{V} p(a)(v) = (x @{Endo(K,V)} p(a))(v).
    qed.
   qed.
  qed.
  p is a map.
- Let us show that p is an algebrahom over K from A to End(K,V).
-  Let us show that for all a,b < A : p(a *{A} b) = p(a) *{End(K,V)} p(b).
+ Let us show that p is an algebrahom over K from A to Endo(K,V).
+  Let us show that for all a,b < A : p(a *{A} b) = p(a) *{Endo(K,V)} p(b).
    Let a,b < A.
    Dmn(p(a *{A} b)) = |V|.
-   Dmn(p(a) *{End(K,V)} p(b)) = |V|.
-   Let us show that for all v < V : p(a *{A} b)(v) = (p(a) *{End(K,V)} p(b))(v).
+   Dmn(p(a) *{Endo(K,V)} p(b)) = |V|.
+   Let us show that for all v < V : p(a *{A} b)(v) = (p(a) *{Endo(K,V)} p(b))(v).
     Let v < V.
     p(a *{A} b)(v) = (a *{A} b) @@{V} v.
     (a *{A} b) @@{V} v = a @@{V} (b @@{V} v).
     a @@{V} (b @@{V} v) = p(a)(b @@{V} v).
     p(a)(b @@{V} v) = p(a)(p(b)(v)).
     p(a)(p(b)(v)) = (p(a)*p(b))(v).
-    (p(a)*p(b))(v) = (p(a) *{End(K,V)} p(b))(v).
+    (p(a)*p(b))(v) = (p(a) *{Endo(K,V)} p(b))(v).
    qed.
    Dmn(p(a *{A} b)) = |V|.
-   Dmn(p(a) *{End(K,V)} p(b)) = |V|.
+   Dmn(p(a) *{Endo(K,V)} p(b)) = |V|.
    Therefore the thesis.
   qed.
-  Let us show that p(1{A}) = 1{End(K,V)}.
-   Let us show that for all v < V : p(1{A})(v) = 1{End(K,V)}(v).
+  Let us show that p(1{A}) = 1{Endo(K,V)}.
+   Let us show that for all v < V : p(1{A})(v) = 1{Endo(K,V)}(v).
     Let v < V.
-    p(1{A})(v) = 1{A} @@{V} v = v = id{|V|}(v) = 1{End(K,V)}(v).
+    p(1{A})(v) = 1{A} @@{V} v = v = id{|V|}(v) = 1{Endo(K,V)}(v).
    qed.
   qed.
  qed.

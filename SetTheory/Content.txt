@@ -312,6 +312,38 @@ Main results:
 
 
 
+15-GCH
+
+In this section we examine cardinal exponentiation in a model of ZFC+GCH.
+GCH gives us the values of the continuum function which coincide with the values of the Gimel function.
+
+Main results:
+
+- Gimel[kappa] = 2 ^ kappa = Plus[kappa]
+- the value of kappa ^ lambda depending on the relation between kappa and lambda
+
+
+
+16-Clubs
+
+Now we define closed unbounded sets and show that the closed unbounded filter on kappa is cof(kappa)-closed.
+For this we reintroduce the inductive composition of a function.
+
+Main results:
+
+- the intersection of less then cof(kappa) many clubs is a club
+- Club(kappa) is cof(kappa)-closed
+
+
+
+
+
+
+17-Stationary Sets
+
+Here we ddefine stationary ans non-stationary subsets of a cardinal of uncountable cofinality and proof that the ideal
+of non-stationary subsets of kappa is a cof(kappa)-complete ideal.
+
 
 
 

@@ -1,8 +1,8 @@
-[read representations/2_representations_axioms.ftl]
+[read RepresentationTheory/06_homomorphism.ftl]
+[read RepresentationTheory/09_subspace.ftl]
+[read RepresentationTheory/16_algebra_and_module.ftl]
 
 Let K denote a field.
-
-# 1.4 A-module homomorphisms
 
 Definition ModuleHom. Let A,M,N be objects.
  A modulehom over A over K from M to N is a map f such that
@@ -13,14 +13,14 @@ Definition ModuleHom. Let A,M,N be objects.
  and (for all a < A and all x < M : f(a @@{M} x) = a @@{N} f(x)).
 
 Axiom. Let A be an algebra over K. Let M,N be modules over A over K.
- |Hom(K,A,M,N)| is the set of maps f such that f is a modulehom over A over K from M to N.
+ |Hom(K,A,M,N)| is the set of modulehoms over A over K from M to N.
 
 Lemma. Let A be an algebra over K. Let M,N be modules over A over K.
- |Hom(K,A,M,N)| is subset of |Hom(K,M,N)|.
+ |Hom(K,A,M,N)| is a subset of |Hom(K,M,N)|.
 Proof.
  Take V = Hom(K,M,N).
  Take U = Hom(K,A,M,N).
- Let us show that |U| is subset of |V|.
+ Let us show that |U| is a subset of |V|.
   Let us show that for all f < U : f < V.
    Let f < U.
    f is a map.
@@ -43,7 +43,7 @@ Proof.
       (a @{A} 1{A}) < A.
      qed.
      (a @{A} 1{A}) @@{N} f(x) = a @{N} (1{A} @@{N} f(x)) = a @{N} f(x).
-    qed.
+    qed.   
    qed.
   qed.
  qed.
@@ -122,8 +122,7 @@ Proof.
  qed.
 Qed.
 
-
-Theorem. Let A be an algebra over K. Let M,N be modules over A over K.
+Theorem ModuleHomSubspace. Let A be an algebra over K. Let M,N be modules over A over K.
  Hom(K,M,N) is a vector space over K and Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
 Proof.
  Hom(K,M,N) is a vector space over K.
@@ -158,9 +157,40 @@ Proof.
  qed.
 Qed.
 
-
-Theorem. Let A be an algebra over K. Let M,N be modules over A over K.
+Theorem ModuleHomVectorSpace. Let A be an algebra over K. Let M,N be modules over A over K.
  Hom(K,A,M,N) is a vector space over K.
 Proof.
- Hom(K,M,N) is a vector space over K and Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
+ Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
+Qed.
+
+Theorem ModuleHomZero. Let A be an algebra over K. Let M,N be modules over A over K.
+ 0{Hom(K,A,M,N)} is a map h such that Dmn(h) = |M| and
+ for all v < M : h(v) = 0{N}.
+Proof.
+ Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
+ 0{Hom(K,A,M,N)} = 0{Hom(K,M,N)}.
+Qed.
+
+Theorem ModuleHomAdd. Let A be an algebra over K. Let M,N be modules over A over K.
+ Let f,g < Hom(K,A,M,N). f +{Hom(K,A,M,N)} g is a map h such that Dmn(h) = |M| and
+ for all v < M : h(v) = f(v) +{N} g(v).
+Proof.
+ Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
+ f +{Hom(K,A,M,N)} g = f +{Hom(K,M,N)} g.
+Qed.
+
+Theorem ModuleHomNeg. Let A be an algebra over K. Let M,N be modules over A over K.
+ Let f < Hom(K,A,M,N). ~{Hom(K,A,M,N)} f is a map h such that Dmn(h) = |M| and
+ for all v < M : h(v) = ~{N} f(v).
+Proof.
+ Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
+ ~{Hom(K,A,M,N)} f = ~{Hom(K,M,N)} f.
+Qed.
+
+Theorem ModuleHomSmul. Let A be an algebra over K. Let M,N be modules over A over K.
+ Let x < K. Let f < Hom(K,A,M,N). x @{Hom(K,A,M,N)} f is a map h such that Dmn(h) = |M| and
+ for all v < M : h(v) = x @{N} f(v).
+Proof.
+ Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
+ x @{Hom(K,A,M,N)} f = x @{Hom(K,M,N)} f.
 Qed.
