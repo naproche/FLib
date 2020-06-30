@@ -3,8 +3,10 @@
 # (Marcel Schütz, 2020)
 #
 
+#[prove off][check off]
 [read ForTheLib/NumberTheory/rationals.ftl]
 [read ForTheLib/Sets/set-systems.ftl]
+#[prove on][check on]
 
 
 # 1. Definition
@@ -42,7 +44,7 @@ Signature AnaRe040. \infty is an element.
 Let +\infty stand for \infty.
 
 
-Definition AnaRe045. An extended real number is an object x such that x is a real number or
+Definition AnaRe045. An extended real number is an entity x such that x is a real number or
 x = \infty or x = -\infty.
 
 
@@ -278,7 +280,7 @@ Then
 Proof. [prove off] qed.
 
 
-Definition AnaRe257. Let x be a nonnegative real number and n be a positive natural number.
+Axiom AnaRe257. Let x be a nonnegative real number and n be a positive natural number.
 root(x,n) is a nonnegative real number such that
 
   root(x,n)^{n} = x.

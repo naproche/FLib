@@ -3,7 +3,9 @@
 # (Marcel Schütz, 2020)
 #
 
+#[prove off][check off]
 [read ForTheLib/Foundations/classes.ftl]
+#[prove on][check on]
 
 
 # 1. The Peano axioms

@@ -3,7 +3,9 @@
 # (Marcel Schütz, 2020)
 #
 
-[read ForTheLib/Analysis/real-valued-functions.ftl]
+#[prove off][check off]
+[read ForTheLib/RealNumbers/real-valued-functions.ftl]
+#[prove on][check on]
 
 
 # 1. Definition
@@ -71,7 +73,6 @@ Proof.
   x < y or x = y or x > y.
   proof.
     x,y \in dom(f). dom(f) \subseteq REAL. Hence x,y \in REAL. Thus x and y are real numbers.
-    Then we have the thesis (by RealTrich).
   end.
 qed.
 

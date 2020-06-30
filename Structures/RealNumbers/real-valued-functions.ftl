@@ -3,7 +3,9 @@
 # (Marcel Schütz, 2020)
 #
 
+#[prove off][check off]
 [read ForTheLib/RealNumbers/reals.ftl]
+#[prove on][check on]
 
 
 # 1. Definition
@@ -105,23 +107,3 @@ all x \in dom(f).
 
 Definition AnaRvf090. Let f be a realvalued function. f is bounded iff |f| < c for some real number
 c.
-
-
-# 5. Misc
-
-Lemma AnaRvf094. Let X be an object and f be a binary function on X. Then (x,y) \in dom(f) for all
-x,y \in X.
-
-Proof. [prove off] qed.
-
-
-Axiom AnaRvf095. Let X be an object and f be a binary function on X that is realvalued. f is
-symmetric on X iff f(x,y) = f(y,x) for all x,y \in X.
-
-Axiom AnaRvf100. Let X be an object and f be a binary function on X that is realvalued. f is
-subadditive on X iff f(x,z) \leq f(x,y) + f(y,z) for all x,y,z \in X.
-
-Axiom AnaRvf105. Let X be an object and f be a binary function on X such that f is nonnegative and
-realvalued. f is positive definite on X iff for all x,y \in X we have f(x,y) = 0 iff x = y.
-
-# Issue: We cannot write "... and f be a binary function on X that is nonnegative and realvalued".

@@ -3,7 +3,9 @@
 # (Marcel Schütz, 2020)
 #
 
+#[prove off][check off]
 [read ForTheLib/Sets/cardinality.ftl]
+#[prove on][check on]
 
 
 # 1. Definitions

@@ -3,9 +3,9 @@
 # (Marcel Schütz, 2020)
 #
 
-#[prove off]
+#[prove off][check off]
 [read ForTheLib/Sets/sets.ftl]
-#[prove on]
+#[prove on][check on]
 
 
 # 1. Definitions
@@ -91,17 +91,39 @@ Definition SetCard065. Let x be a set. x is countably infinite iff x \sim NAT.
 
 Definition SetCard070. Let x be a set. x is countable iff x is finite or x is countably infinite.
 
-Definition SetCard075. Let x be a set. x is uncountable iff x is not countable.
+Definition SetCard071. Let x be a set. x is uncountable iff x is not countable.
 
 
 # 5.1 Finite sets.
 
-Proposition SetCard080. Let x be an element. `{x}` \sim `{0}`.
+Lemma SetCatd074. `{0}` is a set.
 
-Proof. [prove off] end.
+Lemma SetCard075. `{0,1}` is a set.
 
 
-Corollary SetCard081. Let x be an element. `{x}` is a finite set.
+Definition SetCard077. Let x be a set. x has at most one element iff x \preceq `{0}`.
+
+Definition SetCard078. Let x be a set. x has at most two elements iff x \preceq `{0,1}`.
+
+
+Proposition SetCard079. Let x be an element. `{x}` \sim `{0}`.
+
+Proof. [prove off] qed.
+
+
+Proposition SetCard080. Let x be a set. x has at most one element iff x = \emptyset or x = `{a}` for
+some element a.
+
+Proof. [prove off] qed.
+
+
+Proposition SetCard081. Let x be a set. x has at most two elements iff x = \emptyset or x = `{a}`
+for some element a or x = `{a,b}` for some elements a,b.
+
+Proof. [prove off] qed.
+
+
+Corollary SetCard082. Let x be an element. `{x}` is a finite set.
 
 Proof. [prove off] qed.
 

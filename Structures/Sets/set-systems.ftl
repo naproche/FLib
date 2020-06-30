@@ -3,9 +3,9 @@
 # (Marcel Schütz, 2020)
 #
 
-#[prove off]
+#[prove off][check off]
 [read ForTheLib/Sets/cardinality.ftl]
-#[prove on]
+#[prove on][check on]
 
 
 # 1. Definition
@@ -73,4 +73,8 @@ Definition SetSs040. Let X be a systems of sets. X is closed under arbitrary uni
 
 # 5. Misc
 
-Proposition SetSs045. Let x be a set. Every subset of the powerset of x is a systems of sets.
+Proposition SetSs045. Let x be an entity. Every subset of the powerset of x is a systems of sets.
+
+Proof.
+  Let y be a subset of Pow(x). Then y is a set and every element of y is a set.
+qed.

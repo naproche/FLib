@@ -3,13 +3,15 @@
 # (Marcel Schütz, 2020)
 #
 
+#[prove off][check off]
 [read ForTheLib/NumberTheory/integers.ftl]
+#[prove on][check on]
 
 
 # 1. Definitions
 
-Definition NtPrm000. A prime number is a natural number p such that p \geq 2 and for all natural numbers
-n if n \mid p then n = 1 or n = p.
+Definition NtPrm000. A prime number is a natural number p such that p \geq 2 and for all natural
+numbers n if n \mid p then n = 1 or n = p.
 
 Definition NtPrm005. Let n be an integer. n is prime iff n is a prime number.
 
