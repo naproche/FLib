@@ -3,335 +3,392 @@
 # (Marcel Schütz, 2020)
 #
 
-[prove off]
+#[prove off][check off]
+[read ForTheLib/Sets/topologies.ftl]
 [read ForTheLib/Foundations/structures.ftl]
-[read ForTheLib/Foundations/types.ftl]
-[read ForTheLib/Sets/set-systems.ftl]
-[read ForTheLib/Foundations/axioms.ftl]
-[prove on]
+#[prove on][check on]
 
 
-# 1. Topologies
+# 1. Topological spaces
 
-# 1.1 Topologies of open sets
+Signature TopTop000. TOP is a class.
 
-Signature TopTop000. TopOpen1 is an axiom.
-
-Axiom TopTop005. Let X be a set and U be a subset of the powerset of X. (X,U) satisfies TopOpen1 iff
-the empty set and X lie in U.
+Definition TopTop005. A topological space is an element of TOP.
 
 
-Signature TopTop010. TopOpen2 is an axiom.
+Axiom TopTop010. Every topological spaces is a structure.
 
-Axiom TopTop015. Let X be a set and U be a subset of the powerset of X. (X,U) satisfies TopOpen2 iff
-U is closed under finite intersections.
+Lemma TopTop015. Every topological space is a map.
 
-
-Signature TopTop020. TopOpen3 is an axiom.
-
-Axiom TopTop025. Let X be a set and U be a subset of the powerset of X. (X,U) satisfies TopOpen3 iff
-U is closed under arbitrary unions.
+Lemma TopTop020. Every topological space is a class.
 
 
-Definition TopTop030. Let X be an object. A topology of open sets on X is a subset U of the powerset
-of X such that (X,U) satisfies TopOpen1 and TopOpen2 and TopOpen3.
+# 2. Constructing topological spaces
 
-Let a topology on X stand for a topology of open sets on X.
+Axiom TopTop025. TOP_{1} is a class such that TOP_{1} = {(X,U) | X is a set and U is a topology on X}.
 
+Signature TopTop030. Top_{1} is a bijection between TOP_{1} and TOP.
 
-# 1.2 Topologies of closed sets
-
-Signature TopTop035. TopClosed1 is an axiom.
-
-Axiom TopTop040. Let X be a set and U be a subset of the powerset of X. (X,U) satisfies TopClosed1
-iff the empty set and X lie in U.
+Axiom TopTop035. Let X be a set and U be a topology on X. Then dom(Top_{1}(X,U)) = X.
 
 
-Signature TopTop045. TopClosed2 is an axiom.
-
-Axiom TopTop050. Let X be a set and U be a subset of the powerset of X. (X,U) satisfies TopClosed2
-iff U is closed under finite unions.
-
-
-Signature TopTop055. TopClosed3 is an axiom.
-
-Axiom TopTop060. Let X be a set and U be a subset of the powerset of X. (X,U) satisfies TopClosed3
-iff U is closed under arbitrary intersections.
-
-
-Definition TopTop065. Let X be an object. A topology of closed sets on X is a subset U of the
-powerset of X such that (X,U) satisfies TopClosed1 and TopClosed2 and TopClosed3.
-
-
-# 1.3 Examples
-
-Definition TopTop070. Let X be a set. The discrete topology on X is a class U such that U =
-{A | A is a subset of X}.
-
-Definition TopTop075. Let X be a set. The indiscrete topology on X is a class U such that U =
-{\emptyset,X}.
-
-
-Proposition TopTop080. Let X be a set. The discrete topology on X is a topology on X.
+Lemma TopTop040. Let X be a set and U be a topology on X. Then Top_{1}(X,U) is a topological space.
 
 Proof.
-  Take a class D that is the discrete topology on X. Then D = {A | A is a subset of X}. D is the
-  powerset of X (by SetSet080). Hence D is a subset of the powerset of X.
-
-  The empty set and X belong to D. Thus (X,D) satisfies TopOpen1 (by TopTop005).
-
-  For all A,B \in D we have A \cap B \in D.
-  proof.
-    Let A,B \in D. Then A,B are subsets of X. Hence A \cap B is a set. Every element of A \cap B
-    lies in X. Hence A \cap B is a subset of X.
-  end.
-
-  Thus D is closed under finite intersections (by SetSs010). Therefore (X,D) satisfies TopOpen2 (by
-  TopTop015).
-
-  For all nonempty subsets U of D we have \bigcup U \in D.
-  proof.
-    Let U be a nonempty subset of D. Every element of U is a subset of X. Hence \bigcup U is a set.
-    Every element of \bigcup U lies in X. Hence \bigcup U is a subset of X.
-  end.
-
-  Hence D is closed under arbitrary unions (by SetSs040). Thus (X,D) satisfies TopOpen3 (by
-  TopTop025).
+  (X,U) lies in the domain of Top_{1} (by TopTop025). Indeed dom(Top_{1}) = TOP_{1}. The codomain of
+  Top_{1} is TOP. Hence Top_{1}(X,U) lies in TOP. Thus Top_{1}(X,U) lies in TOP. Every element of
+  TOP is a topological spaces. Then we have the thesis.
 qed.
 
 
-Proposition TopTop085. Let X be a set. The discrete topology on X is a topology of closed sets on X.
+Lemma TopTop045. Let X be a set and U be a topology on X. Let x be an element of X. Then
+Top_{1}(X,U)(x) is an element of Top_{1}(X,U).
 
 Proof.
-  Take a class D that is the discrete topology on X. Then D = {A | A is a subset of X}. D is the
-  powerset of X (by SetSet080). Hence D is a subset of the powerset of X.
-
-  The empty set and X belong to D. Thus (X,D) satisfies TopClosed1 (by TopTop040).
-
-  For all A,B \in D we have A \cup B \in D.
-  proof.
-    Let A,B \in D. Then A,B are subsets of X. Hence A \cup B is a set. Every element of A \cup B
-    lies in X. Thus A \cup B is a subset of X.
-  end.
-
-  Hence D is closed under finite unions (by SetSs020). Thus (X,D) satisfies TopClosed2 (by
-  TopTop050).
-
-  For all nonempty subsets U of D we have \bigcap U \in D.
-  proof.
-    Let U be a nonempty subset of D. Then every element of U is a subset of X. Hence \bigcap U is a
-    set. Every element of \bigcap U lies in X. Thus \bigcap U is a subset of X (by SetSet082).
-  end.
-
-  Hence D is closed under arbitrary intersections (by SetSs035). Thus (X,D) satisfies TopClosed3 (by
-  TopTop060).
+  Top_{1}(X,U) is a topological space such that X is the domain of Top_{1}(X,U). Hence x lies in the
+  domain of Top_{1}(X,U). Top_{1}(X,U) is a structure. Then we have the thesis (by FoundStr020).
 qed.
 
 
-Proposition TopTop090. Let X be a set. The indiscrete topology on X is a topology on X.
+Lemma TopTop050. Every topological space is a set.
 
 Proof.
-  Take a class I that is the indiscrete topology on X. I = {\emptyset,X}. Every element of I is a
-  subset of X. Hence I is a subset of the powerset of X. I is a system of sets.
-
-  The empty set and X belong to I. Hence (X,I) satisfies TopOpen1 (by TopTop005).
-
-  For all A,B \in I we have A \cap B \in I.
-  proof.
-    Let A,B \in I.
-
-    Case A,B = \emptyset. Obvious.
-
-    Case A,B = X. Obvious.
-
-    Case A = \emptyset and B = X. Obvious.
-
-    Case A = X and B = \emptyset. Obvious.
-  end.
-
-  Hence I is closed under finite intersections (by SetSs010). Thus (X,I) satisfies TopOpen2 (by
-  TopTop015).
-
-  For all nonempty subsets U of I we have \bigcup U \in I.
-  proof.
-    Let U be a nonempty subset of I.
-
-    Case U = {\emptyset}.
-      \bigcup U = \emptyset.
-    end.
-
-    Case U = {X}.
-      \bigcup U = X.
-    end.
-
-    Case U = {\emptyset,X}.
-      U = `{\emptyset,X}`. Therefore \bigcup U = \emptyset \cup X (by FoundCl090). Indeed \emptyset
-      and X are classes.
-    end.
-  end.
-
-  Hence I is closed under arbitrary unions (by SetSs040). Thus (X,I) satisfies TopOpen3 (by
-  TopTop025).
+  Let T be a topological space. Then T lies in the codomain of Top_{1}. Top_{1} is a surjective map.
+  Hence we can take an element S of TOP_{1} such that Top_{1}(S) = T (by FoundMap100). Indeed
+  dom(Top_{1}) = TOP_{1}. Take a set X and a topology U on X such that S = (X,U) (by TopTop025).
 qed.
-
-
-Proposition TopTop095. Let X be a set. The indiscrete topology on X is a topology of closed sets on
-X.
-
-Proof. [prove off] qed.
-
-
-# 2. Topological spaces
-
-Signature TopTop100. A topological space is a small structure.
-
-Definition TopTop105. Let X be a topological space. The topology of X is a class T such that T =
-{A | A is an open subset of X}.
-
-Axiom TopTop115. Let X be a topological space. The topology of X is a topology on X.
 
 
 # 3. Open and closed sets
 
-# 3.1 Open sets
-
-Proposition TopTop120. Let X be a topological space and U be a set. Assume that every element of U
-is an open subset of X. Then \bigcup U is open.
-
-Proof. [prove off] qed.
+Axiom TopTop055. Let X be a set and U be a topology on X. Then for all subsets B of Top_{1}(X,U) we
+have B = Top_{1}(X,U)[A] for some A \in U iff B is open.
 
 
-Proposition TopTop125. Let X be a topological space and A,B be open subsets of X. Then A \cup B is
-open.
+Proposition TopTop057. Let X be a set and U be a topology on X. Let A \in U. Then Top_{1}(X,U)[A] is
+an open subset of Top_{1}(X,U).
 
-Proof. [prove off] qed.
-
-
-Proposition TopTop130. Let X be a topological space and U be a nonempty finite set. Assume that
-every element of U is an open subset of X. Then \bigcap U is open.
-
-Proof. [prove off] qed.
+Proof.
+  A is a subset of X. Take a topological space T such that T = Top_{1}(X,U). T[A] is a subset of T.
+  Indeed T is a structure. Hence T[A] is open (by TopTop055).
+qed.
 
 
-Proposition TopTop135. Let X be a topological space and A,B be open subsets of X. Then A \cap B is
-open.
+Proposition TopTop058. Let X be a set and U be a topology on X. Let A be an open subset of
+Top_{1}(X,U). Then Top_{1}(X,U)^{-1}[A] \in U.
 
-Proof. [prove off] qed.
+Proof.
+  Take a topological space T such that T = Top_{1}(X,U). A is open. Hence we can take a B \in U such
+  that A = T[B] (by TopTop055). T^{-1}[T[B]] = B (by FoundMap200). Indeed T is an injective map from
+  X to T and B is a subclass of X.
+qed.
 
 
-# 3.2 Closed sets
+Lemma TopTop060. Let T be a topological space. Let V be a class such that V = {A | A is an open
+subset of T}. Then V is a topology on T.
 
-Axiom TopTop140. Let X be a topological space and A be a subset of X. A is closed iff X \setminus A
+Proof.
+  T lies in the codomain of Top_{1}. Top_{1} is a surjective map. Hence we can take an element S of
+  TOP_{1} such that Top_{1}(S) = T (by FoundMap100). Indeed dom(Top_{1}) = TOP_{1}. Take a set X and
+  a topology U on X such that S = (X,U) (by TopTop025).
+
+  (1) T is a bijective function of X.
+
+  V = {T[A] | A \in U}. 
+  proof.
+    Let B be an entity. T = Top_{1}(X,U).
+
+    If B \in V then B = T[A] for some A \in U.
+    proof.
+      Assume that B \in V. Then B is an open subset of T. Thus B = T[A] for some A \in U (by
+      TopTop055).
+    end.
+
+    If B = T[A] for some A \in U then B \in V.
+    proof.
+      Let A \in U. Assume that B = T[A].
+
+      B is a subset of T.
+      proof.
+        U is a subset of the powerset of X. Hence every element of U is a subset of X. Thus A is a
+        subset of X. T[A] = {T(x) | x \in A \cap dom(T)} (by FoundMap180). Indeed T is a map. Hence
+        T[A] = {T(x) | x \in A}. Indeed A \cap dom(T) = A. T = {T(x) | x \in dom(T)}. Indeed T is a
+        structure.
+
+        Every element of T[A] lies in T.
+        proof.
+          Let y \in T[A]. Take x \in A such that y = T(x). Then x \in dom(T). Hence y \in T.
+        end.
+
+        Thus T[A] is a set. Indeed A is a set. 
+      end.
+
+      Then B is open (by TopTop055).
+    end.
+  end.
+
+  Then V is a topology on T[X] (by SetTop065).
+qed.
+
+
+Axiom TopTop065. Let T be a topological space and A be a subset of T. A is closed iff T \setminus A
 is open.
 
 
-Proposition TopTop145. Let X be a topological space and A be a subset of X. A is open iff
-X \setminus A is closed.
+Proposition TopTop070. Let T be a topological space and A be a subset of T. A is open iff
+T \setminus A is closed.
 
-Proof. [prove off] qed.
+Proof.
+  If A is open then T \setminus A is closed.
+  proof.
+    Assume that A is open. A = T \setminus (T \setminus A). Hence the thesis (by TopTop065). Indeed
+    T \setminus A is a subset of T.
+  end.
+
+  If T \setminus A is closed then A is open.
+  proof.
+    Assume that T \setminus A is closed. Then T \setminus (T \setminus A) is open (by TopTop065).
+    Indeed T \setminus A is a subset of T. T \setminus (T \setminus A) = A.
+  end.
+qed.
 
 
-Proposition TopTop150. Let X be a topological space and U be a class. Assume that U = {A | A is a
-closed subset of X}. U is a topology of closed sets on X.
+Proposition TopTop075. Let T be a topological space. Let V be a class such that V = {A | A is a
+closed subset of T}. Then V is a topology of closed sets on T.
 
-Proof. [prove off] qed.
+Proof.
+  Define U = {A | A is an open subset of T}. U is a topology on T (by TopTop060).
+
+  V = {T \setminus A | A \in U}.
+  proof.
+    Let B be an entity.
+
+    If B \in V then B = T \setminus A for some A \in U.
+    proof.
+      Assume B \in V. Then B is a closed subset of T. Hence T \setminus B is an open subset of T.
+      Thus T \setminus B \in U. B = T \setminus (T \setminus B).
+    end.
+
+    If B = T \setminus A for some A \in U then B \in V.
+    proof.
+      Let A \in U. Assume that B = T \setminus A. A is an open subset of T. Hence B is closed (by
+      TopTop070).
+    end.
+  end.
+
+  Hence the thesis (by SetTop140). Indeed T is a set.
+qed.
 
 
-Corollary TopTop155. Let X be a topological space and U be a nonempty set. Assume that every element
-of U is a closed subset of X. Then \bigcap U is closed.
+# 3.1 Basic properties of open sets
 
-Proof. [prove off] qed.
+Proposition TopTop080. Every topological space is an open set.
+
+Proof.
+  Let X be a topological space. Define V = {A | A is an open subset of X}. V is a topology on X (by
+  TopTop060). Hence X lies in V (by SetTop040). Indeed X is a set.
+qed.
 
 
-Corollary TopTop160. Let X be a topological space and A,B be closed subsets of X. Then A \cap B is
+Proposition TopTop085. The empty set is open subset of every topological space.
+
+Proof.
+  Let X be a topological space. Define V = {A | A is an open subset of X}. V is a topology on X (by
+  TopTop060). Hence the empty set lies in V (by SetTop035). Indeed X is a set.
+qed.
+
+
+Proposition TopTop090. Let X be a topological space and U be a set. Assume that every element of U
+is an open subset of X. Then \bigcup U is open.
+
+Proof.
+  Define V = {A | A is an open subset of X}. V is a topology on X (by TopTop060). U is a subset of
+  V. Indeed every element of U lies in V. Hence \bigcup U is an element of V (by SetTop055). Indeed
+  X is a set.
+qed.
+
+
+Proposition TopTop095. Let X be a topological space and A,B be open subsets of X. Then A \cup B is
+open.
+
+Proof.
+  Define V = {C | C is an open subset of X}. V is a topology on X (by TopTop060). A,B are elements
+  of V. Thus A \cup B lies in V (by SetTop060). Indeed X is a set.
+qed.
+
+
+Proposition TopTop100. Let X be a topological space and U be a nonempty finite set. Assume that
+every element of U is an open subset of X. Then \bigcap U is open.
+
+Proof.
+  Define V = {A | A is an open subset of X}. V is a topology on X (by TopTop060). U is a finite
+  nonempty subset of V. Indeed every element of U lies in V. Hence \bigcap U is an element of V (by
+  SetTop045). Indeed X is a set.
+qed.
+
+
+Proposition TopTop105. Let X be a topological space and A,B be open subsets of X. Then A \cap B is
+open.
+
+Proof.
+  Define V = {C | C is an open subset of X}. V is a topology on X (by TopTop060). A,B are elements
+  of V. Thus A \cap B lies in V (by SetTop050). Indeed X is a set.
+qed.
+
+
+# 3.2 Basic properties of closed sets
+
+Proposition TopTop110. Every topological space is closed.
+
+Proof.
+  Let X be a topological space. Define V = {A | A is a closed subset of X}. V is a topology of
+  closed sets on X (by TopTop075). Hence X lies in V (by SetTop110). Indeed X is a set.
+qed.
+
+
+Proposition TopTop115. The empty set is a closed subset of every topological space.
+
+Proof.
+  Let X be a topological space. Define V = {A | A is a closed subset of X}. V is a topology of
+  closed sets on X (by TopTop075). Hence the empty set lies in V (by SetTop105). Indeed X is a set.
+qed.
+
+
+Proposition TopTop125. Let X be a topological space and U be a nonempty set. Assume that every
+element of U is a closed subset of X. Then \bigcap U is closed.
+
+Proof.
+  Define V = {A | A is a closed subset of X}. V is a topology of closed sets on X (by TopTop075).
+  U is a nonempty subset of V. Indeed every element of U lies in V. Hence \bigcap U lies in V (by
+  SetTop125). Indeed X is a set.
+qed.
+
+
+Proposition TopTop130. Let X be a topological space and A,B be closed subsets of X. Then A \cap B is
 closed.
 
-Proof. [prove off] qed.
+Proof.
+  Define V = {C | C is a closed subset of X}. V is a topology of closed sets on X (by TopTop075).
+  A,B are elements of V. Hence A \cap B lies in V (by SetTop130). Indeed X is a set.
+qed.
 
 
-Corollary TopTop165. Let X be a topological space and U be a finite set. Assume that every element
-of U is a closed subset of X. Then \bigcup U is open.
+Proposition TopTop135. Let X be a topological space and U be a finite set. Assume that every element
+of U is a closed subset of X. Then \bigcup U is closed.
 
-Proof. [prove off] qed.
+Proof.
+  Define V = {A | A is a closed subset of X}. V is a topology of closed sets on X (by TopTop075).
+  U is a finite subset of V. Indeed every element of U lies in V. Hence \bigcup U lies in V (by
+  SetTop115). Indeed X is a set.
+qed.
 
 
-Corollary TopTop170. Let X be a topological space and A,B be closed subsets of X. Then A \cup B is
+Proposition TopTop140. Let X be a topological space and A,B be closed subsets of X. Then A \cup B is
 closed.
 
-Proof. [prove off] qed.
+Proof.
+  Define V = {C | C is a closed subset of X}. V is a topology of closed sets on X (by TopTop075).
+  A,B are elements of V. Hence A \cup B lies in V (by SetTop120). Indeed X is a set.
+qed.
 
 
-# 3. TOP
+# 4. Another way of constructing topological spaces
 
-Signature TopTop175. TOP is a type.
-
-Axiom TopTop180. TOP = {X | X is a topological space}.
-
-# Be aware that the class term notation does not imply that TOP is a class!
+Axiom TopTop145. TOP_{2} is a class such that TOP_{2} = {(X,U) | X is a set and U is a topology of
+closed sets on X}.
 
 
-# 3.1 Instances of TOP
+Signature TopTop150. Top_{2} is a function of Top_{2}.
 
-# 3.1.1 TOP_{open}
-
-Signature TopTop190. TOP_{open} is a function of TOP.
-
-Axiom TopTop195. Let T be a topological space. Let X be the domain of T and U be a class. Assume
-that U = {T^{-1}[A] | A is an open subset of T}. TOP_{open}(T) = (X,U).
+Axiom TopTop135. Let X be a set and U be a topology of closed sets on X. Let V be a class such that
+V = {X \setminus A | A \in U}. Then Top_{2}(X,U) = Top_{1}(X,V).
 
 
-Proposition TopTop200. Let T be a topological space and U be a class. Assume that U = {T^{-1}[A] | A
-is an open subset of T}. Then U is a topology on the domain of T.
+Proposition TopTop155. Top_{2} is a bijection between Top_{2} and TOP.
 
 Proof. [prove off] qed.
 
 
-Proposition TopTop205. TOP_{open} is an instantiation of TOP.
+Proposition TopTop160. Let X be a set and U be a topology of closed sets on X. Then
+dom(Top_{2}(X,U)) = X.
 
 Proof. [prove off] qed.
 
 
-Axiom TopTop210. Let X be a set and U be a topology on X. Then there is a topological space T such
-that TOP_{open}(T) = (X,U).
-
-Corollary TopTop215. Let X be a set and U be a topology on X. Then (X,U) is an instance of TOP.
+Proposition TopTop165. Let X be a set and U be a topology on X. Then Top_{2}(X,U) is a topological
+space.
 
 Proof. [prove off] qed.
 
 
-# 3.1.2 TOP_{closed}
-
-Signature TopTop220. TOP_{closed} is a function of TOP.
-
-Axiom TopTop225. Let T be a topological space. Let X be the domain of T and U be a class. Assume
-that U = {T^{-1}[A] | A is a closed subset of T}. TOP_{closed}(T) = (X,U).
-
-
-Proposition TopTop230. TOP_{closed} is an instantiation of TOP.
+Proposition TopTop170. Let X be a set and U be a topology on X. Let x be an element of X. Then
+Top_{2}(X,U)(x) is an element of Top_{2}(X,U).
 
 Proof. [prove off] qed.
 
 
-Proposition TopTop233. TOP_{closed} and TOP_{open} are equivalent.
+Proposition TopTop175. Let X be a set and U be a topology of closed sets on X. Then for all subsets
+B of Top_{2}(X,U) we have B = Top_{2}(X,U)[A] for some A \in U iff B is closed.
 
 Proof. [prove off] qed.
 
 
-Proposition TopTop235. Let X be a set and U be a topology of closed sets on X. Then there is a
-topological space T such that TOP_{closed}(T) = (X,U).
+# 5. Neighbourhoods
 
-Proof. [prove off] qed.
-
-
-Corollary TopTop240. Let X be a set and U be a topology of closed sets on X. Then (X,U) is an
-instance of TOP.
-
-Proof. [prove off] qed.
+Axiom TopTop200. Let X be a topological space and x \in X. Let U be an entity. U is a neighbourhood
+of x iff U is a subset of X such that there is an open subset of U that contains x.
 
 
-# 3.2 Equality of topological spaces
+Proposition TopTop205. Let X be a topological space and x \in X. Every neighbourhood of x contains
+x.
 
-Proposition TopTop250. Let X,Y be topological spaces. Let T be an instantiation of TOP. If
-T(X) = T(Y) then X = Y.
+Proof.
+  Let U be a neighbourhood of x. Take a subset A of U that contains x (by TopTop200).
+qed.
 
-Proof. [prove off] qed.
+
+Proposition TopTop210. Let X be a topological space and U be a subset of X. U is open iff U is a
+neighbourhood of every element of U.
+
+Proof.
+  If U is open then U is a neighbourhood of every element of U.
+  proof.
+    Assume that U is open. Let x be an element of U. U is an open subset of U that contains x. Hence
+    U is a neighbourhood of x (by TopTop200). Indeed x is an element of X.
+  end.
+
+  If U is a neighbourhood of every element of U then U is open.
+  proof.
+    Assume that U is a neighbourhood of every element of U. For all x \in U there is an open subset
+    of U that contains x (by TopTop200). Indeed every element of U lies in X.
+
+    Define f(x) = choose an open subset A of U that contains x in A for x in U.
+
+    f[U] is a set. Hence \bigcup f[U] and U are sets. f[U] = {f(x) | x \in U \cap dom(f)} (by
+    FoundMap180). Indeed f is a map. Hence f[U] = {f(x) | x \in U}. Thus every element of f[U] is an
+    open subset of U.
+
+    \bigcup f[U] = U.
+    proof.
+      Every element of \bigcup f[U] lies in U.
+      proof.
+        Let y \in \bigcup f[U]. Take an element A of f[U] such that y \in A. A is a subset of U.
+      end.
+
+      Every element of U lies in \bigcup f[U].
+      proof.
+        Let y \in U. Then y \in f(y). Hence y is an element of some element of f[U]. Indeed f(y)
+        lies in f[U] (by FoundFun115).
+      end.
+
+      Hence the thesis (by SetSet083).
+    end.
+
+    Every element of f[U] is an open subset of X.
+    proof.
+      Let A \in f[U]. A and X are sets. Every element of A lies in X.
+    end.
+
+    Thus \bigcup f[U] is open (by TopTop090).
+  end.
+qed.
