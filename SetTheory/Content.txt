@@ -328,6 +328,10 @@ Main results:
 
 Now we define closed unbounded sets and show that the closed unbounded filter on kappa is cof(kappa)-closed.
 For this we reintroduce the inductive composition of a function.
+We want to show that the filter Club(kappa) is closed under certain intersections, for this we need to define
+sequences of subsets in Club(kappa). Later-on we want to show similiar results for non-stationary subsets.
+For this we define for an arbitrary class C a sequence of length lambda in C; this notion then can be applied to
+sequences in Club(kappa), in /PP kappa, in NS(kappa), and so on.
 
 Main results:
 
@@ -341,15 +345,27 @@ Main results:
 
 17-Stationary Sets
 
-Here we ddefine stationary ans non-stationary subsets of a cardinal of uncountable cofinality and proof that the ideal
+Here we define stationary ans non-stationary subsets of a cardinal of uncountable cofinality and proof that the ideal
 of non-stationary subsets of kappa is a cof(kappa)-complete ideal.
+Then we prove that the filter Club(kappa) and the ideal NS(kappa) is closed under diagonal intersection resp. diagonal union.
+
+Main results:
+
+- NS(kappa) is cof(kappa)-complete
+- Club(kappa) is closed under diagonal intersections of length kappa
+- NS(kappa) is closed under diagonal unions of length kappa
 
 
 
 
+18-Fodors Lemma
 
+We basically proof Fodors Lemma.
 
+Main results:
 
-
+- Fodors Lemma
+- the derivation of a club is again closed unbounded in kappa
+- the subset of ordinals with cofinality alpha is stationary in kappa
 
 

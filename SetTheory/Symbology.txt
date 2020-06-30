@@ -9,6 +9,7 @@ Classes:
 /Cd - Class of all cardinals
 /Card - Class of all infinite cardinals
 /BigCard - Class of all infinite cardinals of uncountable cofinality
+/BigRegCard - Class of all uncountable regular cardinals
 /Ind - Class of inductive sets
 /NN - Set of natural numbers, regarded as an ordinal itself - defined as the intersection of /Ind
 /Trans - Class of transitive sets
@@ -55,6 +56,7 @@ f : A rightarrow B      - f is a zffunction from A to B
 f : A harpoonright B    - f is a partial function from A to B (not used yet)
 f : A /leftrightarrow B - f is a bijective zffunction from A to B
 f^{-1}      - the inverse of f for injective zffunctions f (otherwise in inverse would not be a function)
+f^{-1}[[x]] - the preimage of x (as a set)
 f /upharpoonright M     - the restricton of f to M for M /subset Dom(f)
 f ^ n       - for integers n the n--fold composition of f with itself, for proper functions f (only defined                     to proof some lemmas, not used later-on)
 ^{A}B       - the class of zffunctions from A to B
@@ -151,7 +153,10 @@ NS(kappa)       - the non-stationary ideal of kappa
 /triangle(X,kappa)      - the diagonal intersection of a sequence of subsets of kappa
 /vartriangle(X,kappa)   - the diagonal union of a sequence of subsets of kappa
 
-
+stat(kappa)         - the stationary subsets of kappa
+der(C,kappa)        - the derivation of a club in kappa
+Estat(kappa,alpha)  - the limit ordinals of cofinality alpha in kappa
+stat(kappa,S)       - the stationary subsets of kappa in S
 
 
 
