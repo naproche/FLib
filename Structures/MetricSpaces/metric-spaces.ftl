@@ -3,134 +3,191 @@
 # (Marcel Schütz, 2020)
 #
 
-#[prove off]
-[read ForTheLib/RealNumbers/real-valued-functions.ftl]
+#[prove off][check off]
 [read ForTheLib/Foundations/structures.ftl]
-[read ForTheLib/Foundations/types.ftl]
-#[prove on]
+[read ForTheLib/RealNumbers/real-valued-functions.ftl]
+#[prove on][check on]
 
 
-# 1. Distance functions and metrics
+# 1. Metrics
 
-Definition MetMs000. Let X be an object. A distance function on X is a binary function d on X such
-that
-
-  d is nonnegative and realvalued and
-
-  d is positive definite on X and
-
-  d is symmetric on X and
-
-  d is subadditive on X.
+Lemma MetMs000. Let X be a set and d be a function on X \times X. Then for all x,y \in X we have
+(x,y) \in dom(d).
 
 
-Definition MetMs001. Let X be a set. A metric on X is a distance function d on X such that
-dom(d) = X \times X.
+Signature MetMs005. Met1 is an axiom.
+
+Axiom MetMs010. Let X be a set and d be a function on X \times X. (X,d) satisfies Met1 iff
+d is realvalued and nonnegative.
 
 
-Lemma MetMs002. Let X be a set and d be a metric on X. Let x,y \in X. Then (x,y) \in dom(d).
+Signature MetMs015. Met2 is an axiom.
 
-Proof.
-  d is a binary function on X. Hence the thesis (by AnaRvf094).
-qed.
+Axiom MetMs020. Let X be a set and d be a function on X \times X. (X,d) satisfies Met2 iff
+for all x,y \in X we have d(x,y) = 0 iff x = y.
+
+
+Signature MetMs025. Met3 is an axiom.
+
+Axiom MetMs030. Let X be a set and d be a function on X \times X. (X,d) satisfies Met3 iff
+for all x,y \in X we have d(x,y) = d(y,x).
+
+
+Signature MetMs035. Met4 is an axiom.
+
+Axiom MetMs040. Let X be a set and d be a function on X \times X. (X,d) satisfies Met4 iff
+for all x,y,z \in X we have d(x,z) \leq d(x,y) + d(y,z).
+
+
+Definition MetMs045. Let X be a set. A metric on X is a function d on X \times X such that
+
+  (X,d) satisfies Met1 and
+
+  (X,d) satisfies Met2 and
+
+  (X,d) satisfies Met3 and
+
+  (X,d) satisfies Met4.
 
 
 # 2. Metric spaces
 
-Signature MetMs010. A metric space is a small structure.
+Signature MetMs050. MET is a class.
+
+Definition MetMs055. A metric space is an element of MET.
 
 
-Signature MetMs024. dist is a distance function on every metric space.
+Axiom MetMs060. Every metric spaces is a structure.
 
-Let the distance of x and y stand for dist(x,y).
+Lemma MetMs065. Every metric space is a map.
+
+Lemma MetMs067. Every metric space is a class.
 
 
-Lemma MetMs025. Let X be a metric space and x,y \in X. Then (x,y) \in dom(dist).
+Signature MetMs070. Let x,y be elements of some metric space. dist(x,y) is an entity.
+
+
+# 3. Constructing metric spaces
+
+Axiom MetMs075. MET_{1} is a class such that MET_{1} = {(X,d) | X is a set and d is a metric on X}.
+
+Signature MetMs080. Met_{1} is a bijection between MET_{1} and MET.
+
+Axiom MetMs085. Let X be a set and d be a metric on X. Then dom(Met_{1}(X,d)) = X.
+
+
+Lemma MetMs090. Let X be a set and d be a metric on X. Then Met_{1}(X,d) is a metric space.
 
 Proof.
-  dist is a binary function on X. Therefore the thesis (by AnaRvf094).
+  (X,d) lies in the domain of Met_{1}. The codomain of Met_{1} is MET. Hence Met_{1}(X,d) lies in
+  MET. Thus Met_{1}(X,d) lies in MET. Every element of MET is a metric spaces. Therefore we have the
+  thesis.
 qed.
 
 
-Proposition MetMs026. Let X be a metric space and x,y \in X. Then dist(x,y) \geq 0.
+Lemma MetMs095. Let X be a set and d be a metric on X. Let x be an element of X. Then
+Met_{1}(X,d)(x) is an element of Met_{1}(X,d).
 
 Proof.
-  dist is a realvalued function. Hence dist \geq 0 iff dist(c) \geq 0 for all c \in dom(dist) (by
-  AnaRvf088). Indeed 0 is a real number. dist is nonnegative. Thus dist(c) \geq 0 for all
-  c \in dom(dist). (x,y) \in dom(dist).
+  Met_{1}(X,d) is a metric space such that X is the domain of Met_{1}(X,d). Hence x lies in the
+  domain of Met_{1}(X,d). Then we have the thesis.
 qed.
 
 
-Proposition MetMs027. Let X be a metric space and x,y \in X. Assume x \neq y. Then dist(x,y) > 0.
+Axiom MetMs100. Let X be a set and d be a metric on X. Then for all x,y \in X we have
+dist(Met_{1}(X,d)(x),Met_{1}(X,d)(y)) = d(x,y).
+
+
+# 4. Basic properties of metric spaces
+
+Proposition MetMs105. Let M be a metric space. Then M = Met_{1}(X,d) for some set X and some metric
+d on X.
 
 Proof.
-  dist(x,y) \geq 0. Hence dist(x,y) = 0 or dist(x,y) > 0 (by AnaRe219). Indeed dist(x,y) and 0 are
-  real numbers.
+  M lies in the range of Met_{1}. Met_{1} is a surjective map. Hence we can take an element A of the
+  domain of Met_{1} such that Met_{1}(A) = M.
+
+  (1) Then A lies in MET_{1}.
+
+  Hence the thesis (by MetMs075, 1).
 qed.
 
 
-Proposition MetMs028. Let X be a metric space and x,y,z \in X. Then
-dist(x,z) \leq dist(x,y) + dist (y,z).
+Proposition MetMs110. Every metric space is a set.
 
 Proof.
-  dist is a realvalued function that is subadditive on X. dist is subadditive on X iff
-  dist(a,c) \leq dist(a,b) + dist(b,c) for all a,b,c \in X (by AnaRvf100).
+  Let M be a metric space. We can take a set X and a metric d on X such that M = Met_{1}(X,d). Then
+  X is the domain of M. 
 qed.
 
 
-Proposition MetMs029. Let X be a metric space and x,y \in X. Then dist(x,y) is a real number.
-
-
-Proposition MetMs030. Let X be a metric space and x,y \in X. Then dist(x,y) = dist(y,x).
+Proposition MetMs120. Let M be a metric space and x,y \in M. Let X be a set and d be a metric on X
+such that M = Met_{1}(X,d). Then there are a,b \in X such that x = M(a) and y = M(b) and
+dist(x,y) = d(a,b).
 
 Proof.
-  dist is a realvalued function that is symmetric on X. dist is symmetric on X iff
-  dist(a,b) = dist(b,a) for all a,b \in X (by AnaRvf095).
+  We can take a,b \in X such that x = M(a) and y = M(b). Indeed M is a bijection between X and the
+  range of M. Then we have the thesis (by MetMs100).
 qed.
 
 
-Proposition MetMs031. Let X be a metric space and x \in X. Then dist(x,x) = 0.
+Proposition MetMs125. Let M be a metric space and x,y \in M. dist(x,y) is a real number.
 
 Proof.
-  dist is realvalued function that is positive definite on X.
+  Take a set X and a metric d on X such that M = Met_{1}(X,d). Take a,b \in X such that
+  dist(x,y) = d(a,b) (by MetMs120). X is a set and d is a function on X \times X such that (X,d)
+  satisfies Met1. Hence d is realvalued (by MetMs010). Thus d(a,b) is a real number. Indeed
+  (a,b) \in dom(d) (by MetMs000).
 qed.
 
 
-# 3. MET
+Proposition MetMs130. Let M be a metric space and x,y \in M. dist(x,y) \geq 0.
 
-Signature MetMs040. MET is a type.
-
-Axiom MetMs045. MET = {X | X is a metric space}.
-
-
-Signature MetMs050. MET_{metric} is a function of MET.
-
-Axiom MetMs055. Let M be a metric space. Let X be the domain of M. Let d be a function of X \times X
-such that d(x,y) = dist(M(x),M(y)) for all x,y \in X. Then MET_{metric}(M) = (X,d).
+Proof.
+  Take a set X and a metric d on X such that M = Met_{1}(X,d). Take a,b \in X such that
+  dist(x,y) = d(a,b) (by MetMs120). (X,d) satisfies Met1. d is a function on X \times X. Hence d is
+  nonnegative and realvalued (by MetMs010). (a,b) \in dom(d) (by MetMs000). Thus d(a,b) \geq 0 (by
+  AnaRvf088, TecSig015). Indeed d is a function and 0 is a real number.
+qed.
 
 
-Proposition MetMs060. MET_{metric} is an instantiation of MET.
+Proposition MetMs135. Let M be a metric space and x,y \in M. dist(x,y) = 0 iff x = y.
 
-Proof. [prove off] qed.
-
-
-Proposition MetMs065. Let M be a metric space and X be the domain of M. Let d be a function of
-X \times X such that d(x,y) = dist(M(x),M(y)) for all x,y \in X. Then d is a metric on X.
-
-Proof. [prove off] qed.
-
-
-Proposition MetMs065. Let X be a set and d be a metric on X. Then (X,d) is an instance of MET.
-
-Proof. [prove off] qed.
+Proof.
+  Take a set X and a metric d on X such that M = Met_{1}(X,d). Take a,b \in X such that x = M(a) and
+  y = M(b) and dist(x,y) = d(a,b) (by MetMs120). (X,d) satisfies Met2. Hence d(a,b) = 0 iff a = b
+  (by MetMs020). Indeed d is a function on X \times X. Then dist(x,y) = 0 iff d(a,b) = 0. Hence
+  dist(x,y) = 0 iff a = b. a = b iff M(a) = M(b) (by FoundMap092). Indeed M is an injective map and
+  a,b lie in the domain of M. Thus we have the thesis.
+qed.
 
 
-Proposition MetMs070. Let M,N be metric spaces. If
+Proposition MetMs137. Let M be a metric space and x,y \in M. Assume that x \neq y. Then
+dist(x,y) > 0.
 
-  the domain of M is equal to the domain of N and
+Proof.
+  dist(x,y) \geq 0 (by MetMs130). dist(x,y) \neq 0 (by MetMs135).
+qed.
 
-  dist(M(x),M(y)) = dist(N(x),N(y)) for all elements x,y of the domain of M
 
-then M = N.
+Proposition MetMs140. Let M be a metric space and x,y \in M. dist(x,y) = dist(y,x).
 
-Proof. [prove off] qed.
+Proof.
+  Take a set X and a metric d on X such that M = Met_{1}(X,d). Take a,b \in X such that x = M(a) and
+  y = M(b) and dist(x,y) = d(a,b) (by MetMs120). (X,d) satisfies Met3. Hence d(a,b) = d(b,a) (by
+  MetMs030). Indeed d is a function on X \times X. Hence dist(x,y) = dist(M(b),M(a)) = dist(y,x) (by
+  MetMs100).
+qed.
+
+
+Proposition MetMs145. Let M be a metric space and x,y,z \in M. dist(x,z) \leq dist(x,y) + dist(y,z).
+
+Proof.
+  Take a set X and a metric d on X such that M = Met_{1}(X,d). Take a,b \in X such that x = M(a) and
+  y = M(b) and dist(x,y) = d(a,b) (by MetMs120). Take B,c \in X such that y = M(B) and z = M(c)
+  and dist(y,z) = d(B,c) (by MetMs120). Then b = B (by FoundMap092). Indeed M is an injective map
+  and b,B \in dom(M) and M(b) = M(B). Hence dist(y,z) = d(b,c). dist(x,z) = dist(M(a),M(c)) = d(a,c)
+  (by MetMs100).
+  (X,d) satisfies Met4. Thus d(a,c) \leq d(a,b) + d(b,c) (by MetMs040). Indeed d is a function on
+  X \times X. Then we have the thesis.
+qed.
