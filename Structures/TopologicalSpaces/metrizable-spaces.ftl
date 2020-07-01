@@ -3,22 +3,22 @@
 # (Marcel Schütz, 2020)
 #
 
-#[prove off][check off]
+[prove off][check off]
 [read ForTheLib/TopologicalSpaces/continuous-maps.ftl]
 [read ForTheLib/MetricSpaces/continuous-maps.ftl]
-#[prove on][check on]
+[prove on][check on]
 
 
 # 1. The topology of a metric space
 
 Proposition TopMet000. Let M be a metric space. Assume that dist(x,y) = 1 for all x,y \in M such
-that x \neq y. Then every subset of M is open.
+that x \neq y. Then M is discrete.
 
 Proof. [prove off] qed.
 
 
-Proposition TopMet005. Let M be a metric space. Assume that for all open subsets A of M we have
-A = \emptyset or A = M. Then M has at most one element.
+Proposition TopMet005. Let M be a metric space. Assume that M is indiscrete. Then M has at most one
+element.
 
 Proof. [prove off] qed.
 
@@ -34,7 +34,7 @@ M}. Top_{3}(M) = Top_{1}(M,U).
 Proposition TopMet020. Let M be a metric space. Then Top_{3}(M) is a topological space.
 
 Proof.
-  Define U = {A | A is an open subset of M}. Then U is a topology on M (by MetOs040). Hence 
+  Define U = {A | A is an open subset of M}. Then U is a topology on M (by MetOs040). Hence
   Top_{1}(M,U) is a topological space. Top_{3}(M) = Top_{1}(M,U) (by TopMet015).
 qed.
 
@@ -62,47 +62,57 @@ Proposition TopMet035. Let M,N be metric spaces and f be a function from M to N.
 Proof. [prove off] qed.
 
 
-# 2.1 Metrizable spaces
+# 2.1 Identifying metric spaces with topological spaces
 
-Definition TopMet040. Let X be a topological space. X is metrizable iff there is a metric space M
-such that X = Top_{3}(M).
+Axiom TopMet038. Every metric space is a topological space.
 
 
-Proposition TopMet045. Let M be a metric space. Top_{3}(M) is Hausdorff.
+# 3. Metrizable spaces
+
+Signature. Let d,a,r be entities. B_{d}(a,r) is a set.
+
+Axiom. Let X be a topological space and d be a metric on X. Let a \in X and r be a positive real
+number. Then B_{d}(a,r) = {x in X | d(a,x) < r}.
+
+Signature. Let U,d be entities. U is induced by d is a statement.
+
+Axiom TopMetxxx. Let X be a set and U be a topology on X. Let d be a metric on X. U is induced
+by d iff for all A \in U and all x \in A there is a positive real number r such that
+B_{d}(x,r) \subseteq A.
+
+Signature. Let X be a topological space. X is metrizable is a statement.
+
+Axiom TopMet040. Let X be a topological space and U be a class such that U = {A | A is an open
+subset of X}. X is metrizable iff U is induced by some metric on X.
+
+
+Proposition. Every metric space is metrizable.
+
+Proof. [prove off] qed.
+
+
+Axiom. Every metrizable topological space is a metric space.
+
+
+Proposition TopMet045. Every metrizable topological space is Hausdorff.
 
 Proof.
-  Take a topological space X such that X = Top_{3}(M). X is a structure such that dom(X) = M.
+  Let M be a metrizable topological space. Then M is a metric space.
 
-  For all x,y \in X if x \neq y then there are disjoint sets U,V such that U is a neighbourhood of x
+  For all x,y \in M if x \neq y then there are disjoint sets U,V such that U is a neighbourhood of x
   and V is a neighbourhood of y.
   proof.
-    Let x,y \in X. Assume that x \neq y. X is a bijection between M and X (by FoundStr010). Take
-    a,b \in M such that a = X^{-1}(x) and b = X^{-1}(y). Indeed X is a surjective map. Then
-    a \neq b (by FoundMap179b). Take positive real numbers epsilon,delta such that
-    B(a,epsilon) and B(b,delta) are disjoint (by MetOs142). B(a,epsilon) and B(b,delta) are open
-    subsets of M (by MetOs020). Hence X[B(a,epsilon)] and X[B(b,delta)] are open subsets of X.
-    Moreover X[B(a,epsilon)] and X[B(b,delta)] are disjoint sets. a \in B(a,epsilon) and
-    b \in B(b,delta). x = X(a) and y = X(b) (by FoundMap179c). Thus x \in X[B(a,epsilon)] and
-    y \in X[B(b,delta)] (by FoundMap188). Indeed X is a map and B(a,epsilon),B(b,delta) are
-    subclasses of M. Therefore X[B(a,epsilon)] is a neighbourhood of x and X[B(b,delta)] is a
-    neighbourhood of y.
+    Let x,y \in M. Assume that x \neq y.Take positive real numbers epsilon,delta such that
+    B(x,epsilon) and B(y,delta) are disjoint (by MetOs142). B(x,epsilon) is a neighbourhood of x and
+    B(y,delta) is a neighbourhood of y. B(x,epsilon) and B(y,delta) are sets.
   end.
 
-  Hence X satisfies T2 (by TopSep025). Thus X is Hausdorff.
+  M is a topological space. Hence M satisfies T2 (by TopSep025). Thus M is Hausdorff.
 qed.
 
 
-Corollary TopMet050. Any metrizable topological space is Hausdorff.
+Corollary TopMet050. Any metric space is Hausdorff.
 
-Corollary TopMet055. Let X be a metrizable topological space and x be an element of X. Then `{x}` is
-closed.
-
+Corollary TopMet055. Let X be a metrizable topological space and x \in X. Then `{x}` is closed.
 
 Corollary TopMet060. Let M be a metric space and x \in M. Then `{x}` is closed.
-
-Proof.
-  Take a topological space X such that X = Top_{3}(M). X is metrizable. Hence X is Hausdorff. Thus
-  X satisfies T1. X[`{x}`] = `{X(x)}`. X(x) is an element of X. Hence X[`{x}`] is closed (by
-  TopSep045). `{X(x)}` and X are a sets such that every element of `{X(x)}` lies in X. Thus `{X(x)}`
-  is a subset of X (by SetSet081)Then we have the thesis (by TopMet030).
-qed.
