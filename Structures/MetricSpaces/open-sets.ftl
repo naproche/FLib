@@ -3,7 +3,7 @@
 # (Marcel Schütz, 2020)
 #
 
-#[prove off][check  off]
+#[prove off][check off]
 [read ForTheLib/MetricSpaces/metric-spaces.ftl]
 [read ForTheLib/Sets/topologies.ftl]
 #[prove on][check on]
@@ -11,10 +11,10 @@
 
 # 1. Open sets
 
-Axiom MetOs000. Let X be a metric space and x \in X and epsilon be a positive real number.
-B(x,epsilon) is a class such that
+Axiom MetOs000. Let X be a metric space and a \in X and r be a positive real number.
+B(a,r) is a set such that
 
-  B(x,epsilon) = {y in X | dist(x,y) < epsilon}.
+  B(a,r) = {x in X | dist(a,x) < r}.
 
 
 Proposition MetOs001. Let X be a metric space and x \in X. Let epsilon be a positive real number.
@@ -289,7 +289,7 @@ qed.
 
 
 Proposition MetOs130. Let X be a metric space and A be a subset of X. A is open iff A is a
-neighbourhood of every element of A.
+neighbourhood of every point of A.
 
 Proof.
   If A is open then A is a neighbourhood of every element of A.

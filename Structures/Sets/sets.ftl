@@ -10,7 +10,7 @@
 
 # 1. Sets
 
-Signature SetSet000. A set is a notion.
+Signature SetSet000. A set is a class.
 
 Definition SetSet005. SET = {x | x is a set}.
 
@@ -24,8 +24,6 @@ Definition SetSet020. An element is an entity x such that x is an urelement or x
 
 
 # 2. The ZFU axioms
-
-Axiom SetSet025. Every set is a class.
 
 Axiom SetSet030. Every element of any set is an element.
 
@@ -173,7 +171,7 @@ Proof.
       Let u \in x \cap A. Then f(u) = `{u}`. u \in f(u). f(u) \in f[x]. Indeed f[x] =
       {f(v) | v \in x and v \in dom(f)}.
     end.
-  
+
     Hence \bigcup f[x] = x \cap A.
   end.
 qed.

@@ -16,11 +16,13 @@ Let x \neq y stand for x is not equal to y.
 
 # Elementhood
 
-Let x \in y         stand for x is an element of y.
-Let y \ni x         stand for x is an element of y.
-Let x lies in y     stand for x is an element of y.
-Let x belongs to y  stand for x is an element of y.
-Let y contains x    stand for x is an element of y.
+Let x \in y           stand for x is an element of y.
+Let y \ni x           stand for x is an element of y.
+Let x lies in y       stand for x is an element of y.
+Let x belongs to y    stand for x is an element of y.
+Let y contains x      stand for x is an element of y.
+
+Let a point of x stand for an element of x.
 
 Let x \notin y      stand for x is not an element of y.
 
