@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/NumberTheory/integers.ftl]
+[read FLib/Structures/NumberTheory/integers.ftl]
 #[prove on][check on]
 
 

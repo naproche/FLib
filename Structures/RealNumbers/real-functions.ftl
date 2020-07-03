@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/RealNumbers/real-valued-functions.ftl]
+[read FLib/Structures/RealNumbers/real-valued-functions.ftl]
 #[prove on][check on]
 
 

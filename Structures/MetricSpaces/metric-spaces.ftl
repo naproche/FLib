@@ -4,8 +4,8 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Foundations/structures.ftl]
-[read ForTheLib/RealNumbers/real-valued-functions.ftl]
+[read FLib/Structures/Foundations/structures.ftl]
+[read FLib/Structures/RealNumbers/real-valued-functions.ftl]
 #[prove on][check on]
 
 
@@ -13,6 +13,10 @@
 
 Lemma MetMs000. Let X be a set and d be a function on X \times X. Then for all x,y \in X we have
 (x,y) \in dom(d).
+
+Proof.
+  Let x,y \in X. Then (x,y) \in X \times X (by FoundFam415). Indeed X is a class.
+qed.
 
 
 Signature MetMs005. Met1 is an axiom.
@@ -167,6 +171,14 @@ dist(x,y) > 0.
 
 Proof.
   dist(x,y) \geq 0 (by MetMs130). dist(x,y) \neq 0 (by MetMs135).
+qed.
+
+
+Corollary MetMs138. Let M be a metric space and x,y \in M. Assume that x \neq y. Then dist(x,y) is a
+positive real number.
+
+Proof.
+  dist(x,y) is a real number such that dist(x,y) > 0.
 qed.
 
 

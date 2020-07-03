@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Sets/cardinality.ftl]
+[read FLib/Structures/Sets/cardinality.ftl]
 #[prove on][check on]
 
 

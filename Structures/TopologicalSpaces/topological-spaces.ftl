@@ -4,8 +4,8 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Sets/topologies.ftl]
-[read ForTheLib/Foundations/structures.ftl]
+[read FLib/Structures/Sets/topologies.ftl]
+[read FLib/Structures/Foundations/structures.ftl]
 #[prove on][check on]
 
 
@@ -29,24 +29,28 @@ Axiom TopTop025. TOP_{1} is a class such that TOP_{1} = {(X,U) | X is a set and 
 
 Signature TopTop030. Top_{1} is a bijection between TOP_{1} and TOP.
 
-Axiom TopTop035. Let X be a set and U be a topology on X. Then dom(Top_{1}(X,U)) = X.
+Axiom TopTop052. Let X be a set and U be a topology on X. (X,U)_{TOP} = Top_{1}(X,U).
 
 
-Lemma TopTop040. Let X be a set and U be a topology on X. Then Top_{1}(X,U) is a topological space.
+Axiom TopTop035. Let X be a set and U be a topology on X. Then dom((X,U)_{TOP}) = X.
 
-Proof.
-  (X,U) lies in the domain of Top_{1} (by TopTop025). Indeed dom(Top_{1}) = TOP_{1}. The codomain of
-  Top_{1} is TOP. Hence Top_{1}(X,U) lies in TOP. Thus Top_{1}(X,U) lies in TOP. Every element of
-  TOP is a topological spaces. Then we have the thesis.
+
+Lemma TopTop040. Let X be a set and U be a topology on X. Then (X,U)_{TOP} is a topological space.
+
+Proof.  
+  (X,U)_{TOP} = Top_{1}(X,U). (X,U) lies in the domain of Top_{1} (by TopTop025). Indeed
+  dom(Top_{1}) = TOP_{1}. The codomain of Top_{1} is TOP. Hence Top_{1}(X,U) lies in TOP. Thus
+  Top_{1}(X,U) lies in TOP. Every element of TOP is a topological spaces. Then we have the thesis.
 qed.
 
 
 Lemma TopTop045. Let X be a set and U be a topology on X. Let x be an element of X. Then
-Top_{1}(X,U)(x) is an element of Top_{1}(X,U).
+(X,U)_{TOP}(x) is an element of (X,U)_{TOP}.
 
 Proof.
-  Top_{1}(X,U) is a topological space such that X is the domain of Top_{1}(X,U). Hence x lies in the
-  domain of Top_{1}(X,U). Top_{1}(X,U) is a structure. Then we have the thesis (by FoundStr020).
+  (X,U)_{TOP} = Top_{1}(X,U). Top_{1}(X,U) is a topological space such that X is the domain of
+  Top_{1}(X,U). Hence x lies in the domain of Top_{1}(X,U). Top_{1}(X,U) is a structure. Then we
+  have the thesis (by FoundStr020).
 qed.
 
 

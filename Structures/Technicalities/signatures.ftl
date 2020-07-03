@@ -3,8 +3,8 @@
 # (Marcel Schütz, 2020)
 #
 
-[read ForTheLib/Technicalities/synonyms.ftl]
-[read ForTheLib/Technicalities/prelude.ftl]
+[read FLib/Structures/Technicalities/synonyms.ftl]
+[read FLib/Structures/Technicalities/prelude.ftl]
 
 
 # 1. Operations
@@ -239,6 +239,8 @@ Signature. Let x be an entity. x is discrete is a statement.
 
 Signature. Let x be an entity. x is indiscrete is a statement.
 
+Signature. Let x be an entity. x is abelian is a statement.
+
 Signature. Let x be an entity. x is monotone is a statement.
 Let x is monotonic stand for x is monotone.
 Let x is isotone stand for x is monotonic.
@@ -273,6 +275,8 @@ Signature. Let x be an entity. x is clopen is a statement.
 Signature. Let x be an entity. x is invertible is a statement.
 
 Signature. Let x be an entity. x is bounded is a statement.
+
+Signature. Let x,y be entities. x and y are isomorphic is a statement.
 
 
 # 4. Definitions

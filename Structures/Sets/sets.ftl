@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Foundations/families.ftl]
+[read FLib/Structures/Foundations/families.ftl]
 #[prove on][check on]
 
 

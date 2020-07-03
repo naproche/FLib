@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Sets/sets.ftl]
+[read FLib/Structures/Sets/sets.ftl]
 #[prove on][check on]
 
 
@@ -111,14 +111,14 @@ Proposition SetCard079. Let x be an element. `{x}` \sim `{0}`.
 Proof. [prove off] qed.
 
 
-Proposition SetCard080. Let x be a set. x has at most one element iff x = \emptyset or x = `{a}` for
-some element a.
+Proposition SetCard080. Let x be a set. x has at most one element iff x has no element or x = {a}
+for some element a of x.
 
 Proof. [prove off] qed.
 
 
-Proposition SetCard081. Let x be a set. x has at most two elements iff x = \emptyset or x = `{a}`
-for some element a or x = `{a,b}` for some elements a,b.
+Proposition SetCard081. Let x be a set. x has at most two elements iff x has no element or x = {a}
+for some element a of x or x = {a,b} for some elements a,b of x.
 
 Proof. [prove off] qed.
 

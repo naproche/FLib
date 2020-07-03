@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/MetricSpaces/open-sets.ftl]
+[read FLib/Structures/MetricSpaces/open-sets.ftl]
 #[prove on][check on]
 
 

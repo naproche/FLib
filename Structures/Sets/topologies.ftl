@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Sets/set-systems.ftl]
+[read FLib/Structures/Sets/set-systems.ftl]
 #[prove on][check on]
 
 

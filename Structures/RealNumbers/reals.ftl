@@ -4,8 +4,8 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/NumberTheory/rationals.ftl]
-[read ForTheLib/Sets/set-systems.ftl]
+[read FLib/Structures/NumberTheory/rationals.ftl]
+[read FLib/Structures/Sets/set-systems.ftl]
 #[prove on][check on]
 
 
@@ -165,6 +165,17 @@ Axiom AnaRe185. Let x,y be real numbers. Assume that y \neq 0. Then x/y is a rea
 Axiom AnaRe190. Let x,y be real numbers. Assume that y \neq 0. Then
 
   (x/y) \cdot y = x.
+
+
+Proposition AnaRe192. 1/2 is a positive real number such that 0 < 1/2 < 1.
+
+Proof. [prove off] qed.
+
+
+Proposition AnaRe193. Let x be a positive real number. then x/2 is a positive real number such that
+x/2 < x.
+
+Proof. [prove off] qed.
 
 
 

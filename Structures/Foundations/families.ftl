@@ -4,8 +4,8 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/NumberTheory/naturals.ftl]
-[read ForTheLib/Foundations/maps.ftl]
+[read FLib/Structures/NumberTheory/naturals.ftl]
+[read FLib/Structures/Foundations/maps.ftl]
 #[prove on][check on]
 
 
@@ -111,6 +111,8 @@ Axiom FoundFam110. Let x0,x1,x2 be entities. (x0,x1,x2)(1) = x0.
 Axiom FoundFam115. Let x0,x1,x2 be entities. (x0,x1,x2)(2) = x1.
 Axiom FoundFam120. Let x0,x1,x2 be entities. (x0,x1,x2)(3) = x2.
 
+Let f(a,b,c) stand for f((a,b,c)).
+
 
 # 3.1.3 4-tuple
 
@@ -124,6 +126,8 @@ Axiom FoundFam130. Let x0,x1,x2,x3 be entities. (x0,x1,x2,x3)(1) = x0.
 Axiom FoundFam135. Let x0,x1,x2,x3 be entities. (x0,x1,x2,x3)(2) = x1.
 Axiom FoundFam140. Let x0,x1,x2,x3 be entities. (x0,x1,x2,x3)(3) = x2.
 Axiom FoundFam145. Let x0,x1,x2,x3 be entities. (x0,x1,x2,x3)(4) = x3.
+
+Let f(a,b,c,d) stand for f((a,b,c,d)).
 
 
 # 3.1.4 5-tuple
@@ -142,6 +146,8 @@ Axiom FoundFam165. Let x0,x1,x2,x3,x4 be entities. (x0,x1,x2,x3,x4)(3) = x2.
 Axiom FoundFam170. Let x0,x1,x2,x3,x4 be entities. (x0,x1,x2,x3,x4)(4) = x3.
 Axiom FoundFam175. Let x0,x1,x2,x3,x4 be entities. (x0,x1,x2,x3,x4)(5) = x4.
 
+Let f(a,b,c,d,e) stand for f((a,b,c,d,e)).
+
 
 # 3.1.5 6-tuple
 
@@ -156,6 +162,8 @@ Axiom FoundFam195. Let x0,x1,x2,x3,x4,x5 be entities. (x0,x1,x2,x3,x4,x5)(3) = x
 Axiom FoundFam200. Let x0,x1,x2,x3,x4,x5 be entities. (x0,x1,x2,x3,x4,x5)(4) = x3.
 Axiom FoundFam205. Let x0,x1,x2,x3,x4,x5 be entities. (x0,x1,x2,x3,x4,x5)(5) = x4.
 Axiom FoundFam210. Let x0,x1,x2,x3,x4,x5 be entities. (x0,x1,x2,x3,x4,x5)(6) = x5.
+
+Let f(a,b,c,d,e,g) stand for f((a,b,c,d,e,g)).
 
 
 # 3.1.6 7-tuple

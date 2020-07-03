@@ -4,8 +4,8 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/MetricSpaces/metric-spaces.ftl]
-[read ForTheLib/Sets/topologies.ftl]
+[read FLib/Structures/MetricSpaces/metric-spaces.ftl]
+[read FLib/Structures/Sets/topologies.ftl]
 #[prove on][check on]
 
 
@@ -271,7 +271,7 @@ qed.
 # 3. Neighbourhoods
 
 #[prove off][check off]
-[read ForTheLib/Sets/filters.ftl]
+[read FLib/Structures/Sets/filters.ftl]
 #[prove on][check on]
 
 Axiom MetOs120. Let X be a metric space and x \in X. Let U be an entity. U is a neighbourhood of

@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/Technicalities/signatures.ftl]
+[read FLib/Structures/Technicalities/signatures.ftl]
 #[prove on][check on]
 
 

@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/TopologicalSpaces/continuous-maps.ftl]
+[read FLib/Structures/TopologicalSpaces/continuous-maps.ftl]
 #[prove on][check on]
 
 
@@ -13,7 +13,7 @@
 Axiom TopProd000. Let X,Y be sets. Let U be a topology on X and V be a topology on Y. Let W be a
 class such that W = {A \times B | (A,B) \in U \times V}. Then
 
-  Top_{1}(X,U) \times Top_{1}(Y,V) = Top_{1}(X \times Y, W).
+  (X,U)_{TOP} \times (Y,V)_{TOP} = (X \times Y, W)_{TOP}.
 
 
 Proposition TopProd002. Let X,Y be topological spaces. Then X \times Y is a topological space.

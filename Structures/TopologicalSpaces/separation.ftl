@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/TopologicalSpaces/topological-spaces.ftl]
+[read FLib/Structures/TopologicalSpaces/topological-spaces.ftl]
 #[prove on][check on]
 
 

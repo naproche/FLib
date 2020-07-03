@@ -4,7 +4,7 @@
 #
 
 #[prove off][check off]
-[read ForTheLib/TopologicalSpaces/separation.ftl]
+[read FLib/Structures/TopologicalSpaces/separation.ftl]
 #[prove on][check on]
 
 
