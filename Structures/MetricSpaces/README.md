@@ -5,7 +5,7 @@ The files in this directory introduce metric spaces
 
 ## Metric spaces
 
-The files _metric-spaces.ftl_ defines metrics on a set and introduces metric
+The file _metric-spaces.ftl_ defines metrics on a set and introduces metric
 spaces as mathematical structures and provides mechanisms for constructing
 metric spaces.
 
