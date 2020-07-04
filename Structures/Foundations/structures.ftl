@@ -72,6 +72,29 @@ Proof.
 qed.
 
 
+Proposition FoundStr032. Let X be a structure and x \in X. Then x = X(X^{-1}(x)).
+
+Proof.
+  X is a bijection between dom(X) and X. Hence the thesis (by FoundMap179c).
+qed.
+
+
+Proposition FoundStr033. Let X be a structure and x \in dom(X). Then x = X^{-1}(X(x)).
+
+Proof.
+  X is a bijection between dom(X) and X. Hence the thesis (by FoundMap179d).
+qed.
+
+
+Proposition FoundStr034. Let X be a structure and x be an entity such that X(x) \in X. Then
+X^{-1}(X(x)) \in dom(X).
+
+Proof.
+  X(x) lies in the domain of X^{-1}. X^{-1} is a bijection between X and dom(X). Hence dom(X) is the
+  codomain of X^{-1}.
+qed.
+
+
 # 2. Small and large structures
 
 Definition FoundStr035. A small structure is a structure that is a set.
@@ -79,10 +102,7 @@ Definition FoundStr035. A small structure is a structure that is a set.
 Definition FoundStr036. A large structure is a structure that is a proper class.
 
 
-# 3. Maps between structures
+# 3. Abuse of notation
 
-Axiom FoundStr047. Let X be a structure and f be a map such that dom(f) = X. Let x be an element of
-the domain of X. Then f(x) = f(X(x)). # Do we really need that?!
-
-Axiom FoundStr048. Let X be a structure and f be a map such that dom(f) = X. Let A be a
-subclass of the domain of X. Then f[A] = f[X[A]].
+Axiom FoundStr047. Let X,Y be structures such that dom(X) \subseteq Y. Let phi be a map such that
+dom(phi) = Y. Then phi(x) = phi(X^{-1}(x)) for all x \in X.
