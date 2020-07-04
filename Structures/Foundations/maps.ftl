@@ -522,6 +522,13 @@ Axiom FoundMap260. Any function is a map f such that codom(f) = range(f).
 Definition FoundMap265. Let x,y be entities. A function from x to y is a function f such that
 dom(f) = x and range(f) \subseteq y.
 
+
+Proposition FoundMap266. Let x,y be an entity and f be a function. f is a function from x to y iff
+dom(f) = x and f(u) \in y for all u \in x.
+
+Proof. [prove off] qed.
+
+
 Definition FoundMap270. Let x be an entity. A function of x is a function f such that the domain of
 f is equal to x.
 
