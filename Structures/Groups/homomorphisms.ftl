@@ -43,16 +43,15 @@ qed.
 Proposition GrpHom020. Let G be a group. id_{G} is a group homomorphism between G and G.
 
 Proof.
-
+  id_{G} is a map from G to G. For all x,y \in G we have id_{G}(x \cdot y) =
+  id_{G}(x) \cdot id_{G}(y). Indeed x \cdot y \in G for all x,y \in G.
 qed.
 
 
 Proposition GrpHom025. Let G,H,K be groups. Let phi be a group homomorphism between G and H and psi
 be a group homomorphism between H and K. Then psi \circ phi is a group homomorphism between H and K.
 
-Proof.
-
-qed.
+Proof. [prove off] qed.
 
 
 # 1.2 Properties of homomorphisms between abelian groups
