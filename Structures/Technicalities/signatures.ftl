@@ -79,6 +79,9 @@ Let the codomain of x stand for codom(x).
 Signature. Let x be an entity. im(x) is a notion.
 Let the image of x stand for im(x).
 
+Signature. Let x be an entity. ker(x) is a notion.
+Let the kernel of x stand for ker(x).
+
 Signature. Let x be an entity. succ(x) is a notion.
 
 Signature. Let x be an entity. neg(x) is a notion.
