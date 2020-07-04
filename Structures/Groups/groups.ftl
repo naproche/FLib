@@ -255,3 +255,10 @@ Proof.
   Thus (y^{-1} \cdot x^{-1}) \cdot (x \cdot y) = 1_{G}. Hence the thesis (by GrpGrp155). Indeed
   y^{-1} \cdot x^{-1}, x \cdot y \in G.
 qed.
+
+
+Proposition GrpGrp180. Let G be a group. 1_{G}^{-1} = 1_{G}.
+
+Proof.
+  1_{G} \cdot 1_{G}^{-1} = 1_{G}.
+qed.
