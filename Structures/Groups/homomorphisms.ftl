@@ -14,6 +14,10 @@ Definition GrpHom000. Let G,H be groups. A group homomorphism between G and H is
 H such that phi(x \cdot y) = phi(x) \cdot phi(y) for all x,y \in G.
 
 
+Lemma GrpHom002. Let G,H be groups and phi be a group homomorphism between G and H. Then phi is a
+map.
+
+
 # 1.1 Properties of homomorphisms between groups
 
 Proposition GrpHom005. Let G,H be groups and phi be a group homomorphism between G and H. Let
@@ -163,5 +167,11 @@ Proof. [prove off] qed.
 
 Proposition GrpHom155. Let G,H,K be groups. If G and H are isomorphic and H and K are isomorphic
 then G and K are isomorphic.
+
+Proof. [prove off] qed.
+
+
+Proposition GrpHom160. Let G be a group that has exactly one element. Then G and the trivial group
+are isomorphic.
 
 Proof. [prove off] qed.
