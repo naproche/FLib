@@ -119,6 +119,7 @@ qed.
 # 1.7 Identity
 
 Axiom FoundMap065. Let X be an entity. id_{X} is a map from X to X.
+Let the identity map on X stand for id_{X}.
 
 
 Lemma FoundMap070. Let X be an entity. The domain of id_{X} is equal to X.
