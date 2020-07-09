@@ -105,6 +105,8 @@ Definition SetCard077. Let x be a set. x has at most one element iff x \preceq `
 
 Definition SetCard078. Let x be a set. x has at most two elements iff x \preceq `{0,1}`.
 
+Definition SetCarc078b. Let x be a set. x has exactly one element iff x \sim `{0}`.
+
 
 Proposition SetCard079. Let x be an element. `{x}` \sim `{0}`.
 
@@ -119,6 +121,11 @@ Proof. [prove off] qed.
 
 Proposition SetCard081. Let x be a set. x has at most two elements iff x has no element or x = {a}
 for some element a of x or x = {a,b} for some elements a,b of x.
+
+Proof. [prove off] qed.
+
+
+Proposition SetCard081b. Let x be a set. x has exactly one element iff x = {a} for some entity a.
 
 Proof. [prove off] qed.
 

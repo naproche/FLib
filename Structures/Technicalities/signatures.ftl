@@ -158,9 +158,6 @@ Signature. Let x be an entity. A neighbourhood of x is a notion.
 
 Signature. Let x be an entity. An open neighbourhood of x is a notion.
 
-Signature. Let x be an entity. A substructure of x is a notion.
-Let a subspace of x stand for a substructure of x.
-
 Signature. Let x be an entity. An interiorpoint of x is a notion.
 
 Signature. Let x be an entity. A boundarypoint of x is a notion.
@@ -218,6 +215,9 @@ Let x divides y stand for divides(x,y).
 
 Signature. Let x,y be entities. equiv(x,y) is a statement.
 Let x \equiv y stand for equiv(x,y).
+
+Signature. Let x,y be entities. triangleleft(x,y) is a statement.
+Let x \triangleleft y stand for triangleleft(x,y).
 
 
 Signature. Let x,y be entities. x is continuous at y is a statement.
@@ -280,6 +280,7 @@ Signature. Let x be an entity. x is invertible is a statement.
 Signature. Let x be an entity. x is bounded is a statement.
 
 Signature. Let x,y be entities. x and y are isomorphic is a statement.
+Let x \cong y stand for x and y are isomorphic.
 
 
 # 4. Definitions

@@ -109,6 +109,17 @@ Proposition SetSet075. Let x be an element. `{x}` = `{x,x}`.
 Corollary SetSet080. Let x be an element. `{x}` is a set.
 
 
+Corollary SetSet077. Let x be an element and y be a class. Assume that y = {x}. Then y is a set.
+
+Proof. [prove off] qed.
+
+
+Corollary SetSet078. Let x,y be sets and f be a bijection between x and y. Assume that x = {u} for
+some entity u. Then y = {v} for some entity v.
+
+Proof. [prove off] qed.
+
+
 Proposition SetSet080. Let x be a set and y be a class. y is the powerset of x iff y =
 {a | a is a subset of x}.
 
@@ -190,6 +201,12 @@ Proof.
 qed.
 
 
+Proposition SetSet091. Let x,y be sets and f be a map from x to y. Let a be a subset of x. Then f[a]
+is a subset of y.
+
+Proof. [prove off] qed.
+
+
 Theorem SetSet095. NAT is a set.
 
 
@@ -204,6 +221,12 @@ Proof. [prove off] qed.
 
 
 Proposition SetSet110. Let x,y be sets. Then x^{y} is a set.
+
+Proof. [prove off] qed.
+
+
+Proposition SetSet112. Let x,y be sets. Let F be a class such that F = {f | f is a map from x to y}.
+Then F is a set.
 
 Proof. [prove off] qed.
 
