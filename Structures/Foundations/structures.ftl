@@ -102,7 +102,55 @@ Definition FoundStr035. A small structure is a structure that is a set.
 Definition FoundStr036. A large structure is a structure that is a proper class.
 
 
-# 3. Abuse of notation
+Proposition FoundStr037. Let X be a small structure. Then the domain of X is a set.
 
-Axiom FoundStr047. Let X,Y be structures such that dom(X) \subseteq Y. Let phi be a map such that
-dom(phi) = Y. Then phi(x) = phi(X^{-1}(x)) for all x \in X.
+Proof. [prove off] qed.
+
+
+Proposition FoundStr038. Let X be a small structure and A be a subset of X. Then X^{-1}[A] is a
+subset of the domain of X.
+
+Proof. [prove off] qed.
+
+
+# 3. Substructures
+
+Definition FoundStr040. Let X be a structure. A substructure of X is a structure Y such that the
+domain of Y is a subclass of the domain of X.
+
+Definition FoundStr045. Let X be a structure and Y be a substructure of X. The inclusion of Y into X
+is the map i from Y to X such that i(y) = X(Y^{-1}(y)) for all y \in Y.
+
+
+Proposition FoundStr050. Let X be a structure and Y be a substructure of X. The inclusion of Y into
+X is an injective map.
+
+Proof. [prove off] qed.
+
+
+Proposition FoundStr055. Every structure X is a substructure of X.
+
+Proof. [prove off] qed.
+
+
+Proposition FoundStr060. Let X,Y be structures such that dom(X) = dom(Y). Then Y is a substructure
+of X.
+
+Proof. [prove off] qed.
+
+
+# 3.1 Abuse of notation
+
+Axiom FoundStr070. Let X be a structure and Y be a substructure of X. Let i be the inclusion of Y
+into X. Let f be a map such that dom(f) = X. Then f(y) = f(i(y)) for all y \in Y.
+
+
+# 4. Constructing new structures
+
+Axiom FoundStr100. Let X,Y be structures. Then X \times Y is a structure such that dom(X \times Y) =
+dom(X) \times dom(Y).
+
+Proposition FoundStr105. Let X be a structure and Y be a substructure of X. Then Y \times Y is a
+substructure of X \times X.
+
+Proof. [prove off] qed.
