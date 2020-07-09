@@ -3,153 +3,97 @@
 # (Marcel Schütz, 2020)
 #
 
-[prove off][check off]
+#[prove off][check off]
 [read FLib/Structures/Groups/homomorphisms.ftl]
-[prove on][check on]
+#[prove on][check on]
 
 
 # 1. Subgroups
 
-Definition GrpSub000. Let G be a group. A subgroup of G is a group H such that the domain of H is a
-subset of G.
+Definition GrpSub000. Let G be a group. A subgroup of G is a substructure H of G that is a group
+such that the inclusion of H into G is a group homomorphism between H and G.
+
+
+Axiom GrpSub005. Let G,H be groups. G < H iff G is a subgroup of H.
 
 
 # 1.1 Constructing subgroups
 
-Proposition GrpSub001. Let G be a group and A be a nonempty subset of G. Assume that for all
-x,y \in A we have x \cdot y \in A. Assume that for all x \in A we have x^{-1} \in A. Then A is the
-domain of some subgroup of G.
-
-Proof.
-  A is a set.
-
-  1_{G} is an element of A.
-  proof.
-    Take an element a of A. Then a^{-1} \in A. Hence a \cdot a^{-1} \in A. a \cdot a^{-1} = 1_{G}.
-    Indeed a and a^{-1} are elements of G.
-  end.
-
-  Define mul((x,y)) = x \cdot y for (x,y) in A \times A.
-  Define inv(x) = x^{-1} for x in A.
-
-  For all z \in A \times A we have mul(z) \in A.
-  proof.
-    Let z \in A \times A. Take x,y \in A such that z = (x,y) (by FoundFam380). Indeed A is a class.
-    Then mul(z) = mul(x,y) = x \cdot y.
-  end.
-
-  Hence mul is a function from A \times A to A (by FoundMap266). Moreover for all x \in A we have
-  inv(x) \in A. Thus inv is a function from A to A (by FoundMap266). Then (A, mul, inv, 1_{G})
-  satisfies GRP1 (by GrpGrp005).
-
-  For all x,y,z \in A we have mul(x,mul(y,z)) = mul(mul(x,y),z).
-  proof.
-    Let x,y,z \in A. mul(x,mul(y,z)) = x \cdot (y \cdot z). mul(mul(x,y),z) = (x \cdot y) \cdot z.
-    x \cdot (y \cdot z) = (x \cdot y) \cdot z (by GrpGrp125). Indeed x,y,z \in G.
-  end.
-
-  Hence (A, mul, inv, 1_{G}) satisfies GRP2 (by GrpGrp015).
-  proof. [prove off] end. # Naproche-SAD cannot prove it...
-
-  For all x \in A we have mul(x,1_{G}) = x = mul(1_{G},x).
-  proof.
-    Let x \in A. mul(x,1_{G}) = x \cdot 1_{G} and mul(1_{G},x) = 1_{G} \cdot x.
-  end.
-
-  Hence (A, mul, inv, 1_{G}) satisfies GRP3 (by GrpGrp025).
-  proof. [prove off] end. # Naproche-SAD cannot prove it...
-
-  For all x \in A we have mul(x,inv(x)) = 1_{G} = mul(inv(x),x).
-  proof.
-    Let x \in A. mul(x,inv(x)) = x \cdot x^{-1}. mul(inv(x),x) = x^{-1} \cdot x. x \in G. Hence the
-    thesis (by GrpGrp135).
-  end.
-
-  Thus (A, mul, inv, 1_{G}) satisfies GRP4 (by GrpGrp035).
-
-  Then (A, mul, inv, 1_{G}) lies in GRP_{1} (by GrpGrp055). Hence we can take a group H such that
-  H = (A, mul, inv , 1_{G})_{GRP} (by GrpGrp075). Then A is the domain of H.
-qed.
-
-
-Proposition GrpSub002. Let G be a group and A be a nonempty subset of G. Assume that for all
-x,y \in A we have x \cdot y^{-1} \in A. Then A is the domain of some subgroup of G.
+Proposition GrpSub010. Let G be a group and A be a nonempty subset of G. Assume that for all
+x,y \in A we have x \cdot y \in A. Assume that for all x \in A we have x^{-1} \in A. Then there is a
+subgroup H of G such that A is the image of H under the inclusion of H into G.
 
 Proof. [prove off] qed.
 
 
-# 1.2 The inclusion map of subgroups
-
-Axiom GrpSub005. Let G be a group and H be a subgroup of G. Let i be the inclusion of H. Then i is a
-map from H to G such that i(x) = H^{-1}(x) for all x \in H.
-
-
-Proposition GrpSub007. Let G be a group and H be a subgroup of G. Let i be the inclusion of H. Let
-x \in H. Then i(x) \in dom(H).
+Proposition GrpSub015. Let G be a group and A be a nonempty subset of G. Assume that for all
+x,y \in A we have x \cdot y^{-1} \in A. Then there is a subgroup H of G such that A is the image of
+H under the inclusion of H into G.
 
 Proof.
-  i(x) = H^{-1}(x) (by GrpSub005). x is an element of dom(H^{-1}).
-qed.
-
-
-Proposition GrpSub010. Let G be a group and H be a subgroup of G. Then the inclusion of H is a group
-monomorphism between H and G.
-
-Proof.
-  Let us show that H^{-1}(x \cdot y) = H^{-1}(x) \cdot H^{-1}(y) for all x,y \in H.
-    [prove off]
-  end.
-
-  Take a map i from H to G that is the inclusion of H. Then i(x) = H^{-1}(x) for all x \in H (by
-  GrpSub005). i(x \cdot y) = i(x) \cdot i(y) for all x,y \in H (by GrpSub000). Indeed x \cdot y is
-  an element of H for all x,y \in H. Hence i is a group homomorphism between H and G (by GrpHom000,
-  GrpSub005). Indeed H is a group.
-
-  For all x,y \in dom(i) if i(x) = i(y) then x = y.
+  1_{G} \in A.
   proof.
-    Let x,y \in dom(i). Then x,y \in H. Assume that i(x) = i(y). Then H^{-1}(x) = H^{-1}(y) (by
-    GrpSub005). H^{-1} is an injective map. Hence the thesis (by FoundMap092). Indeed x and y are
-    elements of dom(H^{-1}).
+    Take an element x of A. Then x \cdot x^{-1} \in A. x and x^{-1} are elements of G. Hence
+    x \cdot x^{-1} = 1_{G}.
   end.
 
-  Thus i is injective (by FoundMap092). Indeed i is a map.
+  For all x \in A we have x^{-1} \in A.
+  proof.
+    Let x \in A. Then 1_{G} \cdot x^{-1} \in A. x^{-1} lies in G. Thus 1_{G} \cdot x^{-1} = x^{-1}.
+  end.
+
+  For all x,y \in A we have x \cdot y \in A.
+  proof.
+    Let x,y \in A. Then y^{-1} \in A. Hence x \cdot (y^{-1})^{-1} is an element of A. (y^{-1})^{-1}
+    = y. Indeed y lies in G.
+  end.
+
+  Then we have the thesis (by GrpSub010).
 qed.
 
 
-Corollary GrpSub015. Let G be a group and H be a subgroup of G. Let i be the inclusion of H. Let
-x \in H. Then i(x) \in G.
+# 2. The inclusion map
+
+Lemma GrpSub020. Let G be a group and H be a subgroup of G. The inclusion of H into G is an
+injective map.
 
 Proof.
-  G and H are groups. i is a group homomorphism between H and G (by GrpSub010, GrpHom075). Hence the
-  thesis (by GrpHom005).
+  G is a structure and H is a substructure of G. Hence the thesis (by FoundStr050).
 qed.
 
 
-Corollary GrpSub020. Let G be a group and H be a subgroup of G. Let i be the inclusion of H. Let
-x,y \in H. Then i(x \cdot y) = i(x) \cdot i(y).
+Lemma GrpSub025. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into G.
+Then i(x) \in G for all x \in H.
+
+
+Lemma GrpSub030. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into
+G. Then i(x \cdot y) = i(x) \cdot i(y) for all x,y \in H.
 
 Proof.
-  G and H are groups. i is a group homomorphism between H and G (by GrpSub010, GrpHom075). Hence the
-  thesis (by GrpHom000).
+  Let x,y \in H. G and H are groups and i is a group homomorphism between H and G. Hence the thesis
+  (by GrpHom000).
 qed.
 
 
-Corollary GrpSub025. Let G be a group and H be a subgroup of G. Let i be the inclusion of H. Then
+Lemma GrpSub035. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into G.
+Then i(x^{-1}) = i(x)^{-1} for all x \in H.
+
+Proof.
+  Let x \in H. G and H are groups and i is a group homomorphism between H and G. Hence the thesis
+  (by GrpHom015).
+qed.
+
+
+Lemma GrpSub040. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into G. Then
 i(1_{H}) = 1_{G}.
 
 Proof.
-  G and H are groups. i is a group homomorphism between H and G (by GrpSub010, GrpHom075). Hence the
-  thesis (by GrpHom010).
+  G and H are groups and i is a group homomorphism between H and G. Hence the thesis (by GrpHom010).
 qed.
 
 
-Corollary GrpSub030. Let G be a group and H be a subgroup of G. Let i be the inclusion of H. Let
-x \in H. Then i(x^{-1}) = i(x)^{-1}.
-
-Proof.
-  G and H are groups. i is a group homomorphism between H and G (by GrpSub010, GrpHom075). Hence the
-  thesis (by GrpHom015).
-qed.
+Lemma GrpSub045. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into G. Then
+i[H] = {i(x) | x \in H}.
 
 
 Proposition GrpSub050. Every subgroup of any abelian group is abelian.
@@ -159,62 +103,219 @@ Proof.
 
   For all x,y \in H we have x \cdot y = y \cdot x.
   proof.
-    Let x,y \in H. Take a map i from H to G that is the inclusion of H. i(x) and i(y) lie in G.
-    Hence i(x \cdot y) = i(x) \cdot i(y) = i(y) \cdot i(x) = i(y \cdot x) (by GrpSub020). i is
-    injective. Hence the thesis (by FoundMap092). Indeed i is a map and x \cdot y, y \cdot x are
-    elements of the domain of i.
+    Let x,y \in H. Take a map i from H to G that is the inclusion of H into G. i(x) and i(y) are
+    elements of G. Hence i(x \cdot y) = i(x) \cdot i(y) = i(y) \cdot i(x) = i(y \cdot x) (by
+    GrpSub030). i is injective. Hence the thesis (by FoundMap092). Indeed i is a map and x \cdot y,
+    y \cdot x are elements of the domain of i.
+  end.
+
+  H is a group. Hence the thesis (by GrpAb000).
+qed.
+
+
+Proposition GrpSub055. Let G be a group. Then the inclusion of G into G is the identity map on G.
+
+Proof.
+  Take a map i that is the inclusion of G into G. G is the domain of i and G is the codomain of G.
+  For all x \in G we have i(x) = x. Moreover for all x \in G we have id_{G}(x) = x. G is the domain
+  of id_{G} and G is the codomain of G. Hence i and id_{G} are maps such that dom(i) = dom(id_{G})
+  and codom(i) = codom(id_{G}). Furthermore for all x \in dom(i) we have i(x) = id_{G}(x). Then we
+  have the thesis (by FoundMap040).
+qed.
+
+
+# 2.1 Abuse of notation
+
+Axiom GrpSubxxx. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into G. Then
+g \cdot h = g \cdot i(h) for all g \in G and all h \in H.
+
+Axiom GrpSubxxx. Let G be a group and H be a subgroup of G. Let i be the inclusion of H into G. Then
+h \cdot g = i(h) \cdot g for all g \in G and all h \in H.
+
+
+# 3. The trivial subgroups
+
+Proposition GrpSub060. Every group G is a subgroup of G.
+
+Proof.
+  Let G be a group. G is a structure. Hence G is a substructure of G (by FoundStr055). Take a map i
+  from G to G that is the inclusion of G into G.
+
+  For all x,y \in G we have i(x \cdot y) = i(x) \cdot i(y).
+  proof.
+    Let x,y \in G. i(x \cdot y) = G(G^{-1}(x \cdot y)) = x \cdot y.
+  end.
+
+  Hence i is a group homomorphism between G and G (by GrpHom000).
+qed.
+
+
+Proposition GrpSub065. Let G be a group. There is a subgroup H of G such that H = {1_{H}}.
+
+Proof.
+  Define A = {1_{G}}. A is a set (by SetSet077). Indeed 1_{G} is an element. Hence A is a nonempty
+  subset of G. Indeed every element of A lies in G. 1_{G}^{-1} = 1_{G}. Hence 1_{G} \cdot 1_{G}^{-1}
+  = 1_{G}. Thus for all x,y \in A we have x \cdot y^{-1} \in A. Therefore we can take a subgroup H
+  of G such that A is the image of H under the inclusion of H into G (by GrpSub015). Take a map i
+  from H to G that is the inclusion of H into G.
+
+  Every element of H is equal to 1_{H}.
+  proof.
+    Let x \in H. 1_{H} is an element of H and i[H] = {1_{G}}. Hence i(1_{H}) = i(x) (by GrpSub045).
+    i is an injective map. Thus x = 1_{H} (by FoundMap092). Indeed x and 1_{H} are elements of the
+    domain of i.
   end.
 qed.
 
 
-# 3. Abuse of notation.
-
-Proposition GrpSub070. Let G be a group and H be a subgroup of G. Let phi be a map such that
-dom(phi) = G. Let i be the inclusion of H. Then phi(x) = phi(i(x)) for all x \in H.
+Corollary GrpSub070. Every group has a subgroup H such that H and the trivial group are isomorphic.
 
 Proof.
-  Let x \in H. G and H are structures. dom(H) \subseteq G. Hence phi(x) = phi(H^{-1}(x)) (by
-  FoundStr047). i(x) = H^{-1}(x) (by GrpSub005).
-qed.
-
-
-Corollary GrpSub075. Let G,K be groups and H be a subgroup of G. Let phi be a group homomorphism
-between G and K. Let i be the inclusion of H. Then phi(x) = phi(i(x)) for all x \in H.
-
-Proof.
-  phi is a map such that dom(phi) = G. Hence the thesis (by GrpSub070).
+  Let G be a group. Take a subgroup H of G such that H = {1_{H}} (by GrpSub065). Then H has exactly
+  one element (by SetCard081b). Indeed H is a set. Hence the thesis (by GrpHom160). Indeed H is a
+  group.
 qed.
 
 
 # 4. Kernel and image
 
-# 4.1 Kernel
+# 4.1 The kernel of a group homomorphism 
 
-Lemma GrpSub090. Let G,H be groups and phi be a group homomorphism between G and H. Let K be a class
-such that K = {x in G | phi(x) = 1_{H}}. Then K is the domain of some subgroup of G.
+Proposition GrpSub080. Let G,H be groups and phi be a group homomorphism between G and H. There is a
+subgroup ker of G such that the image of ker under the inclusion of ker into G is a set K such that
+K = {x in G | phi(x) = 1_{H}}.
 
 Proof.
+  Define K = {x in G | phi(x) = 1_{H}}. K is a subset of G. phi(1_{G}) = 1_{H}. Hence 1_{G} lies in
+  K. Thus K is nonempty.
+
   For all x,y \in K we have x \cdot y^{-1} \in K.
   proof.
     Let x,y \in K. Then phi(x) = 1_{H} = phi(y). phi(x \cdot y^{-1}) = phi(x) \cdot phi(y)^{-1} (by
-    GrpHom000, GrpHom015). Indeed y^{-1} \in G. Hence phi(x \cdot y^{-1}) = 1_{H} \cdot 1_{H} =
-    1_{H}. Indeed 1_{H}^{-1} = 1_{H} (by GrpGrp180). x \cdot y^{-1} lies in G.
+    GrpHom000, GrpHom015). Indeed y^{-1} lies in G. 1_{H}^{-1} = 1_{H}. Hence phi(x \cdot y^{-1}) =
+    1_{H}. Thus x \cdot y^{-1} \in K.
   end.
 
-  K is nonempty. Indeed phi(1_{G}) = 1_{H}. Hence the thesis (by GrpSub002). Indeed K is a subset of
-  G.
+  Hence the thesis (by GrpSub015). Indeed K is a set.
 qed.
 
 
-Axiom GrpSub095. Let G,H be groups and phi be a group homomorphism between G and H. ker(phi) is a
-subgroup of G such that dom(ker(phi)) = {x in G | phi(x) = 1_{H}}.
+Axiom GrpSub085. Let G,H be groups and phi be a group homomorphism between G and H. ker(phi) is a
+subgroup of G such that the image of ker(phi) under the inclusion of ker(phi) into G is a set K such
+that K = {x in G | phi(x) = 1_{H}}.
 
 
-Proposition GrpSub100. Let G,H be groups and phi be a group homomorphism between G and H. Then
-phi(x) = 1_{H} for all x \in ker(phi).
+Proposition GrpSub090. Let G,H be groups and phi be a group homomorphism between G and H. Assume
+that G is abelian. Then the kernel of phi is abelian.
 
 Proof.
-  Take a map i from ker(phi) to G that is the inclusion of ker(phi). Let x \in ker(phi). ker(phi) is
-  a subgroup of G. Hence phi(x) = phi(i(x)) (by GrpSub075). i(x) lies in the domain of ker(phi) (by
-  GrpSub007). Thus we have the thesis (by GrpSub095).
+  ker(phi) is a subgroup of G. Hence the thesis (by GrpSub050).
 qed.
+
+
+# 4.1.1 Abuse of notation
+
+Proposition GrpSub095. Let G,H be groups and phi be a group homomorphism between G and H. Let x be
+an element of the kernel of phi. Then phi(x) = 1_{H}.
+
+Proof.
+  Take a map i that is the inclusion of ker(phi) into G. phi is a map such that dom(phi) = G. Hence
+  phi(x) = phi(i(x)) (by FoundStr070). Indeed G is a structure and ker(phi) is a substructure of G.
+  i[ker(phi)] = {g in G | phi(g) = 1_{H}} (by GrpSub085). i(x) is an element of i[ker(phi)] (by
+  GrpSub045). Indeed ker(phi) is a subgroup of G.
+qed.
+
+
+Corollary GrpSub100. Let G,H be groups. Assume that H is abelian. Let phi be a group homomorphism
+between G and H. Let x be an element of the kernel of phi. Then phi(x) = 0_{H}.
+
+Proof.
+  phi(x) = 1_{H} (by GrpSub095). Hence the thesis (by GrpAb020).
+qed.
+
+
+# 4.1.2 Characterization of injective group homomorphisms
+
+Proposition GrpSub105. Let G,H be groups and phi be a group homomorphism between G and H. phi is
+injective iff for all x \in G if phi(x) = 1_{H} then x = 1_{G}.
+
+Proof. [prove off] qed.
+
+
+Corollary GrpSub110. Let G,H be groups and phi be a group homomorphism between G and H. phi is
+injective iff the kernel of phi and the trivial group are isomorphic.
+
+Proof. [prove off] qed.
+
+
+# 4.2 The image of a group homomorphism
+
+Proposition GrpSub120. Let G,H be groups and phi be a group homomorphism between G and H. There is a
+subgroup im of H such that the image of im under the inclusion of im into H is a set I such that
+I = range(phi).
+
+Proof. [prove off] qed.
+
+
+Axiom GrpSub125. Let G,H be groups and phi be a group homomorphism between G and H. im(phi) is a
+subgroup of H such that the image of im(phi) under the inclusion of im(phi) into H is a set I such
+that I = range(phi).
+
+
+Proposition GrpSub130. Let G,H be groups and phi be a group homomorphism between G and H. Assume
+that H is abelian. Then im(phi) is abelian.
+
+Proof.
+  im(phi) is a subgroup of H. Hence the thesis (by GrpSub050).
+qed.
+
+
+# 5. Normal subgroups
+
+# 5.1 Definition
+
+Signature GrpSub150. Let G be a group. A normal subgroup of G is a notion.
+
+Axiom GrpSub155. Let G be a group and N be a subgroup of G. Let i be the inclusion of N into G. N is
+a normal subgroup of G iff for all g \in G we have g \cdot N = N \cdot g.
+
+Axiom GrpSub160. Let N,G be groups. N \triangleleft G iff N is a normal subgroup of G.
+
+
+# 5.2 Equivalent definitions
+
+Proposition GrpSubxxx. Let G be a group and N be a subgroup of G. Let i be the inclusion of N into
+G. N is a normal subgroup of G iff (g \cdot N) \cdot g^{-1} is a subset of i[N] for all g \in G.
+
+Proof. [prove off] qed.
+
+
+Proposition GrpSubxxx. Let G be a group and N be a subgroup of G. Let i be the inclusion of N into
+G. N is a normal subgroup of G iff (g \cdot n) \cdot g^{-1} \in i[N] for all g \in G and all
+n \in N.
+
+Proof. [prove off] qed.
+
+
+# 5.3 Basic facts about normal subgroups
+
+Proposition GrpSub165. Every group G is a normal subgroup of G.
+
+Proof. [prove off] qed.
+
+
+Proposition GrpSub170. Let G be a group and H be a subgroup of G. If H = {1_{H}} then H is a normal
+subgroup of G.
+
+Proof. [prove off] qed.
+
+
+Proposition GrpSub175. Every subgroup of any abelian group G is a normal subgroup of G.
+
+Proof. [prove off] qed.
+
+
+Proposition GrpSub180. Let G,H be groups and phi be a group homomorphism between G and H. The kernel
+of phi is a normal subgroup of G.
+
+Proof. [prove off] qed.
