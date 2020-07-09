@@ -5,6 +5,7 @@
 
 #[prove off][check off]
 [read FLib/Structures/Foundations/structures.ftl]
+[read FLib/Structures/Sets/cardinality.ftl]
 #[prove on][check on]
 
 
@@ -262,3 +263,15 @@ Proposition GrpGrp180. Let G be a group. 1_{G}^{-1} = 1_{G}.
 Proof.
   1_{G} \cdot 1_{G}^{-1} = 1_{G}.
 qed.
+
+
+# 6. The trivial group
+
+Proposition GrpGrp200. There is a group that has exactly one element.
+
+Proof. [prove off] qed.
+
+
+Axiom GrpGrp205. 1_{GRP} is a group that has exactly one element.
+
+Let the trivial group stand for 1_{GRP}.
