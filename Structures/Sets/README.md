@@ -31,3 +31,11 @@ The file _filters.ftl_ defines filters on a  set.
 
 The file _topologies.ftl_ defines topologies on a set and provides their basic
 properties.
+
+
+## The category of sets
+
+In the file _category-of-sets.ftl_ the category of gorups is constructed.
+
+**WARNING:** _category-of-sets.ftl_ requires a minimum of 8 GB free RAM (16 GB
+are recommended).

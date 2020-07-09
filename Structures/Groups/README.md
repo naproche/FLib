@@ -1,6 +1,6 @@
 # Groups
 
-The files in this directory introduce groups
+The files in this directory introduce groups.
 
 
 ## Groups
@@ -19,3 +19,12 @@ properties.
 
 The file _homomorphisms.ftl_ introduces group homomorphisms and states their
 basic properties.
+
+
+## The category of groups
+
+In the file _category-of-groups.ftl_ the category of gorups is constructed as a
+subcategory of the category of sets.
+
+**WARNING:** _category-of-groups.ftl_ requires a minimum of 8 GB free RAM (16 GB
+are recommended).
