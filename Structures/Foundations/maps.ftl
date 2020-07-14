@@ -158,7 +158,7 @@ composition of g and f is injective.
 
 Proof.
   Let x,y \in dom(g \circ f). Then x,y \in dom(f). Assume that (g \circ f)(x) = (g \circ f)(y).
-  Then g(f(x)) = g(f(y)). Hence f(x) = f(y). Indeed f(x),f(y) \in dom(g). Thus x = y (by  
+  Then g(f(x)) = g(f(y)). Hence f(x) = f(y). Indeed f(x),f(y) \in dom(g). Thus x = y (by
   FoundMap092).
 qed.
 
