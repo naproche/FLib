@@ -10,9 +10,9 @@
 
 # 1. Separation axioms
 
-Signature TopSep000. T_{0} is an axiom.
+Signature TopSep000. T0 is an axiom.
 
-Axiom TopSep005. Let X be a topological space. X satisfies T_{0} iff for all x,y \in X if x \neq y
+Axiom TopSep005. Let X be a topological space. X satisfies T0 iff for all x,y \in X if x \neq y
 then there is a neighbourhood of x that not contains y or there is a neighbourhood of y that does
 not contain x.
 
@@ -37,7 +37,7 @@ Let X is Hausdorff stand for X is a Hausdorff space.
 
 # 2. Consequences
 
-Proposition TopSep035. Let X be a topological space. If X satisfies T1 then X satisfies T_{0}.
+Proposition TopSep035. Let X be a topological space. If X satisfies T1 then X satisfies T0.
 
 Proof.
   Assume that X satisfies T1. For all x,y \in X if x \neq y then there is a neighbourhood of x
