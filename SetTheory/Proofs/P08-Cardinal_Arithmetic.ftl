@@ -13,10 +13,6 @@ Let kappa, lambda stand for cardinals.
 
 ## Cardinal Arithmetic
 
-Signature. 2 is an ordinal.
-
-Axiom. 2 = 1 + 1.
-
 Axiom. Let f be a zffunction. Let Dom(f) /in /VV. Then f is a zfset.
 
 

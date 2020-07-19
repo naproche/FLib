@@ -122,7 +122,9 @@ Lemma. Let f be an injective zffunction. Then ran(f^{-1}) = Dom(f).
 
 Lemma. Let f be a zffunction. Let A,B be sets. Let f : A /leftrightarrow B. Then f^{-1} : B /leftrightarrow A.
 
-Definition. ^{A}B = {zffunction f | f : A /rightarrow B}.
+Definition. Let A be a zfset. Let B be a set. ^{A}B = {zffunction f | f : A /rightarrow B}.
+
+Lemma. Let A be a zfset. ^{A}/VV = {zffunction f | Dom(f) = A}.
 
 Definition. Let f be a zffunction. Let x /in /VV. The preimage of x under f is
 {y /in Dom(f) | f[y] = x}.

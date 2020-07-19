@@ -40,6 +40,36 @@ Definition. Let kappa /in /Lim. The set of clubs in kappa is
 Let Cl(k) stand for the set of clubs in k.
 
 
+Lemma. Let kappa /in /Lim. Let alpha /in kappa. Let X /in Cl(kappa). Then X /setminus alpha /in Cl(kappa).
+Proof.
+  X /setminus alpha /subset kappa.
+  X /setminus alpha /cof kappa.
+  Proof.
+    Let a /in kappa.
+    Then a /cup alpha /in kappa.
+    Take a zfset b such that b /in X /\ a /cup alpha /in b.
+    Then b /in X /setminus alpha.
+    a /in b.
+  end.
+  Forall lambda /in /Lim /cap kappa ((X /setminus alpha) /cap lambda /cof lambda => lambda /in X /setminus alpha).
+  Proof.
+    Let lambda /in /Lim /cap kappa.
+    Let (X /setminus alpha) /cap lambda /cof lambda.
+    Then X /cap lambda /cof lambda.
+    Then lambda /in X.
+    lambda /notin alpha.
+    Proof by contradiction. Assume the contrary.
+      Then lambda /in alpha.
+      Then (X /setminus alpha) /cap lambda = /emptyset.
+      Contradiction.
+    end.
+    Then lambda /in X /setminus alpha.
+  end.
+  Then X /setminus alpha is closed in kappa.
+  Then X /setminus alpha /in Cl(kappa).
+qed.
+
+
 Signature. Let M be a set. Let lambda /in /Ord. A sequence of length lambda in M is a zffunction.
 Axiom sequence. Let M be a set. Let lambda /in /Ord. Let C be a zffunction. C is a sequence of length lambda in M iff Dom(C) = lambda /\ forall i /in lambda C[i] /in M.
 Axiom. Let M be a set. Let lambda /in /Ord. Let C be a sequence of length lambda in M. Then (C is a zffunction) /\ Dom(C) = lambda /\ forall i /in lambda C[i] /in M.

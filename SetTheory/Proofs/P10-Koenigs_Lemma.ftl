@@ -1,7 +1,6 @@
 [read Forthel-Dateien/SetTheory/Library/L08-Cardinal_Arithmetic.ftl]
 [read Forthel-Dateien/SetTheory/Library/L09-Cofinality.ftl]
 
-
 ## Pretyped Variables
 
 Let w,x,y,z,W,X,Y,Z stand for zfsets.
@@ -283,8 +282,7 @@ qed.
 
 
 
-## Koenigs Lemma
-
+## Infinite sum and product
 
 [synonym sequence/-s]
 
@@ -292,14 +290,25 @@ Signature. A sequence of cardinals is a notion.
 Axiom. Let f be a sequence of cardinals. Then f is a zffunction.
 Axiom. Let f be a zffunction. Then f is a sequence of cardinals iff Dom(f) /in /Ord /\ forall x /in Dom(f) f[x] /in /Cd.
 
-
-Definition. Let f be a sequence of cardinals. The seqsumset of f is
-{(a,b) | b /in Dom(f) /\ a /in f[b]}.
-Let /sumset f stand for the seqsumset of f.
-
-
-Lemma. Let f be a sequence of cardinals. Then /sumset f /in /VV.
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then exists g (Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] = Card(f[i])).
 Proof.
+  Define g[i] = Card(f[i]) for i in Dom(f).
+qed.
+
+Definition. Let f be a zffunction. Let Dom(f) /in /Ord. The cardinalsequence of f is a zffunction g such that Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] = Card(f[i]).
+Let cardseq(f) stand for the cardinalsequence of f.
+
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then cardseq(f) is a sequence of cardinals.
+
+
+# Sum
+
+Definition. Let f be a zffunction. The functionsumset of f is {(a,b) | b /in Dom(f) /\ a /in f[b]}.
+Let /funcsumset f stand for the functionsumset of f.
+
+Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /funcsumset f /in /VV.
+Proof.
+  Forall i /in Dom(f) (f[i] is a zfset).
   Define g[i] = {(a,i) | a /in f[i]} for i in Dom(f).
   Then g is a zffunction.
   Proof.
@@ -318,30 +327,125 @@ Proof.
   end.
   Then g^[Dom(f)] /in /VV.
   Then /bigcup g^[Dom(f)] /in /VV.
-  /sumset f /subset /bigcup g^[Dom(f)].
+  /funcsumset f /subset /bigcup g^[Dom(f)].
 qed.
 
+Definition. Let f be a sequence of cardinals. The seqsumset of f is
+{(a,b) | b /in Dom(f) /\ a /in f[b]}.
+Let /sumset f stand for the seqsumset of f.
+
+Lemma. Let f be a sequence of cardinals. Then /sumset f = /funcsumset f.
+
+Lemma. Let f be a sequence of cardinals. Then /sumset f /in /VV.
+Proof.
+  f is a zffunction.
+  Dom(f) /in /VV.
+  Then /funcsumset f /in /VV.
+qed.
 
 Definition. Let f be a sequence of cardinals. The seqsum of f is
 Card(/sumset f).
 Let /sum f stand for the seqsum of f.
 
 
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then Card(/funcsumset f) = /sum cardseq(f).
+Proof.
+  Take an ordinal alpha such that alpha = Dom(f).
+  Forall i /in alpha exists g (g : f[i] /leftrightarrow (cardseq(f))[i]).
+  Proof.
+    Let i /in alpha.
+    Then (cardseq(f))[i] = Card(f[i]).
+    Then (cardseq(f))[i] /tilde f[i].
+  end.
+  Define bij[i] = (Choose a zffunction g such that g : f[i] /leftrightarrow (cardseq(f))[i] in g) for i in alpha.
+  Forall o1,o2 ((o1,o2) /in /funcsumset f => o2 /in alpha /\ o1 /in f[o2]).
+  Then forall o1,o2 ((o1,o2) /in /funcsumset f => o2 /in alpha /\ o1 /in Dom(bij[o2])).
+  Define F[(a,b)] = ((bij[b])[a],b) for (a,b) in /funcsumset f.
+  Then F : /funcsumset f /rightarrow /sumset cardseq(f).
+  Proof.
+    Let pair /in /funcsumset f.
+    Take zfsets a,b such that b /in alpha /\ a /in f[b] /\ pair = (a,b).
+    F[(a,b)] = ((bij[b])[a],b).
+    b /in Dom(cardseq(f)).
+    (bij[b])[a] /in (cardseq(f))[b].
+    Then ((bij[b])[a],b) /in /sumset cardseq(f).
+    Then F[pair] /in /sumset cardseq(f).
+  end.
+  F is injective.
+  Proof.
+    Let pair1, pair2 /in /funcsumset f.
+    Let pair1 /neq pair2.
+    Take zfsets a1,b1 such that b1 /in alpha /\ a1 /in f[b1] /\ pair1 = (a1,b1).
+    Take zfsets a2,b2 such that b2 /in alpha /\ a2 /in f[b2] /\ pair2 = (a2,b2).
+    F[pair1] /neq F[pair2].
+    Proof.
+      (a1,b1) /neq (a2,b2).
+      Then b1 /neq b2 \/ (b1 = b2 /\ a1 /neq a2).
+      Case b1 /neq b2.
+        Then F[(a1,b1)] /neq F[(a2,b2)].
+      end.
+      Case (b1 = b2 /\ a1 /neq a2).
+        bij[b1] is injective.
+        a1,a2 /in Dom(bij[b1]).
+        a1 /neq a2.
+        Then (bij[b1])[a1] /neq (bij[b1])[a2].
+        F[(a1,b1)] = ((bij[b1])[a1],b1).
+        F[(a2,b2)] = ((bij[b1])[a2],b2).
+        Then F[(a1,b2)] /neq F[(a2,b2)].
+      end.
+    end.
+  end.
+  ran(F) = /sumset cardseq(f).
+  Proof.
+    Let pair /in /sumset cardseq(f).
+    /sumset cardseq(f) = {(a,b) | b /in Dom(cardseq(f)) /\ a /in (cardseq(f))[b]}.
+    Take objects a,b such that b /in Dom(cardseq(f)) /\ a /in (cardseq(f))[b] /\ pair = (a,b).
+    Then a,b are zfsets.
+    b /in alpha.
+    bij[b] : f[b] /leftrightarrow (cardseq(f))[b].
+    Take a zfset aa such that aa /in f[b] /\ (bij[b])[aa] = a.
+    Then F[(aa,b)] = (a,b).
+    Then pair /in ran(F).
+  end.
+  Then F : /funcsumset f /rightarrow /sumset cardseq(f).
+  Then Card(/funcsumset f) = Card(/sumset cardseq(f)).
+qed.
+
+
+# Product
+
+Definition. Let f be a zffunction. The functionproductset of f is 
+{zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
+Let /funcprodset f stand for the functionproductset of f.
+
+Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /funcprodset f /in /VV.
+Proof.
+  /bigcup f^[Dom(f)] /in /VV.
+  Forall g /in /funcprodset f forall i /in Dom(g) g[i] /in /bigcup f^[Dom(f)].
+  Then /funcprodset f /subset ^{Dom(f)}(/bigcup f^[Dom(f)]).
+qed.
+
 Definition. Let f be a sequence of cardinals. The seqproductset of f is
 {zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
 Let /prodset f stand for the seqproductset of f.
 
 
+Lemma. Let f be a sequence of cardinals. Then /prodset f = /funcprodset f.
+
 Lemma. Let f be a sequence of cardinals. Then /prodset f /in /VV.
 Proof.
-  /bigcup f^[Dom(f)] /in /VV.
-  Forall g /in /prodset f forall i /in Dom(g) g[i] /in /bigcup f^[Dom(f)].
-  Then /prodset f /subset ^{Dom(f)}(/bigcup f^[Dom(f)]).
+  f is a zffunction.
+  Dom(f) /in /VV.
+  Then /funcprodset f /in /VV.
 qed.
 
 Definition. Let f be a sequence of cardinals. The seqproduct of f is
 Card(/prodset f).
 Let /prod f stand for the seqproduct of f.
+
+
+
+## Koenigs Lemma
 
 
 Theorem Koenig. Let kappa, lambda be sequences of cardinals. Let Dom(kappa) = Dom(lambda). Let forall i /in Dom(kappa) kappa[i] /in lambda[i].

@@ -38,6 +38,8 @@ Signature. A functiontriple is a notion.
 
 Axiom. Let f,lambda,M be objects. (f,lambda,M) is a functiontriple iff M is a set and lambda is an ordinal and f is a sequence of functions on M of length lambda.
 
+Lemma. Let (f,lambda,M) be a functiontriple. Forall v /in lambda ((f is a zffunction) /\ v /in Dom(f) /\ (f[v] is a zffunction)).
+
 Definition. Let (f,lambda,M) be a functiontriple. Let i /in M. Let alpha be a zfset.
 The support of f in lambda on M at i over alpha is {v /in lambda | i /in Dom(f[v]) /\ alpha /subset (f[v])[i]}.
 Let Supp(f,l,M){i,a} stand for the support of f in l on M at i over a.

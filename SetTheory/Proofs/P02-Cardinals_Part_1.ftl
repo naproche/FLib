@@ -139,7 +139,9 @@ Lemma. Let f be an injective zffunction. Then ran(f^{-1}) = Dom(f).
 
 Lemma. Let f be a zffunction. Let A,B be sets. Let f : A /leftrightarrow B. Then f^{-1} : B /leftrightarrow A.
 
-Definition. ^{A}B = {zffunction f | f : A /rightarrow B}.
+Definition. Let A be a zfset. Let B be a set. ^{A}B = {zffunction f | f : A /rightarrow B}.
+
+Lemma. Let A be a zfset. ^{A}/VV = {zffunction f | Dom(f) = A}.
 
 Definition. Let f be a zffunction. Let x /in /VV. The preimage of x under f is
 {y /in Dom(f) | f[y] = x}.
@@ -264,7 +266,7 @@ Signature. Choice is a zffunction.
 Axiom. Dom(Choice) = /VV /setminus </emptyset>.
 Axiom. Forall x /in /VV /setminus </emptyset> (Choice[x] /in x).
 
-Lemma AC. Let x be a zfset. Then exists alpha exists f (f : alpha /leftrightarrow x).
+Theorem AC. Let x be a zfset. Then exists alpha exists f (f : alpha /leftrightarrow x).
 Proof.
   Forall A x /setminus A /in /VV.
   Define f[beta] =

@@ -34,7 +34,8 @@ Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. T
 Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then kappa ^3 lambda /in /Lim.
 
 
-## Koenigs Lemma
+
+## Infinite sum and product
 
 [synonym sequence/-s]
 
@@ -42,9 +43,25 @@ Signature. A sequence of cardinals is a notion.
 Axiom. Let f be a sequence of cardinals. Then f is a zffunction.
 Axiom. Let f be a zffunction. Then f is a sequence of cardinals iff Dom(f) /in /Ord /\ forall x /in Dom(f) f[x] /in /Cd.
 
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then exists g (Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] = Card(f[i])).
+
+Definition. Let f be a zffunction. Let Dom(f) /in /Ord. The cardinalsequence of f is a zffunction g such that Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] = Card(f[i]).
+Let cardseq(f) stand for the cardinalsequence of f.
+
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then cardseq(f) is a sequence of cardinals.
+
+# Sum
+
+Definition. Let f be a zffunction. The functionsumset of f is {(a,b) | b /in Dom(f) /\ a /in f[b]}.
+Let /funcsumset f stand for the functionsumset of f.
+
+Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /funcsumset f /in /VV.
+
 Definition. Let f be a sequence of cardinals. The seqsumset of f is
 {(a,b) | b /in Dom(f) /\ a /in f[b]}.
 Let /sumset f stand for the seqsumset of f.
+
+Lemma. Let f be a sequence of cardinals. Then /sumset f = /funcsumset f.
 
 Lemma. Let f be a sequence of cardinals. Then /sumset f /in /VV.
 
@@ -52,15 +69,31 @@ Definition. Let f be a sequence of cardinals. The seqsum of f is
 Card(/sumset f).
 Let /sum f stand for the seqsum of f.
 
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then Card(/funcsumset f) = /sum cardseq(f).
+
+# Product
+
+Definition. Let f be a zffunction. The functionproductset of f is 
+{zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
+Let /funcprodset f stand for the functionproductset of f.
+
+Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /funcprodset f /in /VV.
+
 Definition. Let f be a sequence of cardinals. The seqproductset of f is
 {zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
 Let /prodset f stand for the seqproductset of f.
+
+Lemma. Let f be a sequence of cardinals. Then /prodset f = /funcprodset f.
 
 Lemma. Let f be a sequence of cardinals. Then /prodset f /in /VV.
 
 Definition. Let f be a sequence of cardinals. The seqproduct of f is
 Card(/prodset f).
 Let /prod f stand for the seqproduct of f.
+
+
+
+## Koenigs Lemma
 
 Theorem Koenig. Let kappa, lambda be sequences of cardinals. Let Dom(kappa) = Dom(lambda). Let forall i /in Dom(kappa) kappa[i] /in lambda[i].
 Then /sum kappa /in /prod lambda.

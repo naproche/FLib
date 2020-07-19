@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L09-Cofinality.ftl]
+[read Forthel-Dateien/SetTheory/Library/L12-Cardinal_Exponentiation.ftl]
 
 [prove off]
 
@@ -34,6 +34,8 @@ Let C /club k stand for C is closed unbounded in k.
 Definition. Let kappa /in /Lim. The set of clubs in kappa is
 {X /subset kappa | X /club kappa}.
 Let Cl(k) stand for the set of clubs in k.
+
+Lemma. Let kappa /in /Lim. Let alpha /in kappa. Let X /in Cl(kappa). Then X /setminus alpha /in Cl(kappa).
 
 Signature. Let M be a set. Let lambda /in /Ord. A sequence of length lambda in M is a zffunction.
 

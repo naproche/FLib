@@ -11,8 +11,6 @@ Let kappa, lambda stand for cardinals.
 
 
 
-
-
 # Cofinality
 
 
@@ -178,6 +176,16 @@ qed.
 
 
 Definition. Let lambda /in /Lim. lambda is regular iff cof(lambda) = lambda.
+
+
+Definition. Let lambda /in /Lim. lambda is singular iff cof(lambda) /neq lambda.
+
+
+Lemma. Let lambda /in /Lim. Let lambda be singular. Then cof(lambda) /in lambda.
+Proof.
+  cof(lambda) /subset lambda.
+  cof(lambda) /neq lambda.
+qed.
 
 
 Definition. Let lambda /in /Lim. The alternativecofset of lambda is {Card(x) | (x is a zfset) /\ x /subset lambda /\ x /cof lambda}.
@@ -817,6 +825,14 @@ Proof by contradiction. Assume the contrary.
   Contradiction.  
 qed.
 
+
+Lemma. Forall alpha /in /Succ (Alef[alpha] is regular).
+Proof.
+  Let alpha /in /Succ.
+  Take an ordinal beta such that alpha = beta + 1.
+  Then Alef[alpha] = Alef[beta + 1].
+  Alef[beta + 1] is regular.
+qed.
 
 
 

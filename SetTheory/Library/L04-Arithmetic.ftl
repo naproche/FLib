@@ -122,7 +122,7 @@ Lemma. Forall alpha /in /Ord Plus[alpha] /in /Cd.
 
 Lemma. Forall alpha /in /Ord alpha /in Plus[alpha].
 
-Lemma. Forall alpha /in /Ord forall kappa /in /Cd (alpha /in kappa => Plus[alpha] /subset kappa).
+Lemma PlusSubset. Forall alpha /in /Ord forall kappa /in /Cd (alpha /in kappa => Plus[alpha] /subset kappa).
 
 Lemma. Plus : /Ord /rightarrow /Cd.
 

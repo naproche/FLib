@@ -43,6 +43,8 @@ Signature. A functiontriple is a notion.
 
 Axiom. Let f,lambda,M be objects. (f,lambda,M) is a functiontriple iff M is a set and lambda is an ordinal and f is a sequence of functions on M of length lambda.
 
+Lemma. Let (f,lambda,M) be a functiontriple. Forall v /in lambda ((f is a zffunction) /\ v /in Dom(f) /\ (f[v] is a zffunction)).
+
 Definition. Let (f,lambda,M) be a functiontriple. Let i /in M. Let alpha be a zfset.
 The support of f in lambda on M at i over alpha is {v /in lambda | i /in Dom(f[v]) /\ alpha /subset (f[v])[i]}.
 Let Supp(f,l,M){i,a} stand for the support of f in l on M at i over a.
@@ -266,22 +268,22 @@ Proof.
       /sumset seq /subset lambda /times lambda.
       lambda /times lambda /tilde lambda.
       Then /sumset seq <= lambda.
-      Card(/funcset pre) = kappa.
+      Card(/funcsumset pre) = kappa.
       Proof.
         Define F[alpha] = (alpha,i[alpha]) for alpha in kappa.
-        F : kappa /rightarrow /funcset pre.
+        F : kappa /rightarrow /funcsumset pre.
         Proof.
           Let alpha /in kappa.
           i[alpha] /in lambda.
           Take a zfset j such that j /in lambda /\ j = i[alpha].
           Then alpha /in pre[j].
-          Then (alpha,j) /in /funcset pre.
-          Then F[alpha] /in /funcset pre.
+          Then (alpha,j) /in /funcsumset pre.
+          Then F[alpha] /in /funcsumset pre.
         end.
         F is injective.
-        ran(F) = /funcset pre.
+        ran(F) = /funcsumset pre.
         Proof.
-          Let pair /in /funcset pre.
+          Let pair /in /funcsumset pre.
           Take objects a,b such that b /in Dom(pre) /\ a /in pre[b] /\ pair = (a,b).
           pre[b] is a zfset.
           a,b are zfsets.
@@ -290,7 +292,7 @@ Proof.
           Then F[a] = (a,b).
           Then pair /in ran(F).
         end.
-        Then F : kappa /leftrightarrow /funcset pre.
+        Then F : kappa /leftrightarrow /funcsumset pre.
       end.
       Contradiction.
     end.

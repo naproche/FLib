@@ -260,7 +260,7 @@ Axiom. Let f be an epsiso. Then f is a zffunction.
 
 Axiom epsiso. Let f be a zffunction. Then f is an epsiso iff f is injective and forall x,y /in Dom(f) (x /in y iff f[x] /in f[y]).
 
-Lemma. Let f be an epsiso. Then forall x /in Dom(f) (f^[x /cap Dom(f)] = f[x] /cap ran(f)).
+Lemma epsiso2. Let f be an epsiso. Then forall x /in Dom(f) (f^[x /cap Dom(f)] = f[x] /cap ran(f)).
 
 Lemma. Let f be a zffunction. Then f is an epsiso iff f is injective and forall x /in Dom(f) (f^[x /cap Dom(f)] = f[x] /cap ran(f)).
 

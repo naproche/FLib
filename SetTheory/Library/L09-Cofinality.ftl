@@ -42,6 +42,10 @@ Lemma. Let lambda /in /Lim. Then cof(lambda) /subset lambda.
 
 Definition. Let lambda /in /Lim. lambda is regular iff cof(lambda) = lambda.
 
+Definition. Let lambda /in /Lim. lambda is singular iff cof(lambda) /neq lambda.
+
+Lemma. Let lambda /in /Lim. Let lambda be singular. Then cof(lambda) /in lambda.
+
 Definition. Let lambda /in /Lim. The alternativecofset of lambda is {Card(x) | (x is a zfset) /\ x /subset lambda /\ x /cof lambda}.
 Let cofset2(x) stand for the alternativecofset of x.
 
@@ -77,6 +81,7 @@ Lemma exsurj. Let x be a zfset. Let x /neq /emptyset. Let alpha /in /Ord. Let Ca
 
 Lemma. Forall alpha /in /Ord cof(Alef[alpha + 1]) = Alef[alpha + 1].
 
+Lemma. Forall alpha /in /Succ (Alef[alpha] is regular).
 
 
 [prove on]

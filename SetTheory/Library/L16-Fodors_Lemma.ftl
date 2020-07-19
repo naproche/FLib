@@ -60,23 +60,15 @@ Lemma. Let kappa /in /BigCard. Let C /in Cl(kappa). Then der(C,kappa) /subset C.
 
 Lemma. Let kappa /in /BigCard. Let C /in Cl(kappa). Then der(C,kappa) /in Cl(kappa).
 
+Lemma. Let kappa /in /BigCard. Let S /subset kappa. Let S be stationary in kappa. Then S /cap /Lim is stationary in kappa.
+
+Lemma. Let kappa /in /BigCard. Let S /in stat(kappa). Then S /cap /Lim /in stat(kappa).
+
 Definition. Let lambda, kappa /in /BigRegCard. Let lambda /in kappa. The subset of cofinality lambda in kappa is
 {alpha /in kappa /cap /Lim | cof(alpha) = lambda}.
 Let Estat(k,l) stand for the subset of cofinality l in k.
 
 Lemma. Let lambda, kappa /in /BigRegCard. Let lambda /in kappa. Then Estat(kappa,lambda) is stationary in kappa.
-
-Lemma. Let kappa be a successor cardinal. Then kappa /in /BigCard.
-
-Definition. Let kappa /in /BigCard. Let S be a set. The set of stationary subsets of kappa in S is
-{x /in stat(kappa) | x /subset S}.
-Let stat(k,S) stand for the set of stationary subsets of k in S.
-
-Lemma. Let M be a set. Let lambda /in /Ord. Let f be a sequence of length lambda in M. Forall a /in lambda (f[a] is a zfset).
-
-Definition. Let M be a set. Let lambda /in /Ord. Let f be a sequence of length lambda in M. f is pairwise disjoint on lambda in M iff
-forall a,b /in lambda (a /neq b => f[a] /cap f[b] = /emptyset).
-
 
 
 
