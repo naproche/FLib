@@ -1,7 +1,5 @@
-[prove off]
-[read RepresentationTheory/21_natural_transformation.ftl]
 [read RepresentationTheory/23_hom_functor.ftl]
-[prove on]
+[read RepresentationTheory/21_natural_transformation.ftl]
 
 Let K denote a field.
 
@@ -29,7 +27,10 @@ Proof.
     |Hom(K,A,M1,M2)| is the set of modulehoms over A over K from M1 to M2.
     f < Hom(K,A,M1,M2).
    qed.
-   Therefore Hom(K,A,-,N)(f) << Mod(K,K)(Hom(K,A,-,N)(M2),Hom(K,A,-,N)(M1)).
+   Take H = Hom(K,A,-,N).
+   H is a contravariant functor from Mod(K,A) to Mod(K,K).
+   M1,M2 < Mod(K,A).
+   Therefore H(f) << Mod(K,K)(H(M2),H(M1)) (by ContraFunctor).
   qed.
   Let us show that for all N1,N2 < Mod(K,A) and all h << Mod(K,A)(N1,N2) : G(h)*n(N1) = n(N2)*F(h).
    Let N1,N2 < Mod(K,A).
@@ -38,12 +39,12 @@ Proof.
    G(h)*n(N1) = Hom(K,A,M1,h)*Hom(K,A,f,N1).
    n(N2)*F(h) = Hom(K,A,f,N2)*Hom(K,A,M2,h).  
    f < Hom(K,A,M1,M2).
-   h < Hom(K,A,N1,N2).
-   Hom(K,A,M1,h),Hom(K,A,f,N1) are maps.
+   h < Hom(K,A,N1,N2) (by ModMor).
+   Hom(K,A,M1,h),Hom(K,A,f,N1) are maps (by HomFun, ContraHomFun).
    Hom(K,A,M1,h)*Hom(K,A,f,N1) is a map.
    Dmn(Hom(K,A,f,N1)) = |Hom(K,A,M2,N1)| (by ContraHomFun).
     Dmn(Hom(K,A,M1,h)*Hom(K,A,f,N1)) = |Hom(K,A,M2,N1)|.
-   Hom(K,A,f,N2),Hom(K,A,M2,h) are maps.
+   Hom(K,A,f,N2),Hom(K,A,M2,h) are maps (by HomFun, ContraHomFun).
    Hom(K,A,f,N2)*Hom(K,A,M2,h) is a map.
    Dmn(Hom(K,A,M2,h)) = |Hom(K,A,M2,N1)| (by HomFun).
    Dmn(Hom(K,A,f,N2)*Hom(K,A,M2,h)) = |Hom(K,A,M2,N1)|.

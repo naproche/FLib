@@ -3,7 +3,7 @@
 
 Let K denote a field.
 
-Definition. Let V and W be objects. A homomorphism over K from V to W is a map f such that
+Definition Homomorphism. Let V and W be objects. A homomorphism over K from V to W is a map f such that
      (V and W are vector spaces over K)
  and (f is from |V| to |W|)
  and (for all u,v < V             : f(u +{V} v) = f(u) +{W} f(v))
@@ -45,11 +45,20 @@ Lemma AddLinear. Let V and W be vector spaces over K. Let f,g < Hom(K,V,W).
 Proof.
  Take a map h such that h = f +{Hom(K,V,W)} g.
  Let us show that h is linear over K from V to W.
-  h is from |V| to |W|.
+  Let us show that h is from |V| to |W|.
+   Dmn(h) = |V| (by MapAdd).
+   For all v < V : h(v) = f(v) +{W} g(v) < W.
+  qed.
   Let us show that for all u,v < V : h(u +{V} v) = h(u) +{W} h(v).
    Let u,v < V.
    h(u +{V} v) = f(u +{V} v) +{W} g(u +{V} v).
-   f(u +{V} v) +{W} g(u +{V} v) = (f(u) +{W} f(v)) +{W} (g(u) +{W} g(v)).
+   Let us show that f(u +{V} v) +{W} g(u +{V} v) = (f(u) +{W} f(v)) +{W} (g(u) +{W} g(v)).
+    f is linear over K from V to W.
+    g is linear over K from V to W.
+    u,v < V.
+    f(u +{V} v) = f(u) +{W} f(v) (by Homomorphism).
+    g(u +{V} v) = g(u) +{W} g(v) (by Homomorphism).
+   qed.
    Let us show that (f(u) +{W} f(v)) +{W} (g(u) +{W} g(v)) = (f(u) +{W} g(u)) +{W} (f(v) +{W} g(v)).
     f(u),f(v),g(u),g(v) < W.
     W is an abelian group.
@@ -59,7 +68,9 @@ Proof.
   Let us show that for all a < K for all v < V : h(a @{V} v) = a @{W} h(v).
    Let a < K and v < V.
    h(a @{V} v) = f(a @{V} v) +{W} g(a @{V} v).
-   f(a @{V} v) +{W} g(a @{V} v) = (a @{W} f(v)) +{W} (a @{W} g(v)).
+   Let us show that f(a @{V} v) +{W} g(a @{V} v) = (a @{W} f(v)) +{W} (a @{W} g(v)).
+    f,g are linear over K from V to W.
+   qed.
    (a @{W} f(v)) +{W} (a @{W} g(v)) = a @{W} (f(v) +{W} g(v)).
    a @{W} (f(v) +{W} g(v)) = a @{W} h(v).
   qed.
@@ -71,21 +82,27 @@ Lemma NegLinear. Let V and W be vector spaces over K. Let f < Hom(K,V,W).
 Proof.
  Take a map h such that h = ~{Hom(K,V,W)} f.
  Let us show that h is linear over K from V to W.
-  h is from |V| to |W|.
+  Let us show that h is from |V| to |W|.
+   Dmn(h) = |V| (by MapNeg).
+   For all v < V : h(v) = ~{W} f(v) < W.
+  qed.
   Let us show that for all u,v < V : h(u +{V} v) = h(u) +{W} h(v).
    Let u,v < V.
    h(u +{V} v) = ~{W} f(u +{V} v).
-   ~{W} f(u +{V} v) = ~{W} (f(u) +{W} f(v)).
+   Let us show that ~{W} f(u +{V} v) = ~{W} (f(u) +{W} f(v)).
+    f is linear over K from V to W.
+   qed.
    ~{W} (f(u) +{W} f(v)) = (~{W} f(u)) +{W} (~{W} f(v)).
    (~{W} f(u)) +{W} (~{W} f(v)) = h(u) +{W} h(v).
   qed.
   Let us show that for all a < K for all v < V : h(a @{V} v) = a @{W} h(v).
    Let a < K and v < V.
-   h(a @{V} v)
-   = ~{W} f(a @{V} v)
-   = ~{W} (a @{W} f(v))
-   = a @{W} (~{W} f(v))
-   = a @{W} h(v).
+   h(a @{V} v) = ~{W} f(a @{V} v).
+   Let us show that ~{W} f(a @{V} v) = ~{W} (a @{W} f(v)).
+    f is linear over K from V to W.
+   qed.
+   ~{W} (a @{W} f(v)) = a @{W} (~{W} f(v)).
+   a @{W} (~{W} f(v)) = a @{W} h(v).
   qed.
  qed.
 Qed.
@@ -99,17 +116,18 @@ Proof.
   Let us show that for all u,v < V : h(u +{V} v) = h(u) +{W} h(v).
    Let u,v < V.
    h(u +{V} v) = a @{W} f(u +{V} v).
+   f is linear over K from V to W.
+   f(u +{V} v) = (f(u) +{W} f(v)) (by Homomorphism).
    a @{W} f(u +{V} v) = a @{W} (f(u) +{W} f(v)).
    a @{W} (f(u) +{W} f(v)) = (a @{W} f(u)) +{W} (a @{W} f(v)).
    (a @{W} f(u)) +{W} (a @{W} f(v)) = h(u) +{W} h(v).
   qed.
   Let us show that for all b < K for all v < V : h(b @{V} v) = b @{W} h(v).
    Let b < K and v < V.
-   h(b @{V} v)
-   = a @{W} f(b @{V} v)
-   = a @{W} (b @{W} f(v))
-   = b @{W} (a @{W} f(v))
-   = b @{W} h(v).
+   h(b @{V} v) = a @{W} f(b @{V} v) (by MapSmul).
+   f is linear over K from V to W.
+   a @{W} f(b @{V} v) = a @{W} (b @{W} f(v)) (by Homomorphism).
+   a @{W} (b @{W} f(v)) = b @{W} (a @{W} f(v)) = b @{W} h(v).
   qed.
  qed.
 Qed.

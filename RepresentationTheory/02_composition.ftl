@@ -36,9 +36,9 @@ Theorem ThreeComp. Let A,B,C,D be objects. Let h:A->B. Let g:B->C. Let f:C->D. T
 Proof.
  Dmn((f*g)*h) = A.
  Dmn(f*(g*h)) = A.
- For all x << A : ((f*g)*h)(x) = (f*(g*h))(x).
+ For all x << A : ((f*g)*h)(x) = f(g(h(x))) = (f*(g*h))(x).
 Qed.
 
 Axiom. Let f be a map. f^(-1) is a map.
-Axiom. Let f be a map. Let A,B be sets. Let f be bijective from A to B. Then f^(-1) is a map
- from B to A  and (for all x << A : f^(-1)(f(x)) = x) and (for all y << B : f(f^(-1)(y)) = y).
+Axiom InverseMap. Let f be a map. Let A,B be sets. Let f be bijective from A to B. Then f^(-1) is a map
+ from B to A and (for all x << A : f^(-1)(f(x)) = x) and (for all y << B : f(f^(-1)(y)) = y).

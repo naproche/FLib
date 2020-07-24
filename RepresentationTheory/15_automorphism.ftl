@@ -53,6 +53,15 @@ Proof.
   Let f be isomorphism over K from V to V.
   f^(-1) < Endo(K,V).
   f *{Endo(K,V)} (f^(-1)) = f*(f^(-1)) = id{|V|} = 1{Endo(K,V)}.
-  (f^(-1)) *{Endo(K,V)} f = (f^(-1))*f = id{|V|} = 1{Endo(K,V)}.
+  (f^(-1)) *{Endo(K,V)} f = (f^(-1))*f.
+  Let us show that (f^(-1))*f = id{|V|}.
+   (f^(-1))*f is a map.
+   Dmn((f^(-1))*f) = |V|.
+   id{|V|} is a map.
+   Dmn(id{|V|}) = |V|.
+   For all v < V : ((f^(-1))*f)(v) = v = id{|V|}(v).
+   Therefore the thesis (by MapExt).
+  qed.
+  id{|V|} = 1{Endo(K,V)}.
  qed.
 Qed.

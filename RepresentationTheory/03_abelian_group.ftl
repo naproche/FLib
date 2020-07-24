@@ -1,6 +1,6 @@
 [read RepresentationTheory/00_introduction.ftl]
 
-Definition. An abelian group is an object G such that
+Definition AbelianGroup. An abelian group is an object G such that
      (|G| is a set)
  and (0{G} < G)
  and (for all a,b < G   : a +{G} b < G)

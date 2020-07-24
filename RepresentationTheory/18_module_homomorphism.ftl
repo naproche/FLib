@@ -15,7 +15,7 @@ Definition ModuleHom. Let A,M,N be objects.
 Axiom. Let A be an algebra over K. Let M,N be modules over A over K.
  |Hom(K,A,M,N)| is the set of modulehoms over A over K from M to N.
 
-Lemma. Let A be an algebra over K. Let M,N be modules over A over K.
+Lemma ModuleHomSubset. Let A be an algebra over K. Let M,N be modules over A over K.
  |Hom(K,A,M,N)| is a subset of |Hom(K,M,N)|.
 Proof.
  Take V = Hom(K,M,N).
@@ -30,6 +30,7 @@ Proof.
      Let x,y < M.
      Let us show that f(x +{M} y) = f(x) +{N} f(y).
       f is a modulehom over A over K from M to N.
+      Therefore the thesis (by ModuleHom).
      qed.
      Therefore the thesis.
     qed.
@@ -41,21 +42,21 @@ Proof.
      Let us show that f((a @{A} 1{A}) @@{M} x) = (a @{A} 1{A}) @@{N} f(x).
       f is a modulehom over A over K from M to N.
       (a @{A} 1{A}) < A.
+      Therefore the thesis (by ModuleHom).
      qed.
-     (a @{A} 1{A}) @@{N} f(x) = a @{N} (1{A} @@{N} f(x)) = a @{N} f(x).
+     (a @{A} 1{A}) @@{N} f(x) = a @{N} (1{A} @@{N} f(x)) = a @{N} f(x) (by Module).
     qed.   
    qed.
   qed.
  qed.
 Qed.
 
-Lemma. Let A be an algebra over K. Let M,N be modules over A over K. Let f,g < Hom(K,A,M,N).
- Then f +{Hom(K,M,N)} g < Hom(K,A,M,N).
+Lemma ModuleHomAddClosed. Let A be an algebra over K. Let M,N be modules over A over K.
+ Let f,g < Hom(K,A,M,N). Then f +{Hom(K,M,N)} g < Hom(K,A,M,N).
 Proof.
- f,g < Hom(K,M,N).
+ f,g < Hom(K,M,N) (by ModuleHomSubset).
  f,g are maps.
- For all x < M: (f +{Hom(K,M,N)} g is a map and (f +{Hom(K,M,N)} g)(x) = f(x) +{N} g(x)).
- f +{Hom(K,M,N)} g is a map and for all x < M : (f +{Hom(K,M,N)} g)(x) = f(x) +{N} g(x).
+ f +{Hom(K,M,N)} g is a map and for all x < M : (f +{Hom(K,M,N)} g)(x) = f(x) +{N} g(x) (by MapAdd).
  Take V = Hom(K,M,N).
  Take U = Hom(K,A,M,N).
  V is a vector space over K.
@@ -74,8 +75,8 @@ Proof.
     Let us show that f(a @@{M} x) +{N} g(a @@{M} x) = (a @@{N} f(x)) +{N} (a @@{N} g(x)).
      f is a modulehom over A over K from M to N.
      g is a modulehom over A over K from M to N.
-     f(a @@{M} x) = a @@{N} f(x).
-     g(a @@{M} x) = a @@{N} g(x).
+     f(a @@{M} x) = a @@{N} f(x) (by ModuleHom).
+     g(a @@{M} x) = a @@{N} g(x) (by ModuleHom).
     qed.
     N is a module over A over K.
     f(x) < N.
@@ -87,13 +88,12 @@ Proof.
  qed.
 Qed.
 
-Lemma. Let A be an algebra over K. Let M,N be modules over A over K. Let f < Hom(K,A,M,N).
- Let a < K.  Then a @{Hom(K,M,N)} f < Hom(K,A,M,N).
+Lemma ModuleHomSmulClosed. Let A be an algebra over K. Let M,N be modules over A over K.
+ Let f < Hom(K,A,M,N). Let a < K. Then a @{Hom(K,M,N)} f < Hom(K,A,M,N).
 Proof.
- f < Hom(K,M,N).
+ f < Hom(K,M,N) (by ModuleHomSubset).
  f is a map.
- For all x < M: (a @{Hom(K,M,N)} f is a map and (a @{Hom(K,M,N)} f)(x) = a @{N} f(x)).
- a @{Hom(K,M,N)} f is a map and for all x < M : (a @{Hom(K,M,N)} f)(x) = a @{N} f(x).
+ a @{Hom(K,M,N)} f is a map and for all x < M : (a @{Hom(K,M,N)} f)(x) = a @{N} f(x) (by MapSmul).
  Take V = Hom(K,M,N).
  Take U = Hom(K,A,M,N).
  V is a vector space over K.
@@ -111,7 +111,7 @@ Proof.
     (a @{V} f)(b @@{M} x) = a @{N} f(b @@{M} x).
     Let us show that a @{N} f(b @@{M} x) = a @{N} (b @@{N} f(x)).
      f is a modulehom over A over K from M to N.
-     f(b @@{M} x) = b @@{N} f(x).
+     f(b @@{M} x) = b @@{N} f(x) (by ModuleHom).
     qed.
     N is a module over A over K.
     f(x) < N.
@@ -129,18 +129,18 @@ Proof.
  Take V = Hom(K,M,N).
  Take U = Hom(K,A,M,N).
  Let us show that U is a subspace of V over K.
-  |U| is subset of |V|.
-  For all f,g < U             : f +{V} g < U.
-  For all a < K and all f < U : a @{V} f < U.
+  |U| is subset of |V| (by ModuleHomSubset).
+  For all f,g < U             : f +{V} g < U (by ModuleHomAddClosed).
+  For all a < K and all f < U : a @{V} f < U (by ModuleHomSmulClosed).
   Let us show that 0{V} < U.
    0{V} < V.
    0{V} is a map linear over K from M to N.
    Let us show that 0{V} is a modulehom over A over K from M to N.
     0{V} is from |M| to |N|.
-    For all x,y < M : 0{V}(x +{M} y) = 0{V}(x) +{N} 0{V}(y).
+    For all x,y < M : 0{V}(x +{M} y) = 0{V}(x) +{N} 0{V}(y) (by MapZero).
     Let us show that for all a < A and all x < M : 0{V}(a @@{M} x) = a @@{N} 0{V}(x).
      Let a < A and x < M.
-     0{V}(a @@{M} x) = 0{N}.
+     0{V}(a @@{M} x) = 0{N} (by MapZero).
      0{N} = 0{K} @{N} (a @@{N} 0{N}) (by ZeroSmul).
      Let us show that 0{K} @{N} (a @@{N} 0{N}) = a @@{N} (0{K} @{N} 0{N}).
       0{K} < K.
@@ -168,7 +168,8 @@ Theorem ModuleHomZero. Let A be an algebra over K. Let M,N be modules over A ove
  for all v < M : h(v) = 0{N}.
 Proof.
  Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
- 0{Hom(K,A,M,N)} = 0{Hom(K,M,N)}.
+ 0{Hom(K,A,M,N)} = 0{Hom(K,M,N)} (by SubZero).
+ Therefore the thesis (by MapZero).
 Qed.
 
 Theorem ModuleHomAdd. Let A be an algebra over K. Let M,N be modules over A over K.
@@ -176,7 +177,8 @@ Theorem ModuleHomAdd. Let A be an algebra over K. Let M,N be modules over A over
  for all v < M : h(v) = f(v) +{N} g(v).
 Proof.
  Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
- f +{Hom(K,A,M,N)} g = f +{Hom(K,M,N)} g.
+ f +{Hom(K,A,M,N)} g = f +{Hom(K,M,N)} g (by SubAdd).
+ Therefore the thesis (by MapAdd).
 Qed.
 
 Theorem ModuleHomNeg. Let A be an algebra over K. Let M,N be modules over A over K.
@@ -184,7 +186,8 @@ Theorem ModuleHomNeg. Let A be an algebra over K. Let M,N be modules over A over
  for all v < M : h(v) = ~{N} f(v).
 Proof.
  Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
- ~{Hom(K,A,M,N)} f = ~{Hom(K,M,N)} f.
+ ~{Hom(K,A,M,N)} f = ~{Hom(K,M,N)} f (by SubNeg).
+ Therefore the thesis (by MapNeg).
 Qed.
 
 Theorem ModuleHomSmul. Let A be an algebra over K. Let M,N be modules over A over K.
@@ -192,5 +195,6 @@ Theorem ModuleHomSmul. Let A be an algebra over K. Let M,N be modules over A ove
  for all v < M : h(v) = x @{N} f(v).
 Proof.
  Hom(K,A,M,N) is a subspace of Hom(K,M,N) over K.
- x @{Hom(K,A,M,N)} f = x @{Hom(K,M,N)} f.
+ x @{Hom(K,A,M,N)} f = x @{Hom(K,M,N)} f (by SubSmul).
+ Therefore the thesis (by MapSmul).
 Qed.

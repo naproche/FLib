@@ -1,4 +1,3 @@
-[prove off]
 [read RepresentationTheory/07_field_is_vector_space.ftl]
 [read RepresentationTheory/43_quiver_representation.ftl]
 
@@ -303,8 +302,6 @@ Axiom. quivRep(2) = F2^2.
 Axiom. quivRep(b) is a map h such that Dmn(h) = |F2| and h(0) = 0{F2^2} and h(1) = 0{F2^2}.
 Axiom. quivRep(c) = [[1,1],[0,1]]{F2}.
 Axiom. quivRep(d) = [[0,1],[1,0]]{F2}.
-
-[prove on]
 
 Theorem. quiv is a quiver.
 Proof.
