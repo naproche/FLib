@@ -1,5 +1,5 @@
 # Representation Theory in ForTheL
-These are formalizations of some topics from representation theory of algebras to be checked by Naproche-SAD.
+These are formalizations of some notions and statements from linear algebra, category theory and representation theory of algebras to be checked by Naproche-SAD.
 
 More details on the (original) linear algebra formalizations are given [here](../linear_algebra_ftl).
 
