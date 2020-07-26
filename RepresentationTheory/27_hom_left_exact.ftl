@@ -1,4 +1,4 @@
-[read RepresentationTheory/23_hom_functor.ftl]
+[read RepresentationTheory/24_hom_functor.ftl]
 [read RepresentationTheory/26_exactness.ftl]
 
 Let K denote a field.

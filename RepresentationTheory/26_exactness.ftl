@@ -1,5 +1,5 @@
-[read RepresentationTheory/22_module_category.ftl]
-[read RepresentationTheory/20_functor.ftl]
+[read RepresentationTheory/23_module_category.ftl]
+[read RepresentationTheory/17_functor.ftl]
 [read RepresentationTheory/10_kernel.ftl]
 
 Let K denote a field.

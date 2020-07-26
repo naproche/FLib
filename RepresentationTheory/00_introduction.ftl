@@ -35,8 +35,6 @@ Let a < S* stand for a << |S|\{0{S}}.
 Let a -{S} b stand for a +{S} (~{S} b).
 Let a /{S} b stand for a *{S} (inv{S} b).
 
-# Constructions with one or two parameters shall be introduced by their prefix being an object.
-# Constructions with more than two parameters are introduced individually.
 Signature. Let K,V,W be objects. Hom(K,V,W) is an object.
 Signature. Let f,x,y be objects. f(x,y) is an object.
 Signature. Let K,V be objects.   dual(K,V) is an object.
