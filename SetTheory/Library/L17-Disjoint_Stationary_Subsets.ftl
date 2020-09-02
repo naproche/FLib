@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L16-Fodors_Lemma.ftl]
+[read Formalizations/Library/L16-Fodors_Lemma.ftl]
 
 [prove off]
 
@@ -10,7 +10,6 @@ Let o,o1,o2 stand for objects.
 Let alpha, beta, gamma stand for ordinals.
 Let f,g,h,F,G,H stand for zffunction.
 Let kappa, lambda stand for cardinals.
-
 
 
 
@@ -53,9 +52,7 @@ Lemma. Let x be a zfset. Let M be a set. Then exists f (Dom(f) = M /\ forall i /
 Definition. Let x be a zfset. Let M be a set. const(x,M) is a zffunction f such that Dom(f) = M /\ forall i /in M f[i] = x.
 
 
-
 ## The Theorem
-
 
 Theorem DisjStat. Let kappa be a successor cardinal. Let S /in stat(kappa). Then exists f (f is a sequence of length kappa in stat(kappa,S) and f is pairwise disjoint on kappa in stat(kappa,S)).
 

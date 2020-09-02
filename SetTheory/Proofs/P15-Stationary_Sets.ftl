@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L14-Clubs.ftl]
+[read Formalizations/Library/L14-Clubs.ftl]
 
 
 ## Pretyped Variables
@@ -9,7 +9,6 @@ Let o,o1,o2 stand for objects.
 Let alpha, beta, gamma stand for ordinals.
 Let f,g,h,F,G,H stand for zffunction.
 Let kappa, lambda stand for cardinals.
-
 
 
 
@@ -89,7 +88,7 @@ Proof.
     XX /in Club(kappa).
     XX /subset YY.
     YY /subset kappa.
-    Then YY /in Club(kappa) (by clubsubset).
+    Then YY /in Club(kappa) (by ClubSubset).
   end.
 qed.
 
@@ -246,19 +245,19 @@ Proof.
       Forall j /in lambda lambda /in C[j].
       Proof.
         Let j /in lambda.
-        M /setminus (j+1) /subset C[j].
+        M /setminus (j+'1) /subset C[j].
         Proof.
-          Let beta /in M /setminus (j+1).
+          Let beta /in M /setminus (j+'1).
           Forall i /in beta (i /in kappa /\ beta /in C[i]).
           j /in beta.
           Proof.
             j, beta /in /Ord.
             j /in beta \/ beta /in j \/ j = beta (by TotalOrder).
-            beta /notin j+1.
+            beta /notin j+'1.
             Then beta /neq j /\ beta /notin j.
           end.
         end.
-        lambda /cap (M /setminus (j+1)) /cof lambda.
+        lambda /cap (M /setminus (j+'1)) /cof lambda.
         Proof.
           Let alpha /in lambda.
           lambda /cap M /cof lambda.
@@ -280,14 +279,14 @@ Proof.
             alpha /in z /\ j /in z.
           end.
           Take a zfset z such that z /in lambda /cap M /\ alpha /in z /\ j /in z.
-          Then z /notin (j+1).
-          Then z /in lambda /cap (M /setminus (j+1)).
+          Then z /notin (j+'1).
+          Then z /in lambda /cap (M /setminus (j+'1)).
         end.
-        lambda /cap (M /setminus (j+1)) /subset (lambda /cap C[j]).
+        lambda /cap (M /setminus (j+'1)) /subset (lambda /cap C[j]).
         Then C[j] /cap lambda /cof lambda.
         Proof.
           Let alpha /in lambda.
-          Take a zfset z such that z /in lambda /cap (M /setminus (j+1)) /\ alpha /in z.
+          Take a zfset z such that z /in lambda /cap (M /setminus (j+'1)) /\ alpha /in z.
           Then z /in C[j] /cap lambda.
         end.
         Then lambda /in C[j].
@@ -300,10 +299,10 @@ Proof.
   M /cof kappa.
   Proof.
     Let alpha /in kappa.
-    Forall beta /in kappa (/bigcap C^[beta] /setminus (beta+1)) /cap kappa /neq /emptyset.
+    Forall beta /in kappa (/bigcap C^[beta] /setminus (beta+'1)) /cap kappa /neq /emptyset.
     Proof.
       Let beta /in kappa.
-      Then (/bigcap C^[beta] /setminus (beta+1)) /cap kappa /neq /emptyset.
+      Then (/bigcap C^[beta] /setminus (beta+'1)) /cap kappa /neq /emptyset.
       Proof.
         Case beta /neq 0.
           Forall i /in beta i /in kappa.
@@ -322,13 +321,13 @@ Proof.
           beta /in kappa.
           Take a zfset z such that z /in /bigcap D^[beta] /\ beta /in z.
           /bigcap D^[beta] /subset /bigcap C^[beta].
-          Then z /in /bigcap C^[beta] /setminus (beta+1).
+          Then z /in /bigcap C^[beta] /setminus (beta+'1).
           Proof.
             z /in /bigcap C^[beta].
             beta /in z.
             Then z /notin beta.
             z /neq beta.
-            Then z /notin beta + 1.
+            Then z /notin beta +' 1.
           end.
           Take a zfset i such that i /in beta.
           C[i] /in C^[beta].
@@ -336,7 +335,7 @@ Proof.
           Then z /in C[i].
           C[i] /subset kappa.
           Then z /in kappa.
-          Then z /in (/bigcap C^[beta] /setminus (beta+1)) /cap kappa.
+          Then z /in (/bigcap C^[beta] /setminus (beta+'1)) /cap kappa.
         end.
         Case beta = 0.
           Then C^[beta] = /emptyset.
@@ -344,7 +343,7 @@ Proof.
         end.
       end.
     end.
-    Define sup[beta] = (Choose a zfset j such that (j /in (/bigcap C^[beta] /setminus (beta+1)) /cap kappa) in j) for i in kappa.
+    Define sup[beta] = (Choose a zfset j such that (j /in (/bigcap C^[beta] /setminus (beta+'1)) /cap kappa) in j) for i in kappa.
     sup : kappa /rightarrow kappa.
     Proof.
       Let i /in kappa.
@@ -356,7 +355,7 @@ Proof.
       Take ordinals a,b such that a = beta /\ b = sup[beta].
       Then a,b /in /Ord.
       Then a /in b \/ b /in a \/ a = b (by TotalOrder).
-      sup[beta] /notin beta + 1.
+      sup[beta] /notin beta +' 1.
       Then b /notin a++.
       Then b /notin a /\ b /neq a.
       Then a /in b.
@@ -369,14 +368,14 @@ Proof.
       Then a /in Dom(sup).
     end.    
   
-    Define f[n] = (sup ^^ (n+1))[alpha] for n in /NN.
+    Define f[n] = (sup ^^ (n+'1))[alpha] for n in /NN.
   
     Forall n /in /NN f[n] /in kappa.
     Proof.
       Let n /in /NN.
-      f[n] = (sup ^^ (n+1))[alpha].
-      Then f[n] /in ran(sup ^^ (n+1)).
-      ran(sup ^^ (n+1)) /subset Dom(sup).
+      f[n] = (sup ^^ (n+'1))[alpha].
+      Then f[n] /in ran(sup ^^ (n+'1)).
+      ran(sup ^^ (n+'1)) /subset Dom(sup).
     end.
     f is a zffunction.
     Proof.
@@ -391,7 +390,7 @@ Proof.
       Case n = 0. end.
       Case n /neq 0.
         Let m = n--.
-        f[n] = (sup ^^ (n+1))[alpha].
+        f[n] = (sup ^^ (n+'1))[alpha].
         (sup ^^ (n++))[alpha] = sup[(sup ^^ n)[alpha]].
         Then f[n] = sup[(sup ^^ n)[alpha]].
         f[m] = (sup ^^ n)[alpha].
@@ -456,7 +455,7 @@ Proof.
       Card(f^[/NN]) /subset /NN.
       f^[/NN] /subset kappa.
       Card(f^[/NN]) /in cofset2(kappa).
-      Then /bigcap cofset2(kappa) /subset Card(f^[/NN]).
+      Then min(cofset2(kappa)) /subset Card(f^[/NN]).
       Then cof(kappa) /subset /NN.
       Alef[1] /subset cof(kappa).
       Contradiction.
@@ -474,23 +473,23 @@ Proof.
       alpha /in x.
       Then x /neq 0.
       Then x /in /Succ.
-      Take an ordinal a such that x = a+1.
+      Take an ordinal a such that x = a+'1.
       Then a /in x.
       Take a zfset b such that b /in f^[/NN] /\ a /in b.
       f^[/NN] /subset kappa.
       Then b /in /Ord.
-      Then a+1 /subset b.
-      Then a+1 = b \/ a+1 /in b.
+      Then a+'1 /subset b.
+      Then a+'1 = b \/ a+'1 /in b.
       Proof.
-        a+1,b /in /Ord.
-        a+1 /in b \/ b /in a+1 \/ a+1 = b (by TotalOrder).
-        b /notin a+1.
+        a+'1,b /in /Ord.
+        a+'1 /in b \/ b /in a+'1 \/ a+'1 = b (by TotalOrder).
+        b /notin a+'1.
       end.
       Take a zfset n such that n /in /NN /\ b = f[n].
-      Then b /in f[n+1].
+      Then b /in f[n+'1].
       Then b /in /bigcup f^[/NN].
       Then b /in x.
-      Then a+1 /in x.
+      Then a+'1 /in x.
       Contradiction.
     end.
   
@@ -498,17 +497,20 @@ Proof.
     Proof.
       Let j /in x.
       Take a zfset n such that n /in /NN /\ j /in f[n].
-      f^[/NN /setminus (n+1)] /subset C[j].
+      f^[/NN /setminus (n+'1)] /subset C[j].
       Proof.
-        Let a /in f^[/NN /setminus (n+1)].
-        f^[/NN /setminus (n+1)] = {f[m] | m /in /NN /setminus (n+1)}.
-        Take a zfset m such that m /in (/NN /setminus (n+1)) /\ a = f[m].
+        Let a /in f^[/NN /setminus (n+'1)].
+        f^[/NN /setminus (n+'1)] = {f[m] | m /in /NN /setminus (n+'1)}.
+        Take a zfset m such that m /in (/NN /setminus (n+'1)) /\ a = f[m].
         Then n /in m.
         m /neq 0.
         f[m] = sup[f[m--]].
         sup[f[m--]] /in /bigcap C^[f[m--]].
         Then a /in /bigcap C^[f[m--]].
         n /subset m--.
+        Proof.
+          m = (m--)++.
+        end.
         Then f[n] /subset f[m--].
         Then j /in f[m--].
         Then C[j] /in C^[f[m--]].
@@ -521,23 +523,23 @@ Proof.
         Let a /in x.
         Take a zfset b such that b /in f^[/NN] /\ a /in b.
         Take a zfset m such that m /in /NN /\ b = f[m].
-        Let k = m /cup (n+1).
-        k = m \/ k = n+1.
+        Let k = m /cup (n+'1).
+        k = m \/ k = n+'1.
         Proof.
-          m, n+1 /in /Ord.
-          m /in n+1 \/ n+1 /in m \/ m = n+1 (by TotalOrder).
-          Then m /subset n+1 \/ n+1 /subset m.
-          Then m /cup (n+1) = m \/ m /cup (n+1) = n+1.
+          m, n+'1 /in /Ord.
+          m /in n+'1 \/ n+'1 /in m \/ m = n+'1 (by TotalOrder).
+          Then m /subset n+'1 \/ n+'1 /subset m.
+          Then m /cup (n+'1) = m \/ m /cup (n+'1) = n+'1.
         end.
         m /subset k.
         Then f[m] /subset f[k].
         Then a /in f[k].
-        k /notin n+1.
-        Then k /in /NN /setminus (n+1).
-        Then f[k] /in f^[/NN /setminus (n+1)].
+        k /notin n+'1.
+        Then k /in /NN /setminus (n+'1).
+        Then f[k] /in f^[/NN /setminus (n+'1)].
         Then f[k] /in C[j].
-        f[k] /in f[k+1].
-        f[k+1] /in f^[/NN].
+        f[k] /in f[k+'1].
+        f[k+'1] /in f^[/NN].
         Then f[k] /in x.
         Then f[k] /in C[j] /cap x.
       end.

@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L19-The_Last_Lemma.ftl]
+[read Formalizations/Library/L19-The_Last_Lemma.ftl]
 
 [prove off]
 
@@ -24,10 +24,7 @@ Let f /intersect X stand for the functionintersection of f and X.
 
 ## The Theorem
 
-
-Theorem Silver. Let kappa /in /BigSingCard. Let GCH below kappa. Then 2 ^3 kappa = Plus[kappa].
-
-
+Theorem Silver. Let kappa /in /BigSingCard. Let GCH below kappa. Then 2 ^ kappa = Plus[kappa].
 
 
 

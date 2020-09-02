@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L05-Mostowski_Collapse.ftl]
+[read Formalizations/Library/L05-Mostowski_Collapse.ftl]
 
 ## Pretyped Variables
 
@@ -10,15 +10,14 @@ Let f,g,h,F,G,H stand for zffunction.
 Let kappa, lambda stand for cardinals.
 
 
-
 ## Cartesian Product
 
 
-Lemma. Forall a,b /in /NN ((a /times b is a zfset) and (Card(a /times b) = a * b)).
+Lemma. Forall a,b /in /NN ((a /times b is a zfset) and (Card(a /times b) = a *' b)).
 Proof.
   Forall a,b /in /NN (a /times b is a zfset).
   Let a /in /NN.
-  Forall b /in /NN (Card(a /times b) = a * b).
+  Forall b /in /NN (Card(a /times b) = a *' b).
   Proof by induction.
     Let b /in /NN.
     Case b = 0.
@@ -26,31 +25,31 @@ Proof.
     Case b /neq 0.
       Let n = b--.
       n is an ordinal.
-      Then Card(a /times n) = a * n.
+      Then Card(a /times n) = a *' n.
       Define A = {(i,n) | i /in a}.     
-      (a /times (n+1)) /subset (a /times n) /cup A.
+      (a /times (n+'1)) /subset (a /times n) /cup A.
       Proof.
-        Let pair /in a /times (n+1).
-        Take zfsets aa,bb such that aa /in a /\ bb /in (n+1) /\ pair = (aa,bb).
+        Let pair /in a /times (n+'1).
+        Take zfsets aa,bb such that aa /in a /\ bb /in (n+'1) /\ pair = (aa,bb).
         Then bb /in n \/ bb = n.
         Case bb /in n. Then (aa,bb) /in a /times n. end.
         Case bb = n. Then (aa,bb) = (aa,n). (aa,n) /in A. end.
       end.
-      (a /times n) /cup A /subset (a /times (n+1)).
+      (a /times n) /cup A /subset (a /times (n+'1)).
       Proof.
         Let pair /in (a /times n) /cup A.
         Then pair /in (a /times n) \/ pair /in A.
         Case pair /in A.
           Take a zfset i such that i /in a \/ pair = (i,n).
-          Then i /in a /\ n /in (n+1).
-          Then (i,n) /in a /times (n+1).
+          Then i /in a /\ n /in (n+'1).
+          Then (i,n) /in a /times (n+'1).
         end.
         Case pair /in a /times n.
           Take zfsets aa,bb such that aa /in a /\ bb /in n /\ pair = (aa,bb).
-          Then aa /in a /\ bb /in (n+1).
-          Then (aa,bb) /in (a /times (n+1)).
+          Then aa /in a /\ bb /in (n+'1).
+          Then (aa,bb) /in (a /times (n+'1)).
         end.
-        Then (a /times (n+1)) = (a /times n) /cup A.
+        Then (a /times (n+'1)) = (a /times n) /cup A.
       end.
       Forall pair /in A pair /notin (a /times n).
       Proof.
@@ -66,7 +65,7 @@ Proof.
         end.
       end. 
      
-      Take a zffunction f such that f : a /times n /leftrightarrow a * n.
+      Take a zffunction f such that f : a /times n /leftrightarrow a *' n.
       Forall x,y /in /VV ((x,y) /in A => x /in /NN).
       Define g[(x,y)] = x for (x,y) in A.
       g is a zffunction.
@@ -75,53 +74,53 @@ Proof.
         Then g[pair] /in /VV.
       end.
       ran(g) = a.
-      Forall x,y /in /VV ((x,y) /in a /times (n+1) => (x,y) /in A \/ (x,y) /in a /times n).
+      Forall x,y /in /VV ((x,y) /in a /times (n+'1) => (x,y) /in A \/ (x,y) /in a /times n).
       Forall x,y /in /VV ((x,y) /in A => (x,y) /in Dom(g) /\ g[(x,y)] /in /Ord).
   
       Forall pair /in A (g[pair] is an ordinal).  
 
       Define h[(x,y)] =
         Case (x,y) /in a /times n  -> f[(x,y)],
-        Case (x,y) /in A -> (a*n) + g[(x,y)]
-      for (x,y) in a /times (n+1).
+        Case (x,y) /in A -> (a*'n) +' g[(x,y)]
+      for (x,y) in a /times (n+'1).
 
       Then h is a zffunction.
       Proof.
         Let pair /in Dom(h). 
         Take zfsets x,y such that pair = (x,y).
-        Then (x,y) /in a /times (n+1).
+        Then (x,y) /in a /times (n+'1).
         Then h[(x,y)] /in /VV.
         Proof.
           Case (x,y) /in a /times n. end.
           Case (x,y) /in A. end.
         end.
       end.
-      ran(h) /subset (a*n) + a.
+      ran(h) /subset (a*'n) +' a.
       Proof.
-        Let pair /in a /times (n+1). 
+        Let pair /in a /times (n+'1). 
         Take zfsets x,y such that pair = (x,y).
-        Then h[(x,y)] /in (a * n) + a.
+        Then h[(x,y)] /in (a *' n) +' a.
         Proof.
           Case (x,y) /in a /times n. 
             Then h[(x,y)] = f[(x,y)].
-            f[(x,y)] /in a * n. 
-            (a*n) /subset (a*n) + a.
-            Then f[(x,y)] /in (a*n) + a.
+            f[(x,y)] /in a *' n. 
+            (a*'n) /subset (a*'n) +' a.
+            Then f[(x,y)] /in (a*'n) +' a.
           end.
           Case (x,y) /in A. 
-            Then h[(x,y)] = (a*n) + g[(x,y)].
-            a*n,g[(x,y)],a /in /Ord.
+            Then h[(x,y)] = (a*'n) +' g[(x,y)].
+            a*'n,g[(x,y)],a /in /Ord.
             g[(x,y)] /in a. 
-            Then (a*n) + g[(x,y)] /in (a*n) + a (by Add1).
+            Then (a*'n) +' g[(x,y)] /in (a*'n) +' a (by Add1).
           end.
         end.
-        Then h[pair] /in (a*n) + a.
+        Then h[pair] /in (a*'n) +' a.
       end.
-      h : a /times (n+1) /rightarrow (a * n) + a.
+      h : a /times (n+'1) /rightarrow (a *' n) +' a.
 
       h is injective.
       Proof.
-        Let pair1, pair2 /in a /times (n+1).
+        Let pair1, pair2 /in a /times (n+'1).
         Let pair1 /neq pair2.
         Then h[pair1] /neq h[pair2].
         Proof.
@@ -136,75 +135,75 @@ Proof.
           Case pair1, pair2 /in A.
             Then g[pair1] /neq g[pair2].
             Forall ord1,ord2 /in /Ord (ord1 /in ord2 \/ ord2 /in ord1 \/ ord1 = ord2).
-            (a*n),g[pair1],g[pair2] /in /Ord.
+            (a*'n),g[pair1],g[pair2] /in /Ord.
             Then g[pair1] /in g[pair2] \/ g[pair2] /in g[pair1] (by TotalOrder).
-            (a*n) + g[pair1], (a*n) + g[pair2] /in /Ord.
-            Then (a*n) + g[pair1] /in (a*n) + g[pair2] \/ (a*n) + g[pair2] /in (a*n) + g[pair1] (by Add1).
-            Then (a*n) + g[pair1] /neq (a*n) + g[pair2].
+            (a*'n) +' g[pair1], (a*'n) +' g[pair2] /in /Ord.
+            Then (a*'n) +' g[pair1] /in (a*'n) +' g[pair2] \/ (a*'n) +' g[pair2] /in (a*'n) +' g[pair1] (by Add1).
+            Then (a*'n) +' g[pair1] /neq (a*'n) +' g[pair2].
             pair1 /notin a /times n.
             Take zfsets x1,y1 such that pair1 = (x1,y1).
-            Then h[(x1,y1)] = (a*n) + g[(x1,y1)].
+            Then h[(x1,y1)] = (a*'n) +' g[(x1,y1)].
             pair2 /notin a /times n.
             Take zfsets x2,y2 such that pair2 = (x2,y2).
-            Then h[(x2,y2)] = (a*n) + g[(x2,y2)].
+            Then h[(x2,y2)] = (a*'n) +' g[(x2,y2)].
           end.
           Case (pair1 /in A /\ pair2 /in a /times n).
             Take zfsets x2,y2 such that pair2 = (x2,y2).
             h[(x2,y2)] = f[(x2,y2)].
-            Then h[pair2] /in a * n.
+            Then h[pair2] /in a *' n.
             pair1 /notin a /times n.
             Take zfsets x1,y1 such that pair1 = (x1,y1).
             g[(x1,y1)] /in /Ord.
-            h[(x1,y1)] = (a*n) + g[(x1,y1)].
-            h[pair1] /notin a * n.
+            h[(x1,y1)] = (a*'n) +' g[(x1,y1)].
+            h[pair1] /notin a *' n.
           end.
             Case (pair2 /in A /\ pair1 /in a /times n).
             Take zfsets x1,y1 such that pair1 = (x1,y1).
             h[(x1,y1)] = f[(x1,y1)].
-            Then h[pair1] /in a * n.
+            Then h[pair1] /in a *' n.
             pair2 /notin a /times n.
             Take zfsets x2,y2 such that pair2 = (x2,y2).
             g[(x2,y2)] /in /Ord.
-            h[(x2,y2)] = (a*n) + g[(x2,y2)].
-            h[pair2] /notin a * n.
+            h[(x2,y2)] = (a*'n) +' g[(x2,y2)].
+            h[pair2] /notin a *' n.
           end.
         end.
       end.
       
-      (a*n) + a /subset ran(h).
+      (a*'n) +' a /subset ran(h).
       Proof.
-        Let x /in (a*n) + a.
+        Let x /in (a*'n) +' a.
         Then x /in ran(h).
         Proof.
-          x /in (a*n) \/ x /notin (a*n).
-          Case x /in a*n.
+          x /in (a*'n) \/ x /notin (a*'n).
+          Case x /in a*'n.
             Take a zfset pair such that pair /in a /times n /\ f[pair] = x.
             Then pair /in Dom(h).
             Take sets x1,y1 such that pair = (x1,y1).
             Then h[(x1,y1)] = x.
           end.
-          Case x /notin a*n.
-            Forall mm,nn /in /NN forall xx /in (mm + nn) (xx /in mm \/ exists i /in nn ((i is an ordinal) /\ xx = mm + i)).
-            (a*n), a /in /NN.
-            x /in (a*n) + a.
-            Then (x /in (a*n) \/ exists i /in a ((i is an ordinal) /\ x = (a*n) + i)) (by AddFin).
-            Exists i /in a ((i is an ordinal) /\ x = (a*n) + i).
-            Take an ordinal i such that i /in a /\ x = (a*n) + i.
+          Case x /notin a*'n.
+            Forall mm,nn /in /NN forall xx /in (mm +' nn) (xx /in mm \/ exists i /in nn xx = mm +' i) (by AddFin).
+            (a*'n), a /in /NN.
+            x /in (a*'n) +' a.
+            Then (x /in (a*'n) \/ exists i /in a ((i is an ordinal) /\ x = (a*'n) +' i)) (by AddFin).
+            Exists i /in a ((i is an ordinal) /\ x = (a*'n) +' i).
+            Take an ordinal i such that i /in a /\ x = (a*'n) +' i.
             Take a zfset pair such that pair /in A /\ i = g[pair].
             Take zfsets x1,y1 such that pair = (x1,y1).
             Then (x1,y1) /notin a /times n.
-            Then h[(x1,y1)] = (a * n) + g[(x1,y1)].
-            Then h[(x1,y1)] = (a * n) + i.
+            Then h[(x1,y1)] = (a *' n) +' g[(x1,y1)].
+            Then h[(x1,y1)] = (a *' n) +' i.
           end.
         end.
       end.
-      Then ran(h) = (a*n) + a.
-      Then h : a /times (n+1) /leftrightarrow (a * n) + a.    
-      (a * n) + a /in /NN.
-      n+1 = b.
-      Then Card(a /times b) = (a * n) + a.
-      a * b = (a * n) + a.
-      Then Card(a /times b) = (a * b).
+      Then ran(h) = (a*'n) +' a.
+      Then h : a /times (n+'1) /leftrightarrow (a *' n) +' a.    
+      (a *' n) +' a /in /NN.
+      n+'1 = b.
+      Then Card(a /times b) = (a *' n) +' a.
+      a *' b = (a *' n) +' a.
+      Then Card(a /times b) = (a *' b).
     end.    
   end.   
 qed.
@@ -212,105 +211,106 @@ qed.
 
 Lemma. Let a1,a2,b1,b2 be zfsets. Let Card(a1) = Card(a2) /\ Card(b1) = Card(b2). Then (a1 /times b1) /tilde (a2 /times b2).
 Proof.
-    a1 /tilde a2.
-    b1 /tilde b2.
-    Take a zffunction f such that f : a1 /leftrightarrow a2.
-    Take a zffunction g such that g : b1 /leftrightarrow b2.
-    
-    Define h1[(c,d)] = c for (c,d) in a1 /times b1.
-    Define h2[(c,d)] = d for (c,d) in a1 /times b1.
-    h1 is a zffunction.
+  a1 /tilde a2.
+  b1 /tilde b2.
+  Take a zffunction f such that f : a1 /leftrightarrow a2.
+  Take a zffunction g such that g : b1 /leftrightarrow b2.
+  
+  Define h1[(c,d)] = c for (c,d) in a1 /times b1.
+  Define h2[(c,d)] = d for (c,d) in a1 /times b1.
+  h1 is a zffunction.
+  Proof.
+    Let pair /in Dom(h1). Then pair /in a1 /times b1.
+    Take zfsets c,d such that pair = (c,d).
+    Then h1[pair] /in /VV.
+  end.
+  ran(h1) /subset a1.
+  Proof.
+    Let pair /in Dom(h1). Then pair /in a1 /times b1.
+    Take zfsets c,d such that pair = (c,d) /\ c /in a1.
+    Then h1[pair] /in a1.
+  end.
+  h2 is a zffunction.
+  Proof.
+    Let pair /in Dom(h2). Then pair /in a1 /times b1.
+    Take zfsets c,d such that pair = (c,d).
+    Then h2[pair] /in /VV.
+  end.
+  ran(h2) /subset b1.
+  Proof.
+    Let pair /in Dom(h2). Then pair /in a1 /times b1.
+    Take zfsets c,d such that pair = (c,d) /\ d /in b1.
+    Then h2[pair] /in b1.
+  end.    
+  Then f /circ h1 : a1 /times b1 /rightarrow a2.
+  Then g /circ h2 : a1 /times b1 /rightarrow b2.
+  
+  Define h[pair] = ((f /circ h1)[pair],(g /circ h2)[pair]) for pair in a1 /times b1.
+  
+  Then h is a zffunction.
+  Proof.
+    Let pair /in a1 /times b1.
+    Then (f /circ h1)[pair] /in a2.
+    Then (g /circ h2)[pair] /in b2.
+    Then h[pair] /in /VV.
+  end.
+  Then h : a1 /times b1 /rightarrow a2 /times b2.
+  Proof.
+    Dom(h) = a1 /times b1.
+    Let pair /in a1 /times b1.
+    Then (f /circ h1)[pair] /in a2.
+    Then (g /circ h2)[pair] /in b2.
+    Then h[pair] /in a2 /times b2.
+  end.
+  h is injective.
+  Proof.
+    Let pair1, pair2 /in a1 /times b1. Let pair1 /neq pair2.
+    Then h[pair1] /neq h[pair2].
     Proof.
-      Let pair /in Dom(h1). Then pair /in a1 /times b1.
-      Take zfsets c,d such that pair = (c,d).
-      Then h1[pair] /in /VV.
-    end.
-    ran(h1) /subset a1.
-    Proof.
-      Let pair /in Dom(h1). Then pair /in a1 /times b1.
-      Take zfsets c,d such that pair = (c,d) /\ c /in a1.
-      Then h1[pair] /in a1.
-    end.
-    h2 is a zffunction.
-    Proof.
-      Let pair /in Dom(h2). Then pair /in a1 /times b1.
-      Take zfsets c,d such that pair = (c,d).
-      Then h2[pair] /in /VV.
-    end.
-    ran(h2) /subset b1.
-    Proof.
-      Let pair /in Dom(h2). Then pair /in a1 /times b1.
-      Take zfsets c,d such that pair = (c,d) /\ d /in b1.
-      Then h2[pair] /in b1.
-    end.    
-    Then f /circ h1 : a1 /times b1 /rightarrow a2.
-    Then g /circ h2 : a1 /times b1 /rightarrow b2.
-    
-    Define h[pair] = ((f /circ h1)[pair],(g /circ h2)[pair]) for pair in a1 /times b1.
-    
-    Then h is a zffunction.
-    Proof.
-      Let pair /in a1 /times b1.
-      Then (f /circ h1)[pair] /in a2.
-      Then (g /circ h2)[pair] /in b2.
-      Then h[pair] /in /VV.
-    end.
-    Then h : a1 /times b1 /rightarrow a2 /times b2.
-    Proof.
-      Dom(h) = a1 /times b1.
-      Let pair /in a1 /times b1.
-      Then (f /circ h1)[pair] /in a2.
-      Then (g /circ h2)[pair] /in b2.
-      Then h[pair] /in a2 /times b2.
-    end.
-    h is injective.
-    Proof.
-      Let pair1, pair2 /in a1 /times b1. Let pair1 /neq pair2.
-      Then h[pair1] /neq h[pair2].
-      Proof.
-        Take zfsets x1,y1 such that x1 /in a1 /\ y1 /in b1 /\ pair1 = (x1,y1).
-        Take zfsets x2,y2 such that x2 /in a1 /\ y2 /in b1 /\ pair2 = (x2,y2).
-        Then x1 /neq x2 \/ y1 /neq y2.
-        Case x1 /neq x2.
-          h1[(x1,y1)] = x1.
-          h1[(x2,y2)] = x2.
-          Then f[x1] /neq f[x2].
-          Then (f /circ h1)[(x1,y1)] /neq (f /circ h1)[(x2,y2)].
-          Then forall aa1,aa2 /in /VV ((f /circ h1)[(x1,y1)],aa1) /neq ((f /circ h1)[(x2,y2)],aa2).
-          ((f /circ h1)[(x1,y1)],(g /circ h2)[(x1,y1)]) /neq ((f /circ h1)[(x2,y2)],(g /circ h2)[(x2,y2)]).
-        end.
-        Case y1 /neq y2.
-          h2[(x1,y1)] = y1.
-          h2[(x2,y2)] = y2.
-          Then g[y1] /neq g[y2].
-          Then (g /circ h2)[(x1,y1)] /neq (g /circ h2)[(x2,y2)].
-          Then forall aa1,aa2 /in /VV (aa1,(g /circ h2)[(x1,y1)]) /neq (aa2,(g /circ h2)[(x2,y2)]).
-          Proof by contradiction. Assume the contrary.
-            Take aa1,aa2 /in /VV such that (aa1,(g /circ h2)[(x1,y1)]) = (aa2,(g /circ h2)[(x2,y2)]).
-            Take zfsets bb1,bb2 such that bb1 = (g /circ h2)[(x1,y1)] /\ bb2 = (g /circ h2)[(x2,y2)].
-            Then (aa1,bb1) = (aa2,bb2).
-            Then aa1=aa2 /\ bb1 = bb2.
-            Then (g /circ h2)[(x1,y1)] = (g /circ h2)[(x2,y2)].
-            Contradiction.
-          end.
-          ((f /circ h1)[(x1,y1)],(g /circ h2)[(x1,y1)]) /neq ((f /circ h1)[(x2,y2)],(g /circ h2)[(x2,y2)]).
-        end.
+      Take zfsets x1,y1 such that x1 /in a1 /\ y1 /in b1 /\ pair1 = (x1,y1).
+      Take zfsets x2,y2 such that x2 /in a1 /\ y2 /in b1 /\ pair2 = (x2,y2).
+      Then x1 /neq x2 \/ y1 /neq y2.
+      Case x1 /neq x2.
+        h1[(x1,y1)] = x1.
+        h1[(x2,y2)] = x2.
+        Then f[x1] /neq f[x2].
+        Then (f /circ h1)[(x1,y1)] /neq (f /circ h1)[(x2,y2)].
+        Then forall aa1,aa2 /in /VV ((f /circ h1)[(x1,y1)],aa1) /neq ((f /circ h1)[(x2,y2)],aa2).
+        ((f /circ h1)[(x1,y1)],(g /circ h2)[(x1,y1)]) /neq ((f /circ h1)[(x2,y2)],(g /circ h2)[(x2,y2)]).
       end.
-    end.    
-    Then h : a1 /times b1 /leftrightarrow ran(h).    
-    a2 /times b2 /subset ran(h).
-    Proof.
-      Let pair /in a2 /times b2. Take zfsets x2,y2 such that x2 /in a2 /\ y2 /in b2 /\ pair = (x2,y2).
-      Take a zfset x1 such that x1 /in a1 /\ f[x1] = x2.
-      Take a zfset y1 such that y1 /in b1 /\ g[y1] = y2.
-      Then (x1,y1) /in a1 /times b1.
-      h1[(x1,y1)] = x1.
-      h2[(x1,y1)] = y1.
-      Then (f /circ h1)[(x1,y1)] = x2.
-      Then (g /circ h2)[(x1,y1)] = y2.
-      Then h[(x1,y1)] = (x2,y2).
-      Then pair /in ran(h).
+      Case y1 /neq y2.
+        h2[(x1,y1)] = y1.
+        h2[(x2,y2)] = y2.
+        Then g[y1] /neq g[y2].
+        Then (g /circ h2)[(x1,y1)] /neq (g /circ h2)[(x2,y2)].
+        Then forall aa1,aa2 /in /VV (aa1,(g /circ h2)[(x1,y1)]) /neq (aa2,(g /circ h2)[(x2,y2)]).
+        Proof by contradiction. Assume the contrary.
+          Take aa1,aa2 /in /VV such that (aa1,(g /circ h2)[(x1,y1)]) = (aa2,(g /circ h2)[(x2,y2)]).
+          Take zfsets bb1,bb2 such that bb1 = (g /circ h2)[(x1,y1)] /\ bb2 = (g /circ h2)[(x2,y2)].
+          Then (aa1,bb1) = (aa2,bb2).
+          Then aa1=aa2 /\ bb1 = bb2.
+          Then (g /circ h2)[(x1,y1)] = (g /circ h2)[(x2,y2)].
+          Contradiction.
+        end.
+        ((f /circ h1)[(x1,y1)],(g /circ h2)[(x1,y1)]) /neq ((f /circ h1)[(x2,y2)],(g /circ h2)[(x2,y2)]).
+      end.
     end.
+  end.    
+  Then h : a1 /times b1 /leftrightarrow ran(h).    
+  a2 /times b2 /subset ran(h).
+  Proof.
+    Let pair /in a2 /times b2. Take zfsets x2,y2 such that x2 /in a2 /\ y2 /in b2 /\ pair = (x2,y2).
+    Take a zfset x1 such that x1 /in a1 /\ f[x1] = x2.
+    Take a zfset y1 such that y1 /in b1 /\ g[y1] = y2.
+    Then (x1,y1) /in a1 /times b1.
+    h1[(x1,y1)] = x1.
+    h2[(x1,y1)] = y1.
+    Then (f /circ h1)[(x1,y1)] = x2.
+    Then (g /circ h2)[(x1,y1)] = y2.
+    Then h[(x1,y1)] = (x2,y2).
+    Then pair /in ran(h).
+  end.
+  Then h : a1 /times b1 /leftrightarrow a2 /times b2.
 qed.
 
 
@@ -318,9 +318,9 @@ Lemma. Let a,b be zfsets. Let a, b be finite. Then (a /times b is a zfset) and (
 Proof.
   Take natural numbers m,n such that Card(a) = m /\ Card(b) = n.
   Then a /times b /tilde m /times n.
-  Card(m /times n) = m * n.
-  Then Card(a /times b) = m * n.
-  m * n /in /NN.
+  Card(m /times n) = m *' n.
+  Then Card(a /times b) = m *' n.
+  m *' n /in /NN.
 qed.
 
 
@@ -479,20 +479,20 @@ Proof.
   /Ord /times /Ord /subset reldomain(goedel).
   Proof.
     Let pair /in /Ord /times /Ord. Take ordinals a,b such that pair = (a,b).
-    Then (a,b) <3 (a+1,b).
+    Then (a,b) <3 (a+'1,b).
     Proof.
-      a /cup b /subset (a+1) /cup b.
+      a /cup b /subset (a+'1) /cup b.
       a,b /in /Ord.
       a /cup b /in /Ord.
-      (a+1) /cup b /in /Ord.
-      Take ordinals alpha, beta such that alpha = a /cup b /\ beta = (a+1) /cup b.
+      (a+'1) /cup b /in /Ord.
+      Take ordinals alpha, beta such that alpha = a /cup b /\ beta = (a+'1) /cup b.
       Then alpha /subset beta. Then alpha /in beta \/ alpha = beta.
-      Then a /cup b /in (a+1) /cup b \/ a /cup b = (a+1) /cup b.
+      Then a /cup b /in (a+'1) /cup b \/ a /cup b = (a+'1) /cup b.
     end.
-    Then (a,b) - goedel - (a+1,b).
-    (a+1,b) /in /VV.
+    Then (a,b) - goedel - (a+'1,b).
+    (a+'1,b) /in /VV.
     Proof.
-      a+1,b /in /VV.
+      a+'1,b /in /VV.
       Forall x,y /in /VV (x,y) /in /VV.
     end.
     Then exists z ((a,b) - goedel - z).
@@ -506,19 +506,23 @@ Proof.
   reldomain(goedel) /subset /Ord /times /Ord.
   Let A be a set. Let A /subset /Ord /times /Ord. Let A /neq /emptyset.
   Define B = {ordinals alpha | exists beta /in /Ord (beta /subset alpha /\ ((alpha,beta) /in A \/ (beta,alpha) /in A))}.
+  B /subset /Ord.
   Then B /neq /emptyset.
   Proof.
     Take an object pair such that pair /in A. Take ordinals a,b such that pair = (a,b).
     Then a /subset b \/ b /subset a. Then a /in B \/ b /in B.
   end.
-  Take a zfset min such that min /in B /\ forall h /in min h /notin B.
+  Let min = min(B).
+  min /in B.
   Define C = {ordinals beta | beta = min \/ (beta /in min /\ (beta,min) /in A)}.
+  C /subset /Ord.
   Then C /neq /emptyset.
   Proof.
     min /in B. Take an ordinal beta such that beta /subset min /\ ((beta,min) /in A \/ (min,beta) /in A).
     Then beta /in C \/ min /in C.
   end.
-  Take a set min2 such that min2 /in C /\ forall h /in min2 h /notin C.
+  Let min2 = min(C).
+  min2 /in C.
   Then min2 /in min \/ min2 = min.
   
   Case min2 /in min. Then (min2, min) /in A. min2 /cup min = min.
@@ -572,6 +576,7 @@ Proof.
   
   Case min2 = min.
     Define D = {ordinals alpha | (min, alpha) /in A}.
+    D /subset /Ord.
     Then D /neq /emptyset.
     Proof.
       Take an ordinal beta such that beta /subset min /\ ((min,beta) /in A \/ (beta,min) /in A).
@@ -579,7 +584,7 @@ Proof.
       Case beta /in min. Then (min,beta) /in A. Then beta /in D. end.
       Case beta = min. Then (min,min) /in A. Then min /in D. end.
     end.
-    Take an ordinal min3 such that min3 /in D /\ forall a /in min3 a /notin D.
+    Let min3 = min(D).
     Let pair = (min,min3). 
     Then min /cup min3 = min.
     Proof.
@@ -629,7 +634,7 @@ Proof.
     Proof.
       Trans(a /cup b).
       a /cup b /in /Ord.
-      Let c = (a /cup b)+1.
+      Let c = (a /cup b)+'1.
       Then sset(goedel, pair) /subset c /times c.
       Proof.
         Let pair2 /in sset(goedel,pair).
@@ -670,11 +675,11 @@ Proof by contradiction. Assume the contrary.
 qed.
 
 
-Lemma. TCol goedel : /Ord /times /Ord /leftrightarrow /Ord.
+Lemma. MCol goedel : /Ord /times /Ord /leftrightarrow /Ord.
 
 
 Signature. Goed is a function.
-Axiom. Goed = TCol goedel.
+Axiom. Goed = MCol goedel.
 Lemma. Goed is a zffunction.
 Lemma. Goed : /Ord /times /Ord /leftrightarrow /Ord.
 Lemma. Let a1,a2,b1,b2 /in /Ord. Then (a1,b1),(a2,b2) /in /Ord /times /Ord /\ Goed[(a1,b1)], Goed[(a2,b2)] /in /Ord.
@@ -689,12 +694,14 @@ Proof.
   Let x = (a1,b1).
   Let y = (a2,b2).
   x,y /in /Ord /times /Ord.
-  Then x,y /in reldomain(goedel).
+  Then x,y /in relfield(goedel).
   Then x - goedel - y.
   Then x /in sset(goedel,y).
-  (TCol goedel)[y] = (TCol goedel)^[sset(goedel,y)].
-  (TCol goedel)[x] /in (TCol goedel)^[sset(goedel,y)].
-  Then (TCol goedel)[x] /in (TCol goedel)[y].
+  goedel is a strongly wellfounded relation.
+  Then forall z /in relfield(goedel) (MCol goedel)[z] = (MCol goedel)^[sset(goedel,z)] (by MCol).
+  (MCol goedel)[y] = (MCol goedel)^[sset(goedel,y)].
+  (MCol goedel)[x] /in (MCol goedel)^[sset(goedel,y)].
+  Then (MCol goedel)[x] /in (MCol goedel)[y].
 qed.
 
 
@@ -847,7 +854,7 @@ Proof.
   Goed[(0,alpha)] /subset ran(Goed /upharpoonright sset(goedel,(0,alpha))).
   Proof.
     Let x /in Goed[(0,alpha)]. Then x /in Goed^[sset(goedel,(0,alpha))].
-    Take a set y such that y /in sset(goedel,(0,alpha)) /\ Goed[y] = x.
+    Take a zfset y such that y /in sset(goedel,(0,alpha)) /\ Goed[y] = x.
     Then (Goed /upharpoonright sset(goedel,(0,alpha)))[y] = x.
     Then x /in ran(Goed /upharpoonright sset(goedel,(0,alpha))).
   end.
@@ -894,13 +901,13 @@ Proof.
     Then /NN /in Goed^[/NN /times /NN].
     /NN /times /NN /subset Dom(Goed).
     Goed^[/NN /times /NN] = {zfset z | exists x /in /NN /times /NN (z = Goed[x])}.
-    Take a set pair such that pair /in /NN /times /NN /\ /NN = Goed[pair].
+    Take a zfset pair such that pair /in /NN /times /NN /\ /NN = Goed[pair].
     Take ordinals a,b such that a,b /in /NN /\ pair = (a,b).
     Then (a,b) /in Dom(Goed).
     Goed[(a,b)] = Goed^[sset(goedel,(a,b))].
     Then /NN = Goed^[sset(goedel,(a,b))].   
     a /cup b /in /Ord.
-    Let c = (a /cup b) + 1.
+    Let c = (a /cup b) +' 1.
     sset(goedel,(a,b)) /subset c /times c.
     Proof.
       Let pair2 /in sset(goedel,(a,b)). Then pair2 /in /Ord /times /Ord.
@@ -908,7 +915,8 @@ Proof.
       Then (a2,b2) <3 (a,b).
       Then a2 /cup b2 /in a /cup b \/ a2 /cup b2 = a /cup b.
       Then a2 /subset a /cup b /\ b2 /subset a /cup b.
-      Then a2,b2 /in c.
+      a2 /in c.
+      b2 /in c.
       Then pair2 /in c /times c.
     end.    
     a /subset b \/ b /subset a.
@@ -1015,7 +1023,7 @@ Proof by induction.
       Goed[(a,b)] = Goed^[sset(goedel,(a,b))].
       Then Alef[alpha] = Goed^[sset(goedel,(a,b))].
       a /cup b /in /Ord.
-      Let c = (a /cup b) + 1.
+      Let c = (a /cup b) +' 1.
       sset(goedel,(a,b)) /subset c /times c.
       Proof.
         Let pair2 /in sset(goedel,(a,b)). Then pair2 /in /Ord /times /Ord.
@@ -1103,6 +1111,13 @@ Proof.
   Let alpha /in /Ord.
   Goed[(0,Alef[alpha])] = Alef[alpha].
   Goed[(0,Alef[alpha])] /tilde (Alef[alpha] /times Alef[alpha]).
+qed.
+
+
+Lemma. Forall kappa /in /Card (kappa /tilde kappa /times kappa).
+Proof.
+  Let kappa /in /Card.
+  Take an ordinal alpha such that kappa = Alef[alpha].
 qed.
 
 

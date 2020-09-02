@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L15-Stationary_Sets.ftl]
+[read Formalizations/Library/L15-Stationary_Sets.ftl]
 
 
 ## Pretyped Variables
@@ -19,7 +19,7 @@ Signature. A successor cardinal is a cardinal.
 Signature. A limit cardinal is a cardinal.
 
 Definition. Let kappa be a cardinal. kappa is infinite iff /NN /subset kappa.
-Axiom. Let kappa be a cardinal. Then kappa is a successor cardinal iff exists alpha /in /Ord (kappa = Alef[alpha + 1]).
+Axiom. Let kappa be a cardinal. Then kappa is a successor cardinal iff exists alpha /in /Ord (kappa = Alef[alpha +' 1]).
 Axiom. Let kappa be a cardinal. kappa is a limit cardinal iff exists lambda /in /Lim (kappa = Alef[lambda]).
 
 Lemma. Let kappa be a successor cardinal. Then kappa /in /Lim.
@@ -28,8 +28,8 @@ Lemma. Let kappa be a limit cardinal. Then kappa /in /Lim.
 
 Lemma. Let kappa be a successor cardinal. Then kappa is regular.
 Proof.
-  Take an ordinal alpha such that kappa = Alef[alpha+1].
-  Alef[alpha+1] is regular.
+  Take an ordinal alpha such that kappa = Alef[alpha+'1].
+  Alef[alpha+'1] is regular.
 qed.
 
 
@@ -55,24 +55,24 @@ Proof.
     Let a /in /bigcup f^[alpha].
     Take a zfset b such that b /in f^[alpha] /\ a /in b.
     Take a zfset c such that c /in alpha /\ b = f[c].
-    c, c+1 /in Dom(f).
-    c /in c+1.
-    Then f[c] /in f[c+1] (by epsiso).
-    Then a+1 /in f[c+1].
+    c, c+'1 /in Dom(f).
+    c /in c+'1.
+    Then f[c] /in f[c+'1] (by epsiso).
+    Then a+'1 /in f[c+'1].
     Proof.
       f[c] /in /Ord.
       a /in f[c].
       a /subset f[c].
       Then a++ /subset f[c].
-      a+1, f[c] /in /Ord.
-      Then a+1 /in f[c] \/ f[c] /in a+1 \/ a+1 = f[c] (by TotalOrder).
-      f[c] /notin a+1.
-      Then a+1 /in f[c] \/ a+1 = f[c].
-      f[c] /in f[c+1].
-      Case a+1 = f[c]. end.
-      Case a+1 /in f[c]. f[c] /in f[c+1]. f[c+1] /in /Ord. end.
+      a+'1, f[c] /in /Ord.
+      Then a+'1 /in f[c] \/ f[c] /in a+'1 \/ a+'1 = f[c] (by TotalOrder).
+      f[c] /notin a+'1.
+      Then a+'1 /in f[c] \/ a+'1 = f[c].
+      f[c] /in f[c+'1].
+      Case a+'1 = f[c]. end.
+      Case a+'1 /in f[c]. f[c] /in f[c+'1]. f[c+'1] /in /Ord. end.
     end.
-    f[c+1] /in f^[alpha].
+    f[c+'1] /in f^[alpha].
     Then a++ /in /bigcup f^[alpha].
   end.
   
@@ -84,10 +84,10 @@ Proof.
     Proof.
       Let a /in y.
       Take a zfset b such that b /in x /\ a = f[b].
-      Then b,b+1 /in Dom(f).
-      b /in b+1.
-      Then f[b] /in f[b+1] (by epsiso).
-      f[b+1] /in f^[alpha].
+      Then b,b+'1 /in Dom(f).
+      b /in b+'1.
+      Then f[b] /in f[b+'1] (by epsiso).
+      f[b+'1] /in f^[alpha].
       Then a /in /bigcup f^[alpha].
     end.
     y /cof /bigcup f^[alpha].
@@ -134,7 +134,8 @@ Proof.
       end.
     end.
     Then Card(y) /in cofset2(/bigcup f^[alpha]).
-    Then /bigcap cofset2(/bigcup f^[alpha]) /subset Card(y).
+    cofset2(/bigcup f^[alpha]) /subset /Ord.
+    Then min(cofset2(/bigcup f^[alpha])) /subset Card(y).
   end.
   
   cof(alpha) /subset cof(/bigcup f^[alpha]).
@@ -160,10 +161,10 @@ Proof.
       Let beta /in alpha.
       Then f[beta] /in /bigcup f^[alpha].
       Proof.
-        beta, beta + 1 /in Dom(f).
-        beta /in beta + 1.
-        Then f[beta] /in f[beta + 1] (by epsiso).
-        f[beta + 1] /in f^[alpha].
+        beta, beta +' 1 /in Dom(f).
+        beta /in beta +' 1.
+        Then f[beta] /in f[beta +' 1] (by epsiso).
+        f[beta +' 1] /in f^[alpha].
       end.
       Take a zfset z such that z /in x /\ f[beta] /in z.
       Then g[z] /in y.
@@ -194,8 +195,8 @@ Proof.
       Then Card(g^[x]) /subset Card(x).
     end.
     Card(y) /in cofset2(alpha).
-    Then /bigcap cofset2(alpha) /subset Card(y).
-    Then /bigcap cofset2(alpha) /subset Card(x).
+    Then min(cofset2(alpha)) /subset Card(y).
+    Then min(cofset2(alpha)) /subset Card(x).
   end.
 qed.
 
@@ -350,8 +351,8 @@ Proof.
       Take ordinals a,b such that a = beta /\ b = sup[beta].
       Then a,b /in /Ord.
       Then a /in b \/ b /in a \/ a = b (by TotalOrder).
-      sup[beta] /notin beta + 1.
-      Then b /notin a+1.
+      sup[beta] /notin beta +' 1.
+      Then b /notin a+'1.
       Then b /notin a /\ b /neq a.
       Then a /in b.
     end.
@@ -363,14 +364,14 @@ Proof.
       Then a /in Dom(sup).
     end.    
   
-    Define f[n] = (sup ^^ (n+1))[alpha] for n in /NN.
+    Define f[n] = (sup ^^ (n+'1))[alpha] for n in /NN.
   
     Forall n /in /NN f[n] /in kappa.
     Proof.
       Let n /in /NN.
-      f[n] = (sup ^^ (n+1))[alpha].
-      Then f[n] /in ran(sup ^^ (n+1)).
-      ran(sup ^^ (n+1)) /subset Dom(sup).
+      f[n] = (sup ^^ (n+'1))[alpha].
+      Then f[n] /in ran(sup ^^ (n+'1)).
+      ran(sup ^^ (n+'1)) /subset Dom(sup).
     end.
     f is a zffunction.
     Proof.
@@ -386,7 +387,7 @@ Proof.
       Case n /neq 0.
         Let m = n--.
         m /in /NN.
-        f[n] = (sup ^^ (n+1))[alpha].
+        f[n] = (sup ^^ (n+'1))[alpha].
         (sup ^^ (n++))[alpha] = sup[(sup ^^ n)[alpha]].
         Then f[n] = sup[(sup ^^ n)[alpha]].
         f[m] = (sup ^^ n)[alpha].
@@ -451,7 +452,7 @@ Proof.
       Card(f^[/NN]) /subset /NN.
       f^[/NN] /subset kappa.
       Card(f^[/NN]) /in cofset2(kappa).
-      Then /bigcap cofset2(kappa) /subset Card(f^[/NN]).
+      Then min(cofset2(kappa)) /subset Card(f^[/NN]).
       Then cof(kappa) /subset /NN.
       Alef[1] /subset cof(kappa).
       Contradiction.
@@ -469,23 +470,23 @@ Proof.
       alpha /in x.
       Then x /neq 0.
       Then x /in /Succ.
-      Take an ordinal a such that x = a+1.
+      Take an ordinal a such that x = a+'1.
       Then a /in x.
       Take a zfset b such that b /in f^[/NN] /\ a /in b.
       f^[/NN] /subset kappa.
       Then b /in /Ord.
-      Then a+1 /subset b.
-      Then a+1 = b \/ a+1 /in b.
+      Then a+'1 /subset b.
+      Then a+'1 = b \/ a+'1 /in b.
       Proof.
-        a+1,b /in /Ord.
-        a+1 /in b \/ b /in a+1 \/ a+1 = b (by TotalOrder).
-        b /notin a+1.
+        a+'1,b /in /Ord.
+        a+'1 /in b \/ b /in a+'1 \/ a+'1 = b (by TotalOrder).
+        b /notin a+'1.
       end.
       Take a zfset n such that n /in /NN /\ b = f[n].
-      Then b /in f[n+1].
+      Then b /in f[n+'1].
       Then b /in /bigcup f^[/NN].
       Then b /in x.
-      Then a+1 /in x.
+      Then a+'1 /in x.
       Contradiction.
     end.
   
@@ -508,8 +509,8 @@ Proof.
         end.
         f[n] /in x.
         Proof.
-          f[n] /in f[n+1].
-          f[n+1] /in f^[/NN].
+          f[n] /in f[n+'1].
+          f[n+'1] /in f^[/NN].
           Then f[n] /in /bigcup f^[/NN].
         end.
         f[n] /in C /cap x.
@@ -564,8 +565,8 @@ Proof.
     Proof.
       otp(C) /in cofset(kappa).
       cof(kappa) = kappa.
-      Then /bigcap cofset(kappa) = kappa.
-      /bigcap cofset(kappa) /subset otp(kappa).
+      Then min(cofset(kappa)) = kappa.
+      min(cofset(kappa)) /subset otp(kappa).
     end.
     Then lambda /subset cof(kappa).
     C /subset /Ord.
@@ -601,11 +602,11 @@ Proof.
       Take a zfset b such that b /in f^[lambda] /\ a /in b.
       Forall c /in lambda c /in kappa.
       Take a zfset c such that c /in lambda /\ b = f[c].
-      c, c+1 /in Dom(f).
-      c /in c+1.
-      Then f[c] /in f[c+1] (by epsiso).
-      c+1 /in lambda.
-      Then f[c+1] /in f^[lambda].
+      c, c+'1 /in Dom(f).
+      c /in c+'1.
+      Then f[c] /in f[c+'1] (by epsiso).
+      c+'1 /in lambda.
+      Then f[c+'1] /in f^[lambda].
       Then f[c] /in /bigcup f^[lambda].
       Then f[c] /in C /cap alpha.
       a /in f[c].

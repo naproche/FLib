@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L11-Gimel_Function.ftl]
+[read Formalizations/Library/L11-Gimel_Function.ftl]
 
 ## Pretyped Variables
 
@@ -65,35 +65,35 @@ Axiom. Let a be a set. Let g be a zffunction. Let a /subset Dom(g). (Forall b /i
 ## Cardinal Exponentiation
 
 
-Lemma. Let v /in /VV. Let b /in /Cd. Then Card(^{b}v) = Card(v) ^3 b.
+Lemma. Let v /in /VV. Let b /in /Cd. Then Card(^{b}v) = Card(v) ^ b.
 Proof.
   v /tilde Card(v).
   Then ^{b}v /tilde ^{b}Card(v).
-  Card(^{b}Card(v)) = Card(v) ^3 b.
+  Card(^{b}Card(v)) = Card(v) ^ b.
 qed.
 
 
-Lemma. Let lambda, kappa /in /Card. Let xi /in /Cd. Let lambda /in kappa. Let xi /in kappa. Let kappa /subset xi ^3 lambda.
-Then kappa ^3 lambda = xi ^3 lambda.
+Lemma. Let lambda, kappa /in /Card. Let xi /in /Cd. Let lambda /in kappa. Let xi /in kappa. Let kappa /subset xi ^ lambda.
+Then kappa ^ lambda = xi ^ lambda.
 Proof.
   xi /subset kappa.
-  Then xi ^3 lambda /subset kappa ^3 lambda.
-  kappa /subset xi ^3 lambda.
-  Then kappa ^3 lambda /subset (xi ^3 lambda) ^3 lambda.
-  (xi ^3 lambda) ^3 lambda = xi ^3 (lambda *3 lambda).
-  lambda *3 lambda = lambda.
-  Then (xi ^3 lambda) ^3 lambda = xi ^3 lambda.
-  Then kappa ^3 lambda /subset xi ^3 lambda.
+  Then xi ^ lambda /subset kappa ^ lambda.
+  kappa /subset xi ^ lambda.
+  Then kappa ^ lambda /subset (xi ^ lambda) ^ lambda.
+  (xi ^ lambda) ^ lambda = xi ^ (lambda * lambda).
+  lambda * lambda = lambda.
+  Then (xi ^ lambda) ^ lambda = xi ^ lambda.
+  Then kappa ^ lambda /subset xi ^ lambda.
 qed.
 
 
-Lemma. Let kappa, lambda /in /Card. Let lambda /in kappa. Let forall xi /in /Cd /cap kappa (xi ^3 lambda /in kappa). Let lambda /in cof(kappa).
-Then kappa ^3 lambda = kappa.
+Lemma. Let kappa, lambda /in /Card. Let lambda /in kappa. Let forall xi /in /Cd /cap kappa (xi ^ lambda /in kappa). Let lambda /in cof(kappa).
+Then kappa ^ lambda = kappa.
 Proof.
-  kappa = kappa ^3 1.
+  kappa = kappa ^ 1.
   1 /subset lambda.
-  Then kappa ^3 1 /subset kappa ^3 lambda.
-  Then kappa /subset kappa ^3 lambda.
+  Then kappa ^ 1 /subset kappa ^ lambda.
+  Then kappa /subset kappa ^ lambda.
   
   Forall f /in ^{lambda}kappa /bigcup ran(f) /in kappa.
   Proof by contradiction. Assume the contrary.
@@ -121,7 +121,7 @@ Proof.
     ran(f) = f^[lambda].
     Then Card(ran(f)) /subset Card(lambda).
     Card(ran(f)) /in cofset2(kappa).
-    Then /bigcap cofset2(kappa) /subset lambda.
+    Then min(cofset2(kappa)) /subset lambda.
     Then cof(kappa) /subset lambda.
     Contradiction.
   end.
@@ -143,7 +143,7 @@ Proof.
       Then /bigcup ran(f) /in kappa.
       Take a zfset v such that v /in kappa /\ v = /bigcup ran(f).
       v is an ordinal.
-      Then f : lambda /rightarrow v+1.
+      Then f : lambda /rightarrow v+'1.
       Proof.
         Dom(f) = lambda.
         Let a /in lambda.
@@ -151,7 +151,7 @@ Proof.
         Then f[a] /subset v.
         f[a],v /in /Ord.
         Then f[a] /in v \/ f[a] = v.
-        Then f[a] /in v+1.
+        Then f[a] /in v++.
       end.
       kappa /in /Lim.
       Then v++ /in kappa.
@@ -159,8 +159,8 @@ Proof.
     end.
   end.
   kappa, lambda are cardinals.
-  Card(^{lambda}kappa) = kappa ^3 lambda.
-  Then Card(M) = kappa ^3 lambda.
+  Card(^{lambda}kappa) = kappa ^ lambda.
+  Then Card(M) = kappa ^ lambda.
   
   Define seq[v] = Card(^{lambda}v) for v in kappa.
   Then seq is a sequence of cardinals.
@@ -206,20 +206,20 @@ Proof.
     Take zfsets a,b such that b /in kappa /\ a /in seq[b] /\ pair = (a,b).
     ^{lambda}b is a zfset.
     seq[b] = Card(^{lambda}b).
-    Card(^{lambda}b) = Card(b) ^3 lambda.
+    Card(^{lambda}b) = Card(b) ^ lambda.
     Card(b) /in /Cd /cap kappa.
-    Then Card(b) ^3 lambda /in kappa.
+    Then Card(b) ^ lambda /in kappa.
     Then seq[b] /in kappa.
     Then a /in kappa.
     Then (a,b) /in kappa /times kappa.
   end.
   Then Card(/sumset seq) /subset Card(kappa /times kappa).
-  Card(kappa /times kappa) = kappa *3 kappa.
-  kappa *3 kappa = kappa.
+  Card(kappa /times kappa) = kappa * kappa.
+  kappa * kappa = kappa.
   Then Card(/sumset seq) /subset kappa.
   
   Then Card(M) /subset kappa.
-  Then kappa ^3 lambda /subset kappa.
+  Then kappa ^ lambda /subset kappa.
   
 qed.
 
@@ -245,18 +245,18 @@ The diagcomposition of f and g is a zffunction h such that (Dom(h) = Dom(f) /\ f
 Let g /comp f stand for the diagcomposition of f and g.
 
 
-Lemma. Let kappa, lambda /in /Card. Let lambda /in kappa. Let forall xi /in /Cd /cap kappa (xi ^3 lambda /in kappa). Let cof(kappa) /subset lambda.
-Then kappa ^3 lambda = Gimel[kappa].
+Lemma. Let kappa, lambda /in /Card. Let lambda /in kappa. Let forall xi /in /Cd /cap kappa (xi ^ lambda /in kappa). Let cof(kappa) /subset lambda.
+Then kappa ^ lambda = Gimel[kappa].
 Proof.
-  Gimel[kappa] /subset kappa ^3 lambda.
+  Gimel[kappa] /subset kappa ^ lambda.
   Proof.
-    Gimel[kappa] = kappa ^3 cof(kappa).
-    kappa ^3 cof(kappa) /subset kappa ^3 lambda.
+    Gimel[kappa] = kappa ^ cof(kappa).
+    kappa ^ cof(kappa) /subset kappa ^ lambda.
     Proof.
       kappa, cof(kappa), lambda /in /Cd.
       0 /in kappa.
       cof(kappa) /subset lambda.
-      Then kappa ^3 cof(kappa) /subset kappa ^3 lambda (by ExpSubset).
+      Then kappa ^ cof(kappa) /subset kappa ^ lambda (by ExpSubset).
     end.
   end.
   
@@ -265,9 +265,9 @@ Proof.
   Proof by contradiction. Assume the contrary.
     alpha /neq 0.
     Then alpha /in /Succ.
-    Take an ordinal beta such that alpha = beta + 1.
-    cof(Alef[beta + 1]) = Alef[beta + 1].
-    Alef[beta + 1] = kappa.
+    Take an ordinal beta such that alpha = beta +' 1.
+    cof(Alef[beta +' 1]) = Alef[beta +' 1].
+    Alef[beta +' 1] = kappa.
     Then cof(kappa) = kappa.
     Contradiction.
   end.
@@ -287,7 +287,7 @@ Proof.
   Proof.
     Let lam /in kappa.
     alpha /in /Lim.
-    Then Alef[alpha] = {zfset xx | exists beta /in alpha xx /in Alef[beta]}.
+    Then Alef[alpha] = /bigcup Alef^[alpha].
     Take a zfset beta such that beta /in alpha /\ lam /in Alef[beta].
     Take a zfset b such that b /in xa /\ beta /in b.
     Then Alef[beta] /subset Alef[b].
@@ -378,7 +378,10 @@ Proof.
     ((delta(xi[i])) /circ f) : lambda /rightarrow xi[i].
     Proof.
       Let j /in lambda.
-      Then ((delta(xi[i])) /circ f)[j] = (delta(xi[i]))[f[j]].
+      f : lambda /rightarrow kappa.
+      f[j] /in kappa.
+      Then f[j] /in Dom(delta(xi[i])).
+      ((delta(xi[i])) /circ f)[j] = (delta(xi[i]))[f[j]].
       Then ((delta(xi[i])) /circ f)[j] /in xi[i].
       Proof.
         Case f[j] /in xi[i]. Then (delta(xi[i]))[f[j]] = f[j]. end.
@@ -473,8 +476,8 @@ Proof.
   Proof.
     Let i /in cof(kappa).
     Then xi[i] /in kappa.
-    Then xi[i] ^3 lambda /in kappa.
-    Card(^{lambda}(xi[i])) = xi[i] ^3 lambda.
+    Then xi[i] ^ lambda /in kappa.
+    Card(^{lambda}(xi[i])) = xi[i] ^ lambda.
   end.
   Forall i /in cof(kappa) exists f (f : ^{lambda}(xi[i]) /rightarrow kappa /\ (f is injective)).
   Proof.
@@ -622,12 +625,12 @@ Proof.
     Then Card(M) = Card(G^[M]).
   end.
   Then Card(G^[^{lambda}kappa]) /subset Card(^{cof(kappa)}kappa).
-  Card(^{lambda}kappa) = kappa ^3 lambda.
-  Card(^{cof(kappa)}kappa) = kappa ^3 cof(kappa).
-  kappa ^3 cof(kappa) = Gimel[kappa].
-  Then kappa ^3 lambda /subset Gimel[kappa].
+  Card(^{lambda}kappa) = kappa ^ lambda.
+  Card(^{cof(kappa)}kappa) = kappa ^ cof(kappa).
+  kappa ^ cof(kappa) = Gimel[kappa].
+  Then kappa ^ lambda /subset Gimel[kappa].
   
-  Then kappa ^3 lambda = Gimel[kappa].  
+  Then kappa ^ lambda = Gimel[kappa].  
 qed.
 
 

@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L17-Disjoint_Stationary_Subsets.ftl]
+[read Formalizations/Library/L17-Disjoint_Stationary_Subsets.ftl]
 
 [prove off]
 
@@ -16,15 +16,12 @@ Let kappa, lambda stand for cardinals.
 
 ## Almost disjoint functions
 
-
 Definition. Let lambda /in /Lim. Let f,g be zffunctions. Let f,g /in ^{lambda}/VV. f and g are almost disjoint on lambda iff
 exists alpha /in lambda forall beta /in lambda (alpha /in beta => f[beta] /neq g[beta]).
 
 Signature. Let lambda /in /Lim. An almost disjoint family of functions on lambda is a notion.
 
 Axiom. Let lambda /in /Lim. Let F be an almost disjoint family of functions on lambda. Then F /subset ^{lambda}/VV.
-
-Lemma. Let lambda /in /Lim. Let F be an almost disjoint family of functions on lambda. Then F /subset ^{lambda}/VV.
 
 Lemma. Let lambda /in /Lim. Let F be an almost disjoint family of functions on lambda. Let f /in F. Then f is a zffunctions and f /in ^{lambda}/VV.
 
@@ -41,7 +38,7 @@ Lemma. Let lambda, F be objects. Let (F,lambda) be an adfampair. Then forall f /
 Axiom adfam2. Let lambda, F be objects. Let (F,lambda) be an adfampair. Let forall f,g /in F (f /neq g => (f and g are almost disjoint on lambda)).
 Then F is an almost disjoint family of functions on lambda.
 
-Lemma. Let lambda /in /Ord. Let A be a zffunction. Let Dom(A) = lambda. Let F /subset /funcprodset A. Then F /subset ^{lambda}/VV.
+Lemma. Let lambda /in /Ord. Let A be a zffunction. Let Dom(A) = lambda. Let F /subset /prodset A. Then F /subset ^{lambda}/VV.
 
 Definition. The class of singular cardinals of uncountable cofinality is
 {kappa /in /BigCard | kappa is singular}.
@@ -51,7 +48,6 @@ Lemma. Let kappa /in /BigSingCard. Then exists alpha /in /Lim (kappa = Alef[alph
 
 
 ## New notions to store information
-
 
 Lemma. Let kappa /in /Lim. Then exists x /subset kappa (otp(x) = cof(kappa) /\ x /club  kappa).
 
@@ -85,27 +81,25 @@ Definition. Let kappa,x,kap be objects. Let (kappa,x,kap) be a coftriple. Let A 
 Dom(A) = cof(kappa) /\ CofSupp(kappa,x,kap){A} /in stat(cof(kappa)).
 
 Definition. Let A be a zffunction. Let Dom(A) /in /Lim. Let F be an object. F is almost disjoint relative to A iff
-F /subset /funcprodset A /\ (F is an almost disjoint family of functions on Dom(A)).
+F /subset /prodset A /\ (F is an almost disjoint family of functions on Dom(A)).
 
 Lemma. Let A be a zffunction. Let Dom(A) /in /Lim. Let F be an object. Let F be almost disjoint relative to A. Then F /in /VV.
 
 
 ## New Cardinal Axioms
 
-
 Signature. Let kappa /in /BigSingCard. Silver below kappa is an atom.
 
-Axiom. Let kappa /in /BigSingCard. Silver below kappa iff forall lambda /in kappa /cap /Cd (lambda ^3 cof(kappa) /in kappa).
+Axiom. Let kappa /in /BigSingCard. Silver below kappa iff forall lambda /in kappa /cap /Cd (lambda ^ cof(kappa) /in kappa).
 
-Signature. Let kappa /in /BigCard. GCH below kappa is an atom.
+Signature. Let kappa /in /BigSingCard. GCH below kappa is an atom.
 
-Axiom. Let kappa /in /BigCard. GCH below kappa iff forall lambda /in kappa /cap /Card 2 ^3 lambda = Plus[lambda].
+Axiom. Let kappa /in /BigSingCard. GCH below kappa iff forall lambda /in kappa /cap /Card 2 ^ lambda = Plus[lambda].
 
 Lemma. Let kappa /in /BigSingCard. Let GCH below kappa. Then Silver below kappa.
 
 
 ## The First Helping Lemma
-
 
 Lemma Silver1. Let kappa, x, kap, F be objects. Let (kappa,x,kap) be a coftriple. Let Silver below kappa. Let A be a zffunction. Let A be compatible with kap relative to kappa and x.
 Let F be almost disjoint relative to A. Then Card(F) /subset kappa.

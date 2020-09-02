@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L15-Stationary_Sets.ftl]
+[read Formalizations/Library/L15-Stationary_Sets.ftl]
 
 [prove off]
 
@@ -13,14 +13,16 @@ Let kappa, lambda stand for cardinals.
 
 
 
-
 ## Prerequisites
 
 Signature. A successor cardinal is a cardinal.
+
 Signature. A limit cardinal is a cardinal.
 
 Definition. Let kappa be a cardinal. kappa is infinite iff /NN /subset kappa.
-Axiom. Let kappa be a cardinal. Then kappa is a successor cardinal iff exists alpha /in /Ord (kappa = Alef[alpha + 1]).
+
+Axiom. Let kappa be a cardinal. Then kappa is a successor cardinal iff exists alpha /in /Ord (kappa = Alef[alpha +' 1]).
+
 Axiom. Let kappa be a cardinal. kappa is a limit cardinal iff exists lambda /in /Lim (kappa = Alef[lambda]).
 
 Lemma. Let kappa be a successor cardinal. Then kappa /in /Lim.
@@ -32,9 +34,7 @@ Lemma. Let kappa be a successor cardinal. Then kappa is regular.
 Lemma. Let f be an epsiso. Let alpha /in /Lim. Let alpha /subset Dom(f). Let ran(f) /subset /Ord. Then /bigcup f^[alpha] /in /Lim /\ cof(/bigcup f^[alpha]) = cof(alpha).
 
 
-
 ## Fodors Lemma
-
 
 Definition. Let kappa /in /BigCard. The set of stationary subsets of kappa is
 {C /subset kappa | C is stationary in kappa}.
@@ -50,7 +50,8 @@ Definition. Let f be a zffunction. Let Dom(f) /subset /Ord. f is regressive iff 
 Theorem Fodor. Let kappa /in /BigRegCard. Let f be a zffunction. Let Dom(f) /in stat(kappa). Let f be regressive.
 Then exists i /in /Ord f^{-1}[[i]] /in stat(kappa).
 
-Corollary Fodor2. Let kappa /in /BigRegCard. Let f be a zffunction. Let Dom(f) /in stat(kappa). Let f be regressive. Then exists T /subset Dom(f) (T /in stat(kappa) /\ (f /upharpoonright T is constant)).
+Corollary Fodor2. Let kappa /in /BigRegCard. Let f be a zffunction. Let Dom(f) /in stat(kappa). Let f be regressive. 
+Then exists T /subset Dom(f) (T /in stat(kappa) /\ (f /upharpoonright T is constant)).
 
 Definition. Let kappa /in /BigCard. Let C /in Cl(kappa). The derivation of C in kappa is
 {alpha /in kappa /cap /Lim | C /cap alpha /cof alpha}.

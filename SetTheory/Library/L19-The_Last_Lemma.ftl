@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L18-Almost_Disjoint_Functions.ftl]
+[read Formalizations/Library/L18-Almost_Disjoint_Functions.ftl]
 
 [prove off]
 
@@ -43,6 +43,7 @@ Lemma. Let lambda /in /Lim. Let F be an almost disjoint family of functions on l
 
 Lemma Silver2. Let kappa, x, kap, F be objects. Let (kappa,x,kap) be a coftriple. Let Silver below kappa. Let A be a zffunction. Let A be silvercompatible with kap relative to kappa and x.
 Let F be almost disjoint relative to A. Then Card(F) /subset Plus[kappa].
+
 
 
 

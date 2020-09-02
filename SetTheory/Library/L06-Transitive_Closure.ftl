@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L05-Mostowski_Collapse.ftl]
+[read Formalizations/Library/L05-Mostowski_Collapse.ftl]
 
 [prove off]
 
@@ -12,10 +12,7 @@ Let f,g,h,F,G,H stand for zffunction.
 Let kappa, lambda stand for cardinals.
 
 
-
-
 ## Transitive Closure
-
 
 Definition. Let R be a strongly wellfounded relation. Let x /subset reldomain(R). The class of transclosed sets of x resp R is
 {zfset z | z /subset reldomain(R) /\ x /subset z /\ forall u /in z forall v /in sset(R,u) v /in z}.

@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L18-Almost_Disjoint_Functions.ftl]
+[read Formalizations/Library/L18-Almost_Disjoint_Functions.ftl]
 
 
 ## Pretyped Variables
@@ -86,8 +86,8 @@ Proof.
   Proof.
     stat(lambda) /subset /PP lambda.
     Then Card(stat(lambda)) /subset Card(/PP lambda).
-    Card(/PP lambda) = 2 ^3 lambda.
-    2 ^3 lambda /in kappa.
+    Card(/PP lambda) = 2 ^ lambda.
+    2 ^ lambda /in kappa.
     Then Card(stat(lambda)) /subset kappa.
   end.
   otp(x) = lambda.
@@ -106,12 +106,12 @@ Proof.
   Forall i /in lambda Card(A[i]) /subset Plus[kap[i]].
   Then forall i /in lambda (bij[i] : A[i] /rightarrow Plus[kap[i]] /\ (bij[i] is injective)).
 
-  F /subset /funcprodset A.
+  F /subset /prodset A.
   Forall f /in F (f is a zffunction and Dom(f) = lambda).
   Forall f /in F forall i /in lambda f[i] /in A[i].
   Proof.
     Let f /in F.
-    Then f /in /funcprodset A.
+    Then f /in /prodset A.
     Then forall i /in Dom(f) f[i] /in A[i].
   end.
   Then forall f /in F forall i /in Dom(f) f[i] /in Dom(bij[i]).
@@ -246,6 +246,8 @@ Proof.
         x /subset kappa /cap /Card.
         Then x /subset /Card.
         Then kap[i] /in /Card.
+        Then PlusCard(kap[i]) /subset /Card.
+        Plus[kap[i]] /in PlusCard(kap[i]).
         Then Plus[kap[i]] /in /Card.
       end.
       Forall i /in lambda f[i] /in Plus[kap[i]].
@@ -275,7 +277,7 @@ Proof.
       end.
       
       Define AfS[i] = 
-        Case i /in S -> f[i] + 1,
+        Case i /in S -> f[i] +' 1,
         Case i /notin S -> Sup[i]
       for i in lambda.
       AfS is a zffunction.
@@ -284,7 +286,7 @@ Proof.
         Then AfS[i] /in /VV.
         Proof.
           Case i /in S. 
-            Then AfS[i] = f[i] + 1.
+            Then AfS[i] = f[i] +' 1.
           end.
           Case i /notin S.
             Then AfS[i] = Sup[i].
@@ -299,18 +301,18 @@ Proof.
         f[i] /in Plus[kap[i]].
         Plus[kap[i]] /in /Lim.
         Then f[i] ++ /in Plus[kap[i]].
-        Then f[i] + 1 /in Plus[kap[i]].
-        Then Card(f[i]+1) /in Plus[kap[i]].
+        Then f[i] +' 1 /in Plus[kap[i]].
+        Then Card(f[i]+'1) /in Plus[kap[i]].
         Proof.
-          Card(f[i]+1) /subset f[i]+1.
+          Card(f[i]+'1) /subset f[i]+'1.
         end.
-        Then Card(f[i]+1) /subset kap[i].
+        Then Card(f[i]+'1) /subset kap[i].
         Proof by contradiction. Assume the contrary.
-          Card(f[i]+1) /in /Ord.
+          Card(f[i]+'1) /in /Ord.
           kap[i] /in /Ord.
-          Then kap[i] /in Card(f[i]+1).
-          Then Plus[kap[i]] /subset Card(f[i]+1).
-          Then Card(f[i]+1) /in Card(f[i]+1).
+          Then kap[i] /in Card(f[i]+'1).
+          Then Plus[kap[i]] /subset Card(f[i]+'1).
+          Then Card(f[i]+'1) /in Card(f[i]+'1).
           Contradiction.
         end.
         Then Card(AfS[i]) /subset kap[i].
@@ -321,7 +323,7 @@ Proof.
 
       FfSset[(f,S)] /subset G.
       Then FfSset[(f,S)] is an almost disjoint family of functions on lambda.
-      FfSset[(f,S)] /subset /funcprodset AfS.
+      FfSset[(f,S)] /subset /prodset AfS.
       Proof.
         Let g /in FfSset[(f,S)].
         S /subset lambda.
@@ -351,7 +353,7 @@ Proof.
             end.
           end.
         end.
-        Then g /in /funcprodset AfS.
+        Then g /in /prodset AfS.
       end.
       Then FfSset[(f,S)] is almost disjoint relative to AfS.
       Then Card(FfSset[(f,S)]) /subset kappa (by Silver1).
@@ -407,6 +409,11 @@ Proof.
       end.
       Ffinj is injective.
       Let H = ran(Ffinj).
+      H is a zfset.
+      Proof.
+        H = Ffinj^[Ff[f]].
+        Ff[f] is a zfset.
+      end.
       Then Ffinj : Ff[f] /leftrightarrow H.
       Then Card(Ff[f]) = Card(H).
       
@@ -509,8 +516,8 @@ Proof.
       kappa /times Card(stat(lambda)) /subset kappa /times kappa.
       Then Card(kappa /times Card(stat(lambda))) /subset Card(kappa /times kappa).
       kappa /in /Card.
-      kappa *3 kappa = kappa.
-      kappa *3 kappa = Card(kappa /times kappa).
+      kappa * kappa = kappa.
+      kappa * kappa = Card(kappa /times kappa).
       Then Card(kappa /times Card(stat(lambda))) /subset kappa.
       Card(kappa /times stat(lambda)) = Card(kappa /times Card(stat(lambda))).
       Then Card(kappa /times stat(lambda)) /subset kappa.
@@ -947,10 +954,10 @@ Proof.
     Ff[fxi[i]] /in /VV.
     Then Ginclfunc[i] /in /VV.
   end.
-  ran(Gincl) /subset /funcsumset Ginclfunc.
-  Then Gincl : G /rightarrow /funcsumset Ginclfunc.
-  Card(G) /subset Card(/funcsumset Ginclfunc).
-  Card(/funcsumset Ginclfunc) = Card(/sumset cardseq(Ginclfunc)).
+  ran(Gincl) /subset /sumset Ginclfunc.
+  Then Gincl : G /rightarrow /sumset Ginclfunc.
+  Card(G) /subset Card(/sumset Ginclfunc).
+  Card(/sumset Ginclfunc) = /sum cardseq(Ginclfunc).
   /sumset cardseq(Ginclfunc) /subset Plus[kappa] /times Plus[kappa].
   Proof.
     Forall pair /in /sumset cardseq(Ginclfunc) pair /in Plus[kappa] /times Plus[kappa].
@@ -976,8 +983,9 @@ Proof.
       Then pair /in Plus[kappa] /times Plus[kappa].
     end.
   end.
+  Plus[kappa] /times Plus[kappa] is a zfset.
   Then Card(/sumset cardseq(Ginclfunc)) /subset Card(Plus[kappa] /times Plus[kappa]).
-  Card(Plus[kappa] /times Plus[kappa]) = Plus[kappa] *3 Plus[kappa].
+  Card(Plus[kappa] /times Plus[kappa]) = Plus[kappa] * Plus[kappa].
   Plus[kappa] /in /Card.
   Proof.
     kappa /in /Card.
@@ -986,7 +994,7 @@ Proof.
     kappa /subset Plus[kappa].
     Then /NN /subset Plus[kappa].
   end.
-  Then Plus[kappa] *3 Plus[kappa] = Plus[kappa].
+  Then Plus[kappa] * Plus[kappa] = Plus[kappa].
   Then Card(Plus[kappa] /times Plus[kappa]) = Plus[kappa].
   Then Card(G) /subset Plus[kappa].
   

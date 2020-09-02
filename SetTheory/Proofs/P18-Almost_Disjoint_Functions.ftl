@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L17-Disjoint_Stationary_Subsets.ftl]
+[read Formalizations/Library/L17-Disjoint_Stationary_Subsets.ftl]
 
 
 ## Pretyped Variables
@@ -23,7 +23,6 @@ Signature. Let lambda /in /Lim. An almost disjoint family of functions on lambda
 
 Axiom. Let lambda /in /Lim. Let F be an almost disjoint family of functions on lambda. Then F /subset ^{lambda}/VV.
 
-Lemma. Let lambda /in /Lim. Let F be an almost disjoint family of functions on lambda. Then F /subset ^{lambda}/VV.
 Lemma. Let lambda /in /Lim. Let F be an almost disjoint family of functions on lambda. Let f /in F. Then f is a zffunctions and f /in ^{lambda}/VV.
 Proof.
   F /subset ^{lambda}/VV.
@@ -42,7 +41,7 @@ qed.
 Axiom adfam2. Let lambda, F be objects. Let (F,lambda) be an adfampair. Let forall f,g /in F (f /neq g => (f and g are almost disjoint on lambda)).
 Then F is an almost disjoint family of functions on lambda.
 
-Lemma. Let lambda /in /Ord. Let A be a zffunction. Let Dom(A) = lambda. Let F /subset /funcprodset A. Then F /subset ^{lambda}/VV.
+Lemma. Let lambda /in /Ord. Let A be a zffunction. Let Dom(A) = lambda. Let F /subset /prodset A. Then F /subset ^{lambda}/VV.
 
 Definition. The class of singular cardinals of uncountable cofinality is
 {kappa /in /BigCard | kappa is singular}.
@@ -627,6 +626,7 @@ Proof.
       b++ /in lambda.
       b /in b++.
       b, b++ /in Dom(f).
+      f is a zffunction.
       Then f[b] /in f[b++] (by epsiso).
       f[b++] /in f^[lambda].
       Then a /in /bigcup f^[lambda].
@@ -667,7 +667,10 @@ qed.
 
 Lemma. Let kappa,x,f be objects. Let (kappa,x,f) be a coftriple. Then Dom(f) /in /Ord and f is continuous.
 Proof.
+  (kappa,x) is a cofpair.
   kappa /in /Lim.
+  x /subset kappa /cap /Card.
+  x /subset /Ord.
   Dom(f) = otp(x).
   Then Dom(f) /in /Ord.
   (kappa,x) is a cofpair.
@@ -689,7 +692,7 @@ Definition. Let kappa,x,kap be objects. Let (kappa,x,kap) be a coftriple. Let A 
 Dom(A) = cof(kappa) /\ CofSupp(kappa,x,kap){A} /in stat(cof(kappa)).
 
 Definition. Let A be a zffunction. Let Dom(A) /in /Lim. Let F be an object. F is almost disjoint relative to A iff
-F /subset /funcprodset A /\ (F is an almost disjoint family of functions on Dom(A)).
+F /subset /prodset A /\ (F is an almost disjoint family of functions on Dom(A)).
 
 Lemma. Let A be a zffunction. Let Dom(A) /in /Lim. Let F be an object. Let F be almost disjoint relative to A. Then F /in /VV.
 
@@ -700,49 +703,49 @@ Lemma. Let A be a zffunction. Let Dom(A) /in /Lim. Let F be an object. Let F be 
 
 Signature. Let kappa /in /BigSingCard. Silver below kappa is an atom.
 
-Axiom. Let kappa /in /BigSingCard. Silver below kappa iff forall lambda /in kappa /cap /Cd (lambda ^3 cof(kappa) /in kappa).
+Axiom. Let kappa /in /BigSingCard. Silver below kappa iff forall lambda /in kappa /cap /Cd (lambda ^ cof(kappa) /in kappa).
 
 Signature. Let kappa /in /BigSingCard. GCH below kappa is an atom.
 
-Axiom. Let kappa /in /BigSingCard. GCH below kappa iff forall lambda /in kappa /cap /Card 2 ^3 lambda = Plus[lambda].
+Axiom. Let kappa /in /BigSingCard. GCH below kappa iff forall lambda /in kappa /cap /Card 2 ^ lambda = Plus[lambda].
 
 Lemma. Let kappa /in /BigSingCard. Let GCH below kappa. Then Silver below kappa.
 Proof.
   Let lambda /in kappa /cap /Cd.
-  Then lambda ^3 cof(kappa) /in kappa.
+  Then lambda ^ cof(kappa) /in kappa.
   Proof.
-    lambda, 2 ^3 cof(kappa) /in /Ord.
-    lambda /subset 2 ^3 cof(kappa) \/ 2 ^3 cof(kappa) /in lambda.
-    Case lambda /subset 2 ^3 cof(kappa).
+    lambda, 2 ^ cof(kappa) /in /Ord.
+    lambda /subset 2 ^ cof(kappa) \/ 2 ^ cof(kappa) /in lambda.
+    Case lambda /subset 2 ^ cof(kappa).
       lambda /in 2 \/ 2 /subset lambda.
       lambda /in 2 iff lambda = 0 \/ lambda = 1.
       Case lambda = 0. end.
       Case lambda = 1. end.
       Case 2 /subset lambda.
         cof(kappa) /in /Card.
-        lambda /subset 2 ^3 cof(kappa).
-        Then lambda ^3 cof(kappa) = 2 ^3 cof(kappa) (by ExpEq).
+        lambda /subset 2 ^ cof(kappa).
+        Then lambda ^ cof(kappa) = 2 ^ cof(kappa) (by ExpEq).
         kappa is singular.
         Then cof(kappa) /in kappa.
         cof(kappa) /in kappa /cap /Card.
-        Then 2 ^3 cof(kappa) = Plus[cof(kappa)].
+        Then 2 ^ cof(kappa) = Plus[cof(kappa)].
         cof(kappa) /in kappa.
         Then Plus[cof(kappa)] /subset kappa.
         Then Plus[cof(kappa)] /in kappa.
       end.
     end.
-    Case 2 ^3 cof(kappa) /in lambda.
+    Case 2 ^ cof(kappa) /in lambda.
       Then cof(kappa) /in lambda.
-      lambda ^3 lambda is a zfset.
-      lambda ^3 cof(kappa) /subset lambda ^3 lambda.
-      Then lambda ^3 cof(kappa) /in lambda ^3 lambda \/ lambda ^3 cof(kappa) = lambda ^3 lambda.
+      lambda ^ lambda is a zfset.
+      lambda ^ cof(kappa) /subset lambda ^ lambda.
+      Then lambda ^ cof(kappa) /in lambda ^ lambda \/ lambda ^ cof(kappa) = lambda ^ lambda.
       lambda /in /Card.
       2 /subset lambda.
-      lambda /in 2 ^3 lambda.
-      lambda /subset 2 ^3 lambda.
-      Then lambda ^3 lambda = 2 ^3 lambda (by ExpEq).
+      lambda /in 2 ^ lambda.
+      lambda /subset 2 ^ lambda.
+      Then lambda ^ lambda = 2 ^ lambda (by ExpEq).
       lambda /in kappa /cap /Card.
-      Then 2 ^3 lambda = Plus[lambda].
+      Then 2 ^ lambda = Plus[lambda].
       lambda /in kappa.
       Then Plus[lambda] /subset kappa.
       Then Plus[lambda] /in kappa.
@@ -755,7 +758,7 @@ qed.
 ## The First Helping Lemma
 
 
-Lemma. Let kappa, x, kap, F be objects. Let (kappa,x,kap) be a coftriple. Let Silver below kappa. Let A be a zffunction. Let A be compatible with kap relative to kappa and x.
+Lemma Silver1. Let kappa, x, kap, F be objects. Let (kappa,x,kap) be a coftriple. Let Silver below kappa. Let A be a zffunction. Let A be compatible with kap relative to kappa and x.
 Let F be almost disjoint relative to A. Then Card(F) /subset kappa.
 Proof.
 
@@ -785,12 +788,12 @@ Proof.
   Forall i /in S Card(A[i]) /subset kap[i].
   Then forall i /in S (bij[i] : A[i] /rightarrow kap[i] /\ (bij[i] is injective)).
 
-  F /subset /funcprodset A.
+  F /subset /prodset A.
   Forall f /in F (f is a zffunction and Dom(f) = lambda).
   Forall f /in F forall i /in lambda f[i] /in A[i].
   Proof.
     Let f /in F.
-    Then f /in /funcprodset A.
+    Then f /in /prodset A.
     Then forall i /in Dom(f) f[i] /in A[i].
   end.
   Then forall f /in F forall i /in Dom(f) f[i] /in Dom(bij[i]).
@@ -1035,15 +1038,15 @@ Proof.
           Then exists gamma /in C (beta /in gamma).
           Proof.
             Case alpha /in beta.
-              Then alpha /in beta + 1.
-              beta + 1 /in lambda.
-              Then beta + 1 /in C.
-              beta /in beta + 1.
+              Then alpha /in beta +' 1.
+              beta +' 1 /in lambda.
+              Then beta +' 1 /in C.
+              beta /in beta +' 1.
             end.
             Case beta /subset alpha.
-              Then beta /in alpha + 1.
-              alpha + 1 /in lambda.
-              Then alpha + 1 /in C.
+              Then beta /in alpha +' 1.
+              alpha +' 1 /in lambda.
+              Then alpha +' 1 /in C.
             end.
           end.
         end.
@@ -1171,20 +1174,20 @@ Proof.
         x /subset kappa /cap /Card.
         Then x /subset /Card.
       end.
-      Card(^{b}kap[alpha]) = kap[alpha] ^3 Card(b).
+      Card(^{b}kap[alpha]) = kap[alpha] ^ Card(b).
       Card(b) /subset lambda.
       0 /in kap[alpha].
-      Then kap[alpha] ^3 Card(b) /subset kap[alpha] ^3 lambda (by ExpSubset).
+      Then kap[alpha] ^ Card(b) /subset kap[alpha] ^ lambda (by ExpSubset).
       kap[alpha] /in kappa.
-      Then kap[alpha] ^3 lambda /in kappa.
+      Then kap[alpha] ^ lambda /in kappa.
       Card(FuncPart[alpha]) /subset Card(^{b}kap[alpha]).
-      Card(^{b}kap[alpha]) /subset kap[alpha] ^3 lambda.
-      kap[alpha] ^3 lambda /subset kappa.
+      Card(^{b}kap[alpha]) /subset kap[alpha] ^ lambda.
+      kap[alpha] ^ lambda /subset kappa.
       Then Card(FuncPart[alpha]) /subset kappa.
       Proof.
         Let aa = Card(FuncPart[alpha]).
         Let bb = Card(^{b}kap[alpha]).
-        Let cc = kap[alpha] ^3 lambda.
+        Let cc = kap[alpha] ^ lambda.
         Then aa /subset bb.
         bb /subset cc.
         cc /subset kappa.
@@ -1206,16 +1209,16 @@ Proof.
       Let a /neq b.
       Then FuncIncl[a] /neq FuncIncl[b].
     end.
-    ran(FuncIncl) /subset /funcsumset FuncPart.
-    Then FuncIncl : Func /rightarrow /funcsumset FuncPart.
-    Then Func <= /funcsumset FuncPart.
-    Then Card(Func) /subset Card(/funcsumset FuncPart).
-    Card(/funcsumset FuncPart) = Card(/sumset cardseq(FuncPart)).
+    ran(FuncIncl) /subset /sumset FuncPart.
+    Then FuncIncl : Func /rightarrow /sumset FuncPart.
+    Then Func <= /sumset FuncPart.
+    Then Card(Func) /subset Card(/sumset FuncPart).
+    Card(/sumset FuncPart) = Card(/sumset cardseq(FuncPart)).
     /sumset cardseq(FuncPart) /subset kappa /times kappa.
     Then Card(/sumset cardseq(FuncPart)) /subset Card(kappa /times kappa).
     kappa /in /Card.
-    kappa *3 kappa = Card(kappa /times kappa).
-    kappa *3 kappa = kappa.
+    kappa * kappa = Card(kappa /times kappa).
+    kappa * kappa = kappa.
     Then Card(kappa /times kappa) = kappa.
     Then Card(Func) /subset kappa.
     Then Card(Image[b]) /subset kappa.
@@ -1229,7 +1232,7 @@ Proof.
   Take a zffunction PreImage such that PreImage = Image /circ Pre.
   Then Dom(PreImage) = Card(/PP lambda).
   
-  H /subset /funcsumset Image.
+  H /subset /sumset Image.
   Proof.
     Let pair /in H.
     Take zfsets a,b such that pair = (a,b).
@@ -1237,28 +1240,28 @@ Proof.
     b /subset lambda.
     Then b /in /PP(lambda).
     Then a /in Image[b].
-    Then (a,b) /in /funcsumset Image.
-    Then pair /in /funcsumset Image.
+    Then (a,b) /in /sumset Image.
+    Then pair /in /sumset Image.
   end.
-  /funcsumset Image /tilde /funcsumset PreImage.
+  /sumset Image /tilde /sumset PreImage.
   Proof.
-    Forall o1,o2 ((o1,o2) /in /funcsumset PreImage => o2 /in Dom(Pre)).
-    Forall pair /in /funcsumset PreImage exists a,c /in /VV (a,c) = pair.
-    Forall pair /in /funcsumset Image exists a,b /in /VV (a,b) = pair.
-    Define Tilde[(a,c)] = (a,Pre[c]) for (a,c) in /funcsumset PreImage.
-    Tilde : /funcsumset PreImage /rightarrow /funcsumset Image.
+    Forall o1,o2 ((o1,o2) /in /sumset PreImage => o2 /in Dom(Pre)).
+    Forall pair /in /sumset PreImage exists a,c /in /VV (a,c) = pair.
+    Forall pair /in /sumset Image exists a,b /in /VV (a,b) = pair.
+    Define Tilde[(a,c)] = (a,Pre[c]) for (a,c) in /sumset PreImage.
+    Tilde : /sumset PreImage /rightarrow /sumset Image.
     Proof.
-      Let pair /in /funcsumset PreImage.
+      Let pair /in /sumset PreImage.
       Take zfsets a,c such that pair = (a,c).
       Then Pre[c] /in /VV.
       Then (a,Pre[c]) /in /VV.
       Tilde[pair] = (a,Pre[c]).
-      (a,Pre[c]) /in /funcsumset Image.
-      Then Tilde[pair] /in /funcsumset Image.
+      (a,Pre[c]) /in /sumset Image.
+      Then Tilde[pair] /in /sumset Image.
     end.
     Tilde is injective.
     Proof.
-      Let pair1,pair2 /in /funcsumset PreImage.
+      Let pair1,pair2 /in /sumset PreImage.
       Let pair1 /neq pair2.
       Then Tilde[pair1] /neq Tilde[pair2].
       Proof.
@@ -1273,20 +1276,20 @@ Proof.
         end.
       end.
     end.
-    ran(Tilde) = /funcsumset Image.
+    ran(Tilde) = /sumset Image.
     Proof.
-      Let pair /in /funcsumset Image.
+      Let pair /in /sumset Image.
       Take zfsets a,b such that pair = (a,b).
       Then b /in /PP lambda.
       Take a zfset c such that c /in Card(/PP lambda) /\ Pre[c] = b.
-      Then (a,c) /in /funcsumset PreImage.
+      Then (a,c) /in /sumset PreImage.
       Tilde[(a,c)] = (a,b).
       Then pair /in ran(Tilde).
     end.
-    Then Tilde : /funcsumset PreImage /leftrightarrow /funcsumset Image.
+    Then Tilde : /sumset PreImage /leftrightarrow /sumset Image.
   end.
-  Then Card(H) /subset Card(/funcsumset PreImage).
-  Card(/funcsumset PreImage) = Card(/sumset cardseq(PreImage)).
+  Then Card(H) /subset Card(/sumset PreImage).
+  Card(/sumset PreImage) = Card(/sumset cardseq(PreImage)).
   cardseq(PreImage) is a sequence of cardinals.
   Forall pair /in /sumset cardseq(PreImage) exists a,b /in /VV pair = (a,b).
   /sumset cardseq(PreImage) /subset kappa /times kappa.
@@ -1295,8 +1298,8 @@ Proof.
     Take zfsets a,b such that pair = (a,b).
     Then b /in Dom(cardseq(PreImage)) /\ a /in (cardseq(PreImage))[b].
     b /in Card(/PP lambda).
-    Card(/PP lambda) = 2 ^3 lambda.
-    2 ^3 lambda /in kappa.
+    Card(/PP lambda) = 2 ^ lambda.
+    2 ^ lambda /in kappa.
     Then b /in kappa.
     (cardseq(PreImage))[b] = Card(PreImage[b]).
     PreImage[b] = Image[Pre[b]].
@@ -1307,14 +1310,13 @@ Proof.
   end.
   Then Card(/sumset cardseq(PreImage)) /subset Card(kappa /times kappa).
   kappa /in /Card.
-  kappa *3 kappa = Card(kappa /times kappa).
-  kappa *3 kappa = kappa.
+  kappa * kappa = Card(kappa /times kappa).
+  kappa * kappa = kappa.
   Then Card(kappa /times kappa) = kappa.
   Then Card(H) /subset kappa.  
   
   Card(F) = Card(H).
   Then Card(F) /subset kappa.
-
 qed.
 
 

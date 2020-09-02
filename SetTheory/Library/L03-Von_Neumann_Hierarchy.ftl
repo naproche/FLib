@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L02-Cardinals_Part_1.ftl]
+[read Formalizations/Library/L02-Cardinals_Part_1.ftl]
 
 [prove off]
 
@@ -10,7 +10,6 @@ Let o,o1,o2 stand for objects.
 Let alpha, beta, gamma, delta stand for ordinals.
 Let k,l,m,n stand for natural numbers.
 Let f,g,h,F,G,H stand for zffunction.
-
 
 
 ## Von Neumann Hierarchy
@@ -51,7 +50,9 @@ Axiom. rk : /VV /rightarrow /Ord.
 Axiom. rk+ : /VV /rightarrow /Ord.
 
 Lemma. rk, rk+ are zffunctions.
+
 Lemma. Let x /in /VV. Then rk[x] /in /Ord.
+
 Axiom. Let x /in /VV. Then x /in V[rk[x]++] /setminus V[rk[x]].
 
 Lemma. Let x /in /VV. Let alpha /in /Ord. Let x /in V[alpha ++] /setminus V[alpha]. Then rk[x] = alpha.
@@ -65,6 +66,9 @@ Lemma. Let x /in /VV. Let rk[x] = alpha. Then x /notin V[alpha].
 Lemma. Let x /in y. Then rk[x] /in rk[y].
 
 Lemma. Forall x /in /VV (rk[x] = /bigcup rk+^[x]).
+
+
+
 
 
 [prove on]

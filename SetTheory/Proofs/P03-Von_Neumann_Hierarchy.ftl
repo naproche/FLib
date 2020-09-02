@@ -1,6 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L02-Cardinals_Part_1.ftl]
-
-[synonym zfset/-s]
+[read Formalizations/Library/L02-Cardinals_Part_1.ftl]
 
 ## Pretyped Variables
 
@@ -10,7 +8,6 @@ Let o,o1,o2 stand for objects.
 Let alpha, beta, gamma, delta stand for ordinals.
 Let k,l,m,n stand for natural numbers.
 Let f,g,h,F,G,H stand for zffunction.
-
 
 
 ## Von Neumann Hierarchy
@@ -126,6 +123,7 @@ Proof by induction.
       Take a zfset x such that x /in V^[alpha] /\ w /in x.
       Take an ordinal gamma such that gamma /in alpha /\ x = V[gamma].
       Then w /in V[gamma].
+      V[gamma] is transitive.
       Then w /subset V[gamma].
       V[gamma] /subset V[alpha].
       Then w /subset V[alpha].
@@ -138,9 +136,7 @@ Proof by induction.
     end.
   end.
   Then Trans(V[alpha]).
-
 qed.
-
 
 
 Lemma. Forall alpha /in /Ord V[alpha] /cap /Ord = alpha.
@@ -205,25 +201,13 @@ Proof.
   Define g[y] = f[y] ++ for y in x.
   Then f,g are zffunctions.
   Let a = /bigcup g^[x].
-  Then a /in /Ord.
+  Then a is an ordinal.
   Proof.
-    Then a /in /VV.
-    Trans(a).
-    Proof. Let b /in a. Take y /in x such that b /in g[y].
-      g[y] /in /Ord.
-      Let c /in b. Then c /in g[y].
-      Then c /in /bigcup g^[x].
-      Then c /in a.
-    end.
-    Forall b /in a Trans(b).
-    Proof. 
-      Let b /in a. 
-      Take a zfset y such that y /in x /\ b /in g[y]. 
-      g[y] /in /Ord. 
-      Then b /in /Ord.
-    end.
+    g^[x] /subset /Ord.
+    g^[x] is a zfset.
+    Then /bigcup g^[x] is an ordinal.
   end.
-  Then x /subset V[a].
+  x /subset V[a].
   Proof.
     Let y /in x. 
     Then y /in V[f[y]]. 
@@ -245,6 +229,7 @@ Proof by contradiction. Assume the contrary.
   Take an ordinal beta such that x /subset V[beta].
   Then x /in V[beta ++].  
   V[beta ++] /in ran(V).
+  Then x /in /bigcup ran(V).
   Then x /in A.
   Contradiction.
 qed.
@@ -289,6 +274,8 @@ qed.
 Lemma. Exists f (Dom(f) = /VV and forall x /in /VV (f[x] /in /Ord /\ x /in V[f[x]++] /setminus V[f[x]])).
 Proof.
   Define f[x] = (Choose an ordinal alpha such that x /in V[alpha ++] /setminus V[alpha] in alpha) for x in /VV.
+  f is a zffunction.
+  Forall x /in /VV (f[x] /in /Ord /\ x /in V[f[x]++] /setminus V[f[x]]).
 qed.
 
 
@@ -362,10 +349,16 @@ Proof.
         Let x /in V[alpha].
         Case x /in V[beta].
         end.
-        Case x /notin V[beta]. 
-          Then x /in V[beta ++] /setminus V[beta]. 
-          Forall a /in /VV forall b /in /Ord (rk[a] = b iff a /in V[b ++] /setminus V[b]).
+        Case x /notin V[beta].
+          x /in V[beta ++] /setminus V[beta].
           Then rk[x] = beta.
+          Proof.
+            Forall a /in /VV forall b /in /Ord (rk[a] = b iff a /in V[b ++] /setminus V[b]).
+            x /in /VV.
+            beta /in /Ord.
+            x /in V[beta ++] /setminus V[beta]. 
+            Then rk[x] = beta.
+          end.
           Then /bigcup rk+^[x] /subset beta.
           Proof.
             Let z /in /bigcup rk+^[x]. 

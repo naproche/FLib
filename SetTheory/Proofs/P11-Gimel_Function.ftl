@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L10-Koenigs_Lemma.ftl]
+[read Formalizations/Library/L10-Koenigs_Lemma.ftl]
 
 ## Pretyped Variables
 
@@ -12,34 +12,6 @@ Let kappa, lambda stand for cardinals.
 
 
 
-## Partially applied functions
-
-Signature. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. F{A,B}(a,-) is a zffunction.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then Dom(F{A,B}(a,-)) = B.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then forall b /in B (F{A,B}(a,-))[b] = F[(a,b)].
-
-Signature. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. F{A,B}(-,b) is a zffunction.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then Dom(F{A,B}(-,b)) = A.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then forall a /in A (F{A,B}(-,b))[a] = F[(a,b)].
-
-Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then ran(F{A,B}(a,-)) /subset ran(F).
-Proof.
-  Dom(F{A,B}(a,-)) = B.
-  Let b /in B.
-  Then (F{A,B}(a,-))[b] = F[(a,b)].
-  Then (F{A,B}(a,-))[b] /in ran(F).
-qed.
-
-Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then ran(F{A,B}(-,b)) /subset ran(F).
-Proof.
-  Dom(F{A,B}(-,b)) = A.
-  Let a /in A.
-  Then (F{A,B}(-,b))[a] = F[(a,b)].
-  Then (F{A,B}(-,b))[a] /in ran(F).
-qed.
-
-
-
 ## Beths
 
 Signature. Beth is a function.
@@ -47,7 +19,7 @@ Axiom. Dom(Beth) = /Ord.
 Axiom. Forall alpha /in /Ord Beth[alpha] /in /Cd.
 Lemma. Beth is a zffunction.
 Axiom. Beth[/emptyset] = /NN.
-Axiom. Let alpha /in /Succ. Let beta /in /Ord. Let alpha = beta + 1. Then Beth[beta] /in /Cd /\ Beth[alpha] = 2 ^3 Beth[beta].
+Axiom. Let alpha /in /Succ. Let beta /in /Ord. Let alpha = beta +' 1. Then Beth[beta] /in /Cd /\ Beth[alpha] = 2 ^ Beth[beta].
 Axiom. Let alpha /in /Lim. Then Beth[alpha] = {zfset x | exists beta /in alpha x /in Beth[beta]}.
 
 
@@ -78,7 +50,7 @@ Proof by induction.
   end.
   Case alpha /in /Succ.
     Let gamma = alpha --.
-    Then Beth[alpha] = 2 ^3 Beth[gamma].
+    Then Beth[alpha] = 2 ^ Beth[gamma].
     gamma /in alpha.
     /NN /subset Beth[gamma].
   end.
@@ -94,12 +66,17 @@ Lemma. Forall alpha /in /Ord forall beta /in alpha (Beth[beta] /in Beth[alpha]).
 Proof by induction.
   Let alpha /in /Ord.
   Forall gamma /in alpha forall beta /in gamma Beth[beta] /in Beth[gamma].
+  Proof.
+    Let gamma /in alpha.
+    Then gamma -<- alpha.
+    Then forall beta /in gamma Beth[beta] /in Beth[gamma].
+  end.
   Case alpha = 0.
   end.
   Case alpha /in /Succ.
     Let gamma = alpha --.
     gamma /in alpha.
-    Beth[alpha] = 2 ^3 Beth[gamma].
+    Beth[alpha] = 2 ^ Beth[gamma].
     Then forall beta /in alpha Beth[beta] /in Beth[alpha].
     Proof.
       Let beta /in alpha.
@@ -118,8 +95,8 @@ Proof by induction.
     Forall beta /in alpha Beth[beta] /in Beth[alpha].
     Proof.
       Let beta /in alpha.
-      Then beta + 1 /in alpha.
-      Beth[beta] /in Beth[beta + 1].
+      Then beta +' 1 /in alpha.
+      Beth[beta] /in Beth[beta +' 1].
       Then Beth[beta] /in /bigcup Beth^[alpha].
     end.
   end.
@@ -167,8 +144,8 @@ kappa = Beth[kappa] /\ cof(kappa) = kappa.
 
 Signature. Gimel is a function.
 Axiom. Dom(Gimel) = /Card.
-Axiom. Forall kappa /in /Card Gimel[kappa] = kappa ^3 cof(kappa).
-Lemma. Let kappa /in /Card. Then kappa ^3 cof(kappa) /in /Card.
+Axiom. Forall kappa /in /Card Gimel[kappa] = kappa ^ cof(kappa).
+Lemma. Let kappa /in /Card. Then kappa ^ cof(kappa) /in /Card.
 Lemma. Gimel : /Card /rightarrow /Card.
 Proof.
   Dom(Gimel) = /Card.
@@ -179,19 +156,19 @@ qed.
 
 
 Signature. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda is a set.
-Axiom. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda = {zfset x | exists v /in lambda x /in kappa ^3 Card(v)}.
+Axiom. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda = {zfset x | exists v /in lambda x /in kappa ^ Card(v)}.
 
 
 Signature. Exp is a function.
 Axiom. Dom(Exp) = /Cd /times /Ord.
 Lemma. Forall o1,o2 ((o1,o2) /in /Cd /times /Ord => o1 /in /Cd /\ o2 /in /Ord).
-Axiom. Let a,b be objects. Let (a,b) /in /Cd /times /Ord. Then Exp[(a,b)] = a ^3 Card(b).
+Axiom. Let a,b be objects. Let (a,b) /in /Cd /times /Ord. Then Exp[(a,b)] = a ^ Card(b).
 Lemma. Exp : /Cd /times /Ord /rightarrow /Cd.
 Proof.
   Let pair /in /Cd /times /Ord.
   Take zfsets a,b such that a /in /Cd /\ b /in /Ord /\ pair = (a,b).
-  Then Exp[pair] = a ^3 Card(b).
-  a ^3 Card(b) /in /Cd.
+  Then Exp[pair] = a ^ Card(b).
+  a ^ Card(b) /in /Cd.
   Then Exp[pair] /in /Cd.
 qed.
 
@@ -209,13 +186,13 @@ qed.
 
 Signature. Let kappa /in /Cd. Cont(kappa) is a function.
 Axiom. Let kappa /in /Cd. Dom(Cont(kappa)) = /Ord.
-Axiom. Let kappa /in /Cd. Let alpha /in /Ord. Then (Cont(kappa))[alpha] = kappa ^3 Card(alpha).
+Axiom. Let kappa /in /Cd. Let alpha /in /Ord. Then (Cont(kappa))[alpha] = kappa ^ Card(alpha).
 Lemma. Let kappa /in /Cd. Cont(kappa) : /Ord /rightarrow /Cd.
 Proof.
   Dom(Cont(kappa)) = /Ord.
   Let alpha /in /Ord.
   Then Card(alpha) /in /Cd.
-  (Cont(kappa))[alpha] = kappa ^3 Card(alpha).
+  (Cont(kappa))[alpha] = kappa ^ Card(alpha).
   (Cont(kappa))[alpha] /in /VV.
   (Cont(kappa))[alpha] /in /Cd.
 qed.
@@ -226,8 +203,8 @@ Proof.
   kappa ^< lambda /subset /bigcup (Cont(kappa))^[lambda].
   Proof.
     Let x /in kappa ^< lambda.
-    Exists v /in lambda x /in kappa ^3 Card(v).
-    Take a zfset v such that v /in lambda /\ x /in kappa ^3 Card(v).
+    Exists v /in lambda x /in kappa ^ Card(v).
+    Take a zfset v such that v /in lambda /\ x /in kappa ^ Card(v).
     Then x /in (Cont(kappa))[v].
     (Cont(kappa))[v] /in (Cont(kappa))^[lambda].
     Then x /in /bigcup (Cont(kappa))^[lambda].
@@ -237,8 +214,8 @@ Proof.
     Let x /in /bigcup (Cont(kappa))^[lambda].
     Take a zfset y such that y /in (Cont(kappa))^[lambda] /\ x /in y.
     Take a zfset a such that a /in lambda /\ y = (Cont(kappa))[a].
-    Then x /in kappa ^3 Card(a).
-    Then exists v /in lambda x /in kappa ^3 Card(v).
+    Then x /in kappa ^ Card(a).
+    Then exists v /in lambda x /in kappa ^ Card(v).
     Then x /in kappa ^< lambda.
   end.
 qed.
@@ -261,10 +238,10 @@ Proof.
   /NN /subset 2 ^< kappa.
   Proof.
     Let n /in /NN.
-    2 ^< kappa = {zfset x | exists v /in kappa x /in 2 ^3 Card(v)}.
+    2 ^< kappa = {zfset x | exists v /in kappa x /in 2 ^ Card(v)}.
     n /in kappa.
     Card(n) = n.
-    Then n /in 2 ^3 Card(n).
+    Then n /in 2 ^ Card(n).
     Then n /in 2 ^< kappa.
   end.
 qed.
@@ -347,6 +324,8 @@ Proof.
       Then forall i /in cof(kappa) func[i] /in prod[i].
       Then func /in /prodset prod.
     end.
+    Then /prodset prod = ^{cof(kappa)}kappa.
+    Then Card(/prodset prod) = Card(^{cof(kappa)}kappa).
   end.
   
   Dom(sum) = Dom(prod).
@@ -374,16 +353,16 @@ Proof.
 qed.
 
 
-Lemma. Let kappa /in /Card. Let cof(kappa) = kappa. Then Gimel[kappa] = 2 ^3 kappa.
+Lemma. Let kappa /in /Card. Let cof(kappa) = kappa. Then Gimel[kappa] = 2 ^ kappa.
 Proof.
   2 /subset kappa.
-  kappa /subset 2 ^3 kappa.
-  Then kappa ^3 kappa = 2 ^3 kappa.
-  Gimel[kappa] = kappa ^3 kappa.
+  kappa /subset 2 ^ kappa.
+  Then kappa ^ kappa = 2 ^ kappa.
+  Gimel[kappa] = kappa ^ kappa.
 qed.
 
 
-Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Then 2 ^3 kappa /subset (2 ^< kappa) ^3 cof(kappa).
+Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Then 2 ^ kappa /subset (2 ^< kappa) ^ cof(kappa).
 Proof.
   Take a zfset x such that x /subset kappa /\ x /cof kappa /\ otp(x) = cof(kappa).
   Exists f (f : cof(kappa) /leftrightarrow x /\ (f is an epsiso)).
@@ -395,9 +374,9 @@ Proof.
   Proof.
     Let i /in cof(kappa).
     kap[i] /in kappa.
-    Card(/PP kap[i]) = 2 ^3 Card(kap[i]).
-    2 ^< kappa = {zfset x | exists v /in kappa x /in 2 ^3 Card(v)}.
-    Then 2 ^3 Card(kap[i]) /subset 2 ^< kappa.
+    Card(/PP kap[i]) = 2 ^ Card(kap[i]).
+    2 ^< kappa = {zfset x | exists v /in kappa x /in 2 ^ Card(v)}.
+    Then 2 ^ Card(kap[i]) /subset 2 ^< kappa.
   end.
   Forall i /in cof(kappa) exists f (f : /PP kap[i] /rightarrow 2 ^< kappa /\ (f is injective)).
   Proof.
@@ -451,6 +430,7 @@ Proof.
         Fun[(M,i)] = (inj[i])[M /cap kap[i]].
         inj[i] : /PP kap[i] /rightarrow 2 ^< kappa.
         Then ran(inj[i]) /subset 2 ^< kappa.
+        M /cap kap[i] /in Dom(inj[i]).
         Then (inj[i])[M /cap kap[i]] /in 2 ^< kappa.
         Then f[i] /in 2 ^< kappa.
       end.
@@ -469,6 +449,11 @@ Proof.
       Then exists z (z /in M1 /setminus M2 \/ z /in M2 /setminus M1).
       Proof.
         (not (M1 /subset M2)) \/ (not (M2 /subset M1)).
+        Proof by contradiction. Assume the contrary.
+          Then M1 /subset M2 /\ M2 /subset M1.
+          Then M1 = M2.
+          Contradiction.
+        end.
       end.
       Take a zfset z such that (z /in M1 /setminus M2 \/ z /in M2 /setminus M1).
       Then z /in kappa.
@@ -509,31 +494,31 @@ Proof.
   
   /PP kappa, ^{cof(kappa)}(2 ^< kappa) are zfsets.
   Then Card(/PP kappa) /subset Card(^{cof(kappa)}(2 ^< kappa)).
-  Card(/PP kappa) = 2 ^3 kappa.
-  Card(^{cof(kappa)}(2 ^< kappa)) = (2 ^< kappa) ^3 cof(kappa).
+  Card(/PP kappa) = 2 ^ kappa.
+  Card(^{cof(kappa)}(2 ^< kappa)) = (2 ^< kappa) ^ cof(kappa).
 qed.
 
 
 Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Let (exists kappap /in /Card /cap kappa forall lambda /in /Card
-(kappap /subset lambda /\ lambda /in kappa => 2 ^3 kappap = 2 ^3 lambda)). Then 2 ^3 kappa = 2 ^< kappa.
+(kappap /subset lambda /\ lambda /in kappa => 2 ^ kappap = 2 ^ lambda)). Then 2 ^ kappa = 2 ^< kappa.
 Proof.
   Take a zfset kappap such that kappap /in /Card /cap kappa /\ forall lambda /in /Card
-  (kappap /subset lambda /\ lambda /in kappa => 2 ^3 kappap = 2 ^3 lambda).
-  2 ^< kappa = 2 ^3 kappap.
+  (kappap /subset lambda /\ lambda /in kappa => 2 ^ kappap = 2 ^ lambda).
+  2 ^< kappa = 2 ^ kappap.
   Proof.
-    2 ^< kappa = {zfset x | exists v /in kappa x /in 2 ^3 Card(v)}.
-    Then 2 ^3 kappap /subset 2 ^< kappa.
+    2 ^< kappa = {zfset x | exists v /in kappa x /in 2 ^ Card(v)}.
+    Then 2 ^ kappap /subset 2 ^< kappa.
     Proof.
-      Let x /in 2 ^3 kappap.
+      Let x /in 2 ^ kappap.
       kappap /in kappa.
       Card(kappap) = kappap.
-      Then exists v /in kappa x /in 2 ^3 Card(v).
+      Then exists v /in kappa x /in 2 ^ Card(v).
       Then x /in 2 ^< kappa.
     end.
-    2 ^< kappa /subset 2 ^3 kappap.
+    2 ^< kappa /subset 2 ^ kappap.
     Proof.
       Let x /in 2 ^< kappa.
-      Take a zfset v such that v /in kappa /\ x /in 2 ^3 Card(v).
+      Take a zfset v such that v /in kappa /\ x /in 2 ^ Card(v).
       Card(v) /in kappa.
       kappap /subset Card(v) \/ Card(v) /in kappap.
       Proof.
@@ -543,85 +528,85 @@ Proof.
       end.
       Case kappap /subset Card(v). 
         Card(v) /in /Card.
-        Then 2 ^3 Card(v) = 2 ^3 kappap.
+        Then 2 ^ Card(v) = 2 ^ kappap.
       end.
       Case Card(v) /in kappap.
-        Then 2 ^3 Card(v) /subset 2 ^3 kappap.
+        Then 2 ^ Card(v) /subset 2 ^ kappap.
       end.
     end.
   end.
   
-  2 ^< kappa /subset 2 ^3 kappa.
+  2 ^< kappa /subset 2 ^ kappa.
   Proof.
-    2 ^3 kappap /subset 2 ^3 kappa.
+    2 ^ kappap /subset 2 ^ kappa.
   end.
   
-  2 ^3 kappa /subset 2 ^< kappa.
+  2 ^ kappa /subset 2 ^< kappa.
   Proof.
-    2 ^3 kappa /subset (2 ^< kappa) ^3 cof(kappa).
-    2 ^< kappa = 2 ^3 kappap.
-    Then 2 ^3 kappa /subset (2 ^3 kappap) ^3 cof(kappa).
-    (2 ^3 kappap) ^3 cof(kappa) = 2 ^3 (kappap *3 cof(kappa)).
-    2 ^3 (kappap *3 cof(kappa)) /subset 2 ^3 kappap.
+    2 ^ kappa /subset (2 ^< kappa) ^ cof(kappa).
+    2 ^< kappa = 2 ^ kappap.
+    Then 2 ^ kappa /subset (2 ^ kappap) ^ cof(kappa).
+    (2 ^ kappap) ^ cof(kappa) = 2 ^ (kappap * cof(kappa)).
+    2 ^ (kappap * cof(kappa)) /subset 2 ^ kappap.
     Proof.
       kappap, cof(kappa) /in /Ord.
       Then kappap /in cof(kappa) \/ cof(kappa) /in kappap \/ kappap = cof(kappa) (by TotalOrder).
       Case kappap = cof(kappa).
-        Then kappap *3 cof(kappa) = kappap.
+        Then kappap * cof(kappa) = kappap.
       end.
       Case kappap /in cof(kappa).
         Then kappap /subset cof(kappa).
-        Then kappap *3 cof(kappa) /subset cof(kappa) *3 cof(kappa).
+        Then kappap * cof(kappa) /subset cof(kappa) * cof(kappa).
         Proof.
           kappap /times cof(kappa) /subset cof(kappa) /times cof(kappa).
           Then Card(kappap /times cof(kappa)) /subset Card(cof(kappa) /times cof(kappa)).
         end.
-        cof(kappa) *3 cof(kappa) = cof(kappa).
-        Then kappap *3 cof(kappa) /subset cof(kappa).
-        Then 2 ^3 (kappap *3 cof(kappa)) /subset 2 ^3 cof(kappa).
+        cof(kappa) * cof(kappa) = cof(kappa).
+        Then kappap * cof(kappa) /subset cof(kappa).
+        Then 2 ^ (kappap * cof(kappa)) /subset 2 ^ cof(kappa).
         Proof.
-          Take cardinals aa, bb such that aa = kappap *3 cof(kappa) /\ bb = cof(kappa).
+          Take cardinals aa, bb such that aa = kappap * cof(kappa) /\ bb = cof(kappa).
           0 /in 2.
           aa /subset bb.
-          Then 2 ^3 aa /subset 2 ^3 bb.
+          Then 2 ^ aa /subset 2 ^ bb.
         end.
-        2 ^3 cof(kappa) = 2 ^3 kappap.
+        2 ^ cof(kappa) = 2 ^ kappap.
       end.
       Case cof(kappa) /in kappap.
         Then cof(kappa) /subset kappap.
-        Then kappap *3 cof(kappa) /subset kappap *3 kappap.
+        Then kappap * cof(kappa) /subset kappap * kappap.
         Proof.
           kappap /times cof(kappa) /subset kappap /times kappap.
           Then Card(kappap /times cof(kappa)) /subset Card(kappap /times kappap).
         end.
-        kappap *3 kappap = kappap.
-        Then kappap *3 cof(kappa) /subset kappap.
-        Then 2 ^3 (kappap *3 cof(kappa)) /subset 2 ^3 kappap.
+        kappap * kappap = kappap.
+        Then kappap * cof(kappa) /subset kappap.
+        Then 2 ^ (kappap * cof(kappa)) /subset 2 ^ kappap.
         Proof.
-          Take cardinals aa, bb such that aa = kappap *3 cof(kappa) /\ bb = kappap.
+          Take cardinals aa, bb such that aa = kappap * cof(kappa) /\ bb = kappap.
           0 /in 2.
           aa /subset bb.
-          Then 2 ^3 aa /subset 2 ^3 bb.
+          Then 2 ^ aa /subset 2 ^ bb.
         end.
       end.
     end.
-    Then 2 ^3 kappa /subset 2 ^3 kappap.
-    2 ^3 kappap = 2 ^< kappa.
+    Then 2 ^ kappa /subset 2 ^ kappap.
+    2 ^ kappap = 2 ^< kappa.
   end.
 qed.
 
 
 Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Let (forall kappap /in /Cd /cap kappa exists lambda /in /Cd /cap kappa
-(kappap /in lambda /\ 2 ^3 kappap /in 2 ^3 lambda)). Then 2 ^3 kappa = Gimel[2 ^< kappa].
+(kappap /in lambda /\ 2 ^ kappap /in 2 ^ lambda)). Then 2 ^ kappa = Gimel[2 ^< kappa].
 Proof.
   Take an ordinal alpha such that kappa = Alef[alpha].
   alpha /in /Lim.
   Proof by contradiction. Assume the contrary.
     alpha /neq 0.
     Then alpha /in /Succ.
-    Take an ordinal beta such that alpha = beta + 1.
-    cof(Alef[beta + 1]) = Alef[beta + 1].
-    Alef[beta + 1] = kappa.
+    Take an ordinal beta such that alpha = beta +' 1.
+    cof(Alef[beta +' 1]) = Alef[beta +' 1].
+    Alef[beta +' 1] = kappa.
     Then cof(kappa) = kappa.
     Contradiction.
   end.
@@ -641,7 +626,7 @@ Proof.
   Proof.
     Let lambda /in kappa.
     alpha /in /Lim.
-    Then Alef[alpha] = {zfset xx | exists beta /in alpha xx /in Alef[beta]}.
+    Then Alef[alpha] = /bigcup Alef^[alpha].
     Take a zfset beta such that beta /in alpha /\ lambda /in Alef[beta].
     Take a zfset b such that b /in xa /\ beta /in b.
     Then Alef[beta] /subset Alef[b].
@@ -704,7 +689,7 @@ Proof.
   Proof.
     cof(2 ^< kappa) /subset cof(kappa).
     Proof.
-      Define f[i] = 2 ^3 kap[i] for i in cof(kappa).
+      Define f[i] = 2 ^ kap[i] for i in cof(kappa).
       f is a zffunction.
       Proof.
         Let i /in cof(kappa).
@@ -716,16 +701,16 @@ Proof.
       Proof.
         Let a /in M.
         Take a zfset b such that b /in cof(kappa) /\ a = f[b].
-        Then a = 2 ^3 kap[b].
+        Then a = 2 ^ kap[b].
         kap[b] /in kappa.
         kap[b] /in /Cd /cap kappa.
-        Take a zfset c such that c /in /Cd /cap kappa /\ kap[b] /in c /\ 2 ^3 kap[b] /in 2 ^3 c.
+        Take a zfset c such that c /in /Cd /cap kappa /\ kap[b] /in c /\ 2 ^ kap[b] /in 2 ^ c.
         Then a /in 2 ^< kappa.
         Proof.
           2 /in /Cd.
           c /in kappa.
           Card(c) = c.
-          a /in 2 ^3 Card(c).
+          a /in 2 ^ Card(c).
           Then a /in (Cont(2))[c].
           Then a /in /bigcup (Cont(2))^[kappa].
           2 ^< kappa = /bigcup (Cont(2))^[kappa].
@@ -739,25 +724,25 @@ Proof.
           2 ^< kappa = /bigcup (Cont(2))^[kappa].
           Take a zfset b such that b /in (Cont(2))^[kappa] /\ a /in b.
           Take a zfset v such that v /in kappa /\ b = (Cont(2))[v].
-          Then a /in 2 ^3 Card(v).
+          Then a /in 2 ^ Card(v).
           Take a zfset c such that c /in x /\ v /in c.
           Take a zfset d such that d /in cof(kappa) /\ kap[d] = c.
           Card(v) /subset kap[d].
-          Then 2 ^3 Card(v) /subset 2 ^3 kap[d].
+          Then 2 ^ Card(v) /subset 2 ^ kap[d].
           Proof.
             2, Card(v), kap[d] /in /Cd.
             0 /in 2.
             Card(v) /subset kap[d].
-            Then 2 ^3 Card(v) /subset 2 ^3 kap[d] (by ExpSubset).
+            Then 2 ^ Card(v) /subset 2 ^ kap[d] (by ExpSubset).
           end.
-          2 ^3 kap[d] = f[d].
-          Then 2 ^3 kap[d] /in M.
-          a /in 2 ^3 kap[d].
+          2 ^ kap[d] = f[d].
+          Then 2 ^ kap[d] /in M.
+          a /in 2 ^ kap[d].
         end.
       end.
       Then Card(M) /in cofset2(2 ^< kappa).
-      Then /bigcap cofset2(2 ^< kappa) /subset Card(M).
-      cof(2 ^< kappa) = /bigcap cofset2(2 ^< kappa).
+      Then min(cofset2(2 ^< kappa)) /subset Card(M).
+      cof(2 ^< kappa) = min(cofset2(2 ^< kappa)).
       Then cof(2 ^< kappa) /subset Card(M).
     end.
     
@@ -767,21 +752,21 @@ Proof.
       cof(beta) /in cofset2(beta).
       Take a zfset z such that z /subset beta /\ z /cof beta /\ Card(z) = cof(beta).
   
-      Define ind[delta] = {i /in cof(kappa) | delta /subset 2 ^3 kap[i]} for delta in z.
+      Define ind[delta] = {i /in cof(kappa) | delta /subset 2 ^ kap[i]} for delta in z.
       Forall delta /in z ind[delta] /neq /emptyset.
       Proof.
         Let delta /in z.
         Then delta /in 2 ^< kappa.
-        Forall aa /in /Cd forall bb /in /Card (aa ^< bb = {zfset y | exists v /in bb y /in aa ^3 Card(v)}).
+        Forall aa /in /Cd forall bb /in /Card (aa ^< bb = {zfset y | exists v /in bb y /in aa ^ Card(v)}).
         2 /in /Cd.
         kappa /in /Card.
-        Then 2 ^< kappa = {zfset y | exists v /in kappa y /in 2 ^3 Card(v)}.
-        Take a zfset v such that v /in kappa /\ delta /in 2 ^3 Card(v).
+        Then 2 ^< kappa = {zfset y | exists v /in kappa y /in 2 ^ Card(v)}.
+        Take a zfset v such that v /in kappa /\ delta /in 2 ^ Card(v).
         Take a zfset a1 such that a1 /in x /\ v /in a1.
         Take a zfset a2 such that a2 /in cof(kappa) /\ kap[a2] = a1.
         Card(v) /in a1.
-        Then 2 ^3 Card(v) /subset 2 ^3 kap[a2].
-        Then delta /subset 2 ^3 kap[a2].
+        Then 2 ^ Card(v) /subset 2 ^ kap[a2].
+        Then delta /subset 2 ^ kap[a2].
         Then a2 /in ind[delta].
       end.
       Forall delta /in z ind[delta] /subset /Ord.
@@ -812,43 +797,43 @@ Proof.
       Proof.
         Let a /in cof(kappa).
         kap[a] /in kappa.
-        Forall kappap /in /Cd /cap kappa exists lambdap /in /Cd /cap kappa (kappap /in lambdap /\ 2 ^3 kappap /in 2 ^3 lambdap).
+        Forall kappap /in /Cd /cap kappa exists lambdap /in /Cd /cap kappa (kappap /in lambdap /\ 2 ^ kappap /in 2 ^ lambdap).
         kap[a] /in /Cd /cap kappa.
-        Then exists lambdap /in /Cd /cap kappa (kap[a] /in lambdap /\ 2 ^3 kap[a] /in 2 ^3 lambdap).
-        Take a cardinal lambda such that lambda /in /Cd /cap kappa /\ kap[a] /in lambda /\ 2 ^3 kap[a] /neq 2 ^3 lambda.
-        2 ^3 kap[a] /in 2 ^3 lambda.
+        Then exists lambdap /in /Cd /cap kappa (kap[a] /in lambdap /\ 2 ^ kap[a] /in 2 ^ lambdap).
+        Take a cardinal lambda such that lambda /in /Cd /cap kappa /\ kap[a] /in lambda /\ 2 ^ kap[a] /neq 2 ^ lambda.
+        2 ^ kap[a] /in 2 ^ lambda.
         Proof.
-          2 ^3 kap[a] /subset 2 ^3 lambda.
-          Take ordinals aa, bb such that aa = 2 ^3 kap[a] /\ bb = 2 ^3 lambda.
+          2 ^ kap[a] /subset 2 ^ lambda.
+          Take ordinals aa, bb such that aa = 2 ^ kap[a] /\ bb = 2 ^ lambda.
           Then aa /in bb \/ bb /in aa \/ aa = bb.
           aa /subset bb.
           aa /neq bb.
           Then aa /in bb.
         end.
-        Then 2 ^3 kap[a] /in 2 ^< kappa.
+        Then 2 ^ kap[a] /in 2 ^< kappa.
         Proof.
           2 /in /Cd.
           kappa /in /Card.
           lambda /in kappa.
           Card(lambda) = lambda.
-          2 ^3 kap[a] /in 2 ^3 Card(lambda).
-          Then 2 ^3 kap[a] /in (Cont(2)[lambda]).
-          Then 2 ^3 kap[a] /in /bigcup (Cont(2))^[kappa].
+          2 ^ kap[a] /in 2 ^ Card(lambda).
+          Then 2 ^ kap[a] /in (Cont(2)[lambda]).
+          Then 2 ^ kap[a] /in /bigcup (Cont(2))^[kappa].
           2 ^< kappa = /bigcup (Cont(2))^[kappa].
         end.
-        Take a zfset b such that b /in z /\ 2 ^3 kap[a] /in b.
+        Take a zfset b such that b /in z /\ 2 ^ kap[a] /in b.
         Then f[b] /in zz.
         a /notin ind[b].
         Proof.
-          not (b /subset 2 ^3 kap[a]).
+          not (b /subset 2 ^ kap[a]).
         end.
         min(ind[b]) /in ind[b].
         Then f[b] /in ind[b].
-        Forall i /in ind[b] (i /in cof(kappa) /\ (2 ^3 kap[i] is a zfset) /\ b /subset 2 ^3 kap[i]).
-        2 ^3 kap[f[b]] is a zfset.
-        b /subset 2 ^3 kap[f[b]].
-        2 ^3 kap[a] /in b.
-        Then 2 ^3 kap[a] /in 2 ^3 kap[f[b]].
+        Forall i /in ind[b] (i /in cof(kappa) /\ (2 ^ kap[i] is a zfset) /\ b /subset 2 ^ kap[i]).
+        2 ^ kap[f[b]] is a zfset.
+        b /subset 2 ^ kap[f[b]].
+        2 ^ kap[a] /in b.
+        Then 2 ^ kap[a] /in 2 ^ kap[f[b]].
         Then kap[a] /in kap[f[b]].
         Proof.
           Take cardinals a1,a2 such that a1 = kap[a] /\ a2 = kap[f[b]].
@@ -856,11 +841,11 @@ Proof.
           Then a1 /in a2 \/ a2 /in a1 \/ a1 = a2 (by TotalOrder).
           Case a1 /in a2. end.
           Case a2 /in a1.
-            Then 2 ^3 a2 /subset 2 ^3 a1.
+            Then 2 ^ a2 /subset 2 ^ a1.
             Contradiction.
           end.
           Case a1 = a2. 
-            Then 2 ^3 a1 = 2 ^3 a2.
+            Then 2 ^ a1 = 2 ^ a2.
             Contradiction.
           end.
         end.
@@ -885,7 +870,7 @@ Proof.
       end.
       
       Card(zz) /in cofset2(cof(kappa)).
-      Then /bigcap cofset2(cof(kappa)) /subset Card(zz).
+      Then min(cofset2(cof(kappa))) /subset Card(zz).
       Then cof(cof(kappa)) /subset Card(zz).
       cof(cof(kappa)) = cof(kappa).
       Then cof(kappa) /subset Card(zz).
@@ -907,50 +892,50 @@ Proof.
     
   end.
   
-  2 ^3 kappa /subset Gimel[2 ^< kappa].
+  2 ^ kappa /subset Gimel[2 ^< kappa].
   Proof.
-    2 ^3 kappa /subset (2 ^< kappa) ^3 cof(kappa).
+    2 ^ kappa /subset (2 ^< kappa) ^ cof(kappa).
     cof(kappa) = cof(2 ^< kappa).
-    Then (2 ^< kappa) ^3 cof(kappa) = (2 ^< kappa) ^3 cof(2 ^< kappa).
-    (2 ^< kappa) ^3 cof(2 ^< kappa) = Gimel[2 ^< kappa].
+    Then (2 ^< kappa) ^ cof(kappa) = (2 ^< kappa) ^ cof(2 ^< kappa).
+    (2 ^< kappa) ^ cof(2 ^< kappa) = Gimel[2 ^< kappa].
   end.
   
-  Gimel[2 ^< kappa] /subset 2 ^3 kappa.
+  Gimel[2 ^< kappa] /subset 2 ^ kappa.
   Proof.
-    Gimel[2 ^< kappa] = (2 ^< kappa) ^3 cof(2 ^< kappa).
+    Gimel[2 ^< kappa] = (2 ^< kappa) ^ cof(2 ^< kappa).
     cof(2 ^< kappa) = cof(kappa).
-    Then Gimel[2 ^< kappa] = (2 ^< kappa) ^3 cof(kappa).
-    2 ^< kappa /subset 2 ^3 kappa.
+    Then Gimel[2 ^< kappa] = (2 ^< kappa) ^ cof(kappa).
+    2 ^< kappa /subset 2 ^ kappa.
     Proof.
       Let a /in 2 ^< kappa.
       2 ^< kappa = /bigcup (Cont(2))^[kappa].
       Take a zfset b such that b /in (Cont(2))^[kappa] /\ a /in b.
       Take a zfset v such that v /in kappa /\ b = (Cont(2))[v].
-      Then a /in 2 ^3 Card(v).
+      Then a /in 2 ^ Card(v).
       2,Card(v),kappa /in /Cd.
       Card(v) /subset kappa.
       0 /in 2.
-      Then 2 ^3 Card(v) /subset 2 ^3 kappa (by ExpSubset).
-      Then a /in 2 ^3 kappa.
+      Then 2 ^ Card(v) /subset 2 ^ kappa (by ExpSubset).
+      Then a /in 2 ^ kappa.
     end.
-    2 ^< kappa, 2 ^3 kappa, cof(kappa) /in /Cd.
-    Then (2 ^< kappa) ^3 cof(kappa) /subset (2 ^3 kappa) ^3 cof(kappa) (by BaseSubset).
-    (2 ^3 kappa) ^3 cof(kappa) = 2 ^3 (kappa *3 cof(kappa)).
+    2 ^< kappa, 2 ^ kappa, cof(kappa) /in /Cd.
+    Then (2 ^< kappa) ^ cof(kappa) /subset (2 ^ kappa) ^ cof(kappa) (by BaseSubset).
+    (2 ^ kappa) ^ cof(kappa) = 2 ^ (kappa * cof(kappa)).
     cof(kappa) /subset kappa.
-    Then kappa *3 cof(kappa) /subset kappa *3 kappa.
+    Then kappa * cof(kappa) /subset kappa * kappa.
     Proof.
       kappa /times cof(kappa) /subset kappa /times kappa.
       Then Card(kappa /times cof(kappa)) /subset Card(kappa /times kappa).
     end.
-    kappa *3 kappa = kappa.
-    Then kappa *3 cof(kappa) /subset kappa.
-    Then 2 ^3 (kappa *3 cof(kappa)) /subset 2 ^3 kappa.
+    kappa * kappa = kappa.
+    Then kappa * cof(kappa) /subset kappa.
+    Then 2 ^ (kappa * cof(kappa)) /subset 2 ^ kappa.
     Proof.
-      Take cardinals aa, bb such that aa = (kappa *3 cof(kappa)) /\ bb = kappa.
+      Take cardinals aa, bb such that aa = (kappa * cof(kappa)) /\ bb = kappa.
       2,aa,bb /in /Cd.
       0 /in 2.
       aa /subset bb.
-      Then 2 ^3 aa /subset 2 ^3 bb.
+      Then 2 ^ aa /subset 2 ^ bb.
     end.
   end.
 qed.

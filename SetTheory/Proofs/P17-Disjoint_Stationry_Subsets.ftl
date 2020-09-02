@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L16-Fodors_Lemma.ftl]
+[read Formalizations/Library/L16-Fodors_Lemma.ftl]
 
 ## Pretyped Variables
 
@@ -18,9 +18,9 @@ Let kappa, lambda stand for cardinals.
 Lemma. Let kappa be a successor cardinal. Then kappa /in /BigCard.
 Proof.
   cof(kappa) = kappa.
-  Take an ordinal alpha such that kappa = Alef[alpha + 1].
-  1 /subset alpha + 1.
-  Then Alef[1] /subset Alef[alpha + 1].
+  Take an ordinal alpha such that kappa = Alef[alpha +' 1].
+  1 /subset alpha +' 1.
+  Then Alef[1] /subset Alef[alpha +' 1].
   Then Alef[1] /subset kappa.
 qed.
 
@@ -70,11 +70,11 @@ Proof.
   
   # Introduction
   
-  Take an ordinal lam such that kappa = Alef[lam + 1].
+  Take an ordinal lam such that kappa = Alef[lam +' 1].
   Let lambda = Alef[lam].
   Then kappa = Plus[lambda].
   Proof.
-    Alef[lam + 1] = Plus[Alef[lam]].
+    Alef[lam +' 1] = Plus[Alef[lam]].
   end.
   Forall v /in kappa /setminus <0> exists f (f : lambda /rightarrow v /\ ran(f) = v).
   Proof.
@@ -85,7 +85,9 @@ Proof.
       Card(v), lambda /in /Ord.
       Then lambda /in Card(v).
       Card(v) /in /Cd.
-      Then Plus[lambda] /subset Card(v) (by PlusSubset).
+      Then Card(v) /in PlusCard(lambda).
+      Plus[lambda] = min(PlusCard(lambda)).
+      Then Plus[lambda] /subset Card(v).
       Contradiction.
     end.
     Then Card(v) /subset lambda.
@@ -157,23 +159,23 @@ Proof.
     lambda /neq /emptyset.
     Then /bigcap C^[lambda] /subset kappa /\ /bigcap C^[lambda] /club kappa (by clubintersection).
     alpha ++ /in kappa.
-    Then /bigcap C^[lambda] /setminus (alpha + 1) /in Cl(kappa).
-    Then /bigcap C^[lambda] /setminus (alpha + 1) /club kappa.
+    Then /bigcap C^[lambda] /setminus (alpha +' 1) /in Cl(kappa).
+    Then /bigcap C^[lambda] /setminus (alpha +' 1) /club kappa.
     
     S /subset kappa.
     S is stationary in kappa.
-    Then S /cap (/bigcap C^[lambda] /setminus (alpha + 1)) /neq /emptyset.
+    Then S /cap (/bigcap C^[lambda] /setminus (alpha +' 1)) /neq /emptyset.
     Proof.
       kappa /in /BigCard. 
       S /subset kappa. 
       S is stationary in kappa iff (forall Cl /subset kappa (Cl /club kappa => S /cap Cl /neq /emptyset)) (by stationary).
       S is stationary in kappa.
-      /bigcap C^[lambda] /setminus (alpha + 1) /subset kappa.
-      /bigcap C^[lambda] /setminus (alpha + 1) /club kappa.
-      Then S /cap (/bigcap C^[lambda] /setminus (alpha + 1)) /neq /emptyset.
+      /bigcap C^[lambda] /setminus (alpha +' 1) /subset kappa.
+      /bigcap C^[lambda] /setminus (alpha +' 1) /club kappa.
+      Then S /cap (/bigcap C^[lambda] /setminus (alpha +' 1)) /neq /emptyset.
     end.
     
-    Take a zfset v such that v /in S /cap (/bigcap C^[lambda] /setminus (alpha + 1)).
+    Take a zfset v such that v /in S /cap (/bigcap C^[lambda] /setminus (alpha +' 1)).
     Then alpha /in v.
     
     Forall i /in lambda v /notin NS[i].
@@ -252,7 +254,9 @@ Proof.
           Then Card(i^{-1}[[j]]) /in lambda \/ Card(i^{-1}[[j]]) = lambda \/ lambda /in Card(i^{-1}[[j]]) (by TotalOrder).
           Then lambda /in Card(i^{-1}[[j]]).
           Card(i^{-1}[[j]]) /in /Cd.
-          Then Plus[lambda] /subset Card(i^{-1}[[j]]) (by PlusSubset).
+          Then Card(i^{-1}[[j]]) /in PlusCard(lambda).
+          Plus[lambda] = min(PlusCard(lambda)).
+          Then Plus[lambda] /subset Card(i^{-1}[[j]]).
           Contradiction.
         end.
       end.
@@ -268,22 +272,22 @@ Proof.
       /sumset seq /subset lambda /times lambda.
       lambda /times lambda /tilde lambda.
       Then /sumset seq <= lambda.
-      Card(/funcsumset pre) = kappa.
+      Card(/sumset pre) = kappa.
       Proof.
         Define F[alpha] = (alpha,i[alpha]) for alpha in kappa.
-        F : kappa /rightarrow /funcsumset pre.
+        F : kappa /rightarrow /sumset pre.
         Proof.
           Let alpha /in kappa.
           i[alpha] /in lambda.
           Take a zfset j such that j /in lambda /\ j = i[alpha].
           Then alpha /in pre[j].
-          Then (alpha,j) /in /funcsumset pre.
-          Then F[alpha] /in /funcsumset pre.
+          Then (alpha,j) /in /sumset pre.
+          Then F[alpha] /in /sumset pre.
         end.
         F is injective.
-        ran(F) = /funcsumset pre.
+        ran(F) = /sumset pre.
         Proof.
-          Let pair /in /funcsumset pre.
+          Let pair /in /sumset pre.
           Take objects a,b such that b /in Dom(pre) /\ a /in pre[b] /\ pair = (a,b).
           pre[b] is a zfset.
           a,b are zfsets.
@@ -292,7 +296,7 @@ Proof.
           Then F[a] = (a,b).
           Then pair /in ran(F).
         end.
-        Then F : kappa /leftrightarrow /funcsumset pre.
+        Then F : kappa /leftrightarrow /sumset pre.
       end.
       Contradiction.
     end.
@@ -401,7 +405,7 @@ Proof.
   Then Z /subset kappa.
   Z /cof kappa.
   Then Card(Z) /in cofset2(kappa).
-  Then /bigcap cofset2(kappa) /subset Card(Z).
+  Then min(cofset2(kappa)) /subset Card(Z).
   Then cof(kappa) /subset Card(Z).
   Then Card(Z) = kappa.
 

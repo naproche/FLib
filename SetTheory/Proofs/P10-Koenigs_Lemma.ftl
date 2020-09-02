@@ -1,5 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L08-Cardinal_Arithmetic.ftl]
-[read Forthel-Dateien/SetTheory/Library/L09-Cofinality.ftl]
+[read Formalizations/Library/L09-Cofinality.ftl]
 
 ## Pretyped Variables
 
@@ -15,7 +14,7 @@ Let kappa, lambda stand for cardinals.
 
 ## Cardinal Arithmetic
 
-Lemma. Let kappa /in /Cd. Then 2 ^3 kappa = Card(/PP kappa).
+Lemma. Let kappa /in /Cd. Then 2 ^ kappa = Card(/PP kappa).
 Proof.
   Forall phi /in ^{kappa}2 forall x /in kappa (x /in Dom(phi)).
   Define f[phi] = {zfset x | x /in kappa /\ phi[x] = 1} for phi in ^{kappa}2.
@@ -84,7 +83,12 @@ Proof.
     Let M1, M2 /in /PP x. Let M1 /neq M2.
     Then exists z (z /in M1 /setminus M2 \/ z /in M2 /setminus M1).
     Proof.
-      (not (M1 /subset M2)) \/ (not (M2 /subset M1)).
+      Then (not (M1 /subset M2)) \/ (not (M2 /subset M1)).
+      Proof by contradiction. Assume the contrary.
+        Then M1 /subset M2 /\ M2 /subset M1.
+        Then M1 = M2.
+        Contradiction.
+      end.
     end.
     Take a zfset z such that (z /in M1 /setminus M2 \/ z /in M2 /setminus M1).
     g[M1] /neq g[M2].
@@ -136,20 +140,20 @@ Proof.
 qed.
 
 
-Lemma. Let x /in /VV. Then Card(/PP x) = 2 ^3 Card(x).
+Lemma. Let x /in /VV. Then Card(/PP x) = 2 ^ Card(x).
 Proof.
   Take a cardinal kappa such that kappa = Card(x).
   kappa, x /in /VV.
   kappa /tilde x.
   Then /PP x /tilde /PP kappa.
   Then Card(/PP x) = Card(/PP kappa).
-  Card(/PP kappa) = 2 ^3 kappa.
+  Card(/PP kappa) = 2 ^ kappa.
 qed.
 
 
-Lemma. Let kappa /in /Cd. Then kappa /in 2 ^3 kappa.
+Lemma. Let kappa /in /Cd. Then kappa /in 2 ^ kappa.
 Proof.
-  2 ^3 kappa = Card(/PP kappa).
+  2 ^ kappa = Card(/PP kappa).
   kappa < /PP kappa.
   Forall x,y /in /VV (x < y => Card(x) /in Card(y)).
   Proof.
@@ -161,7 +165,7 @@ Proof.
 qed.
 
 
-Lemma. Let kappa /in /Cd. Then kappa *3 1 = kappa.
+Lemma. Let kappa /in /Cd. Then kappa * 1 = kappa.
 Proof.
   Define f[n] = (n,0) for n in kappa.
   Then f : kappa /rightarrow kappa /times 1.
@@ -184,7 +188,7 @@ Proof.
 qed.
 
 
-Lemma. Let alpha, beta, gamma /in /Cd. Let beta /subset gamma. Let 0 /in alpha. Then alpha ^3 beta /subset alpha ^3 gamma.
+Lemma ExpSubset. Let alpha, beta, gamma /in /Cd. Let beta /subset gamma. Let 0 /in alpha. Then alpha ^ beta /subset alpha ^ gamma.
 Proof.
   Forall f /in ^{beta}alpha exists g (g /in ^{gamma}alpha /\ g /upharpoonright beta = f).
   Proof.
@@ -234,7 +238,7 @@ Proof.
 qed.
 
 
-Lemma. Let alpha, beta, gamma /in /Cd. Let alpha /subset beta. Then alpha ^3 gamma /subset beta ^3 gamma.
+Lemma BaseSubset. Let alpha, beta, gamma /in /Cd. Let alpha /subset beta. Then alpha ^ gamma /subset beta ^ gamma.
 Proof.
   ^{gamma}alpha /subset ^{gamma}beta.
   Proof.
@@ -247,7 +251,7 @@ Proof.
 qed.
 
 
-Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then /NN /subset kappa ^3 lambda.
+Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then /NN /subset kappa ^ lambda.
 Proof.
   Forall n /in /NN exists g (Dom(g) = lambda /\ g[n] = 1 /\ forall i /in lambda /setminus <n> g[i] = 0).
   Proof.
@@ -271,13 +275,13 @@ Proof.
   
   Then Card(/NN) /subset Card(^{lambda}kappa).
   Card(/NN) = /NN.
-  Card(^{lambda}kappa) = kappa ^3 lambda.  
+  Card(^{lambda}kappa) = kappa ^ lambda.  
 qed.
 
 
-Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then kappa ^3 lambda /in /Lim.
+Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then kappa ^ lambda /in /Lim.
 Proof.
-  kappa ^3 lambda /in /Cd.
+  kappa ^ lambda /in /Cd.
 qed.
 
 
@@ -303,10 +307,10 @@ Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then cardseq(f) is a sequence
 
 # Sum
 
-Definition. Let f be a zffunction. The functionsumset of f is {(a,b) | b /in Dom(f) /\ a /in f[b]}.
-Let /funcsumset f stand for the functionsumset of f.
+Definition. Let f be a zffunction. The sumset of f is {(a,b) | b /in Dom(f) /\ a /in f[b]}.
+Let /sumset f stand for the sumset of f.
 
-Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /funcsumset f /in /VV.
+Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /sumset f /in /VV.
 Proof.
   Forall i /in Dom(f) (f[i] is a zfset).
   Define g[i] = {(a,i) | a /in f[i]} for i in Dom(f).
@@ -327,20 +331,14 @@ Proof.
   end.
   Then g^[Dom(f)] /in /VV.
   Then /bigcup g^[Dom(f)] /in /VV.
-  /funcsumset f /subset /bigcup g^[Dom(f)].
+  /sumset f /subset /bigcup g^[Dom(f)].
 qed.
-
-Definition. Let f be a sequence of cardinals. The seqsumset of f is
-{(a,b) | b /in Dom(f) /\ a /in f[b]}.
-Let /sumset f stand for the seqsumset of f.
-
-Lemma. Let f be a sequence of cardinals. Then /sumset f = /funcsumset f.
 
 Lemma. Let f be a sequence of cardinals. Then /sumset f /in /VV.
 Proof.
   f is a zffunction.
   Dom(f) /in /VV.
-  Then /funcsumset f /in /VV.
+  Then /sumset f /in /VV.
 qed.
 
 Definition. Let f be a sequence of cardinals. The seqsum of f is
@@ -348,7 +346,7 @@ Card(/sumset f).
 Let /sum f stand for the seqsum of f.
 
 
-Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then Card(/funcsumset f) = /sum cardseq(f).
+Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then Card(/sumset f) = /sum cardseq(f).
 Proof.
   Take an ordinal alpha such that alpha = Dom(f).
   Forall i /in alpha exists g (g : f[i] /leftrightarrow (cardseq(f))[i]).
@@ -358,12 +356,12 @@ Proof.
     Then (cardseq(f))[i] /tilde f[i].
   end.
   Define bij[i] = (Choose a zffunction g such that g : f[i] /leftrightarrow (cardseq(f))[i] in g) for i in alpha.
-  Forall o1,o2 ((o1,o2) /in /funcsumset f => o2 /in alpha /\ o1 /in f[o2]).
-  Then forall o1,o2 ((o1,o2) /in /funcsumset f => o2 /in alpha /\ o1 /in Dom(bij[o2])).
-  Define F[(a,b)] = ((bij[b])[a],b) for (a,b) in /funcsumset f.
-  Then F : /funcsumset f /rightarrow /sumset cardseq(f).
+  Forall o1,o2 ((o1,o2) /in /sumset f => o2 /in alpha /\ o1 /in f[o2]).
+  Then forall o1,o2 ((o1,o2) /in /sumset f => o2 /in alpha /\ o1 /in Dom(bij[o2])).
+  Define F[(a,b)] = ((bij[b])[a],b) for (a,b) in /sumset f.
+  Then F : /sumset f /rightarrow /sumset cardseq(f).
   Proof.
-    Let pair /in /funcsumset f.
+    Let pair /in /sumset f.
     Take zfsets a,b such that b /in alpha /\ a /in f[b] /\ pair = (a,b).
     F[(a,b)] = ((bij[b])[a],b).
     b /in Dom(cardseq(f)).
@@ -373,7 +371,7 @@ Proof.
   end.
   F is injective.
   Proof.
-    Let pair1, pair2 /in /funcsumset f.
+    Let pair1, pair2 /in /sumset f.
     Let pair1 /neq pair2.
     Take zfsets a1,b1 such that b1 /in alpha /\ a1 /in f[b1] /\ pair1 = (a1,b1).
     Take zfsets a2,b2 such that b2 /in alpha /\ a2 /in f[b2] /\ pair2 = (a2,b2).
@@ -407,36 +405,29 @@ Proof.
     Then F[(aa,b)] = (a,b).
     Then pair /in ran(F).
   end.
-  Then F : /funcsumset f /rightarrow /sumset cardseq(f).
-  Then Card(/funcsumset f) = Card(/sumset cardseq(f)).
+  Then F : /sumset f /leftrightarrow /sumset cardseq(f).
+  Then Card(/sumset f) = Card(/sumset cardseq(f)).
 qed.
 
 
 # Product
 
-Definition. Let f be a zffunction. The functionproductset of f is 
+Definition. Let f be a zffunction. The productset of f is 
 {zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
-Let /funcprodset f stand for the functionproductset of f.
+Let /prodset f stand for the productset of f.
 
-Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /funcprodset f /in /VV.
+Lemma. Let f be a zffunction. Let Dom(f) /in /VV. Then /prodset f /in /VV.
 Proof.
   /bigcup f^[Dom(f)] /in /VV.
-  Forall g /in /funcprodset f forall i /in Dom(g) g[i] /in /bigcup f^[Dom(f)].
-  Then /funcprodset f /subset ^{Dom(f)}(/bigcup f^[Dom(f)]).
+  Forall g /in /prodset f forall i /in Dom(g) g[i] /in /bigcup f^[Dom(f)].
+  Then /prodset f /subset ^{Dom(f)}(/bigcup f^[Dom(f)]).
 qed.
-
-Definition. Let f be a sequence of cardinals. The seqproductset of f is
-{zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
-Let /prodset f stand for the seqproductset of f.
-
-
-Lemma. Let f be a sequence of cardinals. Then /prodset f = /funcprodset f.
 
 Lemma. Let f be a sequence of cardinals. Then /prodset f /in /VV.
 Proof.
   f is a zffunction.
   Dom(f) /in /VV.
-  Then /funcprodset f /in /VV.
+  Then /prodset f /in /VV.
 qed.
 
 Definition. Let f be a sequence of cardinals. The seqproduct of f is
@@ -531,6 +522,8 @@ Proof by contradiction. Assume the contrary.
   Proof by contradiction. Assume the contrary.
     Take a zfset i such that i /in delta /\ lambda[i] /setminus Diag[i] = /emptyset.
     Then lambda[i] /subset Diag[i].
+    Diag[i] /subset lambda[i].
+    lambda[i], Diag[i] are sets.
     Then lambda[i] = Diag[i].
     Card(Diag[i]) /subset kappa[i].
     Then lambda[i] /subset kappa[i].
@@ -551,31 +544,31 @@ Proof by contradiction. Assume the contrary.
 qed.
 
 
-Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then lambda /in cof(kappa ^3 lambda).
+Lemma. Let kappa, lambda /in /Cd. Let 2 /subset kappa. Let /NN /subset lambda. Then lambda /in cof(kappa ^ lambda).
 Proof by contradiction. Assume the contrary.
-  Then cof(kappa ^3 lambda) /subset lambda.
+  Then cof(kappa ^ lambda) /subset lambda.
   Proof.
-    Take ordinals a,b such that a = lambda /\ b = cof(kappa ^3 lambda).
+    Take ordinals a,b such that a = lambda /\ b = cof(kappa ^ lambda).
     Then a /in b \/ b /in a \/ a = b.
     a /notin b.
   end.
   
-  Take a zfset x such that x /subset kappa ^3 lambda /\ x /cof kappa ^3 lambda /\ Card(x) = cof(kappa ^3 lambda).
+  Take a zfset x such that x /subset kappa ^ lambda /\ x /cof kappa ^ lambda /\ Card(x) = cof(kappa ^ lambda).
   Then Card(x) /subset lambda.
   Take a zffunction f such that f : lambda /rightarrow x /\ ran(f) = x.
   
-  Then /bigcup ran(f) = kappa ^3 lambda.
+  Then /bigcup ran(f) = kappa ^ lambda.
   Proof.
-    /bigcup ran(f) /subset kappa ^3 lambda.
+    /bigcup ran(f) /subset kappa ^ lambda.
     Proof.
       Let alpha /in /bigcup ran(f).
       Take a zfset beta such that beta /in lambda /\ alpha /in f[beta].
       f[beta] /in x.
-      Then f[beta] /subset kappa ^3 lambda.
+      Then f[beta] /subset kappa ^ lambda.
     end.
-    kappa ^3 lambda /subset /bigcup ran(f).
+    kappa ^ lambda /subset /bigcup ran(f).
     Proof.
-      Let alpha /in kappa ^3 lambda.
+      Let alpha /in kappa ^ lambda.
       Take beta /in x such that alpha /in beta.
       Take gamma /in lambda such that f[gamma] = beta.
       Then alpha /in f[gamma].
@@ -616,7 +609,7 @@ Proof by contradiction. Assume the contrary.
     end.
   end.
   Then Card(/bigcup ran(f)) /subset Card(M).
-  Then kappa ^3 lambda /subset Card(M).
+  Then kappa ^ lambda /subset Card(M).
   
   Define seq[i] = Card(f[i]) for i in lambda.
   Then seq is a sequence of cardinals.
@@ -680,37 +673,37 @@ Proof by contradiction. Assume the contrary.
     end.
   end.
   Then Card(M) /subset /sum seq.
-  Then kappa ^3 lambda /subset /sum seq.
+  Then kappa ^ lambda /subset /sum seq.
   
-  Define kaplam[i] = kappa ^3 lambda for i in lambda.
+  Define kaplam[i] = kappa ^ lambda for i in lambda.
   Then kaplam is a sequence of cardinals.
-  kappa ^3 lambda = (kappa ^3 lambda)^3 lambda.
+  kappa ^ lambda = (kappa ^ lambda)^ lambda.
   Proof.
-    lambda *3 lambda = lambda.
-    Then kappa ^3 lambda = kappa ^3 (lambda *3 lambda).
-    kappa ^3 (lambda *3 lambda) = (kappa ^3 lambda)^3 lambda.
+    lambda * lambda = lambda.
+    Then kappa ^ lambda = kappa ^ (lambda * lambda).
+    kappa ^ (lambda * lambda) = (kappa ^ lambda)^ lambda.
   end.
-  ^{lambda}(kappa ^3 lambda) = /prodset kaplam.
+  ^{lambda}(kappa ^ lambda) = /prodset kaplam.
   Proof.
-    ^{lambda}(kappa ^3 lambda) /subset /prodset kaplam.
+    ^{lambda}(kappa ^ lambda) /subset /prodset kaplam.
     Proof.
-      Let func /in ^{lambda}(kappa ^3 lambda).
-      Then func : lambda /rightarrow kappa ^3 lambda.
+      Let func /in ^{lambda}(kappa ^ lambda).
+      Then func : lambda /rightarrow kappa ^ lambda.
       Dom(func) = lambda.
-      Forall i /in lambda func[i] /in kappa ^3 lambda.
+      Forall i /in lambda func[i] /in kappa ^ lambda.
       Then forall i /in lambda func[i] /in kaplam[i].
       Then func /in /prodset kaplam.
     end.
-    /prodset kaplam /subset ^{lambda}(kappa ^3 lambda).
+    /prodset kaplam /subset ^{lambda}(kappa ^ lambda).
     Proof.
       Let func /in /prodset kaplam.
       Then Dom(func) = lambda.
       Forall i /in lambda func[i] /in kaplam[i].
-      Then forall i /in lambda func[i] /in kappa ^3 lambda.
-      Then func /in ^{lambda}(kappa ^3 lambda).
+      Then forall i /in lambda func[i] /in kappa ^ lambda.
+      Then func /in ^{lambda}(kappa ^ lambda).
     end.
   end.
-  Then kappa ^3 lambda = /prod kaplam.
+  Then kappa ^ lambda = /prod kaplam.
   
   /sum seq /in /prod kaplam.
   Proof.
@@ -720,31 +713,31 @@ Proof by contradiction. Assume the contrary.
     Proof.
       Let i /in Dom(seq).
       Then seq[i] = Card(f[i]).
-      f[i] /in kappa ^3 lambda.
-      Then Card(f[i]) /subset kappa ^3 lambda.
-      Card(f[i]) /neq kappa ^3 lambda.
+      f[i] /in kappa ^ lambda.
+      Then Card(f[i]) /subset kappa ^ lambda.
+      Card(f[i]) /neq kappa ^ lambda.
     end.
     Then /sum seq /in /prod kaplam (by Koenig).
   end.
-  Then /sum seq /in kappa ^3 lambda.
+  Then /sum seq /in kappa ^ lambda.
   
   Contradiction.
 qed.
 
 
-Theorem HausdorffRecursion. Let alpha, beta /in /Ord. Then Alef[alpha + 1] ^3 Alef[beta] = (Alef[alpha] ^3 Alef[beta]) *3 Alef[alpha + 1].
+Theorem HausdorffRecursion. Let alpha, beta /in /Ord. Then Alef[alpha +' 1] ^ Alef[beta] = (Alef[alpha] ^ Alef[beta]) * Alef[alpha +' 1].
 Proof.
-  Alef[alpha + 1] /subset 2 ^3 Alef[beta] \/ 2 ^3 Alef[beta] /in Alef[alpha + 1].
+  Alef[alpha +' 1] /subset 2 ^ Alef[beta] \/ 2 ^ Alef[beta] /in Alef[alpha +' 1].
   Proof.
-    Take cardinals a,b such that a = Alef[alpha + 1] /\ b = 2 ^3 Alef[beta].
+    Take cardinals a,b such that a = Alef[alpha +' 1] /\ b = 2 ^ Alef[beta].
     a,b /in /Ord.
     Then a /in b \/ b /in a \/ a = b (by TotalOrder).
   end.
   
-  Case Alef[alpha + 1] /subset 2 ^3 Alef[beta].
-    Alef[alpha + 1] ^3 Alef[beta] = 2 ^3 Alef[beta].
+  Case Alef[alpha +' 1] /subset 2 ^ Alef[beta].
+    Alef[alpha +' 1] ^ Alef[beta] = 2 ^ Alef[beta].
     Proof.
-      Take a cardinal a such that a = Alef[alpha + 1].
+      Take a cardinal a such that a = Alef[alpha +' 1].
       Take a cardinal b such that b = Alef[beta].
       Then 2 /subset a.
       /NN /subset b.
@@ -752,10 +745,10 @@ Proof.
         Alef[0] /subset Alef[beta].
         Alef[0] = /NN.
       end.
-      a /subset 2 ^3 b.
-      Then a ^3 b = 2 ^3 b.
+      a /subset 2 ^ b.
+      Then a ^ b = 2 ^ b.
     end.  
-    Alef[alpha] ^3 Alef[beta] = 2 ^3 Alef[beta].
+    Alef[alpha] ^ Alef[beta] = 2 ^ Alef[beta].
     Proof.
       Take a cardinal a such that a = Alef[alpha].
       Take a cardinal b such that b = Alef[beta].
@@ -765,24 +758,24 @@ Proof.
         Alef[0] /subset Alef[beta].
         Alef[0] = /NN.
       end.
-      a /subset Alef[alpha + 1].
-      Alef[alpha + 1] /subset 2 ^3 b.
-      Then a /subset 2 ^3 b.
-      Then a ^3 b = 2 ^3 b.
+      a /subset Alef[alpha +' 1].
+      Alef[alpha +' 1] /subset 2 ^ b.
+      Then a /subset 2 ^ b.
+      Then a ^ b = 2 ^ b.
     end.
     
-    Alef[alpha] ^3 Alef[beta] = (Alef[alpha] ^3 Alef[beta]) *3 Alef[alpha + 1].
+    Alef[alpha] ^ Alef[beta] = (Alef[alpha] ^ Alef[beta]) * Alef[alpha +' 1].
     Proof.
-      Take a cardinal a such that a = Alef[alpha] ^3 Alef[beta].
-      Take a cardinal b such that b = Alef[alpha + 1].
+      Take a cardinal a such that a = Alef[alpha] ^ Alef[beta].
+      Take a cardinal b such that b = Alef[alpha +' 1].
       Then b /subset a.
       Then a /times b /subset a /times a.
-      Then a *3 b /subset a *3 a.
+      Then a * b /subset a * a.
       a /in /Cd.
       /NN /subset a.
-      a *3 a = a.
-      Then a *3 b /subset a.
-      a /subset a *3 b.
+      a * a = a.
+      Then a * b /subset a.
+      a /subset a * b.
       Proof.
         Define f[i] = (i,0) for i in a.
         Then f : a /rightarrow a /times b.
@@ -799,24 +792,24 @@ Proof.
         end.
         Then Card(a) /subset Card(a /times b).
       end.
-      Then a = a *3 b.
+      Then a = a * b.
     end.
     
-    Then Alef[alpha + 1] ^3 Alef[beta] = (Alef[alpha] ^3 Alef[beta]) *3 Alef[alpha + 1].
+    Then Alef[alpha +' 1] ^ Alef[beta] = (Alef[alpha] ^ Alef[beta]) * Alef[alpha +' 1].
     Proof.
-      Take a cardinal a such that a = Alef[alpha + 1] ^3 Alef[beta].
-      Take a cardinal b such that b = 2 ^3 Alef[beta].
-      Take a cardinal c such that c = Alef[alpha] ^3 Alef[beta].
-      Take a cardinal d such that d = (Alef[alpha] ^3 Alef[beta]) *3 Alef[alpha + 1].
+      Take a cardinal a such that a = Alef[alpha +' 1] ^ Alef[beta].
+      Take a cardinal b such that b = 2 ^ Alef[beta].
+      Take a cardinal c such that c = Alef[alpha] ^ Alef[beta].
+      Take a cardinal d such that d = (Alef[alpha] ^ Alef[beta]) * Alef[alpha +' 1].
       a = b. b = c. c = d.
       Then a = d.
     end.  
   end.
   
-  Case 2 ^3 Alef[beta] /in Alef[alpha + 1].
+  Case 2 ^ Alef[beta] /in Alef[alpha +' 1].
     
     Take a cardinal a0 such that a0 = Alef[alpha].
-    Take a cardinal a1 such that a1 = Alef[alpha + 1].
+    Take a cardinal a1 such that a1 = Alef[alpha +' 1].
     Take an ordinal b such that b = Alef[beta].
     Then b /in /Cd.
     
@@ -824,14 +817,14 @@ Proof.
     Proof by contradiction. Assume the contrary.
       a1 /in b \/ b /in a1 \/ a1 = b.
       Then a1 /subset b.
-      b /in 2 ^3 b.
-      Then a1 /in 2 ^3 b.
+      b /in 2 ^ b.
+      Then a1 /in 2 ^ b.
       Contradiction.
     end.
     
-    (a0 ^3 b) *3 a1 /subset (a1 ^3 b) *3 (a1 ^3 b).
+    (a0 ^ b) * a1 /subset (a1 ^ b) * (a1 ^ b).
     Proof.
-      a0 ^3 b /subset a1 ^3 b.
+      a0 ^ b /subset a1 ^ b.
       Proof.
         ^{b}a0 /subset ^{b}a1.
         Proof.
@@ -839,50 +832,50 @@ Proof.
           Then f : b /rightarrow a0.
           a0 /subset a1.
           Proof.
-            alpha /subset alpha + 1.
-            Then Alef[alpha] /subset Alef[alpha + 1].
+            alpha /subset alpha +' 1.
+            Then Alef[alpha] /subset Alef[alpha +' 1].
           end.
           Then f : b /rightarrow a1.
           Then f /in ^{b}a1.
         end.
         Then Card(^{b}a0) /subset Card(^{b}a1).
       end.
-      a1 /subset (a1 ^3 b).
+      a1 /subset (a1 ^ b).
       Proof.
-        a1 = a1 ^3 1.
+        a1 = a1 ^ 1.
         1 /subset b.
         0 /in a1.
         a1, 1, b /in /Cd.
-        Then a1 ^3 1 /subset a1 ^3 b.
+        Then a1 ^ 1 /subset a1 ^ b.
       end.
-      Then (a0 ^3 b) /times a1 /subset (a1 ^3 b) /times (a1 ^3 b).
+      Then (a0 ^ b) /times a1 /subset (a1 ^ b) /times (a1 ^ b).
       Proof.
-        Let pair /in (a0 ^3 b) /times a1.
-        Take zfsets v1,v2 such that v1 /in a0 ^3 b /\ v2 /in a1 /\ pair = (v1,v2).
-        v1 /in a1 ^3 b.
-        v2 /in a1 ^3 b.
-        Then (v1,v2) /in (a1 ^3 b) /times (a1 ^3 b).
+        Let pair /in (a0 ^ b) /times a1.
+        Take zfsets v1,v2 such that v1 /in a0 ^ b /\ v2 /in a1 /\ pair = (v1,v2).
+        v1 /in a1 ^ b.
+        v2 /in a1 ^ b.
+        Then (v1,v2) /in (a1 ^ b) /times (a1 ^ b).
       end.
-      Then Card((a0 ^3 b) /times a1) /subset Card((a1 ^3 b) /times (a1 ^3 b)).
+      Then Card((a0 ^ b) /times a1) /subset Card((a1 ^ b) /times (a1 ^ b)).
     end.
     
-    (a1 ^3 b) *3 (a1 ^3 b) = a1 ^3 b.
+    (a1 ^ b) * (a1 ^ b) = a1 ^ b.
     Proof.
-      /NN /subset a1 ^3 b.
+      /NN /subset a1 ^ b.
       Proof.
         /NN /subset a1.
-        a1 /subset (a1 ^3 b).
+        a1 /subset (a1 ^ b).
         Proof.
-          a1 = a1 ^3 1.
+          a1 = a1 ^ 1.
           1 /subset b.
           0 /in a1.
           a1, 1, b /in /Cd.
-          Then a1 ^3 1 /subset a1 ^3 b.
+          Then a1 ^ 1 /subset a1 ^ b.
         end.
       end.
     end.
     
-    (a0 ^3 b) *3 a1 /subset (a1 ^3 b).
+    (a0 ^ b) * a1 /subset (a1 ^ b).
       
     cof(a1) = a1.  
     Forall f /in ^{b}a1 /bigcup ran(f) /in a1.
@@ -910,7 +903,7 @@ Proof.
       ran(f) = f^[b].
       Then Card(ran(f)) /subset Card(b).
       Card(ran(f)) /in cofset2(a1).
-      Then /bigcap cofset2(a1) /subset Card(b).
+      Then min(cofset2(a1)) /subset Card(b).
       Then a1 /subset b.
       
       Contradiction.
@@ -933,23 +926,23 @@ Proof.
         Then /bigcup ran(f) /in a1.
         Take a zfset v such that v /in a1 /\ v = /bigcup ran(f).
         Then v is an ordinal.
-        ran(f) /subset v+1.
+        ran(f) /subset v+'1.
         Proof.
           Let x /in ran(f).
           Then x /subset v.
-          x,v /in /Ord.
+          x,v are ordinals.
           Then x /in v \/ x = v.
-          Then x /in v+1.
+          Then x /in v++.
         end.
-        Then f : b /rightarrow v+1.
+        Then f : b /rightarrow v+'1.
         a1 /in /Lim.
-        Then v+1 /in a1.
+        Then v+'1 /in a1.
         Then f /in M.      
       end.
     end.
     Then ^{b}a1, M are zfsets.
-    Card(^{b}a1) = a1 ^3 b.
-    Then Card(M) = a1 ^3 b.
+    Card(^{b}a1) = a1 ^ b.
+    Then Card(M) = a1 ^ b.
     
     Forall v /in a1 (v,^{b}v are zfsets).
     Define seq[v] = Card(^{b}v) for v in a1.
@@ -990,7 +983,7 @@ Proof.
     end.
     Card(M) /subset /sum seq.
     
-    Forall v /in a1 seq[v] = Card(v) ^3 b.
+    Forall v /in a1 seq[v] = Card(v) ^ b.
     Proof.
       Let v /in a1.
       v,^{b}v are zfsets.
@@ -1012,24 +1005,28 @@ Proof.
       end.
       phi is injective.
       Proof.
-        Let f1,f2 /in ^{b}v. Let f1 /neq f2.
-        Then exists x /in b (f1[x] /neq f2[x]).
-        Proof by contradiction. Assume the contrary.
-          f1,f2 are functions.
-          Dom(f1) = Dom(f2).
-          Forall x /in Dom(f1) f1[x] = f2[x].
-          Then f1 = f2.
-          Contradiction.
+        Forall f1,f2 /in Dom(phi) (f1 /neq f2 => phi[f1] /neq phi[f2]).
+        Proof.
+          Let f1,f2 /in Dom(phi). Let f1 /neq f2.
+          f1,f2 /in ^{b}v.
+          Then exists x /in b (f1[x] /neq f2[x]).
+          Proof by contradiction. Assume the contrary.
+            f1,f2 are functions.
+            Dom(f1) = Dom(f2).
+            Forall x /in Dom(f1) f1[x] = f2[x].
+            Then f1 = f2.
+            Contradiction.
+          end.
+          Take a zfset x such that x /in b /\ f1[x] /neq f2[x].
+          f1 : b /rightarrow v.
+          f2 : b /rightarrow v.
+          f1[x], f2[x] /in v.
+          bij is injective.
+          Then bij[f1[x]] /neq bij[f2[x]].
+          Then (bij /circ f1)[x] /neq (bij /circ f2)[x].
+          Then bij /circ f1 /neq bij /circ f2.
+          Then phi[f1] /neq phi[f2].
         end.
-        Take a zfset x such that x /in b /\ f1[x] /neq f2[x].
-        f1 : b /rightarrow v.
-        f2 : b /rightarrow v.
-        f1[x], f2[x] /in v.
-        bij is injective.
-        Then bij[f1[x]] /neq bij[f2[x]].
-        Then (bij /circ f1)[x] /neq (bij /circ f2)[x].
-        Then bij /circ f1 /neq bij /circ f2.
-        Then phi[f1] /neq phi[f2].
       end.
       ^{b}Card(v) /subset ran(phi).
       Proof.
@@ -1069,7 +1066,7 @@ Proof.
       Then ran(phi) = ^{b}Card(v).
       phi : ^{b}v /leftrightarrow ^{b}Card(v).
       Then Card(^{b}v) = Card(^{b}Card(v)).
-      Then Card(^{b}v) = Card(v) ^3 b.
+      Then Card(^{b}v) = Card(v) ^ b.
     end.
   
     Forall v /in a1 ((v is a zfset) /\ Card(v) /subset a0).
@@ -1084,17 +1081,17 @@ Proof.
         Case v /in /NN. /NN /subset a0. end.
         Case /NN /subset v.
           Take an ordinal gamma such that Card(v) = Alef[gamma].
-          Alef[gamma] /subset Alef[alpha + 1].
-          Then gamma /subset alpha + 1.
+          Alef[gamma] /subset Alef[alpha +' 1].
+          Then gamma /subset alpha +' 1.
           Proof.
-            Take ordinals aa, bb such that aa = gamma /\ bb = alpha + 1.
+            Take ordinals aa, bb such that aa = gamma /\ bb = alpha +' 1.
             Then aa /in bb \/ bb /in aa \/ aa = bb (by TotalOrder).
             Case aa /in bb. end.
             Case aa = bb. end.
             Case bb /in aa. Then Alef[bb] /in Alef[aa]. Contradiction. end.
           end.
-          gamma /neq alpha + 1.
-          Then gamma /in alpha + 1.
+          gamma /neq alpha +' 1.
+          Then gamma /in alpha +' 1.
           Then gamma /in alpha \/ gamma = alpha.
           Then gamma /subset alpha.
           Then Alef[gamma] /subset Alef[alpha].
@@ -1107,7 +1104,7 @@ Proof.
       end.
     end.
     
-    Forall v /in a1 ((v is a zfset) /\ Card(v) ^3 b /subset a0 ^3 b).
+    Forall v /in a1 ((v is a zfset) /\ Card(v) ^ b /subset a0 ^ b).
     Proof.
       Let v /in a1.
       v is a zfset.
@@ -1121,7 +1118,7 @@ Proof.
       end.
     end.
       
-    Define const[v] = a0 ^3 b for v in a1.
+    Define const[v] = a0 ^ b for v in a1.
     const is a sequence of cardinals.
     Proof.
       Let v /in a1.
@@ -1140,24 +1137,24 @@ Proof.
     
     /sum seq /subset /sum const.
   
-    /sumset(const) /subset (a0 ^3 b) /times a1.
+    /sumset(const) /subset (a0 ^ b) /times a1.
     Proof.
       Forall pair /in /sumset(const) exists v1,v2 /in /VV (v2 /in Dom(const) /\ v1 /in const[v2] /\ pair = (v1,v2)).
       Let pair /in /sumset(const).
       Take zfsets v1,v2 such that v2 /in Dom(const) /\ v1 /in const[v2] /\ pair = (v1,v2).
       Then v2 /in a1.
-      v1 /in a0 ^3 b.
-      Then (v1,v2) /in (a0 ^3 b) /times a1.
+      v1 /in a0 ^ b.
+      Then (v1,v2) /in (a0 ^ b) /times a1.
     end.
-    Then Card(/sumset(const)) /subset Card((a0 ^3 b) /times a1).  
-    /sum const /subset (a0 ^3 b) *3 a1.
+    Then Card(/sumset(const)) /subset Card((a0 ^ b) /times a1).  
+    /sum const /subset (a0 ^ b) * a1.
     
-    a1 ^3 b /subset (a0 ^3 b) *3 a1.
+    a1 ^ b /subset (a0 ^ b) * a1.
     Proof.
-      a1 ^3 b /subset Card(M).
+      a1 ^ b /subset Card(M).
       Card(M) /subset /sum seq.
       /sum seq /subset /sum const.
-      /sum const /subset (a0 ^3 b) *3 a1.
+      /sum const /subset (a0 ^ b) * a1.
     end.   
   end.
 qed.

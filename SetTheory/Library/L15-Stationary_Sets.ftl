@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L14-Clubs.ftl]
+[read Formalizations/Library/L14-Clubs.ftl]
 
 [prove off]
 
@@ -13,9 +13,7 @@ Let kappa, lambda stand for cardinals.
 
 
 
-
 ## Stationary Sets
-
 
 Definition. Let kappa /in /BigCard. Let X /subset kappa. X is nonstationary in kappa iff kappa /setminus X /in Club(kappa).
 
@@ -57,8 +55,6 @@ Lemma. Let kappa /in /BigCard. Let X be a sequence of length kappa in NS(kappa).
 Lemma. Let kappa /in /BigCard. Let kappa be regular. Let X be a sequence of length kappa in Club(kappa). Then /triangle(X,kappa) /in Club(kappa).
 
 Lemma. Let kappa /in /BigCard. Let kappa be regular. Let X be a sequence of length kappa in NS(kappa). Then /vartriangle(X,kappa) /in NS(kappa).
-
-
 
 
 

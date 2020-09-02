@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L19-The_Last_Lemma.ftl]
+[read Formalizations/Library/L19-The_Last_Lemma.ftl]
 
 
 ## Pretyped Variables
@@ -36,7 +36,7 @@ Let f /intersect X stand for the functionintersection of f and X.
 ## The Theorem
 
 
-Theorem Silver. Let kappa /in /BigSingCard. Let GCH below kappa. Then 2 ^3 kappa = Plus[kappa].
+Theorem Silver. Let kappa /in /BigSingCard. Let GCH below kappa. Then 2 ^ kappa = Plus[kappa].
 Proof.
   Take a zfset x such that (kappa,x) is a cofpair.
   Take a zffunction kap such that (kappa,x,kap) is a coftriple.
@@ -60,9 +60,9 @@ Proof.
   Proof.
     Let i /in lambda.
     A[i] = /PP kap[i].
-    Card(/PP kap[i]) = 2 ^3 kap[i].
+    Card(/PP kap[i]) = 2 ^ kap[i].
     kap[i] /in kappa /cap /Card.
-    Then 2 ^3 kap[i] = Plus[kap[i]].
+    Then 2 ^ kap[i] = Plus[kap[i]].
     Then Card(A[i]) = Plus[kap[i]].
   end.
   Then A is silvercompatible with kap relative to kappa and x.
@@ -86,6 +86,11 @@ Proof.
     Then exists alpha /in /VV ((alpha /in X /\ alpha /notin Y) \/ (alpha /in Y /\ alpha /notin X)).
     Proof.
       not (X /subset Y) \/ not (Y /subset X).
+      Proof by contradiction. Assume the contrary.
+        Then X /subset Y /\ Y /subset X.
+        Then X = Y.
+        Contradiction.
+      end.
     end.
     Take a zfset alpha such that (alpha /in X /\ alpha /notin Y) \/ (alpha /in Y /\ alpha /notin X).
     Then alpha /in kappa.
@@ -100,10 +105,11 @@ Proof.
   end.
   Then f : /PP kappa /leftrightarrow F.
   Then Card(F) = Card(/PP kappa).
-  Card(/PP kappa) = 2 ^3 kappa.
-  Then Card(F) = 2 ^3 kappa.
+  Card(/PP kappa) = 2 ^ kappa.
+  Then Card(F) = 2 ^ kappa.
+  Then Plus[kappa] /subset Card(F).
 
-  F /subset /funcprodset A.
+  F /subset /prodset A.
   Proof.
     Let g /in F.
     Take a zfset X such that X /in /PP kappa /\ f[X] = g.
@@ -113,7 +119,7 @@ Proof.
     Then forall i /in lambda g[i] /in /PP kap[i].
     Forall i /in lambda A[i] = /PP kap[i].
     Then forall i /in lambda g[i] /in A[i].
-    Then g /in /funcprodset A.
+    Then g /in /prodset A.
   end.
 
   F is an almost disjoint family of functions on lambda.
@@ -133,6 +139,11 @@ Proof.
         Then exists alpha /in /VV ((alpha /in X /\ alpha /notin Y) \/ (alpha /in Y /\ alpha /notin X)).
         Proof.
           not (X /subset Y) \/ not (Y /subset X).
+          Proof by contradiction. Assume the contrary.
+            Then X /subset Y /\ Y /subset X.
+            Then X = Y.
+            Contradiction.
+          end.
         end.
         Take a zfset alpha such that (alpha /in X /\ alpha /notin Y) \/ (alpha /in Y /\ alpha /notin X).
         Then alpha /in kappa.
@@ -166,7 +177,7 @@ Proof.
   Then Card(F) /subset Plus[kappa] (by Silver2).
   Then Card(F) = Plus[kappa].
   
-  Then 2 ^3 kappa = Plus[kappa].
+  Then 2 ^ kappa = Plus[kappa].
 qed.
 
 

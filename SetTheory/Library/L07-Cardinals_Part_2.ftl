@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L05-Mostowski_Collapse.ftl]
+[read Formalizations/Library/L05-Mostowski_Collapse.ftl]
 
 [prove off]
 
@@ -12,10 +12,9 @@ Let f,g,h,F,G,H stand for zffunction.
 Let kappa, lambda stand for cardinals.
 
 
-
 ## Cartesian Product
 
-Lemma. Forall a,b /in /NN ((a /times b is a zfset) and (Card(a /times b) = a * b)).
+Lemma. Forall a,b /in /NN ((a /times b is a zfset) and (Card(a /times b) = a *' b)).
 
 Lemma. Let a1,a2,b1,b2 be zfsets. Let Card(a1) = Card(a2) /\ Card(b1) = Card(b2). Then (a1 /times b1) /tilde (a2 /times b2).
 
@@ -29,10 +28,12 @@ Definition. Let a1,a2,b1,b2 /in /Ord. (a1,b1) isgoedelsmallerthan (a2,b2) iff
 \/ (a1 /cup b1 = a2 /cup b2 /\ a1 = a2 /\ b1 /in b2).
 Let (a, b) <3 (c,d) stand for (a,b) isgoedelsmallerthan (c,d).
 
-
 Signature. goedel is an object.
+
 Axiom. goedel is a relation.
+
 Axiom. relfield(goedel) = /Ord /times /Ord.
+
 Axiom goedel. Forall a,b,c,d /in /Ord ( (a, b) - goedel - (c,d) iff (a, b) <3 (c,d)).
 
 Lemma. goedel is a strict linear order.
@@ -47,31 +48,44 @@ Lemma. goedel is a strong wellorder.
 
 Lemma. reldomain(goedel) is a proper class.
 
-Lemma. TCol goedel : /Ord /times /Ord /leftrightarrow /Ord.
+Lemma. MCol goedel : /Ord /times /Ord /leftrightarrow /Ord.
 
 Signature. Goed is a function.
-Axiom. Goed = TCol goedel.
+
+Axiom. Goed = MCol goedel.
+
 Lemma. Goed is a zffunction.
+
 Lemma. Goed : /Ord /times /Ord /leftrightarrow /Ord.
+
 Lemma. Let a1,a2,b1,b2 /in /Ord. Then (a1,b1),(a2,b2) /in /Ord /times /Ord /\ Goed[(a1,b1)], Goed[(a2,b2)] /in /Ord.
 
 Lemma. Let a1,a2,b1,b2 /in /Ord. Let (a1,b1) <3 (a2,b2). 
 Then (a1,b1),(a2,b2) /in Dom(Goed) /\ Goed[(a1,b1)], Goed[(a2,b2)] /in /Ord /\ Goed[(a1,b1)] /in Goed[(a2,b2)].
+
 
 # The Inverse of the Goedel Pairing
 
 Lemma. Goed^{-1} : /Ord /leftrightarrow /Ord /times /Ord.
 
 Signature. pr1 is a function.
+
 Axiom. pr1 : /VV /times /VV /rightarrow /VV.
+
 Lemma. Dom(pr1) = /VV /times /VV.
+
 Lemma. Forall x,y /in /VV (x,y) /in Dom(pr1).
+
 Axiom. Forall x,y /in /VV pr1[(x,y)] = x.
 
 Signature. pr2 is a function.
+
 Axiom. pr2 : /VV /times /VV /rightarrow /VV.
+
 Lemma. Dom(pr2) = /VV /times /VV.
+
 Lemma. Forall x,y /in /VV (x,y) /in Dom(pr2).
+
 Axiom. Forall x,y /in /VV pr2[(x,y)] = y.
 
 Signature. Goed1 is a function.
@@ -104,6 +118,8 @@ Lemma. Goed[(0,/NN)] = /NN.
 Lemma. Forall alpha /in /Ord (Goed[(0,Alef[alpha])] = Alef[alpha]).
 
 Lemma. Forall alpha /in /Ord (Alef[alpha] /tilde Alef[alpha] /times Alef[alpha]).
+
+Lemma. Forall kappa /in /Card (kappa /tilde kappa /times kappa).
 
 Lemma. Forall x /in /VV (Card(x) /notin /NN => x /tilde x /times x).
 

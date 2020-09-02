@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L12-Cardinal_Exponentiation.ftl]
+[read Formalizations/Library/L12-Cardinal_Exponentiation.ftl]
 
 [prove off]
 
@@ -14,8 +14,8 @@ Let kappa, lambda stand for cardinals.
 
 
 
-## Closed unbounded sets
 
+## Closed unbounded sets
 
 Definition. The class of cardinals with uncountable cofinality is
 {kappa /in /Card | Alef[1] /subset cof(kappa)}.
@@ -38,9 +38,7 @@ Let Cl(k) stand for the set of clubs in k.
 Lemma. Let kappa /in /Lim. Let alpha /in kappa. Let X /in Cl(kappa). Then X /setminus alpha /in Cl(kappa).
 
 Signature. Let M be a set. Let lambda /in /Ord. A sequence of length lambda in M is a zffunction.
-
 Axiom sequence. Let M be a set. Let lambda /in /Ord. Let C be a zffunction. C is a sequence of length lambda in M iff Dom(C) = lambda /\ forall i /in lambda C[i] /in M.
-
 Axiom. Let M be a set. Let lambda /in /Ord. Let C be a sequence of length lambda in M. Then (C is a zffunction) /\ Dom(C) = lambda /\ forall i /in lambda C[i] /in M.
 
 Lemma clubintersection. Let kappa /in /BigCard. Let lambda /in cof(kappa). Let lambda /neq /emptyset. Let C be a sequence of length lambda in Cl(kappa).
@@ -62,14 +60,11 @@ Lemma. Let kappa /in /BigCard. Then Club(kappa) /neq /emptyset /\ Club(kappa) /s
 
 Lemma. Let kappa /in /BigCard. Then /emptyset /notin Club(kappa).
 
-Lemma clubsubset. Let kappa /in /BigCard. Let X /in Club(kappa). Let Y /subset kappa. Let X /subset Y. Then Y /in Club(kappa).
+Lemma ClubSubset. Let kappa /in /BigCard. Let X /in Club(kappa). Let Y /subset kappa. Let X /subset Y. Then Y /in Club(kappa).
 
 Lemma. Let kappa /in /BigCard. Let X,Y /in Club(kappa). Then X /cap Y /in Club(kappa).
 
 Lemma. Let kappa /in /BigCard. Let lambda /in cof(kappa). Let lambda /neq /emptyset. Let X be a sequence of length lambda in Club(kappa). Then /bigcap X^[lambda] /in Club(kappa). 
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L04-Arithmetic.ftl]
+[read Formalizations/Library/L04-Ordinal_Arithmetic.ftl]
 
 [prove off]
 
@@ -85,7 +85,6 @@ Definition. Let R be a relation. R is connex iff forall x,y /in relfield(R) (x -
 Let con(R) stand for R is connex.
 
 
-
 ## Kinds of relations
 
 Signature. An equivalence relation is a notion.
@@ -119,39 +118,32 @@ Axiom. Let R be a strict linear order. Then R is a relation.
 Axiom. Let R be a relation. Then R is a strict linear order iff con(R) /\ (R is a strict partial order).
 
 
-
 ## Wellfounded Relations
 
 
 Definition wf. Let R be a relation.  R is wellfounded iff
-(forall A ((A /neq /emptyset /\ A /subset reldomain(R)) => (exists x /in A (forall y /in A (not (y - R - x)))))).
+(forall A ((A /neq /emptyset /\ A /subset relfield(R)) => (exists x /in A (forall y /in A (not (y - R - x)))))).
 
-Lemma wellfounded. Let R be a wellfounded relation. Let M be a set. Let M /neq /emptyset. Let M /subset reldomain(R). Then exists x /in M (forall y /in M (not (y - R - x))).
+Lemma wellfounded. Let R be a wellfounded relation. Let M be a set. Let M /neq /emptyset. Let M /subset relfield(R). Then exists x /in M (forall y /in M (not (y - R - x))).
 
 Definition. Let R be a relation. R is strongly wellfounded iff
 (R is wellfounded) /\ (forall x /in relfield(R) sset(R,x) /in /VV).
 
 Signature. A wellorder is a notion.
-
 Axiom. Let R be a wellorder. Then R is a relation.
-
 Axiom. Let R be a relation. Then R is a wellorder iff (R is wellfounded) and (R is a strict linear order).
 
 Signature. A strong wellorder is a notion.
-
 Axiom. Let R be a strong wellorder. Then R is a relation.
-
 Axiom. Let R be a relation. Then R is a strong wellorder iff (R is strongly wellfounded) and (R is a wellorder).
 
-Definition. Let R be a strongly wellfounded relation. R is extensional iff forall x,y /in reldomain(R) (sset(R,x) = sset(R,y) => x = y).
+Definition extR. Let R be a strongly wellfounded relation. R is extensional iff forall x,y /in relfield(R) (sset(R,x) = sset(R,y) => x = y).
 Let ext(R) stand for R is extensional.
 
 Lemma. Let R be a strong wellorder. Then R is extensional.
 
 
-
-## Relation-reality-check
-
+# Relation-reality-check
 
 Lemma. Let R be a relation. Let forall x,y /in /VV (x - R - y iff x /in y). Then antisym(R).
 
@@ -161,84 +153,85 @@ Then R is a strict linear order.
 Lemma. Let R be a relation. Let forall x,y /in /VV (x - R - y iff x /in y). Then R is strongly wellfounded.
 
 
-
 ## Mostowski Collapse
 
-
 Let SWR stand for a strongly wellfounded relation.
-Signature. TCol SWR is a function.
 
-Axiom. Let R be a strongly wellfounded relation. Dom(TCol R) = reldomain(R).
+Signature. MCol SWR is a function.
 
-Axiom. Let R be a strongly wellfounded relation. Then forall x /in (reldomain(R))  (((TCol R) [x]) = ((TCol R) /caret [sset(R,x)])).
+Axiom. Let R be a strongly wellfounded relation. Dom(MCol R) = relfield(R).
 
-Lemma. Let R be a strongly wellfounded relation. Then (TCol R) is a zffunction.
+Axiom. Let R be a strongly wellfounded relation. Then forall x /in (relfield(R))  (((MCol R) [x]) = ((MCol R) /caret [sset(R,x)])).
 
-Lemma. Let R be a strongly wellfounded relation. Then forall x /in (reldomain(R))  ((TCol R) [x] = (TCol R)^[sset(R,x)]).
+Lemma. Let R be a strongly wellfounded relation. Then (MCol R) is a zffunction.
+
+Lemma MCol. Let R be a strongly wellfounded relation. Then forall x /in (relfield(R))  ((MCol R) [x] = (MCol R)^[sset(R,x)]).
 
 Signature. eps is an object.
-
 Axiom. eps is a relation.
-
 Axiom. Forall x,y /in /VV (x - eps - y iff x /in y).
-
-Lemma. reldomain(eps) = /VV.
-
+Lemma. relfield(eps) = /VV.
 Lemma. eps is strongly wellfounded.
-
 Lemma. Forall x /in /VV sset(eps,x) = x.
-
 Lemma. eps is extensional.
 
 Lemma. Let A /subset /Ord. (eps /restrict A) is a strong wellorder.
 
-Definition. Let x be a zfset. Let x /subset /Ord. The epsrestriction of x is
-eps /restrict (x /cup (<(/bigcup x) + 1>)).
-Let epsrest(x) stand for the epsrestriction of x.
+Lemma. Let x /subset /Ord. Let x be a proper class. Then relfield(eps /restrict x) = x.
 
-Lemma. Let x be a zfset. Let x /subset /Ord. Then reldomain(epsrest(x)) = x.
+Lemma. Forall x /in /VV (MCol eps)[x] = x.
 
-Lemma. Let x /subset /Ord. Let x be a proper class. Then reldomain(eps /restrict x) = x.
+Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then Trans(ran(MCol R)).
 
-Lemma. Let x be a zfset. Let x /subset /Ord. Then x /cup <(/bigcup x)+1> /subset /Ord.
+Lemma. Let R be a relation. Let x /in /VV. Forall y /in sset(R,x) y /in relfield(R).
 
-Lemma. Let x be a zfset. Let x /subset /Ord. Then epsrest(x) is a strong wellorder.
+Lemma. Let R be a relation. Forall x /in reldomain(R) x /in relfield(R).
 
-Lemma. Forall x /in /VV (TCol eps)[x] = x.
+Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then (MCol R) is injective.
 
-Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then Trans(ran(TCol R)).
+Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then forall x,y /in reldomain(R) ((MCol R)[x],(MCol R)[y] /in /VV /\ (x - R - y iff (MCol R)[x] /in (MCol R)[y])).
 
-Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then (TCol R) is injective.
+Lemma. Let R be a strong wellorder. Let relfield(R) /in /VV. Then ran(MCol R) /in /Ord.
 
-Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then forall x,y /in reldomain(R) ((TCol R)[x],(TCol R)[y] /in /VV /\ (x - R - y iff (TCol R)[x] /in (TCol R)[y])).
-
-Lemma. Let R be a strong wellorder. Let reldomain(R) /in /VV. Then ran(TCol R) /in /Ord.
-
-Lemma. Let R be a strong wellorder. Let reldomain(R) be a proper class. Then ran(TCol R) = /Ord.
-
+Lemma. Let R be a strong wellorder. Let relfield(R) be a proper class. Then ran(MCol R) = /Ord.
 
 
 ## Order-type
 
+Signature. A singleton is a notion.
+Axiom. Let x be a singleton. Then x is a set.
+Axiom. Let x be a set. x is a singleton iff exists y x = <y>.
 
-Definition. Let R be a strong wellorder. The relordertype of R is ran(TCol R).
+Signature. A nonsingleton is a notion.
+Axiom. Let x be a nonsingleton. Then x is a set.
+Axiom. Let x be a set. x is a nonsingleton iff not (exists y x = <y>).
+
+Lemma. Let x be a set. (x is a singleton) \/ (x is a nonsingleton).
+
+Definition. Let x /subset /Ord. The epsrestriction of x is eps /restrict x.
+Let epsrest(x) stand for the epsrestriction of x.
+
+Lemma. Let x /subset /Ord. Let x be a nonsingleton. Then relfield(epsrest(x)) = x.
+
+Lemma. Let x /subset /Ord. Then epsrest(x) is strongly wellfounded.
+
+Definition. Let R be a strong wellorder. The relordertype of R is ran(MCol R).
 Let relotp(R) stand for the relordertype of R.
 
 Lemma. Let R be a strong wellorder. Then relotp(R) /in /Ord \/ relotp(R) = /Ord.
 
-Signature. Let x be a set. The ordertype of x is a set.
+Signature. Let x /subset /Ord. The ordertype of x is a set.
 Let otp(x) stand for the ordertype of x.
 
-Axiom. Let x be a zfset. Let x /subset /Ord. Then otp(x) = ran(TCol epsrest(x)).
+Axiom. Let x /subset /Ord. Let x be a nonsingleton. Then otp(x) = ran(MCol epsrest(x)).
 
-Axiom. Let x /subset /Ord. Let x be a proper class. Then otp(x) = ran(TCol (eps /restrict /Ord)).
+Axiom. Let x /subset /Ord. Let x be a singleton. Then otp(x) = 1.
 
 Lemma. Let x /subset /Ord. Let x be a proper class. Then otp(x) = /Ord.
 
 Lemma. Let x be a zfset. Let x /subset /Ord. Then otp(x) /in /Ord.
 
 Lemma. Let alpha be an ordinal. Let x /subset alpha. Then otp(x) /subset alpha.
-
 
 
 ## epshomo and epsiso
@@ -252,6 +245,8 @@ Axiom. Let f be an epshomo. Then f is a zffunction.
 
 Axiom. Let f be a zffunction. Then f is an epshomo iff forall x /in Dom(f) (f^[x /cap Dom(f)] /subset f[x]).
 
+Lemma. Let f be a zffunction. Forall x /in Dom(f) (f[x] is a set).
+
 Lemma. Let f be a zffunction. f is an epshomo iff forall x,y /in Dom(f) (x /in y => f[x] /in f[y]).
 
 Signature. An epsiso is a notion.
@@ -260,7 +255,7 @@ Axiom. Let f be an epsiso. Then f is a zffunction.
 
 Axiom epsiso. Let f be a zffunction. Then f is an epsiso iff f is injective and forall x,y /in Dom(f) (x /in y iff f[x] /in f[y]).
 
-Lemma epsiso2. Let f be an epsiso. Then forall x /in Dom(f) (f^[x /cap Dom(f)] = f[x] /cap ran(f)).
+Lemma. Let f be an epsiso. Then forall x /in Dom(f) (f^[x /cap Dom(f)] = f[x] /cap ran(f)).
 
 Lemma. Let f be a zffunction. Then f is an epsiso iff f is injective and forall x /in Dom(f) (f^[x /cap Dom(f)] = f[x] /cap ran(f)).
 
@@ -271,34 +266,36 @@ Lemma. Let f,g be epsisos. Let ran(f) /subset Dom(g). Then g /circ f is an epsis
 Lemma. Let f be an epsiso. Let Dom(f), ran(f) be transitive. Then Dom(f) = ran(f) and forall x /in Dom(f) f[x] = x.
 
 
-
 ## Simplifying otp
 
-Lemma otpzfset. Forall x /subset /Ord (x /in /VV => otp(x) /in /Ord).
+Lemma. Forall x /subset /Ord (x /in /VV => otp(x) /in /Ord).
 
-Lemma otpclass. Forall x /subset /Ord (x /notin /VV => otp(x) = /Ord).
+Lemma. Forall x /subset /Ord (x /notin /VV => otp(x) = /Ord).
 
 Lemma. Let x /subset /Ord. Let forall alpha /in /Ord x /notin /PP alpha. Then otp(x) = /Ord.
 
-Signature. Let x /subset /Ord. otpfunc(x) is a zffunction.
+Signature. Let x /subset /Ord. otpfunc(x) is a function.
 
-Axiom. Let x /subset /Ord. Let x /in /VV. Then otpfunc(x) = TCol epsrest(x).
+Axiom. Let x /subset /Ord. Let x be a nonsingleton. Then otpfunc(x) = MCol epsrest(x).
 
-Axiom. Let x /subset /Ord. Let x be a proper class. Then otpfunc(x) = TCol (eps /restrict x).
+Axiom. Let x /subset /Ord. Let x be a singleton. Then Dom(otpfunc(x)) = x and forall i /in Dom(otpfunc(x)) (otpfunc(x))[i] = 0.
+
+Lemma. Let x /subset /Ord. otpfunc(x) is a zffunction.
 
 Lemma. Let x /subset /Ord. Then otpfunc(x) : x /leftrightarrow otp(x).
 
-Lemma. Let x /subset /Ord. Then Dom(otpfunc(x)) = x /\ forall y /in x otpfunc(x)[y] = otpfunc(x)^[y /cap x].
+Lemma. Let x /subset /Ord. Let x be a nonsingleton. Then Dom(otpfunc(x)) = x /\ forall y /in x otpfunc(x)[y] = otpfunc(x)^[y /cap x].
 
 Lemma. Let x /subset /Ord. Then otpfunc(x) is an epsiso.
 
-Lemma. Let x /subset /Ord. Let y /in /Ord \/ y = /Ord. Then otp(x) = y iff exists f ((f is an epsiso) /\ f : x /leftrightarrow y).
+Lemma. Let x /subset /Ord. Let y /in /Ord \/ y = /Ord. Then otp(x) = y iff exists f (f is an epsiso and f : x /leftrightarrow y).
 
 Lemma. Let alpha /in /Ord. Then otp(alpha) = alpha.
 
 Lemma. Let x be a zfset. Let x /subset /Ord. Then Card(x) /subset otp(x).
 
 Lemma. Let x /subset /Ord. Let y /in /Ord \/ y = /Ord. Then otp(x) = y iff exists f ((f is an epsiso) /\ f : y /leftrightarrow x).
+
 
 
 

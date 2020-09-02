@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L09-Cofinality.ftl]
+[read Formalizations/Library/L12-Cardinal_Exponentiation.ftl]
 
 
 ## Pretyped Variables
@@ -47,8 +47,12 @@ Proof.
   Proof.
     Let a /in kappa.
     Then a /cup alpha /in kappa.
+    X /club kappa.
     Take a zfset b such that b /in X /\ a /cup alpha /in b.
     Then b /in X /setminus alpha.
+    a, a /cup alpha are ordinals.
+    a /subset a /cup alpha.
+    Then a = a /cup alpha \/ a /in a /cup alpha.
     a /in b.
   end.
   Forall lambda /in /Lim /cap kappa ((X /setminus alpha) /cap lambda /cof lambda => lambda /in X /setminus alpha).
@@ -129,15 +133,15 @@ Proof.
       Proof.
         Let beta /in kappa.
         beta is an ordinal.
-        Forall i /in lambda exists j /in C[i] (j /notin (beta + 1)).
+        Forall i /in lambda exists j /in C[i] (j /notin (beta +' 1)).
         Proof.
           Let i /in lambda.
           C[i] /club kappa.
           beta /in kappa.
           Take a zfset j such that (j /in C[i] /\ beta /in j).
-          Then j /notin (beta + 1).
+          Then j /notin (beta +' 1).
         end.
-        Define f[i] = (Choose a zfset j such that (j /in C[i] /setminus (beta + 1)) in j) for i in lambda.
+        Define f[i] = (Choose a zfset j such that (j /in C[i] /setminus (beta +' 1)) in j) for i in lambda.
         f : lambda /rightarrow kappa.
         Proof.
           Let i /in lambda.
@@ -147,7 +151,7 @@ Proof.
         Forall i /in lambda beta /in f[i].
         Proof.
           Let i /in lambda.
-          f[i] /in C[i] /setminus (beta + 1).
+          f[i] /in C[i] /setminus (beta +' 1).
           f[i], beta /in /Ord.
           f[i] /in beta \/ beta /in f[i] \/ f[i] = beta (by TotalOrder).
           f[i] /notin beta /\ f[i] /neq beta.
@@ -181,13 +185,15 @@ Proof.
             Let a /in kappa.
             Then a /in /bigcup f^[lambda].
           end.
-          Card(f^[lambda]) /subset lambda.
+          Card(f^[lambda]) /subset Card(lambda).
+          Card(lambda) /subset lambda.
+          Then Card(f^[lambda]) /subset lambda.
           Card(f^[lambda]) /in cofset2(kappa).
-          Then /bigcap cofset2(kappa) /subset Card(f^[lambda]).
+          Then min(cofset2(kappa)) /subset Card(f^[lambda]).
           Then cof(kappa) /subset lambda.
           Contradiction.
         end.
-        Let gamma = /bigcup f^[lambda] + 1.
+        Let gamma = /bigcup f^[lambda] +' 1.
         Then gamma /in supset[beta].
         Proof.
           gamma /in supset[beta] iff (gamma /in kappa /\ forall i /in lambda exists j /in C[i] /cap gamma (beta /in j)).
@@ -238,14 +244,14 @@ Proof.
         Then a /in Dom(sup).
       end.    
   
-      Define f[n] = (sup ^^ (n+1)) [alpha] for n in /NN.        
+      Define f[n] = (sup ^^ (n+'1)) [alpha] for n in /NN.        
       
       Forall n /in /NN f[n] /in kappa.
       Proof.
         Let n /in /NN.
-        f[n] = (sup ^^ (n+1)) [alpha].
-        Then f[n] /in ran(sup ^^ (n+1)).
-        ran(sup ^^ (n+1)) /subset Dom(sup).
+        f[n] = (sup ^^ (n+'1)) [alpha].
+        Then f[n] /in ran(sup ^^ (n+'1)).
+        ran(sup ^^ (n+'1)) /subset Dom(sup).
       end.
       f is a zffunction.
       Proof.
@@ -321,7 +327,7 @@ Proof.
         end.
         Card(f^[/NN]) /subset /NN.
         Card(f^[/NN]) /in cofset2(kappa).
-        Then /bigcap cofset2(kappa) /subset Card(f^[/NN]).
+        Then min(cofset2(kappa)) /subset Card(f^[/NN]).
         Then cof(kappa) /subset /NN.
         Alef[1] /subset cof(kappa).
         Contradiction.
@@ -339,22 +345,22 @@ Proof.
         alpha /in x.
         Then x /neq 0.
         Then x /in /Succ.
-        Take an ordinal a such that x = a+1.
+        Take an ordinal a such that x = a+'1.
         Then a /in x.
         Take a zfset b such that b /in f^[/NN] /\ a /in b.
         f^[/NN] /subset /Ord.
         Then b /in /Ord.
-        Then a+1 /subset b.
-        Then a+1 = b \/ a+1 /in b.
+        Then a+'1 /subset b.
+        Then a+'1 = b \/ a+'1 /in b.
         Proof.
-          a+1 /in b \/ b /in a+1 \/ a+1 = b (by TotalOrder).
-          b /notin a+1.
+          a+'1 /in b \/ b /in a+'1 \/ a+'1 = b (by TotalOrder).
+          b /notin a+'1.
         end.
         Take a zfset n such that n /in /NN /\ b = f[n].
-        Then b /in f[n+1].
+        Then b /in f[n+'1].
         Then b /in /bigcup f^[/NN].
         Then b /in x.
-        Then a+1 /in x.
+        Then a+'1 /in x.
         Contradiction.
       end.
       
@@ -362,13 +368,13 @@ Proof.
       Proof.
         Let i /in lambda.
         C[i] is a zfset.
-        Forall n /in /NN exists j /in C[i] (f[n] /in j /\ j /in f[n+1]).
+        Forall n /in /NN exists j /in C[i] (f[n] /in j /\ j /in f[n+'1]).
         Proof.
           Let n /in /NN.
-          f[n+1] = sup[f[n]].
-          Then exists j /in C[i] /cap f[n+1] (f[n] /in j).
+          f[n+'1] = sup[f[n]].
+          Then exists j /in C[i] /cap f[n+'1] (f[n] /in j).
         end.
-        Define val[n] = (Choose a zfset j such that j /in C[i] /\ (f[n] /in j /\ j /in f[n+1]) in j) for n in /NN.
+        Define val[n] = (Choose a zfset j such that j /in C[i] /\ (f[n] /in j /\ j /in f[n+'1]) in j) for n in /NN.
         val is a zffunction.
         Proof.
           Let n /in /NN.
@@ -390,7 +396,7 @@ Proof.
           Let a /in /bigcup val^[/NN].
           Take a zfset b such that b /in val^[/NN] /\ a /in b.
           Take a zfset c such that c /in /NN /\ b = val[c].
-          val[c] /in f[c+1].
+          val[c] /in f[c+'1].
           Then val[c] /in /bigcup f^[/NN].
           Then val[c] /in x.
           Trans(x).
@@ -415,7 +421,7 @@ Proof.
           Let a /in x.
           Take a zfset b such that b /in val^[/NN] /\ a /in b.
           Take a zfset c such that c /in /NN /\ b = val[c].
-          Then b /in f[c+1].
+          Then b /in f[c+'1].
           Then b /in /bigcup f^[/NN].
           Then b /in x.
           b /in C[i].
@@ -452,6 +458,9 @@ Proof.
   kappa /in /BigCard.
   2 /neq /emptyset.
   2 /in cof(kappa).
+  Proof.
+    cof(kappa) /in /Lim.
+  end.
   f is a sequence of length 2 in Cl(kappa).
   Proof.
     f is a zffunction.
@@ -501,7 +510,7 @@ qed.
 Lemma. Let kappa /in /BigCard. Then /emptyset /notin Club(kappa).
 
 
-Lemma. Let kappa /in /BigCard. Let X /in Club(kappa). Let Y /subset kappa. Let X /subset Y. Then Y /in Club(kappa).
+Lemma ClubSubset. Let kappa /in /BigCard. Let X /in Club(kappa). Let Y /subset kappa. Let X /subset Y. Then Y /in Club(kappa).
 Proof.
   Take a zfset C such that C /subset X /\ C /club kappa.
   Then C /subset Y /\ C /club kappa.
@@ -520,7 +529,7 @@ qed.
 
 
 Lemma. Let kappa /in /BigCard. Let lambda /in cof(kappa). Let lambda /neq /emptyset. Let X be a sequence of length lambda in Club(kappa). Then /bigcap X^[lambda] /in Club(kappa). 
-  Proof.
+Proof.
   Forall i /in lambda (X[i] is a set).
   Forall i /in lambda exists Ci /subset X[i] (Ci /in Cl(kappa)).
   Proof.

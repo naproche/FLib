@@ -27,7 +27,7 @@ Let o,o1,o2 stand for objects.
 Lemma. Let a, b be sets. (Forall o (o /in a <=> o /in b)) => a = b.
 Lemma. Let a, b be sets. (Forall c (c /in a <=> c /in b)) => a = b.
 
-Definition Emptyset. The empty set is {zfset x | x /neq x}.
+Definition. The empty set is {zfset x | x /neq x}.
 Let /emptyset stand for the empty set.
 
 Definition. Let a be a set. a is empty iff a = /emptyset.
@@ -36,12 +36,10 @@ Definition. Let a be a set. a is nonempty iff exists b (b /in a).
 Lemma. Let a be a set. Let a be nonempty. Then a /neq /emptyset.
 Lemma. Let a be a set. Let a /neq /emptyset. Then exists x (x /in a).
 
-Definition Universe. The universe is {zfset x | x = x}.
+Definition. The universe is {zfset x | x = x}.
 Let /VV stand for the universe.
 
-Lemma. Let x be an object. x is a zfset iff x /in /VV.
-
-Definition Subset. A subset of A is a set B such that
+Definition. A subset of A is a set B such that
 forall c (c /in B => c /in A).
 Let B /subset A stand for B is a subset of A.
 
@@ -52,16 +50,9 @@ Lemma. Let a,b be sets. Let a /neq b. Then exists x ((x /in a /\ x /notin b) \/ 
 
 ## Arithmetic
 
-
-Signature. Let o be an object. <-o-> is an object.
-
 Definition. The singleton set of X is
 {zfset x | x = X}.
 Let <X> stand for the singleton set of X.
-
-Axiom. Let x be a zfset. Then <-x-> = <x>.
-
-Lemma. Let x,y be zfsets. Let <-x-> = <-y->. Then x = y.
 
 Definition. The pair of x and y is {zfset z | z = x \/ z = y}.
 Let <x , y> denote the pair of x and y.
@@ -96,8 +87,7 @@ Let /PP X stand for the power set of X.
 
 Axiom Emptyset. /emptyset is a zfset.
 
-
-Axiom Pair. Let x, y /in /VV. Then <x, y> /in /VV.
+Axiom Pair. Let x, y be zfsets. Then <x, y> is a zfset.
 
 Lemma. Forall x,y exists z forall o (o /in z iff o = x \/ o = y).
 Proof.
@@ -108,7 +98,7 @@ Proof.
 qed.
 
 
-Axiom Union. Let x /in /VV. Then /bigcup x /in /VV.
+Axiom Union. Let x be a zfset. Then /bigcup x is a zfset.
 
 Lemma. Forall x exists y forall o (o /in y iff exists w (w /in x /\ o /in w)).
 Proof.
@@ -119,15 +109,19 @@ Proof.
   Then exists z forall o (o /in z iff exists w (w /in x /\ o /in w)).
 qed.
 
-Lemma. Let x,y /in /VV. Then x /cup y /in /VV.
+Lemma. Let x,y be zfsets. Then x /cup y is a zfset.
 Proof.
   Let z = <x,y>.
-  Then /bigcup z = x /cup y.
+  /bigcup z = x /cup y.
 qed.
 
 
-Axiom Separation. Let x /in /VV. Let a /subset x. Then a /in /VV.
+Axiom Separation. Let x be a zfset. Let A be a set. A /cap x is a zfset.
 
+Lemma. Let x /in /VV. Let a /subset x. Then a /in /VV.
+Proof.
+  a /cap x = a.
+qed.
 
 Axiom Power. Let x be a zfset. Then /PP x is a zfset.
 
@@ -158,15 +152,13 @@ Then A is a zfset.
 A = <x>.
 qed.
 
-Lemma. Let x be a zfset. Then <-x-> is a zfset.
-
 
 [synonym class/-es]
 
 Signature. A proper class is a notion.
 
 Axiom. Let L be a proper class. Then L is a set.
-Axiom. Let a be a set. a is a proper class iff a /notin /VV.
+Axiom. Let a be a set. a is a proper class iff a is not a zfset.
 
 Lemma. /VV is a proper class.
 
@@ -194,13 +186,11 @@ Axiom. Let alpha be an ordinal. Then alpha is a zfset.
 
 Signature. 0 is a zfset.
 Signature. 1 is a zfset.
-Signature. 2 is an ordinal.
-Signature. Let a be an object. a ++ is an object.
+Signature. 2 is a zfset.
+Signature. Let a be a zfset. a ++ is a set.
 
 
-Lemma. Let alpha be an ordinal. Then alpha is a zfset.
-
-Axiom. Let alpha be a set. alpha is an ordinal iff ( alpha /in /VV /\ Trans(alpha) /\ forall y (y /in alpha => Trans(y) )).
+Axiom. Let alpha be a zfset. alpha is an ordinal iff Trans(alpha) and forall y (y /in alpha => Trans(y) ).
 
 Definition. The class of transitives is
 {zfset x | Trans(x)}.
@@ -227,8 +217,6 @@ Axiom. 1 = 0 ++.
 Axiom. 2 = 1 ++.
 
 Lemma. 2 = <0,1>.
-
-Lemma. /Ord is a set and /Trans is a set.
 
 Lemma. /emptyset /in /Trans and /emptyset /in /Ord.
 
@@ -269,8 +257,7 @@ Proof by contradiction. Assume the contrary.
   Take a zfset beta such that (beta /in B /\ forall c (c /in beta => c /notin B)).
   beta is an ordinal.
   Not (alpha /in beta \/ beta /in alpha \/ alpha = beta).
-  alpha /subset beta.
-  beta /subset alpha.
+  alpha /subset beta and beta /subset alpha.
   alpha = beta.
   Contradiction.
 qed.
@@ -304,7 +291,7 @@ Lemma. Let A /subset /Ord. Let A /neq /emptyset. Then forall beta /in A (min(A) 
 Lemma. Let alpha, beta be ordinals. Let alpha /in beta. Then alpha /subset beta.
 
 
-# Induction
+## Induction
 
 Theorem Induction. Let B /subset /VV. Let forall x (x /subset B => x /in B). Then B = /VV.
 Proof by contradiction. Assume the contrary.
@@ -371,6 +358,8 @@ Proof.
     Case alpha /in /Lim. end.
     Case alpha /neq 0 /\ alpha /notin /Lim.
       Take an ordinal beta such that beta /in alpha /\ beta++ /notin alpha.
+      alpha /subset beta++.
+      beta++ /subset alpha.
       Then alpha = beta ++.
       Then alpha /in /Succ.
     end.
@@ -384,22 +373,20 @@ Axiom Infinity. Exists x (/emptyset /in x /\ forall y /in x ((y ++) /in x) ).
 
 ## Natural Numbers
 
-
 [synonym number/-s]
 
 Signature. A natural number is a notion.
 
 Let k,l,m,n stand for natural numbers.
 
-Axiom. Let n be a natural number. Then n is an ordinal.
 
 
 Definition. The class of inductive sets is
 {zfset x |  (/emptyset /in x /\ forall y (y /in x => (y ++) /in x) ) }.
 Let /Ind stand for the class of inductive sets.
 
-Definition. The class of natnumbers is /bigcap /Ind.
-Let /NN stand for the class of natnumbers.
+Definition. The class of natural numbers is /bigcap /Ind.
+Let /NN stand for the class of natural numbers.
 
 Lemma. /NN /in /VV.
 Proof.
@@ -414,7 +401,6 @@ Axiom. Let alpha be an object. alpha is a natural number iff alpha /in /NN.
 Lemma. 0 is a natural number.
 Lemma. 1 is a natural number.
 Lemma. Let n be a natural number. Then n ++ is a natural number.
-
 
 Lemma. Let n /in /NN. Let n /neq /emptyset. Then n /in /Succ.
 Proof. Define M = {ordinal alpha | alpha /in /NN /\ (alpha = /emptyset \/ alpha /in /Succ)}.
@@ -432,21 +418,15 @@ Proof. /NN /cap /Ord /in /VV.
 qed.
 
 Lemma. /NN is transitive.
-Proof. Define A = {set n | n /in /NN /\ forall x /in n (x /in /NN)}.
+Proof. Define A = {zfset n | n /in /NN /\ forall x /in n (x /in /NN)}.
   Then /emptyset /in A.
-  Forall x /in A (x ++ /in A).
+  Forall x /in A (x++ /in A).
   Then A = /NN.
 qed.
 
 Lemma. /NN /in /Ord.
 
 Lemma. /NN /in /Lim.
-
-
-
-
-
-
 
 
 

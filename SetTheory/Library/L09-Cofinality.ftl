@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L08-Cardinal_Arithmetic.ftl]
+[read Formalizations/Library/L08-Cardinal_Arithmetic.ftl]
 
 [prove off]
 
@@ -14,7 +14,6 @@ Let kappa, lambda stand for cardinals.
 
 
 # Cofinality
-
 
 Definition. Let lambda /in /Lim. Let x /subset lambda. x is cofinal in lambda iff
 forall alpha /in lambda exists y /in x alpha /in y.
@@ -51,7 +50,7 @@ Let cofset2(x) stand for the alternativecofset of x.
 
 Lemma. Let lambda /in /Lim. Then cofset2(lambda) /neq /emptyset.
 
-Lemma. Let lambda /in /Lim. Then cof(lambda) = /bigcap cofset2(lambda).
+Lemma. Let lambda /in /Lim. Then cof(lambda) = min(cofset2(lambda)).
 
 Lemma. Let lambda /in /Lim. Then cof(lambda) = min(cofset2(lambda)).
 
@@ -79,9 +78,11 @@ Lemma. cof(Alef[/NN]) = /NN.
 
 Lemma exsurj. Let x be a zfset. Let x /neq /emptyset. Let alpha /in /Ord. Let Card(x) /subset alpha. Then exists f (f : alpha /rightarrow x /\ ran(f) = x).
 
-Lemma. Forall alpha /in /Ord cof(Alef[alpha + 1]) = Alef[alpha + 1].
+Lemma. Forall alpha /in /Ord cof(Alef[alpha +' 1]) = Alef[alpha +' 1].
 
 Lemma. Forall alpha /in /Succ (Alef[alpha] is regular).
+
+
 
 
 [prove on]

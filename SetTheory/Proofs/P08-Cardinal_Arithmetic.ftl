@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L07-Cardinals_Part_2.ftl]
+[read Formalizations/Library/L07-Cardinals_Part_2.ftl]
 
 ## Pretyped Variables
 
@@ -12,6 +12,7 @@ Let kappa, lambda stand for cardinals.
 
 
 ## Cardinal Arithmetic
+
 
 Axiom. Let f be a zffunction. Let Dom(f) /in /VV. Then f is a zfset.
 
@@ -169,22 +170,22 @@ Proof.
   Then ^{x1}y1 /tilde ^{x2}y2.
 qed.
 
-Signature. kappa +3 lambda is a cardinal.
-Signature. kappa *3 lambda is a cardinal.
-Signature. kappa ^3 lambda is a cardinal.
+Signature. kappa + lambda is a cardinal.
+Signature. kappa * lambda is a cardinal.
+Signature. kappa ^ lambda is a cardinal.
 
 Definition. Let kappa, lambda /in /Cd. Let x,y /in /VV. (kappa,lambda) IsAdditionCompatibleWith (x,y) iff (Card(x) = kappa /\ Card(y) = lambda /\ x /cap y = /emptyset).
 Let (a,b) /sim (x, y) stand for (a,b) IsAdditionCompatibleWith (x, y).
 
 Axiom. Let kappa, lambda /in /Cd. Let x,y /in /VV. Let (kappa,lambda) /sim (x, y).
-Then kappa +3 lambda = Card(x /cup y).
+Then kappa + lambda = Card(x /cup y).
 
 Axiom. Let kappa, lambda /in /Cd. Let x,y /in /VV. Let Card(x) = kappa. Let Card(y) = lambda. Let x /cap y = /emptyset.
-Then kappa +3 lambda = Card(x /cup y).
+Then kappa + lambda = Card(x /cup y).
 
-Axiom. Let kappa, lambda /in /Cd. Then kappa *3 lambda = Card(kappa /times lambda).
+Axiom. Let kappa, lambda /in /Cd. Then kappa * lambda = Card(kappa /times lambda).
 
-Axiom. Let kappa, lambda /in /Cd. Then kappa ^3 lambda = Card(^{lambda}kappa).
+Axiom. Let kappa, lambda /in /Cd. Then kappa ^ lambda = Card(^{lambda}kappa).
 
 Lemma. Forall kappa, lambda /in /Cd exists x,y ((kappa,lambda) /sim (x,y)).
 Proof.
@@ -236,19 +237,19 @@ qed.
 
 ## Algebraic rules for Sum and Product
 
-Lemma. Forall kappa, lambda /in /Cd (kappa +3 lambda = lambda +3 kappa).
+Lemma. Forall kappa, lambda /in /Cd (kappa + lambda = lambda + kappa).
 Proof.
   Let kappa, lambda /in /Cd.
   Take zfsets x,y such that (kappa,lambda) /sim (x,y).
   Then (lambda, kappa) /sim (y,x).
   x /cup y, y /cup x are zfsets.
-  kappa +3 lambda = Card(x /cup y).
-  lambda +3 kappa = Card(y /cup x).
+  kappa + lambda = Card(x /cup y).
+  lambda + kappa = Card(y /cup x).
   x /cup y = y /cup x.  
 qed.
 
 
-Lemma. Forall kappa, lambda /in /Cd (kappa *3 lambda = lambda *3 kappa).
+Lemma. Forall kappa, lambda /in /Cd (kappa * lambda = lambda * kappa).
 Proof.
   Let kappa, lambda /in /Cd.
   Define f[(a,b)] = (b,a) for (a,b) in kappa /times lambda.
@@ -280,8 +281,8 @@ Proof.
   end.
   Then f : kappa /times lambda /leftrightarrow lambda /times kappa.
   Then Card(kappa /times lambda) = Card(lambda /times kappa).
-  kappa *3 lambda = Card(kappa /times lambda).
-  lambda *3 kappa = Card(lambda *3 kappa).
+  kappa * lambda = Card(kappa /times lambda).
+  lambda * kappa = Card(lambda * kappa).
 qed.
 
 
@@ -321,17 +322,17 @@ Proof.
 qed.
 
 
-Lemma. Forall alpha, beta, gamma /in /Cd ((alpha +3 beta) +3 gamma = alpha +3 (beta +3 gamma)).
+Lemma. Forall alpha, beta, gamma /in /Cd ((alpha + beta) + gamma = alpha + (beta + gamma)).
 Proof.
   Let alpha, beta, gamma /in /Cd.
   Take zfsets x,y such that (alpha,beta) /sim (x,y).
-  Take zfsets z such that (alpha +3 beta,gamma) /sim (x /cup y, z).
-  Then (alpha +3 beta) +3 gamma = Card((x /cup y) /cup z).
+  Take zfsets z such that (alpha + beta,gamma) /sim (x /cup y, z).
+  Then (alpha + beta) + gamma = Card((x /cup y) /cup z).
   y /cap z = /emptyset.
   Then (beta,gamma) /sim (y,z).
   x /cap (y /cup z) = /emptyset.
-  Then (alpha, beta +3 gamma) /sim (x, y /cup z).
-  Then alpha +3 (beta +3 gamma) = Card(x /cup (y /cup z)).
+  Then (alpha, beta + gamma) /sim (x, y /cup z).
+  Then alpha + (beta + gamma) = Card(x /cup (y /cup z)).
   (x /cup y) /cup z = x /cup (y /cup z).
 qed.
 
@@ -340,16 +341,16 @@ qed.
 ## Basic Facts
 
 
-Lemma. Forall kappa, lambda /in /Cd (kappa /subset kappa +3 lambda).
+Lemma. Forall kappa, lambda /in /Cd (kappa /subset kappa + lambda).
 Proof.
   Let kappa, lambda /in /Cd.
   Take zfsets x,y such that (kappa,lambda) /sim (x,y).
-  Then kappa +3 lambda = Card(x /cup y).
+  Then kappa + lambda = Card(x /cup y).
   x /subset x /cup y.
   Then Card(x) /subset Card(x /cup y).
 qed.
 
-Lemma. Forall kappa /in /Cd (kappa ^3 0 = 1).
+Lemma. Forall kappa /in /Cd (kappa ^ 0 = 1).
 Proof.
   Let kappa /in /Cd.
   Forall f,g /in ^{0}kappa (f = g).
@@ -367,13 +368,13 @@ Proof.
 qed.
 
 
-Lemma. Forall kappa /in /Cd (kappa /neq 0 => 0 ^3 kappa = 0).
+Lemma. Forall kappa /in /Cd (kappa /neq 0 => 0 ^ kappa = 0).
 Proof.
   Let kappa /in /Cd. Let kappa /neq 0.
   Then ^{kappa}0 = /emptyset.
   qed.
   
-  Lemma. Forall kappa /in /Cd (kappa ^3 1 = kappa).
+  Lemma. Forall kappa /in /Cd (kappa ^ 1 = kappa).
   Proof.
   Let kappa /in /Cd.
   Forall g /in ^{1}kappa 0 /in Dom(g).
@@ -412,7 +413,7 @@ Proof.
 qed.
 
 
-Lemma. Forall kappa /in /Cd (1 ^3 kappa = 1).
+Lemma. Forall kappa /in /Cd (1 ^ kappa = 1).
 Proof.
   Let kappa /in /Cd.
   Forall f,g /in ^{kappa}1 (f = g).
@@ -443,7 +444,7 @@ qed.
 ## Cardinal = Ordinal Arithmetic for finite sets.
 
 
-Lemma. Forall n /in /NN (n + 1 = n +3 1).
+Lemma. Forall n /in /NN (n +' 1 = n + 1).
 Proof.
   Let n /in /NN.
   Let y = <n>.
@@ -455,61 +456,63 @@ Proof.
   end.
   n /cap y = /emptyset.
   Then (n,1) /sim (n,y).
-  Then n +3 1 = Card(n /cup y).
-  n /cup y = n+1.
+  Then n + 1 = Card(n /cup y).
+  n /cup y = n+'1.
 end.
 
 
-Lemma. Forall alpha /in /Cd (alpha +3 0 = alpha).
+Lemma. Forall alpha /in /Cd (alpha + 0 = alpha).
 Proof.
   Let alpha /in /Cd.
   Take zfsets x,y such that (alpha,0) /sim (x,y).
   Card(y) = 0.
   Then y = /emptyset.
-  alpha +3 0 = Card(x /cup y).
+  alpha + 0 = Card(x /cup y).
   x /cup y = x.
   Card(x) = alpha.
 qed.
 
 
-Lemma. Forall alpha, beta /in /NN (alpha + beta = alpha +3 beta).
+Lemma. Forall alpha, beta /in /NN (alpha +' beta = alpha + beta).
 Proof.
   Let alpha /in /NN.
-  Forall beta /in /NN (alpha + beta = alpha +3 beta).
+  Forall beta /in /NN (alpha +' beta = alpha + beta).
   Proof by induction.
     Let beta /in /NN.
     Case beta = 0.      
     end.
     Case beta /neq 0.
       Let gamma = beta --.
-      alpha + beta = (alpha + gamma) + 1.
-      alpha + beta = (alpha +3 gamma) + 1.
-      alpha + beta = (alpha +3 gamma) +3 1.
-      Then alpha + beta = alpha +3 (gamma +3 1).
+      alpha +' beta = (alpha +' gamma) +' 1.
+      alpha +' beta = (alpha + gamma) +' 1.
+      alpha +' beta = (alpha + gamma) + 1.
+      alpha, gamma, 1 /in /Cd.
+      Then (alpha + gamma) + 1 = alpha + (gamma + 1).
+      Then alpha +' beta = alpha + (gamma + 1).
     end.
   end.
 qed.
 
 
-Lemma. Forall alpha, beta /in /NN (alpha * beta = alpha *3 beta).
+Lemma. Forall alpha, beta /in /NN (alpha *' beta = alpha * beta).
 
 
-Lemma. Forall alpha, beta /in /NN (alpha ^ beta = alpha ^3 beta).
+Lemma. Forall alpha, beta /in /NN (alpha ^' beta = alpha ^ beta).
 Proof.
   Let alpha /in /NN.
-  Forall beta /in /NN (alpha ^ beta = alpha ^3 beta).
+  Forall beta /in /NN (alpha ^' beta = alpha ^ beta).
   Proof by induction.
     Let beta /in /NN.
     Case beta = 0.
     end.
     Case beta /neq 0.
       Let gamma = beta --.
-      alpha ^ beta = (alpha ^3 gamma) *3 alpha.
-      (alpha ^3 gamma) *3 alpha = Card(^{gamma}alpha /times alpha).
+      alpha ^' beta = (alpha ^ gamma) * alpha.
+      (alpha ^ gamma) * alpha = Card(^{gamma}alpha /times alpha).
       Proof.
-        (alpha ^3 gamma) *3 alpha = Card((alpha ^3 gamma) /times alpha).
-        alpha ^3 gamma /tilde ^{gamma}alpha.
-        Then (alpha ^3 gamma) /times alpha /tilde ^{gamma}alpha /times alpha.
+        (alpha ^ gamma) * alpha = Card((alpha ^ gamma) /times alpha).
+        alpha ^ gamma /tilde ^{gamma}alpha.
+        Then (alpha ^ gamma) /times alpha /tilde ^{gamma}alpha /times alpha.
       end.
       Forall f /in ^{beta}alpha (gamma /subset Dom(f)).
       Forall f /in ^{beta}alpha (f /upharpoonright gamma is a zfset).
@@ -585,8 +588,8 @@ Proof.
         Then pair /in ran(split).
       end.
       Then split : ^{beta}alpha /leftrightarrow ^{gamma}alpha /times alpha.
-      alpha ^3 beta = Card(^{beta}alpha).
-      Then alpha ^3 beta = Card(^{gamma}alpha /times alpha).
+      alpha ^ beta = Card(^{beta}alpha).
+      Then alpha ^ beta = Card(^{gamma}alpha /times alpha).
     end.
   end.
 qed.
@@ -596,9 +599,9 @@ qed.
 ## Calculation Rules
 
 
-Lemma. Let alpha, beta, gamma /in /Cd. Then alpha *3 (beta +3 gamma) = (alpha *3 beta) +3 (alpha *3 gamma).
+Lemma. Let alpha, beta, gamma /in /Cd. Then alpha * (beta + gamma) = (alpha * beta) + (alpha * gamma).
 Proof.
-  alpha *3 (beta +3 gamma) = Card( alpha /times (beta +3 gamma)).
+  alpha * (beta + gamma) = Card( alpha /times (beta + gamma)).
   Take zfsets xx,yy such that Card(xx) = beta /\ Card(yy) = gamma.
   Define x = {(z,0) | z /in xx}.
   Define y = {(z,1) | z /in yy}.
@@ -643,12 +646,12 @@ Proof.
   x /cap y = /emptyset /\ Card(x) = beta /\ Card(y) = gamma.
   Then (beta,gamma) /sim (x,y).
   x /cup y is a zfset.
-  Then beta +3 gamma = Card(x /cup y).
+  Then beta + gamma = Card(x /cup y).
   alpha /times Card(x /cup y) is a zfset.
-  Then alpha *3 (beta +3 gamma) = Card( alpha /times Card(x /cup y)).
+  Then alpha * (beta + gamma) = Card( alpha /times Card(x /cup y)).
   alpha, alpha /times (x /cup y) are zfsets.
   alpha /times (x /cup y) /tilde Card(alpha) /times Card(x /cup y).
-  Then alpha *3 (beta +3 gamma) = Card(alpha /times (x /cup y)).
+  Then alpha * (beta + gamma) = Card(alpha /times (x /cup y)).
   
   alpha /times (x /cup y) = (alpha /times x) /cup (alpha /times y).
   
@@ -666,17 +669,17 @@ Proof.
   end.
   alpha /times x is a zfset.
   (alpha /times x) /tilde (alpha /times beta).
-  Then (alpha *3 beta) = Card(alpha /times x).
+  Then (alpha * beta) = Card(alpha /times x).
   alpha /times y is a zfset.
   (alpha /times y) /tilde (alpha /times gamma).
-  Then (alpha *3 gamma) = Card(alpha /times y).
-  Then ((alpha *3 beta), (alpha *3 gamma)) /sim ((alpha /times x), (alpha /times y)).
+  Then (alpha * gamma) = Card(alpha /times y).
+  Then ((alpha * beta), (alpha * gamma)) /sim ((alpha /times x), (alpha /times y)).
   
-  Then (alpha *3 beta) +3 (alpha *3 gamma) = Card((alpha /times x) /cup (alpha /times y)).
+  Then (alpha * beta) + (alpha * gamma) = Card((alpha /times x) /cup (alpha /times y)).
 qed.
 
 
-Lemma. Let alpha, beta, gamma /in /Cd. Then (alpha ^3 (beta +3 gamma) = (alpha ^3 beta) *3 (alpha ^3 gamma)).
+Lemma. Let alpha, beta, gamma /in /Cd. Then (alpha ^ (beta + gamma) = (alpha ^ beta) * (alpha ^ gamma)).
 Proof.
   Take zfsets xx,yy such that Card(xx) = beta /\ Card(yy) = gamma.
   Define x = {(z,0) | z /in xx}.
@@ -721,8 +724,8 @@ Proof.
   
   x /cap y = /emptyset /\ Card(x) = beta /\ Card(y) = gamma.
   Then (beta,gamma) /sim (x,y).
-  beta +3 gamma /tilde x /cup y.
-  Then ^{beta +3 gamma}alpha /tilde ^{x /cup y}alpha.
+  beta + gamma /tilde x /cup y.
+  Then ^{beta + gamma}alpha /tilde ^{x /cup y}alpha.
   
   ^{x /cup y}alpha /tilde ^{x}alpha /times ^{y}alpha.
   Proof.
@@ -861,10 +864,10 @@ Proof.
     Then phi : ^{x /cup y}alpha /leftrightarrow ^{x}alpha /times ^{y}alpha.
   end.
   
-  ^{beta +3 gamma}alpha /tilde ^{x}alpha /times ^{y}alpha.
+  ^{beta + gamma}alpha /tilde ^{x}alpha /times ^{y}alpha.
   Proof.
-    Take zfsets A,B,C such that A = ^{beta +3 gamma}alpha /\ B = ^{x /cup y}alpha /\ C = ^{x}alpha /times ^{y}alpha.
-    ^{beta +3 gamma}alpha /tilde ^{x /cup y}alpha.
+    Take zfsets A,B,C such that A = ^{beta + gamma}alpha /\ B = ^{x /cup y}alpha /\ C = ^{x}alpha /times ^{y}alpha.
+    ^{beta + gamma}alpha /tilde ^{x /cup y}alpha.
     ^{x /cup y}alpha /tilde ^{x}alpha /times ^{y}alpha.
     Then A /tilde B /\ B /tilde C.
     Then A /tilde C.
@@ -873,33 +876,74 @@ Proof.
   x /tilde beta.
   ^{x}alpha is a zfset.
   Then ^{x}alpha /tilde ^{beta}alpha.
-  Then alpha ^3 beta = Card(^{x}alpha).
+  Then alpha ^ beta = Card(^{x}alpha).
   
   y /tilde gamma.
   ^{y}alpha is a zfset.
   Then ^{y}alpha /tilde ^{gamma}alpha.
-  Then alpha ^3 gamma = Card(^{y}alpha).
+  Then alpha ^ gamma = Card(^{y}alpha).
   
   Card(^{x}alpha) /times Card(^{y}alpha) is a zfset.
-  (alpha ^3 beta) *3 (alpha ^3 gamma) = Card(Card(^{x}alpha) /times Card(^{y}alpha)).
+  (alpha ^ beta) * (alpha ^ gamma) = Card(Card(^{x}alpha) /times Card(^{y}alpha)).
+  Then (alpha ^ beta) * (alpha ^ gamma) /tilde Card(^{x}alpha) /times Card(^{y}alpha).
   Card(^{x}alpha) /times Card(^{y}alpha) /tilde ^{x}alpha /times ^{y}alpha.
-  Then (alpha ^3 beta) *3 (alpha ^3 gamma) /tilde ^{x}alpha /times ^{y}alpha.
-  ^{x}alpha /times ^{y}alpha /tilde (alpha ^3 beta) *3 (alpha ^3 gamma).
+  Then (alpha ^ beta) * (alpha ^ gamma) /tilde ^{x}alpha /times ^{y}alpha.
+  ^{x}alpha /times ^{y}alpha /tilde (alpha ^ beta) * (alpha ^ gamma).
   
-  Then (alpha ^3 (beta +3 gamma) /tilde (alpha ^3 beta) *3 (alpha ^3 gamma)).
+  Then (alpha ^ (beta + gamma) /tilde (alpha ^ beta) * (alpha ^ gamma)).
   Proof.
     Forall A,B,C /in /VV (A /tilde B /\ B /tilde C => A /tilde C).
-    Take a zfset A such that A = (alpha ^3 (beta +3 gamma)).
+    Take a zfset A such that A = (alpha ^ (beta + gamma)).
     Take a zfset B such that B = ^{x}alpha /times ^{y}alpha.
-    Take a zfset C such that C = (alpha ^3 beta) *3 (alpha ^3 gamma).
+    Take a zfset C such that C = (alpha ^ beta) * (alpha ^ gamma).
     Then A /tilde B /\ B /tilde C.
     Then A /tilde C.
   end.
 qed.
 
 
+
+# Partially applied functions
+
+Signature. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. F{A,B}(a,-) is a function.
+Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then Dom(F{A,B}(a,-)) = B.
+Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then forall b /in B (F{A,B}(a,-))[b] = F[(a,b)].
+Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then F{A,B}(a,-) is a zffunction.
+Proof.
+  Let b /in Dom(F{A,B}(a,-)).
+  (F{A,B}(a,-))[b] = F[(a,b)].
+  Then (F{A,B}(a,-))[b] is a zfset.
+qed.
+
+Signature. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. F{A,B}(-,b) is a function.
+Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then Dom(F{A,B}(-,b)) = A.
+Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then forall a /in A (F{A,B}(-,b))[a] = F[(a,b)].
+Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then F{A,B}(-,b) is a zffunction.
+Proof.
+  Let a /in Dom(F{A,B}(-,b)).
+  (F{A,B}(-,b))[a] = F[(a,b)].
+  Then (F{A,B}(-,b))[a] is a zfset.
+qed.
+
+Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then ran(F{A,B}(a,-)) /subset ran(F).
+Proof.
+  Dom(F{A,B}(a,-)) = B.
+  Let b /in B.
+  Then (F{A,B}(a,-))[b] = F[(a,b)].
+  Then (F{A,B}(a,-))[b] /in ran(F).
+qed.
+
+Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then ran(F{A,B}(-,b)) /subset ran(F).
+Proof.
+  Dom(F{A,B}(-,b)) = A.
+  Let a /in A.
+  Then (F{A,B}(-,b))[a] = F[(a,b)].
+  Then (F{A,B}(-,b))[a] /in ran(F).
+qed.
+
+
 Definition. Let alpha, beta, gamma /in /VV. Let f /in ^{beta /times gamma}alpha. Let F be a zffunction.
-F /partial (f,alpha,beta,gamma) iff (Dom(F) = gamma /\ forall b /in gamma ((F[b] is a zffunction) /\ Dom(F[b]) = beta /\ forall a /in beta (F[b])[a] = f[(a,b)])).
+F /partial (f,alpha,beta,gamma) iff (Dom(F) = gamma /\ forall b /in gamma F[b] = f{beta,gamma}(-,b)).
 
 
 Lemma. Let alpha, beta, gamma /in /VV. Let f /in ^{beta /times gamma}alpha. Let F be a zffunction. Let F /partial (f,alpha,beta,gamma).
@@ -908,45 +952,38 @@ Proof.
   Forall b /in gamma F[b] /in ^{beta}alpha.
   Proof.
     Let b /in gamma.
-    Then (F[b] is a zffunction) /\ Dom(F[b]) = beta.
-    ran(F[b]) /subset alpha.
-    Proof.
-      Let a /in beta.
-      Then f[(a,b)] /in alpha.
-      Then (F[b])[a] /in alpha.
-    end.
+    F[b] = f{beta,gamma}(-,b).
+    f{beta,gamma}(-,b) /in ^{beta}alpha.
   end.
 qed.
 
 
-Lemma. Let alpha, beta, gamma /in /Cd. Then (alpha ^3 (beta *3 gamma) = (alpha ^3 beta) ^3 gamma).
+Lemma partial. Let alpha, beta, gamma /in /VV. Let f /in ^{beta /times gamma}alpha. Let F be a zffunction. Let F /partial (f,alpha,beta,gamma).
+Forall a /in beta forall b /in gamma (F[b])[a] = f[(a,b)].
+Proof.
+  Let a /in beta.
+  Let b /in gamma.
+  F[b] = f{beta,gamma}(-,b).
+  (f{beta,gamma}(-,b))[a] = f[(a,b)].
+qed.
+
+
+Lemma. Let alpha, beta, gamma /in /Cd. Then (alpha ^ (beta * gamma) = (alpha ^ beta) ^ gamma).
 Proof.
   Forall f /in ^{beta /times gamma}alpha forall a /in beta forall b /in gamma (a,b) /in Dom(f).
   Forall f /in ^{beta /times gamma}alpha exists F (F /partial (f,alpha,beta,gamma)).
   Proof.
     Let f /in ^{beta /times gamma}alpha.
-    Forall b /in gamma exists g ( Dom(g) = beta /\ forall a /in beta g[a] = f[(a,b)]).
+    Define F[b] = f{beta,gamma}(-,b) for b in gamma.
+    F is a zffunction.
     Proof.
       Let b /in gamma.
-      Define g[a] = f[(a,b)] for a in beta.
-      Then Dom(g) = beta.
-      g is a zffunction.
-      Proof.
-        Let a /in beta. Then g[a] /in /VV.
-      end.
-      Forall a /in beta g[a] = f[(a,b)].
+      F[b] = f{beta,gamma}(-,b).
+      f{beta,gamma}(-,b) is a zffunction.
+      Dom(f{beta,gamma}(-,b)) is a zfset.
+      Then f{beta,gamma}(-,b) is a zfset.
     end.
-    Define F[b] = (Choose a zffunction g such that ( Dom(g) = beta /\ forall a /in beta g[a] = f[(a,b)]) in g) for b in gamma.
-    Then F is a zffunction.
-    Proof.
-      Let b /in gamma.
-      Then F[b] is a zffunction.
-      Dom(F[b]) /in /VV.
-      Then F[b] /in /VV.
-    end.
-    Dom(F) = gamma.
-    Forall b /in gamma ((F[b] is a zffunction) /\ Dom(F[b]) = beta /\ forall a /in beta (F[b])[a] = f[(a,b)]).
-    Then F /partial (f,alpha,beta,gamma).
+    F /partial (f,alpha,beta,gamma).
   end.
   Define phi[f] = (Choose a zffunction F such that (F /partial (f,alpha,beta,gamma)) in F) for f in ^{beta /times gamma}alpha.
   
@@ -982,8 +1019,27 @@ Proof.
     Take a zfset pair such that pair /in beta /times gamma /\ f1[pair] /neq f2[pair].
     Take zfsets a,b such that a /in beta /\ b /in gamma /\ pair = (a,b).
     Then phi[f1] /neq phi[f2].
+    Proof.
+      Let F1 = phi[f1].
+      alpha, beta, gamma /in /VV.
+      f1 /in ^{beta /times gamma}alpha.
+      F1 is a zffunction.
+      F1 /partial (f1,alpha,beta,gamma).
+      Then forall aa /in beta forall bb /in gamma (F1[bb])[aa] = f1[(aa,bb)] (by partial).
+      Then (F1[b])[a] = f1[(a,b)].
+      Let F2 = phi[f2].
+      alpha, beta, gamma /in /VV.
+      f2 /in ^{beta /times gamma}alpha.
+      F2 is a zffunction.
+      F2 /partial (f2,alpha,beta,gamma).
+      Then forall aa /in beta forall bb /in gamma (F2[bb])[aa] = f2[(aa,bb)] (by partial).
+      Then (F2[b])[a] = f2[(a,b)].
+      Then (F1[b])[a] /neq (F2[b])[a].
+      Then F1[b] /neq F2[b].
+      Then F1 /neq F2.
+    end.
   end.
-    
+
   ran(phi) = ^{gamma}(^{beta}alpha).
   Proof.
     Let F /in ^{gamma}(^{beta}alpha).
@@ -1003,19 +1059,18 @@ Proof.
     F /partial (f,alpha,beta,gamma).
     Proof.
       Dom(F) = gamma.
-      Forall b /in gamma ((F[b] is a zffunction) /\ Dom(F[b]) = beta /\ forall a /in beta (F[b])[a] = f[(a,b)]).
+      Forall b /in gamma F[b] = f{beta,gamma}(-,b).
       Proof.
         Let b /in gamma.
-        Then F[b] is a zffunction.
-        Dom(F[b]) = beta.
-        Forall a /in beta (F[b])[a] = f[(a,b)].
+        F[b], f{beta,gamma}(-,b) are functions.
+        Dom(F[b]) = Dom(f{beta,gamma}(-,b)).
+        Forall a /in Dom(F[b]) ((F[b])[a] = (f{beta,gamma}(-,b))[a]).
         Proof.
-          Let a /in beta.
-          Then (a,b) /in beta /times gamma.
-          Take zfsets aa,bb such that aa /in beta /\ bb /in gamma /\ (a,b) = (aa,bb) /\ f[(a,b)] = (F[bb])[aa].
-          Then a = aa /\ b = bb.
-          Then f[(a,b)] = (F[b])[a].
+          Let a /in Dom(F[b]).
+          (F[b])[a] = f[(a,b)].
+          (f{beta,gamma}(-,b))[a] = f[(a,b)].
         end.
+        Then F[b] = f{beta,gamma}(-,b).
       end.
     end.
     Then phi[f] = F.
@@ -1030,18 +1085,8 @@ Proof.
         Forall b /in gamma F[b] = G[b].
         Proof.
           Let b /in gamma.
-          Then F[b] = G[b].
-          Proof.
-            F[b], G[b] are functions.
-            Then (F[b] = G[b] iff Dom(F[b]) = Dom(G[b]) /\ forall val /in Dom(F[b]) F[b][val] = G[b][val]).
-            Dom(F[b]) = beta /\ Dom(G[b]) = beta.
-            Forall a /in beta (F[b])[a] = (G[b])[a].
-            Proof.
-              Let a /in beta.
-              Then (F[b])[a] = f[(a,b)].
-              (G[b])[a] = f[(a,b)].
-            end.
-          end.
+          F[b] = f{beta,gamma}(-,b).
+          G[b] = f{beta,gamma}(-,b).
         end.
       end.
     end.
@@ -1052,41 +1097,41 @@ Proof.
   
   Then ^{beta /times gamma}alpha /tilde ^{gamma}(^{beta}alpha).
   
-  beta *3 gamma /tilde beta /times gamma.
-  alpha ^3 (beta *3 gamma) /tilde ^{beta *3 gamma}alpha.
-  Then alpha ^3 (beta *3 gamma) /tilde ^{beta /times gamma}alpha.
+  beta * gamma /tilde beta /times gamma.
+  alpha ^ (beta * gamma) /tilde ^{beta * gamma}alpha.
+  Then alpha ^ (beta * gamma) /tilde ^{beta /times gamma}alpha.
   Proof.
-    Take zfsets x1,x2 such that x1 = beta *3 gamma /\ x2 = beta /times gamma.
+    Take zfsets x1,x2 such that x1 = beta * gamma /\ x2 = beta /times gamma.
     Then ^{x1}alpha /tilde ^{x2}alpha.
-    alpha ^3 (x1) /tilde ^{x1}alpha.
-    Then alpha ^3 (x1) /tilde ^{x2}alpha.
+    alpha ^ (x1) /tilde ^{x1}alpha.
+    Then alpha ^ (x1) /tilde ^{x2}alpha.
   end.
   
-  ^{beta}alpha /tilde alpha ^3 beta.
-  Then ^{gamma}(^{beta}alpha) /tilde ^{gamma}(alpha ^3 beta).
-  ^{gamma}(alpha ^3 beta) /tilde (alpha ^3 beta) ^3 gamma.
-  Then ^{gamma}(^{beta}alpha) /tilde (alpha ^3 beta) ^3 gamma.
+  ^{beta}alpha /tilde alpha ^ beta.
+  Then ^{gamma}(^{beta}alpha) /tilde ^{gamma}(alpha ^ beta).
+  ^{gamma}(alpha ^ beta) /tilde (alpha ^ beta) ^ gamma.
+  Then ^{gamma}(^{beta}alpha) /tilde (alpha ^ beta) ^ gamma.
   
-  Then (alpha ^3 (beta *3 gamma) = (alpha ^3 beta) ^3 gamma).
+  Then (alpha ^ (beta * gamma) = (alpha ^ beta) ^ gamma).
   Proof.
-    Take a zfset x1 such that x1 = (alpha ^3 (beta *3 gamma)).
+    Take a zfset x1 such that x1 = (alpha ^ (beta * gamma)).
     Take a zfset x2 such that x2 = ^{beta /times gamma}alpha.
     Take a zfset x3 such that x3 = ^{gamma}(^{beta}alpha).
-    Take a zfset x4 such that x4 = (alpha ^3 beta) ^3 gamma.
+    Take a zfset x4 such that x4 = (alpha ^ beta) ^ gamma.
     Then x1 /tilde x2 /\ x2 /tilde x3 /\ x3 /tilde x4.
     Then x1 /tilde x4.
   end.
 qed.
 
 
-Lemma. Forall kappa /in /Card (kappa *3 kappa = kappa).
+Lemma. Forall kappa /in /Card (kappa * kappa = kappa).
 Proof.
   Let kappa /in /Card.
   Then kappa /tilde kappa /times kappa.
 qed.
 
 
-Lemma. Let kappa /in /Card. Let lambda /in /Cd. Let lambda /neq 0. Then kappa *3 lambda = kappa /cup lambda.
+Lemma. Let kappa /in /Card. Let lambda /in /Cd. Let lambda /neq 0. Then kappa * lambda = kappa /cup lambda.
 Proof.
   Forall a,b /in /Ord (a /subset b \/ b /subset a).
   kappa /subset lambda \/ lambda /subset kappa.
@@ -1111,9 +1156,12 @@ Proof.
     end.
     kappa /times lambda /subset lambda /times lambda.
     /NN /subset lambda.
+    Then Card(lambda) /notin /NN.
+    Then lambda /tilde lambda /times lambda.
     lambda /times lambda /tilde lambda.
+    kappa /times lambda <= lambda /times lambda.
     Then kappa /times lambda <= lambda.
-    Then kappa *3 lambda = lambda.
+    Then kappa * lambda = lambda.
   end.
   Case lambda /subset kappa.
     Then kappa /cup lambda = kappa.
@@ -1135,14 +1183,16 @@ Proof.
       end.
     end.
     kappa /times lambda /subset kappa /times kappa.
-    kappa /times kappa /tilde kappa.
+    kappa /tilde kappa /times kappa.
+    Then kappa /times kappa /tilde kappa.
+    kappa /times lambda <= kappa /times kappa.
     Then kappa /times lambda <= kappa.
-    Then kappa *3 lambda = kappa.
+    Then kappa * lambda = kappa.
   end.
 qed.
 
 
-Lemma. Let kappa /in /Card. Let lambda /in /Cd. Then kappa +3 lambda = kappa /cup lambda.
+Lemma. Let kappa /in /Card. Let lambda /in /Cd. Then kappa + lambda = kappa /cup lambda.
 Proof.
   Define x = {(z,0) | z /in kappa}.
   Define y = {(z,1) | z /in lambda}.
@@ -1184,38 +1234,38 @@ Proof.
   end.
   x /cap y = /emptyset /\ Card(x) = kappa /\ Card(y) = lambda.
   Then (kappa,lambda) /sim (x,y).
-  kappa +3 lambda /tilde x /cup y.
+  kappa + lambda /tilde x /cup y.
   
   Forall a,b /in /Ord (a /subset b \/ b /subset a).
   kappa /subset lambda \/ lambda /subset kappa.
   Case kappa /subset lambda.
     Then kappa /cup lambda = lambda.
-    lambda <= kappa +3 lambda.
+    lambda <= kappa + lambda.
     x /cup y /subset lambda /times 2.
-    Then kappa +3 lambda <= lambda /times 2.
-    lambda *3 2 = lambda /cup 2.
+    Then kappa + lambda <= lambda /times 2.
+    lambda * 2 = lambda /cup 2.
     Then lambda /times 2 /tilde lambda.
-    Then kappa +3 lambda <= lambda.
-    Then kappa +3 lambda /tilde lambda.
+    Then kappa + lambda <= lambda.
+    Then kappa + lambda /tilde lambda.
   end.
   Case lambda /subset kappa.
     Then kappa /cup lambda = kappa.
-    kappa <= kappa +3 lambda.
+    kappa <= kappa + lambda.
     x /cup y /subset kappa /times 2.
-    Then kappa +3 lambda <= kappa /times 2.
-    kappa *3 2 = kappa /cup 2.
+    Then kappa + lambda <= kappa /times 2.
+    kappa * 2 = kappa /cup 2.
     Then kappa /times 2 /tilde kappa.
-    Then kappa +3 lambda <= kappa.
-    Then kappa +3 lambda /tilde kappa.
+    Then kappa + lambda <= kappa.
+    Then kappa + lambda /tilde kappa.
   end.
 qed.
 
 
-Lemma. Forall n /in /NN forall kappa /in /Card (n /neq 0 => kappa ^3 n = kappa).
+Lemma. Forall n /in /NN forall kappa /in /Card (n /neq 0 => kappa ^ n = kappa).
 Proof by induction.
   Let n /in /NN.
   Let kappa /in /Card.
-  Then n /neq 0 => kappa ^3 n = kappa.
+  Then n /neq 0 => kappa ^ n = kappa.
   Proof.
     Case n = 0.
     end.
@@ -1225,37 +1275,37 @@ Proof by induction.
         Then n = 1.
       end.
       Case m /neq 0.
-        kappa ^3 n = kappa ^3 (m +3 1).
-        Then kappa ^3 n = (kappa ^3 m) *3 (kappa ^3 1).
-        kappa ^3 m = kappa.
-        kappa ^3 1 = kappa.
-        kappa *3 kappa = kappa.
+        kappa ^ n = kappa ^ (m + 1).
+        Then kappa ^ n = (kappa ^ m) * (kappa ^ 1).
+        kappa ^ m = kappa.
+        kappa ^ 1 = kappa.
+        kappa * kappa = kappa.
       end.
     end.
   end.
 qed.
 
 
-Lemma. Let kappa /in /Card. Let lambda /in /Cd. Let 2 /subset lambda. Let lambda /subset (2 ^3 kappa).
-Then lambda ^3 kappa = 2 ^3 kappa.
+Lemma ExpEq. Let kappa /in /Card. Let lambda /in /Cd. Let 2 /subset lambda. Let lambda /subset (2 ^ kappa).
+Then lambda ^ kappa = 2 ^ kappa.
 Proof.
-  2 ^3 kappa /subset lambda ^3 kappa.
+  2 ^ kappa /subset lambda ^ kappa.
   Proof.
     2 /subset lambda.
     Then ^{kappa}2 /subset ^{kappa}lambda.
     Then Card(^{kappa}2) /subset Card(^{kappa}lambda).
   end.
-  lambda ^3 kappa /subset (2 ^3 kappa) ^3 kappa.
+  lambda ^ kappa /subset (2 ^ kappa) ^ kappa.
   Proof.
-    ^{kappa}lambda /subset ^{kappa}(2 ^3 kappa).
-    Take zfsets x1,x2 such that x1 = ^{kappa}lambda /\ x2 = ^{kappa}(2 ^3 kappa).
-    Then lambda ^3 kappa = Card(x1).
-    Then (2 ^3 kappa) ^3 kappa = Card(x2).
+    ^{kappa}lambda /subset ^{kappa}(2 ^ kappa).
+    Take zfsets x1,x2 such that x1 = ^{kappa}lambda /\ x2 = ^{kappa}(2 ^ kappa).
+    Then lambda ^ kappa = Card(x1).
+    Then (2 ^ kappa) ^ kappa = Card(x2).
   end.
-  (2 ^3 kappa) ^3 kappa = 2 ^3 (kappa *3 kappa).
-  kappa *3 kappa = kappa.
-  Then 2 ^3 (kappa *3 kappa) = 2 ^3 kappa.
-  Then lambda ^3 kappa /subset 2 ^3 kappa.
+  (2 ^ kappa) ^ kappa = 2 ^ (kappa * kappa).
+  kappa * kappa = kappa.
+  Then 2 ^ (kappa * kappa) = 2 ^ kappa.
+  Then lambda ^ kappa /subset 2 ^ kappa.
 qed.
 
 

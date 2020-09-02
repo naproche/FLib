@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L07-Cardinals_Part_2.ftl]
+[read Formalizations/Library/L08-Cardinal_Arithmetic.ftl]
 
 ## Pretyped Variables
 
@@ -22,18 +22,11 @@ Lemma. Let lambda /in /Lim. Forall x /subset lambda (x /cof lambda => Card(x) /n
 Proof by contradiction. Assume the contrary.
   
   Define M = {ordinal n | n /in /NN /\ exists x (x /subset lambda /\ x /cof lambda /\ Card(x) = n)}.
-  Then M /neq /emptyset.
-  
-  Let n = /bigcap M.
+  M /subset /Ord.
+  M /neq /emptyset.
+  Let n = min(M).
   Then n /in M.
-  Proof by contradiction. Assume the contrary.
-    M /subset /Ord.
-    Forall m /in M (n /subset m /\ n /neq m).
-    Then forall m /in M n /in m.
-    Then n /in /bigcap M.
-    Contradiction.
-  end.
-  
+    
   Take a zfset x such that x /subset lambda /\ x /cof lambda /\ Card(x) = n.
   Take a zffunction f such that f : n /leftrightarrow x.
   Then lambda = /bigcup f^[n].
@@ -97,7 +90,7 @@ Proof by contradiction. Assume the contrary.
         f^[n--] /subset ran(f /upharpoonright (n--)).
         Proof.
           Let a /in f^[n--].
-          Forall m /in (n--) m /in n.
+          Forall m /in (n--) m /in Dom(f).
           Take a zfset m such that m /in (n--) /\ a = f[m].
           Then a = (f /upharpoonright (n--))[m].
           Then a /in ran(f /upharpoonright (n--)).
@@ -199,11 +192,11 @@ Proof.
 qed.
 
 
-Lemma. Let lambda /in /Lim. Then cof(lambda) = /bigcap cofset2(lambda).
+Lemma. Let lambda /in /Lim. Then cof(lambda) = min(cofset2(lambda)).
 Proof.
-  /bigcap cofset2(lambda) /subset cof(lambda).
+  min(cofset2(lambda)) /subset cof(lambda).
   Proof.
-    Let y /in /bigcap cofset2(lambda).
+    Let y /in min(cofset2(lambda)).
     Then forall z /in cofset2(lambda) y /in z.
     Then forall z /in cofset(lambda) y /in z.
     Proof.
@@ -215,20 +208,12 @@ Proof.
     end.
     Then y /in cof(lambda).
   end.
-  
-  /bigcap cofset2(lambda) /in cofset2(lambda).
-  Proof by Contradiction. Assume the contrary.
-    cofset2(lambda) /subset /Ord.
-    Forall x /in cofset2(lambda) /bigcap cofset2(lambda) /subset x.
-    Forall x /in cofset2(lambda) /bigcap cofset2(lambda) /neq x.
-    Then forall x /in cofset2(lambda) /bigcap cofset2(lambda) /in x.
-    Then /bigcap cofset2(lambda) /in /bigcap cofset2(lambda).
-    Contradiction.
-  qed.
-  
-  cof(lambda) /subset /bigcap cofset2(lambda).
+  cofset2(lambda) /subset /Ord.
+  min(cofset2(lambda)) /in cofset2(lambda).
+ 
+  cof(lambda) /subset min(cofset2(lambda)).
   Proof.
-    Take a zfset x such that x /subset lambda /\ x /cof lambda /\ Card(x) = /bigcap cofset2(lambda).
+    Take a zfset x such that x /subset lambda /\ x /cof lambda /\ Card(x) = min(cofset2(lambda)).
     Take a zffunction f such that f : Card(x) /leftrightarrow x.
     Define g[n] = /bigcup f^[n] for n in Card(x).
     Then g : Card(x) /rightarrow lambda.
@@ -271,14 +256,14 @@ Proof.
       Let alpha /in lambda.
       Take a zfset y such that y /in x /\ alpha /in y.
       Take a zfset beta such that beta /in Card(x) /\ f[beta] = y.
-      Then beta + 1 /in Card(x).
+      Then beta +' 1 /in Card(x).
       Proof.
         Card(x) /notin /NN.
         Card(x) /in /Lim.
       end.
-      beta /in beta + 1.
-      Then y /in f^[beta + 1].
-      Then alpha /in g[beta + 1].
+      beta /in beta +' 1.
+      Then y /in f^[beta +' 1].
+      Then alpha /in g[beta +' 1].
     end.    
     Forall a1,a2 /in Card(x) (a1 /in a2 => g[a1] /subset g[a2]).
     Proof.
@@ -553,12 +538,13 @@ Proof.
       f is an epsiso.
       Forall a,b /in Dom(f) (a /in b iff f[a] /in f[b]) (by epsiso).
       beta, yb /in Dom(f).
+      beta /in yb => f[beta] /in f[yb].
       beta /in yb.
       Then f[beta] /in f[yb].
       alpha /in f[beta].
       f[yb] /in /Ord.
       Then alpha /in f[yb].
-    end.    
+    end.
     Then otp(z) /in cofset(lambda).
     Then /bigcap cofset(lambda) /subset otp(z).
     Then cof(lambda) /subset cof(gamma).
@@ -589,7 +575,7 @@ Proof.
     y /cof Alef[alpha].
     Proof.
       Let a /in Alef[alpha].
-      Alef[alpha] = {zfset x | exists beta /in alpha x /in Alef[beta]}.
+      Alef[alpha] = /bigcup Alef^[alpha].
       Take a zfset beta such that beta /in alpha /\ a /in Alef[beta].
       x /cof alpha.
       Take a zfset z such that z /in x /\ beta /in z.
@@ -623,7 +609,7 @@ Proof.
       end.
     end.
     Then Card(y) /in cofset2(Alef[alpha]).
-    Then /bigcap cofset2(Alef[alpha]) /subset Card(y).
+    Then min(cofset2(Alef[alpha])) /subset Card(y).
   end.
   
   cof(alpha) /subset cof(Alef[alpha]).
@@ -631,6 +617,9 @@ Proof.
     Take a zfset x such that x /subset Alef[alpha] /\ x /cof Alef[alpha] /\ 
     Card(x) = cof(Alef[alpha]).
     Forall y /in x exists beta /in alpha y /in Alef[beta].
+    Proof.
+      Alef[alpha] = /bigcup Alef^[alpha].
+    end.
     Define f[n] = (choose zfset beta such that beta /in alpha /\ n /in Alef[beta] in beta) 
     for n in x.
     f is a zffunction.
@@ -677,8 +666,8 @@ Proof.
       Then Card(f^[x]) /subset Card(x).
     end.
     Card(y) /in cofset2(alpha).
-    Then /bigcap cofset2(alpha) /subset Card(y).
-    Then /bigcap cofset2(alpha) /subset Card(x).
+    Then min(cofset2(alpha)) /subset Card(y).
+    Then min(cofset2(alpha)) /subset Card(x).
   end.  
 qed.
 
@@ -708,29 +697,29 @@ Proof.
 qed.
 
 
-Lemma. Forall alpha /in /Ord cof(Alef[alpha + 1]) = Alef[alpha + 1].
+Lemma. Forall alpha /in /Ord cof(Alef[alpha +' 1]) = Alef[alpha +' 1].
 Proof by contradiction. Assume the contrary.
-  Take an ordinal alpha such that alpha /in /Ord /\ cof(Alef[alpha + 1]) /neq Alef[alpha + 1].
-  Take a zfset x such that x /subset Alef[alpha + 1] /\ x /cof Alef[alpha + 1] /\ Card(x) = cof(Alef[alpha + 1]).
+  Take an ordinal alpha such that alpha /in /Ord /\ cof(Alef[alpha +' 1]) /neq Alef[alpha +' 1].
+  Take a zfset x such that x /subset Alef[alpha +' 1] /\ x /cof Alef[alpha +' 1] /\ Card(x) = cof(Alef[alpha +' 1]).
   Then Card(x) /subset Alef[alpha].
   Proof.
-    Card(x) /subset Alef[alpha + 1].
-    Card(x) /neq Alef[alpha + 1].
+    Card(x) /subset Alef[alpha +' 1].
+    Card(x) /neq Alef[alpha +' 1].
     /NN /subset Card(x).
     Take an ordinal beta such that Card(x) = Alef[beta].
-    Then beta /in alpha + 1.
+    Then beta /in alpha +' 1.
     Then beta /in alpha \/ beta = alpha.
     Then beta /subset alpha.
     Then Card(x) /subset Alef[alpha].
   end.
-  Forall i /in Alef[alpha + 1] Card(i) /subset Alef[alpha].
+  Forall i /in Alef[alpha +' 1] Card(i) /subset Alef[alpha].
   Proof.
-    Let i /in Alef[alpha + 1].
+    Let i /in Alef[alpha +' 1].
     Then i /in /Ord.
-    i /subset Alef[alpha + 1].
+    i /subset Alef[alpha +' 1].
     Card(i) /subset i.
-    Then Card(i) /subset Alef[alpha + 1].
-    Card(i) /neq Alef[alpha + 1].
+    Then Card(i) /subset Alef[alpha +' 1].
+    Card(i) /neq Alef[alpha +' 1].
     Card(i) /in /NN \/ /NN /subset Card(i).
     Proof.
       Card(i), /NN /in /Ord.
@@ -743,7 +732,7 @@ Proof by contradiction. Assume the contrary.
     end.
     Case /NN /subset Card(i).
       Take an ordinal beta such that Card(i) = Alef[beta].
-      Then beta /in alpha + 1.
+      Then beta /in alpha +' 1.
       Then beta /in alpha \/ beta = alpha.
       Then beta /subset alpha.
       Then Card(i) /subset Alef[alpha].
@@ -752,25 +741,25 @@ Proof by contradiction. Assume the contrary.
   
   Take a zffunction f such that f : Alef[alpha] /rightarrow x /\ ran(f) = x.
   
-  Forall i /in Alef[alpha + 1] (exists h (h : Alef[alpha] /rightarrow i+1 /\ ran(h) = i+1)).
+  Forall i /in Alef[alpha +' 1] (exists h (h : Alef[alpha] /rightarrow i+'1 /\ ran(h) = i+'1)).
   Proof.
-    Let i /in Alef[alpha + 1].
-    Then i+1 /in Alef[alpha + 1].
-    Card(i+1) /subset i+1.
-    Card(i+1) /in /Ord.
-    Then Card(i+1) = i+1 \/ Card(i+1) /in i+1.
-    Alef[alpha + 1] /in /Ord.
-    Then Card(i+1) /in Alef[alpha + 1].
-    Then Card(i+1) /subset Alef[alpha].
-    i+1 /neq /emptyset.
-    i+1 is a zfset.
+    Let i /in Alef[alpha +' 1].
+    Then i+'1 /in Alef[alpha +' 1].
+    Card(i+'1) /subset i+'1.
+    Card(i+'1) /in /Ord.
+    Then Card(i+'1) = i+'1 \/ Card(i+'1) /in i+'1.
+    Alef[alpha +' 1] /in /Ord.
+    Then Card(i+'1) /in Alef[alpha +' 1].
+    Then Card(i+'1) /subset Alef[alpha].
+    i+'1 /neq /emptyset.
+    i+'1 is a zfset.
     Alef[alpha] /in /Ord.
-    Then exists h (h : Alef[alpha] /rightarrow i+1 /\ ran(h) = i+1) (by exsurj).
+    Then exists h (h : Alef[alpha] /rightarrow i+'1 /\ ran(h) = i+'1) (by exsurj).
   end.
-  Define g[i] = (choose a zffunction phi such that (phi : Alef[alpha] /rightarrow (i+1) /\ ran(phi) = (i+1)) in phi)
-  for i in Alef[alpha + 1].
+  Define g[i] = (choose a zffunction phi such that (phi : Alef[alpha] /rightarrow (i+'1) /\ ran(phi) = (i+'1)) in phi)
+  for i in Alef[alpha +' 1].
   
-  Forall a /in Alef[alpha] f[a] /in Alef[alpha + 1].
+  Forall a /in Alef[alpha] f[a] /in Alef[alpha +' 1].
   Forall a,b /in Alef[alpha] (f[a] /in Dom(g) /\ b /in Dom(g[f[a]])).
   Forall o1,o2 ((o1,o2) /in Alef[alpha] /times Alef[alpha] => o1,o2 /in Alef[alpha]).
   
@@ -788,9 +777,9 @@ Proof by contradiction. Assume the contrary.
     Then h[pair] /in /VV.
   end.
   
-  Alef[alpha + 1] /subset h^[Alef[alpha] /times Alef[alpha]].
+  Alef[alpha +' 1] /subset h^[Alef[alpha] /times Alef[alpha]].
   Proof.
-    Let a /in Alef[alpha + 1].
+    Let a /in Alef[alpha +' 1].
     Take a zfset b such that b /in x /\ a /in b.
     Take a zfset c such that c /in Alef[alpha] /\ f[c] = b.
     a /in ran(g[b]).
@@ -803,13 +792,13 @@ Proof by contradiction. Assume the contrary.
     Then a /in h^[Alef[alpha] /times Alef[alpha]].
   end.
   
-  Then Card(Alef[alpha + 1]) /subset Card(h^[Alef[alpha] /times Alef[alpha]]).
+  Then Card(Alef[alpha +' 1]) /subset Card(h^[Alef[alpha] /times Alef[alpha]]).
   Card(h^[Alef[alpha] /times Alef[alpha]]) /subset Card(Alef[alpha] /times Alef[alpha]).
-  Card(Alef[alpha + 1]) = Alef[alpha + 1].
+  Card(Alef[alpha +' 1]) = Alef[alpha +' 1].
   Card(Alef[alpha] /times Alef[alpha]) = Alef[alpha].
-  Then Alef[alpha + 1] /subset Alef[alpha].
+  Then Alef[alpha +' 1] /subset Alef[alpha].
   Proof.
-    Take a zfset a such that a = Card(Alef[alpha + 1]).
+    Take a zfset a such that a = Card(Alef[alpha +' 1]).
     h^[Alef[alpha] /times Alef[alpha]] is a zfset.
     Take a zfset b such that b = Card(h^[Alef[alpha] /times Alef[alpha]]).
     Alef[alpha] /times Alef[alpha] is a zfset.
@@ -817,10 +806,10 @@ Proof by contradiction. Assume the contrary.
     a /subset b.
     b /subset c.
     Then a /subset c.
-    a = Alef[alpha + 1].
+    a = Alef[alpha +' 1].
     c = Alef[alpha].
   end.
-  Alef[alpha] /in Alef[alpha + 1].
+  Alef[alpha] /in Alef[alpha +' 1].
   
   Contradiction.  
 qed.
@@ -829,9 +818,9 @@ qed.
 Lemma. Forall alpha /in /Succ (Alef[alpha] is regular).
 Proof.
   Let alpha /in /Succ.
-  Take an ordinal beta such that alpha = beta + 1.
-  Then Alef[alpha] = Alef[beta + 1].
-  Alef[beta + 1] is regular.
+  Take an ordinal beta such that alpha = beta +' 1.
+  Then Alef[alpha] = Alef[beta +' 1].
+  Alef[beta +' 1] is regular.
 qed.
 
 

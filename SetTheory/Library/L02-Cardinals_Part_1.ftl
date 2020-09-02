@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L01-ZF-Sets.ftl]
+[read Formalizations/Library/L01-ZF-Sets.ftl]
 
 [prove off]
 
@@ -11,20 +11,19 @@ Let alpha, beta, gamma, delta stand for ordinals.
 Let k,l,m,n stand for natural numbers.
 
 
-
 ## Functions
 
-Let func stand for a function.
-Let the value of f at x stand for f[x].
 Let the domain of f stand for Dom(f).
-Let f is defined on M stand for M /subset Dom(f).
 
+# This is already defined
 Lemma. Let f be a function. The domain of f is a set.
 
 [synonym zffunction/-s]
 Signature. A zffunction is a notion.
 Axiom. Let f be a zffunction. Then f is a function.
-Axiom. Let f be a function. f is a zffunction iff forall x /in Dom(f) f[x] /in /VV.
+Axiom. Let f be a function. f is a zffunction iff forall x /in Dom(f) (f[x] is a zfset).
+
+Axiom. Let f be a zffunction. Let Dom(f) be a zfset. Then f is a zfset.
 
 Let f,g,h,F,G,H stand for zffunction.
 
@@ -111,6 +110,11 @@ Lemma. Forall M (Id /upharpoonright M : M /leftrightarrow M).
 # Inverse Map
 
 Lemma. Let f be an injective zffunction. Then exists g (Dom(g) = ran(f) and (forall x /in ran(f) forall y /in Dom(f) (g[x] = y iff f[y] = x))).
+Proof.
+  Forall x /in ran(f) exists y /in Dom(f) x = f[y].
+  Define g[x] = (Choose a zfset y such that y /in Dom(f) /\ x = f[y] in y) for x in ran(f).
+  g is a zffunction.
+end.
 
 Definition. Let f be an injective zffunction. The inverse of f is a zffunction g such that
 Dom(g) = ran(f) and (forall x /in ran(f) forall y /in Dom(f) (g[x] = y iff f[y] = x)).
@@ -130,19 +134,17 @@ Definition. Let f be a zffunction. Let x /in /VV. The preimage of x under f is
 {y /in Dom(f) | f[y] = x}.
 Let f^{-1}[[x]] denote the preimage of x under f.
 
-Lemma. Let f and g be functions. f = g iff Dom(f) = Dom(g) and forall x /in Dom(f) (f[x] = g[x]).
-
 Lemma. Let f and g be zffunctions. f = g iff Dom(f) = Dom(g) and forall x /in Dom(f) (f[x] = g[x]).
 
 Lemma. Let f,g be functions. Let Dom(f) = Dom(g). Let f /neq g. Then exists x /in Dom(f) f[x] /neq g[x].
 
-Lemma FuncIneq. Let f,g be zffunctions. Let Dom(f) = Dom(g). Let f /neq g. Then exists x /in Dom(f) f[x] /neq g[x].
+Lemma. Let f,g be zffunctions. Let Dom(f) = Dom(g). Let f /neq g. Then exists x /in Dom(f) f[x] /neq g[x].
 
 
 ## Function-Iteration
 
 Signature. f ^^ n is an object.
-Axiom. Let f be a zffunction. Let ran(f) /subset Dom(f). Let n /in /NN. Then f ^^ n is a function.
+Axiom. Let f be a zffunction and ran(f) /subset Dom(f) and n /in /NN. Then f ^^ n is a function.
 Axiom. Let f be a zffunction. Let ran(f) /subset Dom(f). Let n /in /NN. Then Dom(f^^n) = Dom(f).
 Axiom. Let f be a zffunction. Let ran(f) /subset Dom(f). Let x /in Dom(f). Then (f^^0)[x] = x.
 
@@ -159,29 +161,25 @@ Lemma. Let f be a zffunction. Let ran(f) /subset Dom(f). Then (f ^^ 1) = f.
 Lemma. Let f be a zffunction. Let ran(f) /subset Dom(f). Let n /in /NN. Let n /neq /emptyset. Then ran(f ^^ n) /subset ran(f).
 
 
-
 ## Ordinals
 
 Signature. Let alpha /in /Succ. alpha -- is an ordinal.
 
-Axiom. Let alpha /in /Succ. Let beta be a set. alpha -- = beta iff alpha = beta ++.
-
+Axiom. Let alpha /in /Succ. Let beta be a zfset. alpha -- = beta iff alpha = beta ++.
 Lemma. 0 = 1 --.
-
 
 
 ## Axiom of Choice
 
-# Choice is already integrated
-
 Lemma. Exists f (Dom(f) = /VV /setminus </emptyset> /\ forall x /in /VV /setminus </emptyset> f[x] /in x).
 
 Signature. Choice is a zffunction.
+
 Axiom. Dom(Choice) = /VV /setminus </emptyset>.
+
 Axiom. Forall x /in /VV /setminus </emptyset> (Choice[x] /in x).
 
-Lemma AC. Let x be a zfset. Then exists alpha exists f (f : alpha /leftrightarrow x).
-
+Theorem Wellorder. Let x be a zfset. Then exists alpha exists f (f : alpha /leftrightarrow x).
 
 
 ## Cardinals
@@ -198,7 +196,7 @@ Definition. Let x, y be sets. x has smaller cardinality than y iff
 (x <= y) /\ not (x /tilde y).
 Let x < y stand for x has smaller cardinality than y.
 
-Lemma. Let x,y be sets. Let x and y be equipotent. Then y and x are equipotent.
+Lemma.  Let x,y be sets. Let x and y be equipotent. Then y and x are equipotent.
 
 Lemma. Let x,y be sets. Let x and y be equipotent. Let y and z be equipotent. Then x and z are equipotent.
 
@@ -221,13 +219,13 @@ Lemma. Let x be a zfset. The cardinality of x is an ordinal.
 
 Lemma. Let x be a zfset. Then Card(x) /in Cardset(x).
 
+# Comparison of Card(x) with <, <=, /tilde
+
 Lemma. Let x, y be zfsets. Let x /tilde y. Then Card(x) = Card(y).
 
 Lemma. Let x, y be zfsets. Let Card(x) = Card(y). Then x /tilde y.
 
-
 [synonym cardinal/-s]
-
 Signature. A cardinal is a notion.
 
 Axiom. Let kappa be a cardinal. Then kappa is an ordinal.
@@ -249,13 +247,13 @@ Lemma. Let alpha be an ordinal. Then Card(alpha) /subset alpha.
 
 Lemma. Let kappa be a cardinal. Then Card(kappa) = kappa.
 
-Lemma. Let alpha be a cardinal. Let x be a zfset. Let x /subset alpha. Then Card(x) /subset alpha.
+Lemma. Let alpha be a cardinal. Let x /subset alpha. Then Card(x) /subset alpha.
 
 Lemma. Let x /subset y. Then Card(x) /subset Card(y).
 
 Lemma. Let x, y be zfset. Let x <= y. Then Card(x) /subset Card(y).
 
-Lemma. Let x, y be zfset. Let Card(x) /subset Card(y). Then x <= y.
+Lemma. Let x,y be zfsets. Let Card(x) /subset Card(y). Then x <= y.
 
 Lemma. Let x, y be zfsets. Let x <= y. Let y <= x. Then Card(x) = Card(y).
 
@@ -263,7 +261,7 @@ Lemma. Let x, y be zfsets. Let x <= y. Let y <= x. Then x /tilde y.
 
 Lemma. Let x,y be zfsets. Let x < y. Then Card(x) /in Card(y).
 
-Lemma. Let x, y be zfset. Let Card(x) /in Card(y). Then x < y.
+Lemma. Let x,y be zfsets. Let Card(x) /in Card(y). Then x < y.
 
 Lemma. Let kappa be a cardinal. Let x /in kappa. Then Card(x) /in kappa.
 
@@ -282,6 +280,8 @@ Lemma. /Cd is a proper class.
 Lemma. Let x be a zfset. Let Card(x) = 0. Then x = /emptyset.
 
 Lemma. Let x be a zfset. Let Card(x) = 1. Then exists y (x = <y>).
+
+
 
 
 [prove on]

@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L05-Mostowski_Collapse.ftl]
+[read Formalizations/Library/L05-Mostowski_Collapse.ftl]
 
 ## Pretyped Variables
 
@@ -51,10 +51,10 @@ qed.
 Lemma. Let R be a strongly wellfounded relation. Then forall x /in /VV (x /subset reldomain(R) => TC(R,x) /in /VV).
 Proof.
   R is wellfounded.
-  Then (forall A ((A /neq /emptyset /\ A /subset reldomain(R)) => (exists x /in A (forall y /in A (not (y - R - x)))))) (by wf).
-  Then (forall A ((A /neq /emptyset /\ A /subset reldomain(R)) => (exists x /in A (forall y /in sset(R,x) (y /notin A))))).
+  Then (forall A ((A /neq /emptyset /\ A /subset relfield(R)) => (exists x /in A (forall y /in A (not (y - R - x)))))) (by wf).
+  Then (forall A ((A /neq /emptyset /\ A /subset relfield(R)) => (exists x /in A (forall y /in sset(R,x) (y /notin A))))).
   Proof.
-    Let A be a set. Let A /neq /emptyset /\ A /subset reldomain(R).
+    Let A be a set. Let A /neq /emptyset /\ A /subset relfield(R).
     Then exists x /in A (forall y /in A (not (y - R - x))) (by wellfounded).
     Take a zfset x such that x /in A /\ forall y /in A (not (y - R - x)).
     Then forall y /in sset(R,x) (y /notin A).
@@ -126,8 +126,12 @@ Proof.
           A /in /VV.
           Proof.
             Forall m /in sset(R,x) (m is a zfset).
-            Define f[m] = TC(R,<-m->) for m in sset(R,x).
+            Define f[m] = TC(R,<m>) for m in sset(R,x).
             Then f is a zffunction.
+            Proof.
+              Let m /in sset(R,x).
+              TC(R,<m>) is a zfset.
+            end.
             A /subset f^[sset(R,x)].
             Proof.
               Let a /in A. 
@@ -165,8 +169,8 @@ Proof.
     Case N /neq /emptyset.
       Then exists x /in N (forall y /in sset(R,x) (y /notin N)).
       Proof.
-        Forall B ((B /neq /emptyset /\ B /subset reldomain(R)) => (exists x /in B (forall y /in sset(R,x) (y /notin B)))).
-        Let B be a set. Let B = N. Then B /neq /emptyset /\ B /subset reldomain(R).
+        Forall B ((B /neq /emptyset /\ B /subset relfield(R)) => (exists x /in B (forall y /in sset(R,x) (y /notin B)))).
+        Let B be a set. Let B = N. Then B /neq /emptyset /\ B /subset relfield(R).
       end.
       Take a zfset a such that (a /in N /\ (forall y /in sset(R,a) y /notin N)).
       Then forall y /in sset(R,a) phi[y] = 0.
@@ -177,7 +181,7 @@ Proof.
 
   Let x /in /VV. Let x /subset reldomain(R).
   Forall y /in x <y> /subset reldomain(R).
-  Define A = {TC(R,<-y->) | y /in x}.
+  Define A = {TC(R,<y>) | y /in x}.
   Let z = /bigcup A.
   Then z /in TCsets(R,x).
   Proof.
@@ -217,7 +221,7 @@ Proof.
     Proof.
       A /in /VV.
       Proof.
-        Define f[m] = TC(R,<-m->) for m in x.
+        Define f[m] = TC(R,<m>) for m in x.
         f is a zffunction.
         Proof.
           Let m /in x.
@@ -266,7 +270,8 @@ Proof.
   TC(x) /in /VV.
   A /cap TC(x) /subset TC(x).
   A /cap TC(x) /in /VV.
-  x /subset A /cap TC(x).
+  x /subset TC(x).
+  Then x /subset A /cap TC(x).
   Trans(A /cap TC(x)).
   Then A /cap TC(x) /in TCsets(eps,x).
   Then /bigcap TCsets(eps,x) /subset A /cap TC(x).

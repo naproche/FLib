@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L04-Arithmetic.ftl]
+[read Formalizations/Library/L04-Ordinal_Arithmetic.ftl]
 
 ## Pretyped Variables
 
@@ -22,6 +22,11 @@ Definition. The cartesian product of A and B is
 Let A /times B stand for the cartesian product of A and B.
 
 Lemma. Let A,B be sets. Let a,b be objects. Let (a,b) /in A /times B. Then a /in A /\ b /in B.
+Proof.
+  (a,b) /in A /times B.
+  Take objects aa, bb such that aa /in A /\ bb /in B /\ (a,b) = (aa,bb).
+  Then a = aa and b = bb.
+qed.
 
 Lemma. Forall x,y /in /VV (x /times y /in /VV).
 Proof.
@@ -146,11 +151,11 @@ Axiom. Let R be a relation. Then R is a strict linear order iff con(R) /\ (R is 
 
 
 Definition wf. Let R be a relation.  R is wellfounded iff
-(forall A ((A /neq /emptyset /\ A /subset reldomain(R)) => (exists x /in A (forall y /in A (not (y - R - x)))))).
+(forall A ((A /neq /emptyset /\ A /subset relfield(R)) => (exists x /in A (forall y /in A (not (y - R - x)))))).
 
-Lemma wellfounded. Let R be a wellfounded relation. Let M be a set. Let M /neq /emptyset. Let M /subset reldomain(R). Then exists x /in M (forall y /in M (not (y - R - x))).
+Lemma wellfounded. Let R be a wellfounded relation. Let M be a set. Let M /neq /emptyset. Let M /subset relfield(R). Then exists x /in M (forall y /in M (not (y - R - x))).
 Proof.
-  M is a set. M /neq /emptyset /\ M /subset reldomain(R).
+  M is a set. M /neq /emptyset /\ M /subset relfield(R).
   Then exists x /in M (forall y /in M (not (y - R - x))) (by wf).
 qed.
 
@@ -165,14 +170,13 @@ Signature. A strong wellorder is a notion.
 Axiom. Let R be a strong wellorder. Then R is a relation.
 Axiom. Let R be a relation. Then R is a strong wellorder iff (R is strongly wellfounded) and (R is a wellorder).
 
-Definition. Let R be a strongly wellfounded relation. R is extensional iff forall x,y /in reldomain(R) (sset(R,x) = sset(R,y) => x = y).
+Definition extR. Let R be a strongly wellfounded relation. R is extensional iff forall x,y /in relfield(R) (sset(R,x) = sset(R,y) => x = y).
 Let ext(R) stand for R is extensional.
 
 Lemma. Let R be a strong wellorder. Then R is extensional.
 Proof.
   R is connex.
-  Then (forall x,y /in relfield(R) (x - R - y \/ y - R - x \/ x = y)).
-  Let x, y /in reldomain(R). Then x,y /in relfield(R). Then (x - R - y \/ y - R - x \/ x = y).
+  Let x,y /in relfield(R). Then (x - R - y \/ y - R - x \/ x = y).
 qed.
 
 
@@ -211,39 +215,40 @@ qed.
 
 
 Let SWR stand for a strongly wellfounded relation.
-Signature. TCol SWR is a function.
+Signature. MCol SWR is a function.
 
-Axiom. Let R be a strongly wellfounded relation. Dom(TCol R) = reldomain(R).
-Axiom. Let R be a strongly wellfounded relation. Then forall x /in (reldomain(R))  (((TCol R) [x]) = ((TCol R) /caret [sset(R,x)])).
+Axiom. Let R be a strongly wellfounded relation. Dom(MCol R) = relfield(R).
+Axiom. Let R be a strongly wellfounded relation. Then forall x /in (relfield(R))  (((MCol R) [x]) = ((MCol R) /caret [sset(R,x)])).
 
 
-Lemma. Let R be a strongly wellfounded relation. Then (TCol R) is a zffunction.
+Lemma. Let R be a strongly wellfounded relation. Then (MCol R) is a zffunction.
 Proof.
   Define phi[n] =
-    Case (TCol R) [n] /in /VV -> 0,
-    Case (TCol R) [n] /notin /VV -> 1
-  for n in reldomain(R).
+    Case (MCol R) [n] /in /VV -> 0,
+    Case (MCol R) [n] /notin /VV -> 1
+  for n in relfield(R).
 
-  Forall x /in reldomain(R) (forall y /in sset(R,x) phi[y] = 0 => phi[x] = 0).
+  Forall x /in relfield(R) (forall y /in sset(R,x) phi[y] = 0 => phi[x] = 0).
   Proof.
-    Let x /in reldomain(R). Let forall y /in sset(R,x) phi[y] = 0.
-    Define f[n] = (TCol R) [n] for n in sset(R,x).
-    Then (f is a zffunction).
+    Let x /in relfield(R). Let forall y /in sset(R,x) phi[y] = 0.
+    Forall n /in sset(R,x) n /in Dom(MCol R).
+    Define f[n] = (MCol R) [n] for n in sset(R,x).
+    Then f is a zffunction.
     Proof.
       Let n /in Dom(f). Then f[n] /in /VV.
     end.
-    (TCol R) /caret [sset(R,x)] = f^[sset(R,x)].
-    (TCol R) [x] = (TCol R) /caret [sset(R,x)].
-    Then (TCol R) [x] /in /VV.
+    (MCol R) /caret [sset(R,x)] = f^[sset(R,x)].
+    (MCol R) [x] = (MCol R) /caret [sset(R,x)].
+    Then (MCol R) [x] /in /VV.
   end.
 
-  Define M = {zfset x | x /in reldomain(R) /\ phi[x] = 0}.
-  Let N = reldomain(R) /setminus M.
+  Define M = {zfset x | x /in relfield(R) /\ phi[x] = 0}.
+  Let N = relfield(R) /setminus M.
   Case N = /emptyset. 
-    Then M = reldomain(R). 
-    Then forall x /in reldomain(R) phi[x] = 0.
-    Dom(TCol R) = reldomain(R).
-    Then forall x /in Dom(TCol R) (TCol R)[x] /in /VV.
+    Then M = relfield(R). 
+    Then forall x /in relfield(R) phi[x] = 0.
+    Dom(MCol R) = relfield(R).
+    Then forall x /in Dom(MCol R) (MCol R)[x] /in /VV.
   end.
   Case N /neq /emptyset.
     R is wellfounded.
@@ -257,18 +262,18 @@ Proof.
 qed.
 
 
-Lemma. Let R be a strongly wellfounded relation. Then forall x /in (reldomain(R))  ((TCol R) [x] = (TCol R)^[sset(R,x)]).
+Lemma. Let R be a strongly wellfounded relation. Then forall x /in (relfield(R))  ((MCol R) [x] = (MCol R)^[sset(R,x)]).
 Proof.
-  TCol R is a zffunction.
-  Let x /in reldomain(R).
-  Then (TCol R) /caret [sset(R,x)] = (TCol R)^[sset(R,x)].
+  MCol R is a zffunction.
+  Let x /in relfield(R).
+  Then (MCol R) /caret [sset(R,x)] = (MCol R)^[sset(R,x)].
 qed.
 
 
 Signature. eps is an object.
 Axiom. eps is a relation.
 Axiom. Forall x,y /in /VV (x - eps - y iff x /in y).
-Lemma. reldomain(eps) = /VV.
+Lemma. relfield(eps) = /VV.
 Lemma. eps is strongly wellfounded.
 Lemma. Forall x /in /VV sset(eps,x) = x.
 Lemma. eps is extensional.
@@ -276,10 +281,10 @@ Lemma. eps is extensional.
 Lemma. Let A /subset /Ord. (eps /restrict A) is a strong wellorder.
 Proof.
   relfield(eps /restrict A) /subset A.
-  reldomain(eps /restrict A) /subset /Ord.
+  relfield(eps /restrict A) /subset /Ord.
   (eps /restrict A) is wellfounded.
   Proof.
-    Let B /subset reldomain(eps /restrict A). Let B /neq /emptyset. Then B /subset /Ord.
+    Let B /subset relfield(eps /restrict A). Let B /neq /emptyset. Then B /subset /Ord.
     Take a set x such that x /in B /\ forall y /in x (y /notin B).
     Then forall y ((y - eps - x) => (y /notin B)).
     Then forall y ((y - (eps /restrict A) - x) => (y /notin B)).
@@ -308,37 +313,8 @@ Proof.
   end.
 qed.
 
-
-# This is just a shortcut for the restirction of the relation eps such that the domain is x.
-Definition. Let x be a zfset. Let x /subset /Ord. The epsrestriction of x is
-eps /restrict (x /cup (<(/bigcup x) + 1>)).
-Let epsrest(x) stand for the epsrestriction of x.
-
-Lemma. Let x be a zfset. Let x /subset /Ord. Then reldomain(epsrest(x)) = x.
+Lemma. Let x /subset /Ord. Let x be a proper class. Then relfield(eps /restrict x) = x.
 Proof.
-  ((/bigcup x)+1) /in x /cup (<(/bigcup x) + 1>).
-  Let y /in x.
-  Then y /in ((/bigcup x) + 1).
-  Proof.
-    y, /bigcup x /in /Ord.
-    Let a = /bigcup x.
-    a,y /in /Ord.
-    Then a /in y \/ y /in a \/ a = y (by TotalOrder).
-    Then y /in /bigcup x \/ /bigcup x /in y \/ y = /bigcup x.
-    Then y /in (/bigcup x) ++.
-  end.
-  Then y - (epsrest(x)) - ((/bigcup x) + 1).
-  Then y /in reldomain(epsrest(x)).
-  Let z /in reldomain(epsrest(x)). 
-  Take a zfset a such that z - (epsrest(x)) - a.
-  Then z /in a /\ z,a /in (x /cup </bigcup x + 1>). 
-  Then z /in x.
-qed.
-
-
-Lemma. Let x /subset /Ord. Let x be a proper class. Then reldomain(eps /restrict x) = x.
-Proof.
-  reldomain(eps /restrict x) /subset x.
   x /subset reldomain(eps /restrict x).
   Proof.
     Let y /in x.
@@ -346,7 +322,7 @@ Proof.
     Proof by contradiction. Assume the contrary.
       Then forall z /in x (z /subset y).
       Then forall z /in x (z /in y \/ z = y).
-      Then x /subset y+1.
+      Then x /subset y+'1.
       Then x /in /VV.
       Contradiction.
     end.
@@ -354,67 +330,74 @@ Proof.
     Then y - eps - z.
     Then y /in reldomain (eps /restrict x).
   end.
+  Then x /subset relfield(eps /restrict x).
 qed.
 
-Lemma. Let x be a zfset. Let x /subset /Ord. Then x /cup <(/bigcup x)+1> /subset /Ord.
 
-Lemma. Let x be a zfset. Let x /subset /Ord. Then epsrest(x) is a strong wellorder.
-
-
-Lemma. Forall x /in /VV (TCol eps)[x] = x.
+Lemma. Forall x /in /VV (MCol eps)[x] = x.
 Proof by induction.
   Let x /in /VV.
   sset(eps,x) = x.
-  (TCol eps)[x] = (TCol eps)^[x].
-  Forall y /in x (TCol eps)[y] = y.
-  Then (TCol eps)^[x] = x.
+  (MCol eps)[x] = (MCol eps)^[x].
+  Forall y /in x (MCol eps)[y] = y.
+  Then (MCol eps)^[x] = x.
 qed.
 
 
-Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then Trans(ran(TCol R)).
+Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then Trans(ran(MCol R)).
 Proof.
-  Let x /in ran(TCol R). Take a zfset a such that a /in reldomain(R) /\ x = (TCol R)[a].
-  Let y /in x. Then y /in (TCol R)^[sset(R,a)].
-  Take a zfset b such that b /in sset(R,a) /\ y = (TCol R)[b].
-  Then y /in ran(TCol R).
+  Let x /in ran(MCol R). Take a zfset a such that a /in relfield(R) /\ x = (MCol R)[a].
+  Let y /in x. Then y /in (MCol R)^[sset(R,a)].
+  Forall b /in sset(R,a) b /in relfield(R).
+  Take a zfset b such that b /in sset(R,a) /\ y = (MCol R)[b].
+  Then y /in ran(MCol R).
 qed.
 
+Lemma. Let R be a relation. Let x /in /VV. Forall y /in sset(R,x) y /in relfield(R).
+Lemma. Let R be a relation. Forall x /in reldomain(R) x /in relfield(R).
 
-Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then (TCol R) is injective.
+Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then (MCol R) is injective.
 Proof.
-  Define A = {zfset x | x /in ran(TCol R) /\ exists y,z (y /neq z /\ y,z /in reldomain(R) /\ (TCol R)[y] = x /\ (TCol R)[z] = x)}.
+  Define A = {zfset x | x /in ran(MCol R) /\ exists y,z (y /neq z /\ y,z /in relfield(R) /\ (MCol R)[y] = x /\ (MCol R)[z] = x)}.
   Then A is a set.
   Case A = /emptyset. 
-    Then forall y,z /in reldomain(R) (y /neq z => (TCol R)[y] /neq (TCol R)[z]).
+    Then forall y,z /in relfield(R) (y /neq z => (MCol R)[y] /neq (MCol R)[z]).
     Proof by contradiction. Assume the contrary.
-      Take y,z /in reldomain(R) such that y /neq z /\ (TCol R)[y] = (TCol R)[z].
-      Then (TCol R)[y] /in A.
+      Take y,z /in relfield(R) such that y /neq z /\ (MCol R)[y] = (MCol R)[z].
+      Then (MCol R)[y] /in A.
       Contradiction.
     end.
-    Then (TCol R) is injective. 
+    Then (MCol R) is injective. 
   end.
 
-  Case A /neq /emptyset. A /subset ran(TCol R). Take a zfset x such that x /in A /\ forall y /in x y /notin A.
-    Take zfsets y1, y2 such that (y1 /neq y2 /\ y1,y2 /in reldomain(R) /\ (TCol R)[y1] = x /\ (TCol R)[y2] = x).
+  Case A /neq /emptyset.
+    Forall x /in A exists y,z (y /neq z /\ y,z /in relfield(R) /\ (MCol R)[y] = x /\ (MCol R)[z] = x).
+    A /subset ran(MCol R). Take a zfset x such that x /in A /\ forall y /in x y /notin A.
+    x /in A => exists y,z (y /neq z /\ y,z /in relfield(R) /\ (MCol R)[y] = x /\ (MCol R)[z] = x).
+    x /in A.
+    Then exists y,z (y /neq z /\ y,z /in relfield(R) /\ (MCol R)[y] = x /\ (MCol R)[z] = x).
+    Take zfsets y1, y2 such that (y1 /neq y2 /\ y1,y2 /in relfield(R) /\ (MCol R)[y1] = x /\ (MCol R)[y2] = x).
     sset(R,y1) /subset sset(R,y2).
     Proof.
       Let u1 /in sset(R,y1). 
-      (TCol R)[y1] = (TCol R)^[sset(R,y1)]. 
-      (TCol R)[y1] = x.
-      (TCol R)[u1] /in (TCol R)^[sset(R,y1)].
-      Then (TCol R)[u1] /in x. 
-      Then (TCol R)[u1] /in (TCol R)^[sset(R,y2)].
-      Take a zfset u2  such that u2 /in sset(R,y2) /\ (TCol R)[u1] = (TCol R)[u2].
-      Then (TCol R)[u1] /notin A.
+      Then u1 /in relfield(R).
+      (MCol R)[y1] = (MCol R)^[sset(R,y1)]. 
+      (MCol R)[y1] = x.
+      (MCol R)[u1] /in (MCol R)^[sset(R,y1)].
+      Then (MCol R)[u1] /in x. 
+      Then (MCol R)[u1] /in (MCol R)^[sset(R,y2)].
+      Forall u2 /in sset(R,y2) u2 /in relfield(R).
+      Take a zfset u2  such that u2 /in sset(R,y2) /\ (MCol R)[u1] = (MCol R)[u2].
+      Then (MCol R)[u1] /notin A.
       Then u1 = u2.
       Proof by contradiction. Assume the contrary. 
         Then u1 /neq u2.
-        Let w = (TCol R)[u1]. 
+        Let w = (MCol R)[u1]. 
         w /notin A.
         w is a zfset.
-        u1,u2 /in reldomain(R).
+        u1,u2 /in relfield(R).
         u1 /neq u2.
-        Then (TCol R)[u1] = w /\ (TCol R)[u2] = w => w /in A.
+        Then (MCol R)[u1] = w /\ (MCol R)[u2] = w => w /in A.
         Then w /in A. 
         Contradiction.
       end.
@@ -422,74 +405,77 @@ Proof.
     sset(R,y2) /subset sset(R,y1).
     Proof.
       Let u1 /in sset(R,y2). 
-      (TCol R)[y2] = (TCol R)^[sset(R,y2)].
-      (TCol R)[y2] = x.
-      (TCol R)[u1] /in (TCol R)^[sset(R,y2)].
-      Then (TCol R)[u1] /in x.
-      Then (TCol R)[u1] /in (TCol R)^[sset(R,y1)].
-      Take a zfset u2  such that u2 /in sset(R,y1) /\ (TCol R)[u1] = (TCol R)[u2].
-      Then (TCol R)[u1] /notin A.
+      (MCol R)[y2] = (MCol R)^[sset(R,y2)].
+      (MCol R)[y2] = x.
+      (MCol R)[u1] /in (MCol R)^[sset(R,y2)].
+      Then (MCol R)[u1] /in x.
+      Then (MCol R)[u1] /in (MCol R)^[sset(R,y1)].
+      Take a zfset u2  such that u2 /in sset(R,y1) /\ (MCol R)[u1] = (MCol R)[u2].
+      Then (MCol R)[u1] /notin A.
       Then u1 = u2.
       Proof by contradiction. Assume the contrary. 
         Then u1 /neq u2.
-        Let w = (TCol R)[u1]. 
+        Let w = (MCol R)[u1]. 
         w /notin A. 
         w is a zfset.
-        u1,u2 /in reldomain(R).
+        u1,u2 /in relfield(R).
         u1 /neq u2.
-        Then (TCol R)[u1] = w /\ (TCol R)[u2] = w => w /in A.
+        Then (MCol R)[u1] = w /\ (MCol R)[u2] = w => w /in A.
         Then w /in A. 
         Contradiction.
       end.
     end.
     sset(R,y1) = sset(R,y2). 
-    Then y1 = y2. 
+    R is extensional.
+    R is a strongly wellfounded relation.
+    y1,y2 /in relfield(R).
+    Then y1 = y2 (by extR). 
     Contradiction.
   end.
 qed.
 
 
-Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then forall x,y /in reldomain(R) ((TCol R)[x],(TCol R)[y] /in /VV /\ (x - R - y iff (TCol R)[x] /in (TCol R)[y])).
+Lemma. Let R be a strongly wellfounded relation. Let R be extensional. Then forall x,y /in reldomain(R) ((MCol R)[x],(MCol R)[y] /in /VV /\ (x - R - y iff (MCol R)[x] /in (MCol R)[y])).
 Proof.
-  Let x,y /in reldomain(R). 
-  Then (TCol R)[x],(TCol R)[y] /in /VV.
-  x - R - y => (TCol R)[x] /in (TCol R)[y].
+  Let x,y /in relfield(R). 
+  Then (MCol R)[x],(MCol R)[y] /in /VV.
+  x - R - y => (MCol R)[x] /in (MCol R)[y].
   Proof.
-    Let x - R - y. (TCol R)[y] = (TCol R)^[sset(R,y)].
+    Let x - R - y. (MCol R)[y] = (MCol R)^[sset(R,y)].
   end.
-  (TCol R)[x] /in (TCol R)[y] => x - R - y.
+  (MCol R)[x] /in (MCol R)[y] => x - R - y.
   Proof.
-    Let (TCol R)[x] /in (TCol R)[y]. (TCol R)[y] = (TCol R)^[sset(R,y)].
-    Take a set z such that z /in sset(R,y) /\ (TCol R)[x] = (TCol R)[z].
-    (TCol R) is injective. 
-    Then forall a,b /in reldomain(R) ((TCol R)[a] = (TCol R)[b] => a = b).
-    x,z /in reldomain(R).
-    Then (TCol R)[x] = (TCol R)[z] => x = z.
-    (TCol R)[x] = (TCol R)[z].
-    TCol R is injective.
+    Let (MCol R)[x] /in (MCol R)[y]. (MCol R)[y] = (MCol R)^[sset(R,y)].
+    Take a set z such that z /in sset(R,y) /\ (MCol R)[x] = (MCol R)[z].
+    (MCol R) is injective. 
+    Then forall a,b /in relfield(R) ((MCol R)[a] = (MCol R)[b] => a = b).
+    x,z /in relfield(R).
+    Then (MCol R)[x] = (MCol R)[z] => x = z.
+    (MCol R)[x] = (MCol R)[z].
+    MCol R is injective.
     Then x = z.
     Then x - R - y.
   end.
 qed.
 
 
-Lemma. Let R be a strong wellorder. Let reldomain(R) /in /VV. Then ran(TCol R) /in /Ord.
+Lemma. Let R be a strong wellorder. Let relfield(R) /in /VV. Then ran(MCol R) /in /Ord.
 Proof.
-  Trans(ran(TCol R)).
-  ran(TCol R) /in /VV.
+  Trans(ran(MCol R)).
+  ran(MCol R) /in /VV.
   Proof.
-    ran(TCol R) = (TCol R)^[reldomain(R)].
+    ran(MCol R) = (MCol R)^[relfield(R)].
   end.
-  Forall x /in ran(TCol R) Trans(x).
+  Forall x /in ran(MCol R) Trans(x).
   Proof.
-    Let x /in ran(TCol R). 
-    Take a zfset y such that y /in reldomain(R)  /\ x = (TCol R)[y].
+    Let x /in ran(MCol R). 
+    Take a zfset y such that y /in relfield(R)  /\ x = (MCol R)[y].
     Let x1 /in x. 
-    Then x1 /in (TCol R)^[sset(R,y)]. 
-    Take a zfset y1 such that y1 /in sset(R,y) /\ x1 = (TCol R)[y1].
+    Then x1 /in (MCol R)^[sset(R,y)]. 
+    Take a zfset y1 such that y1 /in sset(R,y) /\ x1 = (MCol R)[y1].
     Let x2 /in x1.
-    Then x2 /in (TCol R)^[sset(R,y1)]. 
-    Take a zfset y2 such that y2 /in sset(R,y1) /\ x2 = (TCol R)[y2].
+    Then x2 /in (MCol R)^[sset(R,y1)]. 
+    Take a zfset y2 such that y2 /in sset(R,y1) /\ x2 = (MCol R)[y2].
     Then y2 /in sset(R,y).
     Proof.
       y2 - R - y1.
@@ -497,26 +483,26 @@ Proof.
       reltrans(R).
       Then y2 - R - y.
     end.
-    x = (TCol R)^[sset(R,y)].
-    (TCol R)[y2] /in (TCol R)^[sset(R,y)].
-    Then (TCol R)[y2] /in x.
+    x = (MCol R)^[sset(R,y)].
+    (MCol R)[y2] /in (MCol R)^[sset(R,y)].
+    Then (MCol R)[y2] /in x.
     Then x2 /in x.
   end.
 qed.
 
 
-Lemma. Let R be a strong wellorder. Let reldomain(R) be a proper class. Then ran(TCol R) = /Ord.
+Lemma. Let R be a strong wellorder. Let relfield(R) be a proper class. Then ran(MCol R) = /Ord.
 Proof.
-  Trans(ran(TCol R)).
-  Forall x /in ran(TCol R) Trans(x).
+  Trans(ran(MCol R)).
+  Forall x /in ran(MCol R) Trans(x).
   Proof.
-    Let x /in ran(TCol R). Take a zfset y such that y /in reldomain(R)  /\ x = (TCol R)[y].
+    Let x /in ran(MCol R). Take a zfset y such that y /in relfield(R)  /\ x = (MCol R)[y].
     Let x1 /in x. 
-    Then x1 /in (TCol R)^[sset(R,y)]. 
-    Take a set y1 such that y1 /in sset(R,y) /\ x1 = (TCol R)[y1].
+    Then x1 /in (MCol R)^[sset(R,y)]. 
+    Take a set y1 such that y1 /in sset(R,y) /\ x1 = (MCol R)[y1].
     Let x2 /in x1. 
-    Then x2 /in (TCol R)^[sset(R,y1)]. 
-    Take a set y2 such that y2 /in sset(R,y1) /\ x2 = (TCol R)[y2].
+    Then x2 /in (MCol R)^[sset(R,y1)]. 
+    Take a set y2 such that y2 /in sset(R,y1) /\ x2 = (MCol R)[y2].
     Then y2 /in sset(R,y).
     Proof.
       y2 - R - y1.
@@ -524,26 +510,26 @@ Proof.
       reltrans(R).
       Then y2 - R - y.
     end.
-    x = (TCol R)^[sset(R,y)].
-    (TCol R)[y2] /in (TCol R)^[sset(R,y)].
-    Then (TCol R)[y2] /in x.
+    x = (MCol R)^[sset(R,y)].
+    (MCol R)[y2] /in (MCol R)^[sset(R,y)].
+    Then (MCol R)[y2] /in x.
     Then x2 /in x.
   end.
-  Then ran(TCol R) /subset /Ord.
+  Then ran(MCol R) /subset /Ord.
   Let alpha /in /Ord. 
-  Then alpha /in ran(TCol R).
+  Then alpha /in ran(MCol R).
   Proof by contradiction. Assume the contrary. 
-    Then alpha /notin ran(TCol R).
-    Then forall beta /in /Ord (alpha /in beta => beta /notin ran(TCol R)).
+    Then alpha /notin ran(MCol R).
+    Then forall beta /in /Ord (alpha /in beta => beta /notin ran(MCol R)).
     Forall a,b /in /Ord (a /in b \/ b /in a \/ a = b).
-    Forall a /in /Ord (a /in ran(TCol R) => alpha /notin a /\ alpha /neq a).
-    Then ran(TCol R) /subset alpha.
-    Then ran(TCol R) /in /VV.
-    (TCol R) is injective.
-    Then (TCol R) : reldomain(R) /leftrightarrow ran(TCol R).
-    Then (TCol R)^{-1} : ran(TCol R) /leftrightarrow reldomain(R).
-    Then reldomain(R) = ((TCol R)^{-1})^[ran(TCol R)].
-    Then reldomain(R) /in /VV.
+    Forall a /in /Ord (a /in ran(MCol R) => alpha /notin a /\ alpha /neq a).
+    Then ran(MCol R) /subset alpha.
+    Then ran(MCol R) /in /VV.
+    (MCol R) is injective.
+    Then (MCol R) : relfield(R) /leftrightarrow ran(MCol R).
+    Then (MCol R)^{-1} : ran(MCol R) /leftrightarrow relfield(R).
+    Then relfield(R) = ((MCol R)^{-1})^[ran(MCol R)].
+    Then relfield(R) /in /VV.
     Contradiction.
   end.
 qed.
@@ -552,54 +538,105 @@ qed.
 
 ## Order-type
 
+Signature. A singleton is a notion.
+Axiom. Let x be a singleton. Then x is a set.
+Axiom. Let x be a set. x is a singleton iff exists y x = <y>.
 
-Definition. Let R be a strong wellorder. The relordertype of R is ran(TCol R).
+Signature. A nonsingleton is a notion.
+Axiom. Let x be a nonsingleton. Then x is a set.
+Axiom. Let x be a set. x is a nonsingleton iff not (exists y x = <y>).
+
+Lemma. Let x be a set. (x is a singleton) \/ (x is a nonsingleton).
+
+Definition. Let x /subset /Ord. The epsrestriction of x is
+eps /restrict x.
+Let epsrest(x) stand for the epsrestriction of x.
+
+Lemma. Let x /subset /Ord. Let x be a nonsingleton. Then relfield(epsrest(x)) = x.
+Proof.
+  Case x = 0. end.
+  Case x /neq 0.
+    Then exists y,z (y,z /in x /\ y /neq z).
+    Proof.
+      Take a zfset y such that y /in x.       x /neq <y>.
+      Then x /setminus <y> /neq /emptyset.
+      Take a zfset z such that z /in x /setminus <y>.
+      Then y,z /in x. y /neq z.
+    end.
+    Take zfsets y,z such that y,z /in x /\ y /neq z.
+    x /subset relfield(epsrest(x)).
+    Proof.
+        Let a /in x.
+      a /in relfield(epsrest(x)).
+      Proof.
+        a /neq y \/ a /neq z.
+        Case a /neq y.
+          a, y are ordinals.
+          Then a /in y \/ y /in a (by TotalOrder).
+          Then a - epsrest(x) - y \/ y - epsrest(x) - a.
+        end.
+        Case a /neq z.
+          a,z are ordinals.
+          Then a /in z \/ z /in a (by TotalOrder).
+          Then a - epsrest(x) - z \/ z - epsrest(x) - a.
+        end.
+      end.
+    end.
+  end.
+qed.
+
+Lemma. Let x /subset /Ord. Then epsrest(x) is strongly wellfounded.
+
+
+Definition. Let R be a strong wellorder. The relordertype of R is ran(MCol R).
 Let relotp(R) stand for the relordertype of R.
 
 Lemma. Let R be a strong wellorder. Then relotp(R) /in /Ord \/ relotp(R) = /Ord.
 
-Signature. Let x be a set. The ordertype of x is a set.
+Signature. Let x /subset /Ord. The ordertype of x is a set.
 Let otp(x) stand for the ordertype of x.
 
-Axiom. Let x be a zfset. Let x /subset /Ord. Then otp(x) = ran(TCol epsrest(x)).
-Axiom. Let x /subset /Ord. Let x be a proper class. Then otp(x) = ran(TCol (eps /restrict /Ord)).
+Axiom. Let x /subset /Ord. Let x be a nonsingleton. Then otp(x) = ran(MCol epsrest(x)).
+Axiom. Let x /subset /Ord. Let x be a singleton. Then otp(x) = 1.
 
 Lemma. Let x /subset /Ord. Let x be a proper class. Then otp(x) = /Ord.
 
 Lemma. Let x be a zfset. Let x /subset /Ord. Then otp(x) /in /Ord.
 Proof.
-  otp(x) = ran(TCol epsrest(x)).
+  Case x is a nonsingleton. ran(MCol epsrest(x)) /in /Ord. end.
+  Case x is a singleton. end.
 qed.
 
 
 Lemma. Let alpha be an ordinal. Let x /subset alpha. Then otp(x) /subset alpha.
 Proof.
   x /subset /Ord.
-  Forall y /in x (TCol epsrest(x))[y] /subset y.
+  Forall y /in relfield(epsrest(x)) (MCol epsrest(x))[y] /subset y.
   Proof by induction.
-    Let y /in x.
-    Then (TCol epsrest(x))[y] /subset y.
+    Let y /in relfield(epsrest(x)).
+    Then (MCol epsrest(x))[y] /subset y.
     Proof.
-      (TCol epsrest(x))[y] = (TCol epsrest(x))^[sset(epsrest(x),y)].
-      Let z /in (TCol epsrest(x))[y].  
-      Take a zfset a such that a /in sset(epsrest(x),y) /\ z = (TCol epsrest(x))[a].
+      (MCol epsrest(x))[y] = (MCol epsrest(x))^[sset(epsrest(x),y)].
+      Let z /in (MCol epsrest(x))[y].  
+      Take a zfset a such that a /in sset(epsrest(x),y) /\ z = (MCol epsrest(x))[a].
       Then a /in y.
-      Then (TCol epsrest(x))[a] /subset a.
+      Then (MCol epsrest(x))[a] /subset a.
       Then z /subset a.
       a /in /Ord.
-      (TCol epsrest(x))[a] /in /Ord.
+      (MCol epsrest(x))[a] /in /Ord.
       z /in /Ord.
       a /notin z.
       Then z /in a \/ z = a (by TotalOrder).
       Then z /in y.
     end.
   end.
-  Then ran(TCol epsrest(x)) /subset alpha.
+  Then ran(MCol epsrest(x)) /subset alpha.
   Proof.
-    Let y /in ran(TCol epsrest(x)). 
-    Take a zfset z such that z /in x /\ y = (TCol epsrest(x))[z].
+    Let y /in ran(MCol epsrest(x)). 
+    Take a zfset z such that z /in relfield(epsrest(x)) /\ y = (MCol epsrest(x))[z].
     Then y /subset z.
-    z /in alpha.
+    relfield(epsrest(x)) /subset x.
+    Then z /in alpha.
     y, alpha /in /Ord.
     Then y /in alpha \/ alpha /in y \/ alpha = y.
     Then y /in alpha.
@@ -624,6 +661,8 @@ Axiom. Let f be an epshomo. Then f is a zffunction.
 Axiom. Let f be a zffunction. Then f is an epshomo iff
 forall x /in Dom(f) (f^[x /cap Dom(f)] /subset f[x]).
 
+Lemma. Let f be a zffunction. Forall x /in Dom(f) (f[x] is a set).
+
 Lemma. Let f be a zffunction. f is an epshomo iff forall x,y /in Dom(f) (x /in y => f[x] /in f[y]).
 Proof.
   (f is an epshomo) => forall x,y /in Dom(f) (x /in y => f[x] /in f[y]).
@@ -643,7 +682,7 @@ Proof.
     Proof.
       Let z /in f^[x /cap Dom(f)].
       Take a zfset y such that y /in x /cap Dom(f) /\ f[y] = z.
-      Then f[y] /in f[x].
+      f[y] /in f[x].
       Then z /in f[x].
     end.
   end.
@@ -790,6 +829,8 @@ Proof.
       Then f^{-1}[y] = y.
       Then y /in x.
     end.
+    x, f[x] are sets.
+    Then x = f[x].
   end.
   A /subset B.
   B /subset A.
@@ -816,8 +857,8 @@ Proof.
     Forall alpha /in /Ord exists i /in x (alpha /in i).
     Proof.
       Let alpha /in /Ord.
-      Take a zfset i such that i /in x /\ i /notin alpha + 1.
-      Then alpha + 1 /subset i.
+      Take a zfset i such that i /in x /\ i /notin alpha +' 1.
+      Then alpha +' 1 /subset i.
       Then alpha /in i.
     end.
     Then /Ord /subset /bigcup x.
@@ -826,28 +867,32 @@ Proof.
 qed.
 
 
-Signature. Let x /subset /Ord. otpfunc(x) is a zffunction.
+Signature. Let x /subset /Ord. otpfunc(x) is a function.
 
-Axiom. Let x /subset /Ord. Let x /in /VV. Then otpfunc(x) = TCol epsrest(x).
-Axiom. Let x /subset /Ord. Let x be a proper class. Then otpfunc(x) = TCol (eps /restrict x).
+Axiom. Let x /subset /Ord. Let x be a nonsingleton. Then otpfunc(x) = MCol epsrest(x).
+Axiom. Let x /subset /Ord. Let x be a singleton. Then Dom(otpfunc(x)) = x and forall i /in Dom(otpfunc(x)) (otpfunc(x))[i] = 0.
 
+Lemma. Let x /subset /Ord. otpfunc(x) is a zffunction.
+Proof.
+  Case x is a nonsingleton. 
+    MCol epsrest(x) is a zffunction.
+  end.
+  Case x is a singleton. 
+    Forall i /in Dom(otpfunc(x)) ((otpfunc(x))[i] is a zfset).
+  end.
+qed.
 
 Lemma. Let x /subset /Ord. Then otpfunc(x) : x /leftrightarrow otp(x).
 Proof.
-  Case x /in /VV.
-    TCol epsrest(x) : x /leftrightarrow otp(x).
+  Case x is a nonsingleton.
+    MCol epsrest(x) : x /leftrightarrow otp(x).
   end.
-  Case x /notin /VV.
-    reldomain(eps /restrict x) is a proper class.
-    Then ran(TCol (eps /restrict x)) = /Ord.
-    TCol (eps /restrict x) is injective.
-    Dom(TCol (eps /restrict x)) = x.
-    Then TCol (eps /restrict x) : x /leftrightarrow /Ord.
+  Case x is a singleton.
   end.
 qed.
 
 
-Lemma. Let x /subset /Ord. Then Dom(otpfunc(x)) = x /\ forall y /in x otpfunc(x)[y] = otpfunc(x)^[y /cap x].
+Lemma. Let x /subset /Ord. Let x be a nonsingleton. Then Dom(otpfunc(x)) = x /\ forall y /in x otpfunc(x)[y] = otpfunc(x)^[y /cap x].
 Proof.
   otpfunc(x) : x /leftrightarrow otp(x).
   Then Dom(otpfunc(x)) = x.
@@ -855,7 +900,7 @@ Proof.
   Proof.
     Let y /in x.
     Case x /in /VV.
-      (TCol epsrest(x))[y] = (TCol epsrest(x))^[sset(epsrest(x),y)].
+      (MCol epsrest(x))[y] = (MCol epsrest(x))^[sset(epsrest(x),y)].
       sset(epsrest(x),y) = y /cap x.
       Proof.
         y /cap x /subset sset(epsrest(x),y).
@@ -870,9 +915,12 @@ Proof.
       end.
     end.
     Case x /notin /VV.
-      (TCol (eps /restrict x))[y] = (TCol (eps /restrict x))^[sset((eps /restrict x),y)].
+      (MCol (eps /restrict x))[y] = (MCol (eps /restrict x))^[sset((eps /restrict x),y)].
       sset((eps /restrict x),y) /subset y /cap x.
       y /cap x /subset sset((eps /restrict x),y).
+      Then sset((eps /restrict x),y) = y /cap x.
+      Then (MCol (eps /restrict x))[y] = (MCol (eps /restrict x))^[y /cap x].
+      Then otpfunc(x)[y] = otpfunc(x)^[y /cap x].
     end.
   end.
 qed.
@@ -880,40 +928,57 @@ qed.
 
 Lemma. Let x /subset /Ord. Then otpfunc(x) is an epsiso.
 Proof.
-  otpfunc(x) is injective.
-  Dom(otpfunc(x)) = x.
-  Let y,z /in x.
-  Then y /in z iff otpfunc(x)[y] /in otpfunc(x)[z].
-  Proof.
-    y /in z => otpfunc(x)[y] /in otpfunc(x)[z].
+  (x is a nonsingleton) \/ (x is a singleton).
+  Case x is a nonsingleton.
+    otpfunc(x) is a zffunction.
+    otpfunc(x) is injective.
     Proof.
-      Let y /in z.
-      Then otpfunc(x)[y] /in otpfunc(x)[z].
+      MCol (eps /restrict x) is injective.
+    end.
+    Dom(otpfunc(x)) = x.
+    Forall y,z /in Dom(otpfunc(x)) (y /in z iff otpfunc(x)[y] /in otpfunc(x)[z]).
+    Proof.
+      Let y,z /in x.
+      Then y /in z iff otpfunc(x)[y] /in otpfunc(x)[z].
       Proof.
-        Forall a /in x otpfunc(x)[a] = otpfunc(x)^[a /cap x].
-        y /in z /cap x.
+        y /in z => otpfunc(x)[y] /in otpfunc(x)[z].
+        Proof.
+          Let y /in z.
+          Then otpfunc(x)[y] /in otpfunc(x)[z].
+          Proof.
+            Forall a /in x otpfunc(x)[a] = otpfunc(x)^[a /cap x].
+            y /in z /cap x.
+          end.
+        end.
+        otpfunc(x)[y] /in otpfunc(x)[z] => y /in z.
+        Proof.
+          Let otpfunc(x)[y] /in otpfunc(x)[z].
+          otpfunc(x)[z] = otpfunc(x)^[z /cap x].
+          Then otpfunc(x)[y] /in otpfunc(x)^[z /cap x].
+          Take a zfset a such that a /in z /cap x /\ otpfunc(x)[a] = otpfunc(x)[y].
+          Then a = y.
+          Proof by contradiction. Assume the contrary.
+            Then a /neq y.
+            a,y /in Dom(otpfunc(x)).
+            otpfunc(x) is injective.
+            Then otpfunc(x)[a] /neq otpfunc(x)[y].
+            Contradiction.
+          end.
+        end.
       end.
     end.
-    otpfunc(x)[y] /in otpfunc(x)[z] => y /in z.
-    Proof.
-      Let otpfunc(x)[y] /in otpfunc(x)[z].
-      otpfunc(x)[z] = otpfunc(x)^[z /cap x].
-      Then otpfunc(x)[y] /in otpfunc(x)^[z /cap x].
-      Take a zfset a such that a /in z /cap x /\ otpfunc(x)[a] = otpfunc(x)[y].
-      Then a = y.
-      Proof by contradiction. Assume the contrary.
-        Then a /neq y.
-        a,y /in Dom(otpfunc(x)).
-        otpfunc(x) is injective.
-        Then otpfunc(x)[a] /neq otpfunc(x)[y].
-        Contradiction.
-      end.
-    end.
+    Then otpfunc(x) is an epsiso (by epsiso).
+  end.
+  Case x is a singleton.
+    otpfunc(x) is a zffunction.
+    otpfunc(x) is injective.
+    Forall y,z /in Dom(otpfunc(x)) (y /in z iff otpfunc(x)[y] /in otpfunc(x)[z]).
+    Then otpfunc(x) is an epsiso (by epsiso).
   end.
 qed.
 
 
-Lemma. Let x /subset /Ord. Let y /in /Ord \/ y = /Ord. Then otp(x) = y iff exists f ((f is an epsiso) /\ f : x /leftrightarrow y).
+Lemma. Let x /subset /Ord. Let y /in /Ord \/ y = /Ord. Then otp(x) = y iff exists f (f is an epsiso and f : x /leftrightarrow y).
 Proof.
   otp(x) = y => exists f ((f is an epsiso) /\ f : x /leftrightarrow y).
   Proof.

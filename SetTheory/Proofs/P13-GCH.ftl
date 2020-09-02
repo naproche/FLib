@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L12-Cardinal_Exponentiation.ftl]
+[read Formalizations/Library/L12-Cardinal_Exponentiation.ftl]
 
 
 ## Pretyped Variables
@@ -17,7 +17,7 @@ Let kappa, lambda stand for cardinals.
 
 
 Signature. GCH is an atom.
-Axiom. GCH iff forall kappa /in /Card 2 ^3 kappa = Plus[kappa].
+Axiom. GCH iff forall kappa /in /Card 2 ^ kappa = Plus[kappa].
 
 Lemma. Assume GCH. Then forall kappa /in /Card Gimel[kappa] = Plus[kappa].
 Proof.
@@ -25,22 +25,22 @@ Proof.
   cof(kappa) /subset kappa.
   kappa /in Gimel[kappa].
   Then Plus[kappa] /subset Gimel[kappa].
-  kappa ^3 cof(kappa) /subset kappa ^3 kappa.
-  kappa ^3 kappa = 2 ^3 kappa.
+  kappa ^ cof(kappa) /subset kappa ^ kappa.
+  kappa ^ kappa = 2 ^ kappa.
   Proof.
     2 /subset kappa.
-    kappa /subset 2 ^3 kappa.
-    Then kappa ^3 kappa = 2 ^3 kappa.
+    kappa /subset 2 ^ kappa.
+    Then kappa ^ kappa = 2 ^ kappa.
   end.
 qed.
 
 Lemma. Assume GCH. Let kappa, lambda /in /Card. Let lambda /in cof(kappa).
-Then kappa ^3 lambda = kappa.
+Then kappa ^ lambda = kappa.
 Proof.
-  kappa ^3 1 = kappa.
+  kappa ^ 1 = kappa.
   1 /in lambda.
-  kappa ^3 1 /subset kappa ^3 lambda.
-  Then kappa /subset kappa ^3 lambda.
+  kappa ^ 1 /subset kappa ^ lambda.
+  Then kappa /subset kappa ^ lambda.
   
   Forall f /in ^{lambda}kappa /bigcup ran(f) /in kappa.
   Proof by contradiction. Assume the contrary.
@@ -68,7 +68,7 @@ Proof.
     ran(f) = f^[lambda].
     Then Card(ran(f)) /subset Card(lambda).
     Card(ran(f)) /in cofset2(kappa).
-    Then /bigcap cofset2(kappa) /subset lambda.
+    Then min(cofset2(kappa)) /subset lambda.
     Then cof(kappa) /subset lambda.
     Contradiction.
   end.
@@ -90,23 +90,23 @@ Proof.
       Then /bigcup ran(f) /in kappa.
       Take a zfset v such that v /in kappa /\ v = /bigcup ran(f).
       v is an ordinal.
-      Then ran(f) /subset v+1.
+      Then ran(f) /subset v+'1.
       Proof.
         Let x /in ran(f).
         Then x /subset v.
         x,v /in /Ord.
-        Then x /in v+1.
+        Then x /in v+'1.
       end.
-      Then f : lambda /rightarrow v+1.
+      Then f : lambda /rightarrow v+'1.
       kappa /in /Lim.
-      Then v+1 /in kappa.
+      Then v+'1 /in kappa.
       Then f /in M.      
     end.
   end.
   kappa, lambda are cardinals.
   M, ^{lambda}kappa are zfsets.
-  Card(^{lambda}kappa) = kappa ^3 lambda.
-  Then Card(M) = kappa ^3 lambda.
+  Card(^{lambda}kappa) = kappa ^ lambda.
+  Then Card(M) = kappa ^ lambda.
   
   Forall v /in kappa (^{lambda}v is a zfset).
   Define seq[v] = Card(^{lambda}v) for v in kappa.
@@ -152,48 +152,48 @@ Proof.
     Let pair /in /sumset seq.
     Take zfsets a,b such that b /in kappa /\ a /in seq[b] /\ pair = (a,b).
     seq[b] = Card(^{lambda}b).
-    Card(^{lambda}b) = Card(b) ^3 lambda.
+    Card(^{lambda}b) = Card(b) ^ lambda.
     Card(b) /in kappa.
     Then Card(b) /in /Cd /cap kappa.
-    Then Card(b) ^3 lambda /subset kappa.
+    Then Card(b) ^ lambda /subset kappa.
     Proof.
       Take a cardinal xi such that xi /in /Cd /cap kappa /\ xi = Card(b).
-      Then xi ^3 lambda /subset kappa.
+      Then xi ^ lambda /subset kappa.
       Proof.
-        xi /subset 2 ^3 lambda \/ 2 ^3 lambda /subset xi.
-        Case xi /subset 2 ^3 lambda.
-          Then xi ^3 lambda /subset 2 ^3 lambda.
+        xi /subset 2 ^ lambda \/ 2 ^ lambda /subset xi.
+        Case xi /subset 2 ^ lambda.
+          Then xi ^ lambda /subset 2 ^ lambda.
           Proof.
             2 /subset xi \/ xi /subset 2.
             Case 2 /subset xi. 
             end.
             Case xi /subset 2.
               xi,2,lambda /in /Cd.
-              Then xi ^3 lambda /subset 2 ^3 lambda (by BaseSubset).
+              Then xi ^ lambda /subset 2 ^ lambda (by BaseSubset).
             end.
           end.
-          2 ^3 lambda = Plus[lambda].
+          2 ^ lambda = Plus[lambda].
           lambda /in cof(kappa).
           Then lambda /in kappa.
           Then Plus[lambda] /subset kappa.
-          Then xi ^3 lambda /subset kappa.
+          Then xi ^ lambda /subset kappa.
         end.
-        Case 2 ^3 lambda /subset xi.
+        Case 2 ^ lambda /subset xi.
           xi,lambda /in /Card.
           lambda /subset xi.
           0 /in xi.
-          Then xi ^3 lambda /subset xi ^3 xi (by ExpSubset).
-          xi ^3 xi = 2 ^3 xi.
+          Then xi ^ lambda /subset xi ^ xi (by ExpSubset).
+          xi ^ xi = 2 ^ xi.
           Proof.
             2 /subset xi.
-            xi /subset 2 ^3 xi.
-            Then xi ^3 xi = 2 ^3 xi.
+            xi /subset 2 ^ xi.
+            Then xi ^ xi = 2 ^ xi.
           end.
-          2 ^3 xi = Plus[xi].
-          Then xi ^3 xi = Plus[xi].
+          2 ^ xi = Plus[xi].
+          Then xi ^ xi = Plus[xi].
           xi /in kappa.
           Then Plus[xi] /subset kappa.
-          xi ^3 lambda /subset Plus[xi].
+          xi ^ lambda /subset Plus[xi].
         end.
       end. 
     end.
@@ -202,47 +202,47 @@ Proof.
     Then (a,b) /in kappa /times kappa.
   end.
   Then Card(/sumset seq) /subset Card(kappa /times kappa).
-  Card(kappa /times kappa) = kappa *3 kappa.
-  kappa *3 kappa = kappa.
+  Card(kappa /times kappa) = kappa * kappa.
+  kappa * kappa = kappa.
   Then Card(/sumset seq) /subset kappa.
   
   Then Card(M) /subset kappa.
-  Then kappa ^3 lambda /subset kappa.
+  Then kappa ^ lambda /subset kappa.
   
 qed.
 
 
 
 Lemma. Assume GCH. Let kappa, lambda /in /Card. Let cof(kappa) /subset lambda /\ lambda /subset kappa.
-Then kappa ^3 lambda = Plus[kappa].
+Then kappa ^ lambda = Plus[kappa].
 Proof.
   Gimel[kappa] = Plus[kappa].
-  kappa ^3 cof(kappa) /subset kappa ^3 lambda.
-  kappa ^3 lambda /subset kappa ^3 kappa.
-  kappa ^3 kappa = 2 ^3 kappa.
+  kappa ^ cof(kappa) /subset kappa ^ lambda.
+  kappa ^ lambda /subset kappa ^ kappa.
+  kappa ^ kappa = 2 ^ kappa.
   Proof.
     2 /subset kappa.
-    kappa /subset 2 ^3 kappa.
-    Then kappa ^3 kappa = 2 ^3 kappa.
+    kappa /subset 2 ^ kappa.
+    Then kappa ^ kappa = 2 ^ kappa.
   end.
 qed.
 
 
-Lemma. Assume GCH. Let kappa, lambda /in /Card. Let kappa /in lambda. Then kappa ^3 lambda = Plus[lambda].
+Lemma. Assume GCH. Let kappa, lambda /in /Card. Let kappa /in lambda. Then kappa ^ lambda = Plus[lambda].
 Proof.
-  Plus[lambda] = 2 ^3 lambda.
-  2 ^3 lambda /subset kappa ^3 lambda.
+  Plus[lambda] = 2 ^ lambda.
+  2 ^ lambda /subset kappa ^ lambda.
   Proof.
     2, kappa, lambda /in /Cd.
     2 /subset kappa.
-    Then 2 ^3 lambda /subset kappa ^3 lambda (by BaseSubset).
+    Then 2 ^ lambda /subset kappa ^ lambda (by BaseSubset).
   end.
-  kappa ^3 lambda /subset lambda ^3 lambda.
-  lambda ^3 lambda = 2 ^3 lambda.
+  kappa ^ lambda /subset lambda ^ lambda.
+  lambda ^ lambda = 2 ^ lambda.
   Proof.
     2 /subset lambda.
-    lambda /subset 2 ^3 lambda.
-    Then lambda ^3 lambda = 2 ^3 lambda (by ExpEq).
+    lambda /subset 2 ^ lambda.
+    Then lambda ^ lambda = 2 ^ lambda (by ExpEq).
   end.
 qed.
 

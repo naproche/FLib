@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L01-zf-Sets.ftl]
+[read Formalizations/Library/L01-ZF-Sets.ftl]
 
 ## Pretyped Variables
 
@@ -9,13 +9,9 @@ Let alpha, beta, gamma, delta stand for ordinals.
 Let k,l,m,n stand for natural numbers.
 
 
-
 ## Functions
 
-Let func stand for a function.
-Let the value of f at x stand for f[x].
 Let the domain of f stand for Dom(f).
-Let f is defined on M stand for M /subset Dom(f).
 
 # This is already defined
 Lemma. Let f be a function. The domain of f is a set.
@@ -23,7 +19,9 @@ Lemma. Let f be a function. The domain of f is a set.
 [synonym zffunction/-s]
 Signature. A zffunction is a notion.
 Axiom. Let f be a zffunction. Then f is a function.
-Axiom. Let f be a function. f is a zffunction iff forall x /in Dom(f) f[x] /in /VV.
+Axiom. Let f be a function. f is a zffunction iff forall x /in Dom(f) (f[x] is a zfset).
+
+Axiom. Let f be a zffunction. Let Dom(f) be a zfset. Then f is a zfset.
 
 Let f,g,h,F,G,H stand for zffunction.
 
@@ -51,6 +49,10 @@ Lemma. Let f and g be zffunctions. Let ran(f) /subset Dom(g). Then exists h (Dom
 Proof.
   Define h[x] = g[f[x]] for x in Dom(f).
   Then h is a zffunction.
+  Proof.
+    Let x /in Dom(f).
+    Then h[x] is a zfset.
+  end.
 qed.
 
 Definition. Let f and g be zffunctions. Let ran(f) /subset Dom(g). The composition of g and f is
@@ -169,7 +171,7 @@ qed.
 ## Function-Iteration
 
 Signature. f ^^ n is an object.
-Axiom. Let f be a zffunction. Let ran(f) /subset Dom(f). Let n /in /NN. Then f ^^ n is a function.
+Axiom. Let f be a zffunction and ran(f) /subset Dom(f) and n /in /NN. Then f ^^ n is a function.
 Axiom. Let f be a zffunction. Let ran(f) /subset Dom(f). Let n /in /NN. Then Dom(f^^n) = Dom(f).
 Axiom. Let f be a zffunction. Let ran(f) /subset Dom(f). Let x /in Dom(f). Then (f^^0)[x] = x.
 
@@ -199,6 +201,9 @@ Proof by induction.
     m /in /NN.
     Forall x /in Dom(f) ((f^^m)[x] /in Dom(f) /\ (f^^(m++))[x] = f[((f^^m)[x])]).
     Proof.
+      f is a zffunction.
+      ran(f) /subset Dom(f).
+      m /in /NN.
       Let x /in Dom(f).
       Then ((f^^m)[x] /in Dom(f) /\ (f^^(m++))[x] = f[((f^^m)[x])]) (by funcit).
     end.
@@ -247,14 +252,14 @@ qed.
 
 Signature. Let alpha /in /Succ. alpha -- is an ordinal.
 
-Axiom. Let alpha /in /Succ. Let beta be a set. alpha -- = beta iff alpha = beta ++.
+Axiom. Let alpha /in /Succ. Let beta be a zfset. alpha -- = beta iff alpha = beta ++.
 Lemma. 0 = 1 --.
 
 
 
 ## Axiom of Choice
 
-# Choice is already integrated
+# (Global) Choice is already integrated
 
 Lemma. Exists f (Dom(f) = /VV /setminus </emptyset> /\ forall x /in /VV /setminus </emptyset> f[x] /in x).
 Proof.
@@ -266,7 +271,7 @@ Signature. Choice is a zffunction.
 Axiom. Dom(Choice) = /VV /setminus </emptyset>.
 Axiom. Forall x /in /VV /setminus </emptyset> (Choice[x] /in x).
 
-Theorem AC. Let x be a zfset. Then exists alpha exists f (f : alpha /leftrightarrow x).
+Theorem Wellorder. Let x be a zfset. Then exists alpha exists f (f : alpha /leftrightarrow x).
 Proof.
   Forall A x /setminus A /in /VV.
   Define f[beta] =
@@ -378,6 +383,7 @@ Proof.
   Proof.
     ran(g) /subset x.
     ran(g) = g^[alpha].
+    Forall i /in alpha f[i] = g[i].
     g^[alpha] = f^[alpha].
     f[alpha] = x.
     Then x /setminus f /caret [alpha] = /emptyset.
@@ -556,11 +562,12 @@ Proof. Card(kappa) /subset kappa.
 qed.
 
 
-Lemma. Let alpha be a cardinal. Let x be a zfset. Let x /subset alpha. Then Card(x) /subset alpha.
+Lemma. Let alpha be a cardinal. Let x /subset alpha. Then Card(x) /subset alpha.
 Proof by contradiction. Assume the contrary. Then Card(alpha) /in Card(x).
+  Forall n /in /Ord n++ /in /Ord.
+  Define gg[n] = gg[n++] for n in /Ord.
   Define f[n] = f /caret [n /cap x] for n in x.
-  # This is an unusual definition. How do we know that this is welldefined?
-  # We can proof this using foundation, somehow Naproche already knows this.
+  # This definition is possible due to the integrated recursive function definition
   Then Dom(f) = x.
   Then f is a zffunction.
   Proof.
@@ -731,7 +738,7 @@ Proof.
 qed.
 
 
-Lemma. Let x, y be sets. Let x <= y. Let y <= x. Then x /tilde y.
+Lemma. Let x, y be zfsets. Let x <= y. Let y <= x. Then x /tilde y.
 Proof.
   Take a zffunction f such that f : Card(x) /leftrightarrow x.
   Take a zffunction g such that g : Card(y) /leftrightarrow y.
@@ -768,6 +775,11 @@ Lemma. Let x be a zfset. Let f be a zffunction. Let x /subset Dom(f). Then Card(
 Proof.
   Forall n /in f^[x] exists y /in x (f[y] = n).
   Define g[n] = (Choose a zfset y such that y /in x /\ f[y] = n in y) for n in f^[x].
+  g is a zffunction.
+  Proof.
+    Let n /in f^[x].
+    Then g[n] /in /VV.
+  end.
   Then g : f^[x] /rightarrow x.
   g is injective.
   Then f^[x] <= x.

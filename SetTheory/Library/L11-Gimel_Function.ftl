@@ -1,4 +1,4 @@
-[read Forthel-Dateien/SetTheory/Library/L10-Koenigs_Lemma.ftl]
+[read Formalizations/Library/L10-Koenigs_Lemma.ftl]
 
 [prove off]
 
@@ -14,21 +14,6 @@ Let kappa, lambda stand for cardinals.
 
 
 
-## Partially applied functions
-
-Signature. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. F{A,B}(a,-) is a zffunction.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then Dom(F{A,B}(a,-)) = B.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then forall b /in B (F{A,B}(a,-))[b] = F[(a,b)].
-
-Signature. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. F{A,B}(-,b) is a zffunction.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then Dom(F{A,B}(-,b)) = A.
-Axiom. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then forall a /in A (F{A,B}(-,b))[a] = F[(a,b)].
-
-Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let a /in A. Then ran(F{A,B}(a,-)) /subset ran(F).
-
-Lemma. Let A,B be sets. Let F be a zffunction. Let Dom(F) = A /times B. Let b /in B. Then ran(F{A,B}(-,b)) /subset ran(F).
-
-
 ## Beths
 
 Signature. Beth is a function.
@@ -36,9 +21,8 @@ Axiom. Dom(Beth) = /Ord.
 Axiom. Forall alpha /in /Ord Beth[alpha] /in /Cd.
 Lemma. Beth is a zffunction.
 Axiom. Beth[/emptyset] = /NN.
-Axiom. Let alpha /in /Succ. Let beta /in /Ord. Let alpha = beta + 1. Then Beth[beta] /in /Cd /\ Beth[alpha] = 2 ^3 Beth[beta].
+Axiom. Let alpha /in /Succ. Let beta /in /Ord. Let alpha = beta +' 1. Then Beth[beta] /in /Cd /\ Beth[alpha] = 2 ^ Beth[beta].
 Axiom. Let alpha /in /Lim. Then Beth[alpha] = {zfset x | exists beta /in alpha x /in Beth[beta]}.
-
 
 Lemma. Forall lambda /in /Lim Beth[lambda] = /bigcup Beth^[lambda].
 
@@ -63,30 +47,40 @@ Axiom. Let kappa be a cardinal. Then kappa is an inaccessible cardinal iff
 kappa = Beth[kappa] /\ cof(kappa) = kappa.
 
 
-
 ## Gimel Function
 
-
 Signature. Gimel is a function.
+
 Axiom. Dom(Gimel) = /Card.
-Axiom. Forall kappa /in /Card Gimel[kappa] = kappa ^3 cof(kappa).
-Lemma. Let kappa /in /Card. Then kappa ^3 cof(kappa) /in /Card.
+
+Axiom. Forall kappa /in /Card Gimel[kappa] = kappa ^ cof(kappa).
+
+Lemma. Let kappa /in /Card. Then kappa ^ cof(kappa) /in /Card.
+
 Lemma. Gimel : /Card /rightarrow /Card.
 
 Signature. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda is a set.
-Axiom. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda = {zfset x | exists v /in lambda x /in kappa ^3 Card(v)}.
+
+Axiom. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda = {zfset x | exists v /in lambda x /in kappa ^ Card(v)}.
 
 Signature. Exp is a function.
+
 Axiom. Dom(Exp) = /Cd /times /Ord.
+
 Lemma. Forall o1,o2 ((o1,o2) /in /Cd /times /Ord => o1 /in /Cd /\ o2 /in /Ord).
-Axiom. Let a,b be objects. Let (a,b) /in /Cd /times /Ord. Then Exp[(a,b)] = a ^3 Card(b).
+
+Axiom. Let a,b be objects. Let (a,b) /in /Cd /times /Ord. Then Exp[(a,b)] = a ^ Card(b).
+
 Lemma. Exp : /Cd /times /Ord /rightarrow /Cd.
 
 Lemma. Let kappa /in /Cd. Then Exp{/Cd,/Ord}(kappa,-) : /Ord /rightarrow /Cd.
 
 Signature. Let kappa /in /Cd. Cont(kappa) is a function.
+
 Axiom. Let kappa /in /Cd. Dom(Cont(kappa)) = /Ord.
-Axiom. Let kappa /in /Cd. Let alpha /in /Ord. Then (Cont(kappa))[alpha] = kappa ^3 Card(alpha).
+
+Axiom. Let kappa /in /Cd. Let alpha /in /Ord. Then (Cont(kappa))[alpha] = kappa ^ Card(alpha).
+
 Lemma. Let kappa /in /Cd. Cont(kappa) : /Ord /rightarrow /Cd.
 
 Lemma. Let kappa /in /Cd. Let lambda /in /Card. kappa ^< lambda = /bigcup (Cont(kappa))^[lambda].
@@ -97,15 +91,15 @@ Lemma. Let kappa /in /Card. Then 2 ^< kappa /in /Card.
 
 Lemma. Forall kappa /in /Card (Gimel[kappa] /in /Card /\ kappa /in Gimel[kappa]).
 
-Lemma. Let kappa /in /Card. Let cof(kappa) = kappa. Then Gimel[kappa] = 2 ^3 kappa.
+Lemma. Let kappa /in /Card. Let cof(kappa) = kappa. Then Gimel[kappa] = 2 ^ kappa.
 
-Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Then 2 ^3 kappa /subset (2 ^< kappa) ^3 cof(kappa).
+Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Then 2 ^ kappa /subset (2 ^< kappa) ^ cof(kappa).
 
 Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Let (exists kappap /in /Card /cap kappa forall lambda /in /Card
-(kappap /subset lambda /\ lambda /in kappa => 2 ^3 kappap = 2 ^3 lambda)). Then 2 ^3 kappa = 2 ^< kappa.
+(kappap /subset lambda /\ lambda /in kappa => 2 ^ kappap = 2 ^ lambda)). Then 2 ^ kappa = 2 ^< kappa.
 
 Lemma. Let kappa /in /Card. Let cof(kappa) /in kappa. Let (forall kappap /in /Cd /cap kappa exists lambda /in /Cd /cap kappa
-(kappap /in lambda /\ 2 ^3 kappap /in 2 ^3 lambda)). Then 2 ^3 kappa = Gimel[2 ^< kappa].
+(kappap /in lambda /\ 2 ^ kappap /in 2 ^ lambda)). Then 2 ^ kappa = Gimel[2 ^< kappa].
 
 
 
