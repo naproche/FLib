@@ -18,7 +18,7 @@ Axiom. V[0] = /emptyset.
 Axiom. Forall alpha /in /Ord (V[alpha] is a set).
 
 Axiom. Let alpha /in /Ord. Then V[alpha ++] = {zfset x | x /subset V[alpha]}.
-Axiom. Let lambda be an ordinal. Let lambda /in /Lim. Then V[lambda] = {zfset x | exists alpha (alpha /in lambda /\ x /in V[alpha])}.
+Axiom. Let lambda be an ordinal. Let lambda /in /Lim. Then V[lambda] = /bigcup V /caret [lambda].
 
 Lemma. V is a zffunction.
 Proof.
@@ -36,6 +36,7 @@ Proof.
         Then VV is a zffunction.
         V[alpha] /subset /bigcup VV^[alpha].
         Proof.
+          V[alpha] = /bigcup V /caret [alpha].
           Let x /in V[alpha].
           Take an ordinal beta such that beta /in alpha /\ x /in V[beta].
           Then x /in VV[beta].
@@ -53,16 +54,8 @@ Lemma. Let alpha /in /Ord. Then V[alpha] is a zfset and V[alpha ++] = /PP V[alph
 
 Lemma. Let lambda /in /Lim. Then V[lambda] = /bigcup V^[lambda].
 Proof.
-  V[lambda] /subset /bigcup V^[lambda].
-  /bigcup V^[lambda] /subset V[lambda].
-  Proof.
-    Let x /in /bigcup V^[lambda].
-    Take a zfset y such that y /in V^[lambda] /\ x /in y.
-    Take an ordinal alpha such that alpha /in lambda /\ y = V[alpha].
-    Then x /in V[alpha].
-    V[lambda] = {zfset z | exists a (a /in lambda /\ z /in V[a])}.
-    Then x /in V[lambda].
-  end.
+  V /caret [lambda] = V^[lambda].
+  V[lambda] = /bigcup V /caret [lambda].
 qed.
 
 Lemma. Forall alpha (forall beta /in alpha (V[beta] /in V[alpha] /\ V[beta] /subset V[alpha] /\ Trans(V[alpha]))).
@@ -88,6 +81,7 @@ Proof by induction.
         beta++ is an ordinal. 
         alpha is an ordinal. 
       end.
+      Then V[beta ++] /in V^[alpha].
       Then V[beta ++] /subset V[alpha].
       Then V[beta] /in V[alpha].
     end.
@@ -108,6 +102,8 @@ Proof by induction.
     end.
     Case alpha /in /Lim. 
       Let beta /in alpha. 
+      Then V[beta] /in V^[alpha].
+      V[alpha] = /bigcup V^[alpha].
       Then V[beta] /subset V[alpha].
     end.
     Case alpha = /emptyset.

@@ -648,7 +648,7 @@ Proof.
   end.
 qed.
 
-
+Lemma. Let f be a zffunction. Forall x /in Dom(f) (f[x] is a set).
 
 ## epshomo and epsiso
 

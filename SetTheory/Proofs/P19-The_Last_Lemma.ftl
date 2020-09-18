@@ -12,7 +12,7 @@ Let kappa, lambda stand for cardinals.
 
 
 
-## General Lemmata
+## General Lemmas
 
 Lemma. Let f be a function. Let x be a zfset. Then f /caret [x] is a zfset.
 Proof.
@@ -308,10 +308,11 @@ Proof.
         end.
         Then Card(f[i]+'1) /subset kap[i].
         Proof by contradiction. Assume the contrary.
-          Card(f[i]+'1) /in /Ord.
-          kap[i] /in /Ord.
-          Then kap[i] /in Card(f[i]+'1).
-          Then Plus[kap[i]] /subset Card(f[i]+'1).
+          Take a cardinal value such that value = Card(f[i]+'1).
+          kap[i] /in value.
+          value /in /Card.
+          Then value /in PlusCard(kap[i]).
+          Then Plus[kap[i]] /subset value.
           Then Card(f[i]+'1) /in Card(f[i]+'1).
           Contradiction.
         end.

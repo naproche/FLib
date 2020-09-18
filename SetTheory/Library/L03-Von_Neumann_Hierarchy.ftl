@@ -20,7 +20,7 @@ Axiom. V[0] = /emptyset.
 Axiom. Forall alpha /in /Ord (V[alpha] is a set).
 
 Axiom. Let alpha /in /Ord. Then V[alpha ++] = {zfset x | x /subset V[alpha]}.
-Axiom. Let lambda be an ordinal. Let lambda /in /Lim. Then V[lambda] = {zfset x | exists alpha (alpha /in lambda /\ x /in V[alpha])}.
+Axiom. Let lambda be an ordinal. Let lambda /in /Lim. Then V[lambda] = /bigcup V /caret [lambda].
 
 Lemma. V is a zffunction.
 

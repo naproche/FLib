@@ -91,7 +91,7 @@ Proof by contradiction. Assume the contrary.
         Proof.
           Let a /in f^[n--].
           Forall m /in (n--) m /in Dom(f).
-          Take a zfset m such that m /in (n--) /\ a = f[m].
+          Take a zfset m such that m /in (n--) /cap Dom(f) /\ a = f[m].
           Then a = (f /upharpoonright (n--))[m].
           Then a /in ran(f /upharpoonright (n--)).
         end.
@@ -392,7 +392,6 @@ Proof.
     Then otp(M) /subset Card(x).    
     M /subset /Ord.
     otpfunc(M) : M /leftrightarrow otp(M).
-    otpfunc(M) is an epshomo.    
     otpfunc(M) /circ h^{-1} : h^[M] /leftrightarrow otp(M).
     Proof.
       Dom(otpfunc(M) /circ h^{-1}) = h^[M].

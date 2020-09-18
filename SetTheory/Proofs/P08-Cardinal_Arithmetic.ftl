@@ -14,9 +14,6 @@ Let kappa, lambda stand for cardinals.
 ## Cardinal Arithmetic
 
 
-Axiom. Let f be a zffunction. Let Dom(f) /in /VV. Then f is a zfset.
-
-
 Lemma. Let A,B /in /VV. Then ^{A}B /in /VV.
 Proof.
   Forall f /in ^{A}B (f : A /rightarrow B).

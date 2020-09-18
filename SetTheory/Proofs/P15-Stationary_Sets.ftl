@@ -116,7 +116,8 @@ Proof.
   Proof.
     kappa /in /BigCard.
     lambda /in /Ord.
-    Dom(Y) = lambda /\ forall i /in lambda Y[i] /in Club(kappa).
+    Dom(Y) = lambda.
+    Forall i /in lambda Y[i] /in Club(kappa).
     Then Y is a sequence of length lambda in Club(kappa) (by sequence).
   end.
   Then /bigcap Y^[lambda] /in Club(kappa).
@@ -533,6 +534,11 @@ Proof.
         end.
         m /subset k.
         Then f[m] /subset f[k].
+        Proof.
+          Forall aa,bb /in /NN (aa /subset bb => f[aa] /subset f[bb]).
+          m,k /in /NN => (m /subset k => f[m] /subset f[k]).
+          Then m /subset k => f[m] /subset f[k].
+        end.
         Then a /in f[k].
         k /notin n+'1.
         Then k /in /NN /setminus (n+'1).

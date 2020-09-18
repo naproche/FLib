@@ -362,14 +362,14 @@ Proof.
         Forall alpha, beta /in /Ord (alpha /in beta \/ beta /in alpha \/ alpha = beta).
         Take ordinals alpha, beta such that a /cup b = alpha /\ c /cup d = beta.
         Then (alpha /in beta \/ beta /in alpha \/ alpha = beta).
-        Case alpha /in beta. Then (a,b) <3 (c,d). end.
-        Case beta /in alpha. Then (c,d) <3 (a,b). end.
+        Case alpha /in beta. Then (a,b) <3 (c,d). a,b,c,d /in /Ord. Then (a,b) - goedel - (c,d) (by goedel). end.
+        Case beta /in alpha. Then (c,d) <3 (a,b). a,b,c,d /in /Ord. Then (c,d) - goedel - (a,b) (by goedel). end.
         Case alpha = beta. Then a /in c \/ c /in a \/ a = c.
-          Case a /in c. Then (a,b) <3 (c,d). end.
-          Case c /in a. Then (c,d) <3 (a,b). end.
+          Case a /in c. Then (a,b) <3 (c,d). a,b,c,d /in /Ord. Then (a,b) - goedel - (c,d) (by goedel). end.
+          Case c /in a. Then (c,d) <3 (a,b). a,b,c,d /in /Ord. Then (c,d) - goedel - (a,b) (by goedel). end.
           Case a = c. Then b /in d \/ d /in b \/ b = d.
-            Case b /in d. Then (a,b) <3 (c,d). end.
-            Case d /in b. Then (c,d) <3 (a,b). end.
+            Case b /in d. Then (a,b) <3 (c,d). a,b,c,d /in /Ord. Then (a,b) - goedel - (c,d) (by goedel). end.
+            Case d /in b. Then (c,d) <3 (a,b). a,b,c,d /in /Ord. Then (c,d) - goedel - (a,b) (by goedel). end.
             Case b = d. Then (a,b) = (c,d). end.
           end.        
         end.
