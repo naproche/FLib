@@ -24,21 +24,22 @@ Signature. alpha ^' beta is an ordinal.
 
 Axiom. Let alpha be an ordinal. Then alpha +' 0 = alpha.
 
-Axiom. Let alpha, beta be ordinals. Let beta /in /Succ. Then alpha +' beta = (alpha +' beta--) ++.
+Axiom. Let alpha, beta be ordinals. Let beta /in /Succ. Then alpha +' beta = (alpha +' beta--)++.
 
-Lemma. Let alpha, beta be ordinals. Then alpha +' (beta ++) = (alpha +' beta) +' 1.
+Lemma. Let alpha, beta be ordinals. Then alpha +' (beta++) = (alpha +' beta) +' 1.
 
-Axiom AddLim. Let alpha, beta be ordinals. Let beta /in /Lim. Then alpha +' beta = {zfset x | exists gamma /in beta (x /in (alpha +' gamma))}.
+Axiom AddLim. Let alpha, beta be ordinals. Let beta /in /Lim. 
+Then alpha +' beta = {zfset x | exists gamma /in beta (x /in (alpha +' gamma))}.
 
-Lemma. Forall alpha (alpha +' 1 = alpha ++).
+Lemma. Forall alpha (alpha +' 1 = alpha++).
 
-Lemma. Forall alpha ((alpha +' 1) -- = alpha).
+Lemma. Forall alpha ((alpha +' 1)-- = alpha).
 
 Lemma. Forall alpha /in /Ord (0 +' alpha = alpha).
 
 Lemma Add1. Forall alpha, beta, gamma /in /Ord (beta /in gamma => alpha +' beta /in alpha +' gamma).
 
-Lemma. Forall alpha, beta /in /Ord (alpha /subset alpha+'beta).
+Lemma. Forall alpha, beta /in /Ord (alpha /subset alpha +' beta).
 
 Lemma. Forall alpha, beta /in /Ord (beta /subset alpha +' beta).
 

@@ -285,12 +285,12 @@ Lemma. rk, rk+ are zffunctions.
 Lemma. Let x /in /VV. Then rk[x] /in /Ord.
 Axiom. Let x /in /VV. Then x /in V[rk[x]++] /setminus V[rk[x]].
 
-Lemma. Let x /in /VV. Let alpha /in /Ord. Let x /in V[alpha ++] /setminus V[alpha]. Then rk[x] = alpha.
+Lemma rank. Let x /in /VV. Let alpha /in /Ord. Let x /in V[alpha ++] /setminus V[alpha]. Then rk[x] = alpha.
 Proof.
   x /in V[rk[x]++] /setminus V[rk[x]].
   Then x /notin V[rk[x]].
   alpha, rk[x] /in /Ord.
-  Then alpha /in rk[x] \/ rk[x] /in alpha \/ rk[x] = alpha.
+  Then alpha /in rk[x] \/ rk[x] /in alpha \/ rk[x] = alpha (by TotalOrder).
   Case rk[x] = alpha.
   end.
   Case alpha /in rk[x].
@@ -353,7 +353,7 @@ Proof.
             x /in /VV.
             beta /in /Ord.
             x /in V[beta ++] /setminus V[beta]. 
-            Then rk[x] = beta.
+            Then rk[x] = beta (by rank).
           end.
           Then /bigcup rk+^[x] /subset beta.
           Proof.

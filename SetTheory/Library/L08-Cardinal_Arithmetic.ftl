@@ -30,9 +30,6 @@ Let (a,b) /sim (x, y) stand for (a,b) IsAdditionCompatibleWith (x, y).
 Axiom. Let kappa, lambda /in /Cd. Let x,y /in /VV. Let (kappa,lambda) /sim (x, y).
 Then kappa + lambda = Card(x /cup y).
 
-Axiom. Let kappa, lambda /in /Cd. Let x,y /in /VV. Let Card(x) = kappa. Let Card(y) = lambda. Let x /cap y = /emptyset.
-Then kappa + lambda = Card(x /cup y).
-
 Axiom. Let kappa, lambda /in /Cd. Then kappa * lambda = Card(kappa /times lambda).
 
 Axiom. Let kappa, lambda /in /Cd. Then kappa ^ lambda = Card(^{lambda}kappa).

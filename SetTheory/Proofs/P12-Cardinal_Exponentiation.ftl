@@ -92,8 +92,11 @@ Then kappa ^ lambda = kappa.
 Proof.
   kappa = kappa ^ 1.
   1 /subset lambda.
-  Then kappa ^ 1 /subset kappa ^ lambda.
+  0 /in kappa.
+  kappa,0,1 /in /Cd.
+  Then kappa ^ 1 /subset kappa ^ lambda (by ExpSubset).
   Then kappa /subset kappa ^ lambda.
+
   
   Forall f /in ^{lambda}kappa /bigcup ran(f) /in kappa.
   Proof by contradiction. Assume the contrary.

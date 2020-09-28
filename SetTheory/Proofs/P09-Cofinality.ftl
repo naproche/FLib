@@ -537,7 +537,7 @@ Proof.
       f is an epsiso.
       Forall a,b /in Dom(f) (a /in b iff f[a] /in f[b]) (by epsiso).
       beta, yb /in Dom(f).
-      beta /in yb => f[beta] /in f[yb].
+      beta /in yb iff f[beta] /in f[yb].
       beta /in yb.
       Then f[beta] /in f[yb].
       alpha /in f[beta].

@@ -2,15 +2,15 @@ Let x \in y stand for x is an element of y.
 Let x \notin y stand for x is not an element of y.
 Let x \neq y stand for x != y.
 
-Let e stand for an object.
+Let v stand for an object.
 Let x,A,B stand for sets.
 
 Definition. A subset of A is a set B such that
-forall e (e \in B => e \in A).
+forall v (v \in B => v \in A).
 Let B \subseteq A stand for B is a subset of A.
 
 Definition. Let p be an object. The singleton of p is
-{object e | e = p}.
+{object v | v = p}.
 Let <p> stand for the singleton of p.
 
 Definition. The power set of A is
@@ -49,6 +49,6 @@ Proof by contradiction.
 	Assume the contrary.
 	Take an injective map f such that f is from \PP(A) to A .
 	Define C = {u \in A | forall x \in \PP(A) (u \in x => f(x) \neq u)}.
-	Then C \in f(C) iff C \notin f(C).
+	Then f(C) \in C.
 	Contradiction.
 qed.

@@ -70,7 +70,7 @@ Lemma. Let f be a zffunction. Let Dom(f) /in /Ord. Then Card(/sumset f) = /sum c
 
 # Product
 
-Definition. Let f be a zffunction. The productset of f is 
+Definition. Let f be a zffunction. Let Dom(f) /in /VV. The productset of f is 
 {zffunction g | Dom(g) = Dom(f) /\ forall i /in Dom(g) g[i] /in f[i]}.
 Let /prodset f stand for the productset of f.
 

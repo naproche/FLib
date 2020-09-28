@@ -32,8 +32,11 @@ Lemma. Forall x,y /in /VV (x /times y /in /VV).
 
 [synonym relation/-s]
 
-Definition. A relation is a set R such that 
-R /subset /VV /times /VV.
+Signature. A relation is a notion.
+
+Axiom. Let R be a relation. Then R is a set.
+
+Axiom. Let R be a set. R is a relation iff R /subset /VV /times /VV.
 Let a - R - b stand for (a,b) /in R.
 
 Lemma. Let R be a relation. x /in R => exists a,b /in /VV (x = (a,b)).

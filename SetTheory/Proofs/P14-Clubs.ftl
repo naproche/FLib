@@ -17,9 +17,9 @@ Let kappa, lambda stand for cardinals.
 ## Closed unbounded sets
 
 
-Definition. The class of cardinals with uncountable cofinality is
+Definition. The class of cardinals of uncountable cofinality is
 {kappa /in /Card | Alef[1] /subset cof(kappa)}.
-Let /BigCard stand for the class of cardinals with uncountable cofinality.
+Let /BigCard stand for the class of cardinals of uncountable cofinality.
 
 
 Lemma. Let kappa /in /BigCard. Then kappa /in /Card and Alef[1] /subset cof(kappa).

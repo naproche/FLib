@@ -128,7 +128,7 @@ Axiom Power. Let x be a zfset. Then /PP x is a zfset.
 Lemma. Forall x exists y forall o (o /in y iff o /subset x).
 
 
-Axiom Foundation. Let A be a nonempty set. Then there is a zfset b such that 
+Axiom Foundation. Let A be set. Then A = /emptyset or there is a zfset b such that 
 (b /in A /\ forall o (o /in b => o /notin A)).
 
 Lemma. Let A be a nonempty set. Then there is a zfset b such that

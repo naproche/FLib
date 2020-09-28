@@ -49,7 +49,7 @@ qed.
 
 Signature. A pair is a notion.
 Axiom. Let p be a pair. Then p is a set.
-Axiom. Let p be an object. p is a pair iff exists x,y p = [x,y].
+Axiom. Let p be a set. p is a pair iff exists x,y p = [x,y].
 Let p stand for a pair.
 
 Signature. pi1(p) is an object.

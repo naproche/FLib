@@ -55,7 +55,7 @@ Lemma. Let x /in /VV. Then rk[x] /in /Ord.
 
 Axiom. Let x /in /VV. Then x /in V[rk[x]++] /setminus V[rk[x]].
 
-Lemma. Let x /in /VV. Let alpha /in /Ord. Let x /in V[alpha ++] /setminus V[alpha]. Then rk[x] = alpha.
+Lemma rank. Let x /in /VV. Let alpha /in /Ord. Let x /in V[alpha ++] /setminus V[alpha]. Then rk[x] = alpha.
 
 Lemma. Exists f (Dom(f) = /VV and forall x /in /VV (f[x] /in /Ord /\ f[x] = rk[x] ++)).
 
