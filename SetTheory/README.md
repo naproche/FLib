@@ -39,5 +39,6 @@ The times vary depending on background activity.
 | P19-The_Last_Lemma                | 19:26.14              | 17:42.16              |
 | P20-Silvers_Theorem               | 03:23.56              | 03:10.30              |
 |                                   |                       |                       |
+|                                   |                       |                       |
 | Example_from_1.1.1                | 00:00.30              | 00:00.18              |
 | Formalizing_Pairs_and_Functions   | 00:23.52              | 00:22.03              |
