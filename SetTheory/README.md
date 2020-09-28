@@ -15,7 +15,6 @@ Isabelle_Naproche-20190611.app/Contents/Resources/Isabelle_Naproche-20190611/con
 The total checking time of all files is about 4 hours (depending on the computer).
 
 The first times were checked on a computer with a 3.2 GHz Quad-Core Intel Core i5 and 16 GB 1333 MHz DDR3 RAM.
-
 The second times were checked on a computer with a 2.3 GHz 8-Core Intel Core i9 and 16 GB 2400 MHz DDR4 RAM.
 
 The times vary depending on background activity.
