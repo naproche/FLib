@@ -174,7 +174,7 @@ Proof.
   proof.
     Let y be a natural number. Assume P(y).
 
-    For all natural numbers x we have x < y + 1 or x = y + 1 or x > y + 1.
+    (2) For all natural numbers x we have x < y + 1 or x = y + 1 or x > y + 1.
     proof.
       Let x be a natural number.
 
@@ -194,7 +194,7 @@ Proof.
       end.
     end.
 
-    Hence the thesis (by 1).
+    Hence the thesis (by 1). Indeed y + 1 is a natural number.
   end.
 
   Thus P holds for every natural number.
@@ -286,7 +286,7 @@ Proof.
         the thesis.
       end.
 
-      Hence the thesis (by 1).
+      Hence the thesis (by 1). Indeed x + 1 is a natural number.
     end.
 
     Therefore P holds for every natural number.
@@ -404,7 +404,7 @@ Proof.
           Hence the thesis. Indeed z \leq 1 or z > 1.
         end.
 
-        Thus P holds for z + 1 (by 1).
+        Thus P holds for z + 1 (by 1). Indeed z + 1 is a natural number.
       end.
 
       Thus P holds for every natural number. Then we have the thesis (by 1).
@@ -434,7 +434,7 @@ Proof.
         y^{z + 1}. Therefore x^{z + 1} \geq y^{z + 1} (by 0510, 0303, 0403).
       end.
 
-      Hence the thesis (by 1).
+      Hence the thesis (by 1). Indeed z + 1 is a natural number.
     end.
 
     Thus P holds for every natural number. Therefore if n \geq m then
@@ -452,6 +452,12 @@ qed.
 
 
 Corollary 0527. Assume k \neq 0. n^{k} \leq m^{k} iff n \leq m.
+
+Proof.
+  If n^{k} < m^{k} then n < m. If n^{k} = m^{k} then n = m.
+
+  If n < m then n^{k} < m^{k}. If n = m then n^{k} = m^{k}.
+qed.
 
 
 Proposition 0528. Assume k > 1. n < m iff k^{n} < k^{m}.
@@ -487,7 +493,7 @@ Proof.
         end.
       end.
 
-      Hence the thesis (by 1).
+      Hence the thesis (by 1). Indeed y + 1 is a natural number.
     end.
 
     Thus P holds for every natural number (by 0107). Then we have the thesis (by
@@ -529,7 +535,7 @@ Proof.
         end.
       end.
 
-      Hence the thesis (by 2).
+      Hence the thesis (by 2). Indeed x + 1 is a natural number.
     end.
 
     Thus P holds for every natural number. Therefore if n \geq m then
