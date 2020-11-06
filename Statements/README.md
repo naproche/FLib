@@ -1,7 +1,5 @@
 # Statements
 
-## About
-
 This library has been created to investigate how formulas can be accessed in
 then object-level of ForTheL in order to formalize theories which contain axiom
 schemes or which deal with mathematical logic. Be aware that its content is
