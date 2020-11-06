@@ -24,7 +24,7 @@ Definition. \bot = {x | FALSE}.
 
 Lemma. \top and \bot are propositions.
 
-Let P is true  stand for every object is an element of P.
+Let P is true stand for every object is an element of P.
 Let P is false stand for P is not true.
 
 
@@ -33,3 +33,10 @@ Lemma. If P and Q are true then P = Q.
 Lemma. P is true or P is false.
 
 Lemma. P is true iff P is not false.
+
+
+# Arities of statements
+
+Definition. Let P be a statement. P is nullary iff P is a proposition.
+
+Signature. Let P be a statement. P is unary is an atom.
