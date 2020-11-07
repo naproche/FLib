@@ -4,24 +4,57 @@
 [read FLib/Statements/Library/SetTheory/01_collections.ftl]
 
 
-Signature. A zet is a collection. Let x,y,z denote zets.
+Signature 0201. A zet is a collection. Let x,y,z denote zets.
 
-Definition. A subset of x is a zet y such that y \subseteq x.
-
-
-# 1.1. Extensionality
-
-Proposition. If x \subseteq y and y \subseteq x then x = y.
+Definition 0202. A subset of x is a zet y such that y \subseteq x.
 
 
-# 1.2. The empty set
-
-Definition. x is empty iff x has no elements.
-
-Axiom. There is an empty zet.
+Definition 0203. An element is an object a such that a is an urelement or a is a
+zet.
 
 
-Lemma. If x and y are empty then x = y.
+# 2.2 Extensionality
+
+Proposition 0204. If x \subseteq y and y \subseteq x then x = y.
+
+
+# 2.2 Separation
+
+Let P denote a statement.
+
+Axiom 0205. Assume that P is nullary or P is unary. Then there is a zet y such
+that for all objects u we have u \in y iff u \in x and P(u).
+
+
+Corollary 0206. Assume that P is nullary or P is unary. Then there is a zet y
+such that y = {u in x | P(u)}.
+
+
+Lemma 0207. Assume that P is nullary or P is unary. Let x,y be zets. Assume
+x = {u | P(u)} and y = {u | P(u)}. Then x = y.
+
+
+# 2.3 Set existence and the empty set
+
+Definition 0208. x is empty iff x has no elements.
+
+Axiom 0209. There is a zet.
+
+
+Lemma 0210. There is an empty zet.
+
+Proof.
+  Take a zet x.
+
+  [prove off]
+  Define P = {u | FALSE}. P is a proposition.
+  [prove on]
+
+  Take a zet y such that y = {u in x | P(u)}. Then y is empty.
+qed.
+
+
+Lemma 0211. If x and y are empty then x = y.
 
 Proof.
   Assume that x and y are empty. Then every element of x is an element of y and
@@ -30,63 +63,65 @@ Proof.
 qed.
 
 
-Definition. \emptyset is the empty zet.
+Definition 0212. \emptyset is the empty zet.
 
 
-# 1.3. Separation
+# 2.4 Intersections and complements
 
-Let P denote a statement.
-
-Axiom. Assume that P is nullary or P is unary. Then there is a zet y such that
-for all objects u we have u \in y iff u \in x and P(u).
-
-
-Corollary foo. Assume that P is nullary or P is unary. Then there is a zet y
-such that y = {u in x | P(u)}.
-
-
-Lemma. Assume that P is nullary or P is unary. Let x,y be zets. Assume
-x = {u | P(u)} and y = {u | P(u)}. Then x = y.
-
-
-# 1.4 Intersections and complements
-
-Proposition. There is a zet z such that z = {u | u \in x and u \in y}.
+Lemma 0213. There is a zet z such that z = {u | u \in x and u \in y}.
 
 Proof.
   [prove off]
-  # P(u) iff u \in y.
-  Define P = {u | u \in y}.
-  P is unary.
+  Define P = {u | u \in y}. P is unary.
   [prove on]
 
-  Take a zet z such that z = {u in x | P(u)} (by foo). Then z = {u | u \in x and
-  u \in y}.
+  Take a zet z such that z = {u in x | P(u)} (by 0206). Then z = {u | u \in x
+  and u \in y}.
 qed.
 
 
-Axiom. x \cap y is the zet z such that z = {u | u \in x and u \in y}.
+Axiom 0214. x \cap y is the zet z such that z = {u | u \in x and u \in y}.
 
 
-Lemma. There is a zet z such that z = {u | u \in x and u \notin y}.
+Lemma 0215. There is a zet z such that z = {u | u \in x and u \notin y}.
 
 Proof.
   [prove off]
-  # P(u) iff u \notin y.
-  Define P = {u | u \notin y}.
-  P is unary.
-  [prove off]
+  Define P = {u | u \notin y}. P is unary.
+  [prove on]
 
-  Take a zet z such that z = {u in x | P(u)} (by foo). Then z = {u | u \in x and
-  u \notin y}.
+  Take a zet z such that z = {u in x | P(u)} (by 0206). Then z = {u | u \in x
+  and u \notin y}.
 qed.
 
 
-Axiom. x \setminus y is the zet z such that z = {u | u \in x and u \notin y}.
+Axiom 0216. x \setminus y is the zet z such that z = {u | u \in x and
+u \notin y}.
 
 
-# 1.5 Unions
+# 2.5 Unions
 
-Axiom. There is a zet z such that z = {u | u \in x or u \in y}.
+Axiom 0217. There is a zet z such that z = {u | u \in x or u \in y}.
 
-Axiom. x \cup y is the zet z such that z = {u | u \in x or u \in y}.
+Axiom 0218. x \cup y is the zet z such that z = {u | u \in x or u \in y}.
+
+
+# 2.6 Pairs and singleton sets
+
+Let a,b denote elements.
+
+Axiom 0219. There is a zet x such that x = {u | u = a or u = b}.
+
+Definition 0220. `{a,b}` is the zet x such that x = {u | u = a or u = b}. Let
+the unordered pair of a and b stand for `{a,b}`.
+
+
+Lemma 0221. There is a zet x such that x = {u | u = a}.
+
+Proof.
+  `{a,a}` is a zet and `{a,a}` = {u | u = a}.
+qed.
+
+
+Definition 0222. Let a be an element. `{a}` is the zet x such that `{a}` =
+{u | u = a}. Let the singleton set of a stand for `{a}`.
