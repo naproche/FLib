@@ -8,7 +8,7 @@ Let x,y,z denote zets.
 
 # Definition
 
-Axiom 0401. x \triangle y  = (x \cup y) \setminus (x \cap y).
+Definition 0401. x \triangle y  = (x \cup y) \setminus (x \cap y).
 
 
 # Computation laws
@@ -16,8 +16,7 @@ Axiom 0401. x \triangle y  = (x \cup y) \setminus (x \cap y).
 Proposition 0402. x \triangle y = (x \setminus y) \cup (y \setminus x).
 
 Proof.
-  Every element of x \triangle y is an element of (x \setminus y) \cup
-  (y \setminus x).
+  x \triangle y \subseteq (x \setminus y) \cup (y \setminus x).
   proof.
     Let u \in x \triangle y. Then u \in x \cup y and u \notin x \cap y. Hence
     (u \in x or u \in y) and not (u \in x and u \in y). Thus (u \in x or
@@ -27,10 +26,7 @@ Proof.
     u \in y \setminus x. Thus u \in (x \setminus y) \cup (y \setminus x).
   end.
 
-  Therefore x \triangle y \subseteq (x \setminus y) \cup (y \setminus x).
-
-  Every element of (x \setminus y) \cup (y \setminus x) is an element of
-  x \triangle y.
+  (x \setminus y) \cup (y \setminus x) \subseteq x \triangle y.
   proof.
     Let u \in (x \setminus y) \cup (y \setminus x). Then (u \in x and
     u \notin y) or (u \in y and u \notin x). If u \in x and u \notin y then
@@ -39,8 +35,6 @@ Proof.
     u \notin x \cap y. Thus u \in (x \cup y) \setminus (x \cap y) =
     x \triangle y.
   end.
-
-  Therefore (x \setminus y) \cup (y \setminus x) \subseteq x \triangle y.
 qed.
 
 
@@ -63,8 +57,8 @@ Proof.
   x \triangle (y \triangle z) = (x \setminus ((y \setminus z) \cup
   (z \setminus y))) \cup (((y \setminus z) \cup (z \setminus y)) \setminus x).
 
-  Every element of (((x \setminus y) \cup (y \setminus x)) \setminus z) \cup
-  (z \setminus ((x \setminus y) \cup (y \setminus x))) is an element of
+  (((x \setminus y) \cup (y \setminus x)) \setminus z) \cup
+  (z \setminus ((x \setminus y) \cup (y \setminus x))) \subseteq
   (x \setminus ((y \setminus z) \cup (z \setminus y))) \cup (((y \setminus z)
   \cup (z \setminus y)) \setminus x).
   proof.
@@ -78,9 +72,7 @@ Proof.
         Then u \notin y \setminus z and u \notin z \setminus y.
         u \in x. Hence u \in x \setminus ((y \setminus z) \cup (z \setminus y)).
         Thus u \in (x \setminus ((y \setminus z) \cup (z \setminus y))) \cup
-        (((y \setminus z) \cup (z \setminus y)) \setminus x). Indeed
-        x \setminus ((y \setminus z) \cup (z \setminus y)) and
-        ((y \setminus z) \cup (z \setminus y)) \setminus x are zets.
+        (((y \setminus z) \cup (z \setminus y)) \setminus x). 
       end.
 
       Case u \in y \setminus x.
@@ -88,9 +80,7 @@ Proof.
         (z \setminus y). u \notin x. Thus u \in ((y \setminus z) \cup
         (z \setminus y)) \setminus x. Therefore u \in (x \setminus
         ((y \setminus z) \cup (z \setminus y))) \cup (((y \setminus z) \cup
-        (z \setminus y)) \setminus x). Indeed x \setminus ((y \setminus z) \cup
-        (z \setminus y)) and ((y \setminus z) \cup (z \setminus y)) \setminus x
-        are zets.
+        (z \setminus y)) \setminus x).
       end.
     end.
 
@@ -104,9 +94,7 @@ Proof.
         Then u \in y. Hence u \notin (y \setminus z) \cup (z \setminus y). Thus
         u \in x \setminus ((y \setminus z) \cup (z \setminus y)). Therefore
         u \in (x \setminus ((y \setminus z) \cup (z \setminus y))) \cup
-        (((y \setminus z) \cup (z \setminus y)) \setminus x). Indeed
-        x \setminus ((y \setminus z) \cup (z \setminus y)) and
-        ((y \setminus z) \cup (z \setminus y)) \setminus x are zets.
+        (((y \setminus z) \cup (z \setminus y)) \setminus x).
       end.
 
       Case u \notin x.
@@ -114,17 +102,13 @@ Proof.
         \cup (z \setminus y). Therefore u \in ((y \setminus z) \cup
         (z \setminus y)) \setminus x. Then we have u \in (x \setminus
         ((y \setminus z) \cup (z \setminus y))) \cup (((y \setminus z) \cup
-        (z \setminus y)) \setminus x). Indeed x \setminus ((y \setminus z) \cup
-        (z \setminus y)) and ((y \setminus z) \cup (z \setminus y)) \setminus x
-        are zets.
+        (z \setminus y)) \setminus x).
       end.
     end.
   end.
 
-  Hence (x \triangle y) \triangle z \subseteq x \triangle (y \triangle z).
-
-  Every element of (x \setminus ((y \setminus z) \cup (z \setminus y))) \cup
-  (((y \setminus z) \cup (z \setminus y)) \setminus x) is an element of
+  (x \setminus ((y \setminus z) \cup (z \setminus y))) \cup
+  (((y \setminus z) \cup (z \setminus y)) \setminus x) \subseteq
   (((x \setminus y) \cup (y \setminus x)) \setminus z) \cup (z \setminus
   ((x \setminus y) \cup (y \setminus x))).
   proof.
@@ -143,9 +127,7 @@ Proof.
         (y \setminus x). Thus u \in z \setminus ((x \setminus y) \cup
         (y \setminus x)). Therefore u \in (((x \setminus y) \cup
         (y \setminus x)) \setminus z) \cup (z \setminus ((x \setminus y) \cup
-        (y \setminus x))). Indeed ((x \setminus y) \cup (y \setminus x))
-        \setminus z and z \setminus ((x \setminus y) \cup (y \setminus x)) are
-        zets.
+        (y \setminus x))).
       end.
 
       Case u \notin y.
@@ -153,9 +135,7 @@ Proof.
         u \in (x \setminus y) \cup (y \setminus x). Thus u \in ((x \setminus y)
         \cup (y \setminus x)) \setminus z. Therefore u \in (((x \setminus y)
         \cup (y \setminus x)) \setminus z) \cup (z \setminus ((x \setminus y)
-        \cup (y \setminus x))). Indeed ((x \setminus y) \cup (y \setminus x))
-        \setminus z and z \setminus ((x \setminus y) \cup (y \setminus x)) are
-        zets.
+        \cup (y \setminus x))).
       end.
     end.
 
@@ -167,8 +147,6 @@ Proof.
         (y \setminus x). Thus u \in ((x \setminus y) \cup (y \setminus x))
         \setminus z. Therefore u \in (((x \setminus y) \cup (y \setminus x))
         \setminus z) \cup (z \setminus ((x \setminus y) \cup (y \setminus x))).
-        Indeed ((x \setminus y) \cup (y \setminus x)) \setminus z and
-        z \setminus ((x \setminus y) \cup (y \setminus x)) are zets.
       end.
 
       Case u \in z \setminus y.
@@ -177,15 +155,10 @@ Proof.
         (y \setminus x). Thus u \in z \setminus ((x \setminus y) \cup
         (y \setminus x)). Therefore u \in (((x \setminus y) \cup
         (y \setminus x)) \setminus z) \cup (z \setminus ((x \setminus y) \cup
-        (y \setminus x))). Indeed ((x \setminus y) \cup (y \setminus x))
-        \setminus z and z \setminus ((x \setminus y) \cup (y \setminus x)) are
-        zets.
+        (y \setminus x))).
       end.
     end.
   end.
-
-  Hence x \triangle (y \triangle z) \subseteq (x \triangle y) \triangle z.
-  Indeed x \triangle (y \triangle z) and (x \triangle y) \triangle z are zets.
 qed.
 
 
@@ -213,15 +186,11 @@ Proof.
 
   If x \triangle y = y \setminus x then x \subseteq y.
   proof.
-    Assume x \triangle y = y \setminus x.
-
-    Every element of x is an element of y.
-    proof.
-      Let u \in x. Then u \notin y \setminus x. Hence u \notin x \triangle y.
-      Thus u \notin x \cup y or u \in x \cap y. Indeed x \triangle y =
-      (x \cup y) \setminus (x \cap y). If u \notin x \cup y then we have a
-      contradiction. Therefore u \in x \cap y. Then we have the thesis.
-    end.
+    Assume x \triangle y = y \setminus x. Let u \in x. Then
+    u \notin y \setminus x. Hence u \notin x \triangle y. Thus u \notin x \cup y
+    or u \in x \cap y. Indeed x \triangle y = (x \cup y) \setminus (x \cap y).
+    If u \notin x \cup y then we have a contradiction. Therefore u \in x \cap y.
+    Then we have the thesis.
   end.
 qed.
 
@@ -233,7 +202,7 @@ Proof.
   proof.
     Assume x \triangle y = x \triangle z.
 
-    Every element of y is an element of z.
+    y \subseteq z.
     proof.
       Let u \in y.
 
@@ -250,9 +219,7 @@ Proof.
       end.
     end.
 
-    Hence y \subseteq z.
-
-    Every element of z is an element of y.
+    z \subseteq y.
     proof.
       Let u \in z.
 
@@ -268,8 +235,6 @@ Proof.
         Therefore u \in x or u \in y. Then we have the thesis.
       end.
     end.
-
-    Hence z \subseteq y.
   end.
 qed.
 
