@@ -15,7 +15,10 @@ Definition 0101. x \subseteq y iff every element of x is an element of y. Let
 x \supseteq y stand for y \subseteq x. Let x \subsetneq y stand for
 x \subseteq y and x \neq y. Let x \supsetneq y stand for y \subsetneq x.
 
-Lemma 0102. If x \subseteq y and y \subseteq x then x = y.
+
+Lemma 0102. If y = {u | u \in x} then x = y.
+
+Corollary 0103. If x \subseteq y and y \subseteq x then x = y.
 
 
-Definition 0103. An urelement is an object that is not a collection.
+Definition 0104. An urelement is an object that is not a collection.
