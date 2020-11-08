@@ -26,7 +26,7 @@ Axiom 0106. [x,y] \equiv [y,x].
 Axiom 0107. If [x,y] \equiv [z,z] then x = y.
 
 # Transitivity of congruence
-Axiom 0108. If X \equiv Y and Y \equiv Z then X \equiv Z.
+Axiom 0108. If X \equiv Y and X \equiv Z then Y \equiv Z.
 
 
 # 1.2 Betweenness axioms
