@@ -19,28 +19,24 @@ zet.
 
 # 2.1 Separation
 
-Let P denote a statement.
+Let P denote a predicate.
 
-Axiom 0205. Assume that P is nullary or P is unary. Then there is a zet y such
-that for all objects u we have u \in y iff u \in x and P(u).
-
-
-Corollary 0206. Assume that P is nullary or P is unary. Then there is a zet y
+Axiom 0205. Assume that P has at most one free variable. Then there is a zet y
 such that y = {u in x | P(u)}.
 
 
-Lemma 0207. Assume that P is nullary or P is unary. Let x,y be zets. Assume
+Lemma 0206. Assume that P has at most one free variable. Let x,y be zets. Assume
 x = {u | P(u)} and y = {u | P(u)}. Then x = y.
 
 
 # 2.2 Set existence and the empty set
 
-Definition 0208. x is empty iff x has no elements.
+Definition 0207. x is empty iff x has no elements.
 
-Axiom 0209. There is a zet.
+Axiom 0208. There is a zet.
 
 
-Lemma 0210. There is an empty zet.
+Lemma 0209. There is an empty zet.
 
 Proof.
   Take a zet x.
@@ -53,7 +49,7 @@ Proof.
 qed.
 
 
-Lemma 0211. If x and y are empty then x = y.
+Lemma 0210. If x and y are empty then x = y.
 
 Proof.
   Assume that x and y are empty. Then every element of x is an element of y and
@@ -62,65 +58,65 @@ Proof.
 qed.
 
 
-Definition 0212. \emptyset is the empty zet.
+Definition 0211. \emptyset is the empty zet.
 
 
 # 2.3 Intersections and complements
 
-Lemma 0213. There is a zet z such that z = {u | u \in x and u \in y}.
+Lemma 0212. There is a zet z such that z = {u | u \in x and u \in y}.
 
 Proof.
   [prove off]
-  Define P = {u | u \in y}. P is unary.
+  Define P = {u | u \in y}. P has one free variable.
   [prove on]
 
-  Take a zet z such that z = {u in x | P(u)} (by 0206). Then z = {u | u \in x
+  Take a zet z such that z = {u in x | P(u)}. Then z = {u | u \in x
   and u \in y}.
 qed.
 
 
-Definition 0214. x \cap y is the zet z such that z = {u | u \in x and u \in y}.
+Definition 0213. x \cap y is the zet z such that z = {u | u \in x and u \in y}.
 
 
-Lemma 0215. There is a zet z such that z = {u | u \in x and u \notin y}.
+Lemma 0214. There is a zet z such that z = {u | u \in x and u \notin y}.
 
 Proof.
   [prove off]
-  Define P = {u | u \notin y}. P is unary.
+  Define P = {u | u \notin y}. P has one free variable.
   [prove on]
 
-  Take a zet z such that z = {u in x | P(u)} (by 0206). Then z = {u | u \in x
+  Take a zet z such that z = {u in x | P(u)}. Then z = {u | u \in x
   and u \notin y}.
 qed.
 
 
-Definition 0216. x \setminus y is the zet z such that z = {u | u \in x and
+Definition 0215. x \setminus y is the zet z such that z = {u | u \in x and
 u \notin y}.
 
 
 # 2.4 Unions
 
-Axiom 0217. There is a zet z such that z = {u | u \in x or u \in y}.
+Axiom 0216. There is a zet z such that z = {u | u \in x or u \in y}.
 
-Definition 0218. x \cup y is the zet z such that z = {u | u \in x or u \in y}.
+Definition 0217. x \cup y is the zet z such that z = {u | u \in x or u \in y}.
 
 
 # 2.5 Pairs and singleton sets
 
 Let a,b denote elements.
 
-Axiom 0219. There is a zet x such that x = {u | u = a or u = b}.
+Axiom 0218. There is a zet x such that x = {u | u = a or u = b}.
 
-Definition 0220. `{a,b}` is the zet x such that x = {u | u = a or u = b}. Let
+Definition 0229. `{a,b}` is the zet x such that x = {u | u = a or u = b}. Let
 the unordered pair of a and b stand for `{a,b}`.
 
 
-Lemma 0221. There is a zet x such that x = {u | u = a}.
+Lemma 0220. There is a zet x such that x = {u | u = a}.
 
 Proof.
   `{a,a}` is a zet and `{a,a}` = {u | u = a}.
 qed.
 
 
-Definition 0222. Let a be an element. `{a}` is the zet x such that `{a}` =
+Definition 0221. Let a be an element. `{a}` is the zet x such that `{a}` =
 {u | u = a}. Let the singleton set of a stand for `{a}`.

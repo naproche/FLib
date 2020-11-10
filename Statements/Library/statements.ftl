@@ -5,7 +5,7 @@
 
 # Statements
 
-Let a statement stand for a set.
+Let a statement stand for a set. Let a predicate stand for a statement.
 
 Let P(x) stand for x is an element of P.
 Let P holds for x stand for P(x).
@@ -16,7 +16,7 @@ Let P holds for x stand for P(x).
 Let FALSE stand for contradiction.
 Let TRUE  stand for not FALSE.
 
-Definition. A proposition is a statement P such that P holds for all objects or
+Definition. A proposition is a predicate P such that P holds for all objects or
 P holds for no object. Let P,Q denote propositions.
 
 Definition. \top = {x | TRUE}.
@@ -37,6 +37,12 @@ Lemma. P is true iff P is not false.
 
 # Arities of statements
 
-Definition. Let P be a statement. P is nullary iff P is a proposition.
+Let P denote a predicate.
 
-Signature. Let P be a statement. P is unary is an atom.
+
+Signature. P has one free variable is an atom.
+
+Definition. P has at most one free variable iff P is a proposition or P has one
+free variable.
+
+Signature. P has two free variables is an atom. Let P(x,y) stand for P((x,y)).

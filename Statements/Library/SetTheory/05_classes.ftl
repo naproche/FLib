@@ -21,8 +21,8 @@ X \supseteq C.
 
 # Comprehension
 
-Axiom 0506. Let P be a statement. Assume that P is nullary or P is unary. There
-exists a class X such that X = {u | u is an element and P(u)}.
+Axiom 0506. Let P be a predicate. Assume that P has at most one free variable.
+There exists a class X such that X = {u | u is an element and P(u)}.
 
 
 Definition 0507. \mathbb{V} is the set of zets.
@@ -32,7 +32,7 @@ Proposition 0508. \mathbb{V} is a class.
 
 Proof.
   [prove off]
-  Define P = {u | u is a zet}. P is unary.
+  Define P = {u | u is a zet}. P has one free variable.
   [prove on]
 
   Take a class V such that V = {u | u is an element and P(u)}. Then V = {u | u
