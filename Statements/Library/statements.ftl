@@ -7,8 +7,8 @@
 
 Let a statement stand for a set. Let a predicate stand for a statement.
 
-Let P(x) stand for x is an element of P.
-Let P holds for x stand for P(x).
+Let P(x) stand for x is an element of P. Let P holds for x stand for P(x). Let P
+hold for x stand for P(x).
 
 
 # Propositions
