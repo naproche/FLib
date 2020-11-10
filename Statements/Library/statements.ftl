@@ -46,3 +46,6 @@ Definition. P has at most one free variable iff P is a proposition or P has one
 free variable.
 
 Signature. P has two free variables is an atom. Let P(x,y) stand for P((x,y)).
+
+
+Axiom. Let x,y,a,b be objects. If (a,b) = (x,y) then a = x and b = y.
