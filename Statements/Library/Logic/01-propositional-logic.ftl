@@ -5,322 +5,112 @@
 [prover eprover-2.5]
 
 
-Signature. A proposition is a notion. Let P,Q,R denote propositions.
-
-Signature. P is true is a relation.
-
-Definition. P is false iff P is not true.
-
-Axiom. If P is true iff Q is true then P = Q.
+Let P,Q,R denote statements that have no free variable.
 
 
-# 1.1 Atomic propositions and junctors
+# 1.1 Atomic propositions
 
-Signature. /top is a proposition.
+Definition 0101. TRUE  = {x | it is wrong that we have a contradiction}.
 
-Axiom. /top is true.
-
-
-Signature. /bot is a proposition.
-
-Axiom. /bot is false.
-
-
-Signature. /neg P is a proposition.
-
-Axiom. /neg P is true iff P is false.
-
-
-Signature. P /wedge Q is a proposition.
-
-Axiom. P /wedge Q is true iff P is true and Q is true.
-
-
-Signature. P /vee Q is a proposition.
-
-Axiom. P /vee Q is true iff P is true or Q is true.
-
-
-Signature. P /implies Q is a proposition.
-
-Axiom. P /implies Q is true iff if P is true then Q is true.
-
-
-Signature. P /iff Q is a proposition.
-
-Axiom. P /iff Q is true iff P is true iff Q is true.
-
+Definition 0102. FALSE = {x | contradiction}.
 
 
 # 1.2 Logical laws
 
-Proposition 0111. /neg /neg P = P.
+# Excluded middle
 
-Proof.
-  Case P is true.
-    Then P is not false. Hence /neg P is false. Then /neg /neg P is not false.
-    Thus /neg /neg P is true. Therefore /neg /neg P = P.
-  end.
+Proposition 0103. "P" or not "P".
 
-  Case P is false.
-    Then P is not true. Hence /neg P is true. Then /neg /neg P is not true. Thus
-    /neg /neg P is false. Therefore /neg /neg P = P.
-  end.
-qed.
+Proposition 0104. Not not "P" iff "P".
 
 
-Proposition 0112. P /wedge Q = Q /wedge P.
+# Commutativity
 
-Proof.
-  Case P and Q are true.
-    Then (P is true and Q is true) and (Q is true and P is true). Hence
-    P /wedge Q is true and Q /wedge P is true. Therefore P /wedge Q =
-    Q /wedge P.
-  end.
+Proposition 0105. "P" and "Q" iff "Q" and "P".
 
-  Case P is true and Q is false.
-    Then not (P is true and Q is true) and not (Q is true and P is true). Hence
-    P /wedge Q is not true and Q /wedge P is not true. Thus P /wedge Q is false
-    and Q /wedge P is false. Therefore P /wedge Q = Q /wedge P.
-  end.
+Proposition 0106. "P" or "Q" iff "Q" or "P".
 
-  Case P is false and Q is true.
-    Then not (P is true and Q is true) and not (Q is true and P is true). Hence
-    P /wedge Q is not true and Q /wedge P is not true. Thus P /wedge Q is false
-    and Q /wedge P is false. Therefore P /wedge Q = Q /wedge P.
-  end.
 
-  Case P and Q are false.
-    Then not (P is true and Q is true) and not (Q is true and P is true). Hence
-    P /wedge Q is not true and Q /wedge P is not true. Thus P /wedge Q is false
-    and Q /wedge P is false. Therefore P /wedge Q = Q /wedge P.
-  end.
-qed.
+# Associativity
 
+Proposition 0107. ("P" and "Q") and "R" iff "P" and ("Q" and "R").
 
-Proposition 0113. P /vee Q = Q /vee P.
+Proposition 0108. ("P" or "Q") or "R" iff "P" or ("Q" or "R").
 
-Proof.
-  Case P and Q are true.
-    Then (P is true or Q is true) and (Q is true or P is true). Hence
-    P /vee Q is true and Q /vee P is true. Therefore P /vee Q = Q /vee P.
-  end.
 
-  Case P is true and Q is false.
-    Then (P is true or Q is true) and (Q is true or P is true). Hence
-    P /vee Q is true and Q /vee P is true. Thus P /vee Q = Q /vee P.
-  end.
+# Distributivity
 
-  Case P is false and Q is true.
-    Then (P is true or Q is true) and (Q is true or P is true). Hence
-    P /vee Q is true and Q /vee P is true. Thus P /vee Q = Q /vee P.
-  end.
+Proposition 0109. "P" and ("Q" or "R") iff ("P" and "Q") or ("P" and "R").
 
-  Case P and Q are false.
-    Then not (P is true or Q is true) and not (Q is true or P is true). Hence
-    P /vee Q is not true and Q /vee P is not true. Thus P /vee Q is false
-    and Q /vee P is false. Therefore P /vee Q = Q /vee P.
-  end.
-qed.
+Proposition 0110. "P" or ("Q" and "R") iff ("P" or "Q") and ("P" or "R").
 
 
-Proposition 0114. (P /wedge Q) /wedge R = P /wedge (Q /wedge R).
+# Idempocy laws
 
-Proof.
+Proposition 0111. "P" and "P" iff "P".
 
-qed.
+Proposition 0112. "P" or "P" iff "P".
 
 
-Proposition 0115. (P /vee Q) /vee R = P /vee (Q /vee R).
+# Complement laws
 
-Proof.
+Proposition 0113. "P" and not "P" iff "FALSE".
 
-qed.
+Proposition 0114. "P" or not "P" iff "TRUE".
 
 
-Proposition 0116. P /wedge (Q /vee R) = (P /wedge Q) /vee (P /wedge R).
+# Absorption laws
 
-Proof.
+Proposition 0115. "P" and ("P" or "Q") iff "P".
 
-qed.
+Corollary 0116. "P" and "TRUE" iff "P".
 
 
-Proposition 0117. P /vee (Q /wedge R) = (P /vee Q) /wedge (P /vee R).
+Proposition 0117. "P" or ("P" and "Q") iff "P".
 
-Proof.
+Corollary 0118. "P" or "FALSE" iff "P".
 
-qed.
 
+# De Morgan's laws
 
-Proposition 0118. P /wedge P = P.
+Proposition 0119. not ("P" and "Q") iff (not "P") or (not "Q").
 
-Proof.
+Corollary 0120. "P" and "Q" iff not ((not "P") or (not "Q")).
 
-qed.
 
+Proposition 0121. not ("P" or "Q") iff (not "P") and (not "Q").
 
-Proposition 0119. P /vee P = P.
+Corollary 0122. "P" or "Q" iff not ((not "P") and (not "Q")).
 
-Proof.
 
-qed.
+# Rewriting via implication
 
+Proposition 0123. "P" and "Q" iff not ("P" => not "Q").
 
-Proposition 0120. P /wedge /neg P = /bot.
+Proposition 0124. "P" or "Q" iff (not "P") => "Q".
 
-Proof.
+Proposition 0125. "P" or "Q" iff (not "Q") => "P".
 
-qed.
+Proposition 0126. ("P" iff "Q") iff ("P" => "Q") and ("Q" => "P").
 
 
-Proposition 0121. P /vee /neg P = /top.
+# Rewriting via disjunction and conjunction
 
-Proof.
+Proposition 0127. ("P" iff "Q") iff ("P" and "Q") or ((not "P") and not "Q").
 
-qed.
+Corollary 0128. Not ("P" iff "Q") iff ((not "P") or not "Q") and ("P" or "Q").
 
 
-Proposition 0122. P /wedge (P /vee Q) = P.
+Proposition 0129. ("P" iff "Q") iff ("P" or not "Q") and ("Q" or not "P").
 
-Proof.
+Corollary 0130. Not ("P" iff "Q") iff ((not "P") and "Q") or ("P" and not "Q").
 
-qed.
 
+Proposition 0131. "P" => "Q" iff (not "P") or "Q".
 
-Proposition 0123. P /vee (P /wedge Q) = P.
 
-Proof.
+# Contraposition
 
-qed.
+Proposition 0132. "P" => "Q" iff (not "Q") => not "P".
 
-
-Proposition 0124. P /wedge /top = P.
-
-Proof.
-
-qed.
-
-
-Proposition 0125. P /vee /bot = P.
-
-Proof.
-
-qed.
-
-
-Proposition 0126. /neg (P /wedge Q) = (/neg P) /vee (/neg Q).
-
-Proof.
-
-qed.
-
-
-Corollary 0127. P /wedge Q = /neg ((/neg P) /vee (/neg Q)).
-
-Proof.
-
-qed.
-
-
-Proposition 0128. /neg (P /vee Q) = (/neg P) /wedge (/neg Q).
-
-Proof.
-
-qed.
-
-
-Corollary 0129. P /vee Q = /neg ((/neg P) /wedge (/neg Q)).
-
-Proof.
-
-qed.
-
-
-Proposition 0130. P /wedge Q = /neg (P /implies /neg Q).
-
-Proof.
-
-qed.
-
-
-Proposition 0131. P /vee Q = (/neg P) /implies Q = (/neg Q) /implies P.
-
-Proof.
-
-qed.
-
-
-Proposition 0132. P /iff Q = (P /implies Q) /wedge (Q /implies P) =
-(P /wedge Q) /vee ((/neg P) /wedge /neg Q) =
-(P /vee /neg Q) /wedge (Q /vee /neg P).
-
-Proof.
-
-qed.
-
-
-Corollary 0133. /neg (P /iff Q) = (P /wedge /neg Q) /vee ((/neg P) /wedge Q) =
-(P /vee Q) /wedge ((/neg P) /vee /neg Q).
-
-Proof.
-
-qed.
-
-
-Proposition 0134. P /implies Q = (/neg P) /vee Q = (/neg Q) /implies /neg P.
-
-Proof.
-
-qed.
-
-
-Corollary 0135. /neg (P /implies Q) = P /wedge /neg Q.
-
-Proof.
-
-qed.
-
-
-# 1.3 Inference rules
-
-Proposition 0136. If P /implies Q is true and P is true then Q is true.
-
-Proof.
-
-qed.
-
-
-Proposition 0137. If P /implies Q is true and Q is false then P is false.
-
-Proof.
-
-qed.
-
-
-Proposition 0138. If P /implies Q is true and Q /implies R is true then
-P /implies R is true.
-
-Proof.
-
-qed.
-
-
-Proposition 0139. If P /vee Q is true and P is false then Q is true.
-
-Proof.
-
-qed.
-
-
-Proposition 0140. If /neg P is false then P is true.
-
-Proof.
-
-qed.
-
-
-Proposition 0150. If P /wedge Q is false and P is true then Q is false.
-
-Proof.
-
-qed.
+Corollary 0133. Not ("P" => "Q") iff "P" and not "Q".
