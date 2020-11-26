@@ -9,11 +9,15 @@ Let a statement stand for a set. Let P denote a statement.
 
 Let P(x) stand for x is an element of P. Let P holds for x stand for P(x).
 
+Let "P" stand for P holds for every object.
+
 Let FALSE stand for contradiction.
 Let TRUE  stand for not FALSE.
 
 
 # Arities of statements
+
+Signature. P has no free variable is an atom.
 
 Signature. P has one free variable is an atom.
 
