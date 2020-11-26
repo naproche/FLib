@@ -13,28 +13,28 @@ Definition 0503. A proper class is a class that is not a zet.
 # Sub- and superclasses
 
 Definition 0504. Let C be a collection. A subclass of C is a class X such that
-X \subseteq C.
+X /subseteq C.
 
 Definition 0505. Let C be a collection. A superclass of C is a class X such that
-X \supseteq C.
+X /supseteq C.
 
 
 # Comprehension
 
-Axiom 0506. Let P be a predicate. Assume that P has at most one free variable.
+Axiom 0506. Let P be a statement. Assume that P has at most one free variable.
 There exists a class X such that X = {u | u is an element and P(u)}.
 
 
-Definition 0507. \mathbb{V} is the set of zets.
+Definition 0507. /mathbb{V} is the set of zets.
 
 
-Proposition 0508. \mathbb{V} is a class.
+Proposition 0508. /mathbb{V} is a class.
 
 Proof.
   [prove off]
   Define P = {u | u is a zet}. P has one free variable.
-  [prove on]
+  [/prove]
 
   Take a class V such that V = {u | u is an element and P(u)}. Then V = {u | u
-  is a zet}. Hence V = \mathbb{V}.
+  is a zet}. Hence V = /mathbb{V}.
 qed.
