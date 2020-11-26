@@ -13,45 +13,19 @@ Axiom 0201. n + 0 = n.
 Axiom 0202. n + (m + 1) = (n + m) + 1.
 
 
-Proposition 0203. n + m is a natural number.
-
-Proof.
-  [prove off]
-  # Define P(y) iff x + y is a natural number for all natural numbers x.
-  Define P = {natural number y | x + y is a natural number for all natural
-  numbers x}.
-  [prove on]
-
-  We have P(0). Indeed x + 0 = x for all natural numbers x.
-
-  For all natural numbers y if P(y) then P(y + 1).
-  proof.
-    Let y be a natural number. Assume P(y).
-
-    x + (y + 1) is a natural number for all natural numbers x.
-    proof.
-    Let x be a natural number. Then x + y is a natural number. Hence (x + y) + 1
-    is a natural number. We have x + (y + 1) = (x + y) + 1. Thus x + (y + 1) is
-    a natural number.
-    end.
-  end.
-
-  Therefore P holds for every natural number.
-qed.
-
-
 # 2.2 Computation laws
 
 # Associativity
 
-Proposition 0204. n + (m + k) = (n + m) + k.
+Proposition 0203. n + (m + k) = (n + m) + k.
 
 Proof.
   [prove off]
-  # Define P(z) iff x + (y + z) = (x + y) + z for all natural numbers x,y.
+  # Define P(z) = "x + (y + z) = (x + y) + z for all natural numbers x,y" for
+  # any natural number z.
   Define P = {natural number z | x + (y + z) = (x + y) + z for all natural
   numbers x,y}.
-  [prove on]
+  [/prove]
 
   We have P(0). Indeed x + (y + 0) = x + y = (x + y) + 0 for all natural numbers
   x,y.
@@ -74,26 +48,27 @@ Proof.
     end.
   end.
 
-  Thus P holds for every natural number (by 0107).
+  Thus P holds for every natural number.
 qed.
 
 
 # Commutativity
 
-Proposition 0205. n + m = m + n.
+Proposition 0204. n + m = m + n.
 
 Proof.
   [prove off]
-  # Define P(y) iff x + y = y + x for all natural numbers x.
+  # Define P(y) = "x + y = y + x for all natural numbers x" for any natural
+  # number y.
   Define P = {natural number y | x + y = y + x for all natural numbers x}.
-  [prove on]
+  [/prove]
 
   P(0).
   proof.
     [prove off]
-    # Define Q(x) iff x + 0 = 0 + x.
+    # Define Q(x) = "x + 0 = 0 + x" for any natural number x.
     Define Q = {natural number x | x + 0 = 0 + x}.
-    [prove on]
+    [/prove]
 
     Q holds for 0.
 
@@ -108,15 +83,15 @@ Proof.
       = 0 + (x + 1).  # 2nd addition axiom
     end.
 
-    Thus P holds for 0 (by 0107).
+    Thus P holds for 0 (by 0108).
   end.
 
   P holds for 1.
   proof.
     [prove off]
-    # Define Q(x) iff x + 1 = 1 + x.
+    # Define Q(x) = "x + 1 = 1 + x" for any natural number x.
     Define Q = {natural number x | x + 1 = 1 + x}.
-    [prove on]
+    [/prove]
 
     Q holds for 0.
 
@@ -129,7 +104,7 @@ Proof.
       = 1 + (x + 1).  # 2nd addition axiom
     end.
 
-    Thus P holds for 1 (by 0107).
+    Thus P holds for 1 (by 0108).
   end.
 
   For all natural numbers x if P(x) then P(x + 1).
@@ -154,14 +129,15 @@ qed.
 
 # Cancellation laws
 
-Proposition 0206. If n + k = m + k then n = m.
+Proposition 0205. If n + k = m + k then n = m.
 
 Proof.
   [prove off]
-  # Define P(z) iff for all natural numbers x,y if x + z = y + z then x = y.
+  # Define P(z) = "for all natural numbers x,y if x + z = y + z then x = y" for
+  # any natural number z.
   (1) Define P = {natural number z | for all natural numbers x,y if
   x + z = y + z then x = y}.
-  [prove on]
+  [/prove]
 
   P holds for 0.
 
@@ -172,7 +148,7 @@ Proof.
     For all natural numbers x,y if x + (z + 1) = y + (z + 1) then x = y.
     proof.
       Let x,y be natural numbers. Assume x + (z + 1) = y + (z + 1). Then
-      (x + z) + 1 = (y + z) + 1. Hence x + z = y + z (by 0105, 0203). Thus
+      (x + z) + 1 = (y + z) + 1. Hence x + z = y + z (by 0106). Thus
       x = y.
     end.
 
@@ -183,7 +159,7 @@ Proof.
 qed.
 
 
-Corollary 0207. If k + n = k + m then n = m.
+Corollary 0206. If k + n = k + m then n = m.
 
 Proof.
   Assume k + n = k + m. We have k + n = n + k and k + m = m + k. Hence n + k =
