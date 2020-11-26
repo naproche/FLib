@@ -8,6 +8,7 @@ Let x /neq y stand for x is not equal to y.
 
 [synonym element/-s]
 
+[synonym has/have]
 [synonym hold/-s]
 
 [synonym integer/-s]
