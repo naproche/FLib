@@ -22,6 +22,10 @@ Let x /neq y stand for x is not equal to y.
 [synonym segment/-s]
 [synonym statement/-s]
 
+[synonym term/-s]
+
 [synonym urelement/-s]
+
+[synonym variable/-s]
 
 [synonym zet/-s]
