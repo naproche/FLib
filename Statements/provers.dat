@@ -1,5 +1,7 @@
 ## Naproche-SAD's provers
 
+# E 2.0
+
 Peprover
 LEprover
 Ftptp
@@ -14,6 +16,8 @@ U# SZS status GaveUp
 # Verbose provers
 #
 
+# E 2.0
+
 Peproververb
 LEprover
 Ftptp
@@ -22,6 +26,9 @@ Y# SZS status Theorem
 N# SZS status CounterSatisfiable
 U# SZS status ResourceOut
 U# SZS status GaveUp
+
+
+# SPASS 3.8
 
 Pspasss
 LSPASS
@@ -32,6 +39,9 @@ NSPASS beiseite: Completion found.
 USPASS beiseite: Ran out of time.
 #USPASS beiseite: Maximal number of loops exceeded.
 
+
+# E 2.5
+
 Peprover-2.5
 Leprover-2.5
 Ftptp
@@ -41,3 +51,15 @@ Y# SZS status ContradictoryAxioms
 N# SZS status CounterSatisfiable
 U# SZS status ResourceOut
 U# SZS status GaveUp
+
+
+# Vampire 4.5.1
+
+Pvampire-4.5.1
+Lvampire-4.5.1
+Ftptp
+Cvampire-4.5.1 --mode casc -t %d
+Y% SZS output end Proof for
+Y% SZS status ContradictoryAxioms for
+N% SZS status CounterSatisfiable for
+U% SZS status Timeout for
