@@ -18,7 +18,6 @@ Let x /neq y stand for x is not equal to y.
 [synonym point/-s]
 [synonym proposition/-s]
 
-[synonym satisfy/satisfies]
 [synonym segment/-s]
 [synonym statement/-s]
 
