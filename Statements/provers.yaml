@@ -1,0 +1,112 @@
+---
+## Naproche-SAD's provers
+
+# E 2.0
+
+- name: "eprover"
+  label: "eprover"
+  path: "eprover"
+  arguments:
+    - "--auto"
+    - "-s"
+    - "--memory-limit=6144"
+    - "--cpu-limit=%d"
+  successMessage:
+    - "# SZS status Theorem"
+  contradictionMessage:
+    - "# SZS status ContradictoryAxioms"
+  failureMessage:
+    - "# SZS status CounterSatisfiable"
+  unknownMessage:
+    - "# SZS status ResourceOut"
+    - "# SZS status GaveUp"
+
+
+# Verbose provers
+
+# E 2.0
+
+- name: "eproververb"
+  label: "eproververb"
+  path: "eprover"
+  arguments:
+    - "-xAuto"
+    - "-tAuto"
+    - "-mAuto"
+    - "--tstp-in"
+    - "-l"
+    - "2"
+    - "--cpu-limit=%d"
+  successMessage:
+    - "# SZS status Theorem"
+  contradictionMessage:
+    - "# SZS status ContradictoryAxioms"
+  failureMessage:
+    - "# SZS status CounterSatisfiable"
+  unknownMessage:
+    - "# SZS status ResourceOut"
+    - "# SZS status GaveUp"
+
+
+# SPASS 3.8
+
+- name: "spass"
+  label: "SPASS"
+  path: "SPASS"
+  arguments:
+    - "-TPTP"
+    - "-CNFOptSkolem=0"
+    - "-PProblem=0"
+    - "-PGiven=0"
+    - "-Stdin"
+    - "-TimeLimit=%d"
+  successMessage:
+    - "SPASS beiseite: Proof found."
+  contradictionMessage: []
+  failureMessage:
+    - "SPASS beiseite: Completion found."
+  unknownMessage:
+    - "SPASS beiseite: Ran out of time."
+#   - "SPASS beiseite: Maximal number of loops exceeded."
+
+
+# Vampire 4.5.1
+
+- name: "vampire-4.5.1"
+  label: "vampire-4.5.1"
+  path: "vampire-4.5.1"
+  arguments:
+    - "--mode"
+    - "casc"
+    - "-t %d"
+  successMessage:
+    - "% SZS output end Proof for"
+  contradictionMessage:
+    - "% SZS status ContradictoryAxioms for"
+  failureMessage:
+    - "% SZS status CounterSatisfiable for"
+  unknownMessage:
+    - "% SZS status Timeout for"
+
+
+# E 2.5
+
+- name: "eprover-2.5"
+  label: "eprover-2.5"
+  path: "eprover-2.5"
+  arguments:
+    - "-xAuto"
+    - "-tAuto"
+    - "-mAuto"
+    - "--tstp-in"
+    - "-l 2"
+    - "--cpu-limit=%d"
+  successMessage:
+    - "# SZS status Theorem"
+  contradictionMessage:
+    - "# SZS status ContradictoryAxioms"
+  failureMessage:
+    - "# SZS status CounterSatisfiable"
+  unknownMessage:
+    - "# SZS status ResourceOut"
+    - "# SZS status GaveUp"
