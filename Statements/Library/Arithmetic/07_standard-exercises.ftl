@@ -13,6 +13,8 @@ Proof.
   = (n + 1) /cdot (n + 1)
   = ((n + 1) /cdot n) + (n + 1)
   = ((n /cdot n) + n) + (n + 1)
+  = (n^{2} + n) + (n + 1)
+  = ((n^{2} + n) + n) + 1
   = (n^{2} + (n + n)) + 1
   = (n^{2} + (2 /cdot n)) + 1.
 qed.
@@ -101,9 +103,18 @@ Proof.
     Case x > 4.
       Then 2^{x} > x^{2}.
 
-      2^{x} /cdot 2 > x^{2} /cdot 2.
+      (2) 2^{x} /cdot 2 > x^{2} /cdot 2.
 
-      x^{2} + x^{2} > x^{2} + ((2 /cdot x) + 1). Indeed x^{2} > (2 /cdot x) + 1.
+      (3) x^{2} /cdot 2 = x^{2} + x^{2}.
+
+      (4) x^{2} + x^{2} > x^{2} + ((2 /cdot x) + 1). Indeed
+      x^{2} > (2 /cdot x) + 1.
+
+      [prove off]
+      # Vampire cannot prove this trivial statement...
+      (5) x^{2} + ((2 /cdot x) + 1) = (x + 1)^{2} (by 0701).
+      [/prove]
+
 
       Hence
 

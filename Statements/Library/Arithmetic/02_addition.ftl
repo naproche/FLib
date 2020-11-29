@@ -32,7 +32,8 @@ Proof.
 
   For all natural numbers z if P(z) then P(z + 1).
   proof.
-    Let z be a natural number. Assume P(z).
+    Let z be a natural number. Assume P(z). Then x + (y + z) = (x + y) + z for
+    all natural numbers x,y.
 
     x + (y + (z + 1)) = (x + y) + (z + 1) for all natural numbers x,y.
     proof.

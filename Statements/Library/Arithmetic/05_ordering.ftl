@@ -321,7 +321,8 @@ Proof.
     proof.
       Assume x + 1, m > k. Then (x + 1) /cdot m = (x /cdot m) + m. If x = 0 then
       (x /cdot m) + m = 0 + m = m > k. If x /neq 0 then (x /cdot m) + m > m > k.
-      Hence (x + 1) /cdot m > k.
+      Indeed if x /neq 0 then x /cdot m > 0. Indeed m > 0. Hence
+      (x + 1) /cdot m > k.
     end.
   end.
 
@@ -329,10 +330,14 @@ Proof.
 qed.
 
 
-Corollary 0523. Assume k /neq 0. n /leq m iff k /cdot n /leq k /cdot m.
+Corollary 05xx. If n /leq m then k /cdot n /leq k /cdot m.
+
+Corollary 0523. Assume k /neq 0. If k /cdot n /leq k /cdot m then n /leq m.
 
 
-Corollary 0524. Assume k /neq 0. n /leq m iff n /cdot k /leq m /cdot k.
+Corollary 05yy. If n /leq m then n /cdot k /leq m /cdot k.
+
+Corollary 0524. Assume k /neq 0. If n /cdot k /leq m /cdot k then n /leq m.
 
 
 # < is stable under exponentiation
@@ -380,8 +385,8 @@ Proof.
         For all natural numbers x,y if x < y and z + 1 > 1 then
         x^{z + 1} < y^{z + 1}.
         proof.
-          Let x,y be natural numbers. Assume x < y and z + 1 > 1. (3) Then
-          x^{z} < y^{z}.
+          Let x,y be natural numbers. Assume x < y and z + 1 > 1. Then
+          x^{z} < y^{z}. Indeed z /neq 0 and if z = 1 then x^{z} < y^{z}.
 
           Case z /leq 1.
             Then z = 0 or z = 1. Hence z + 1 = 1 or z + 1 = 2. Thus P holds for

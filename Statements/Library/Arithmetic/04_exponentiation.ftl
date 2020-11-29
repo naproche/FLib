@@ -93,6 +93,7 @@ Proof.
   # for any natural number z.
   Define P = {natural number z | x^{y + z} = x^{y} /cdot x^{z} for all natural
   numbers x,y}.
+  [/prove]
 
   P holds for 0.
   proof.
@@ -109,7 +110,7 @@ Proof.
 
   For all natural numbers z if P(z) then P(z + 1).
   proof.
-    Let z be a natural number.
+    Let z be a natural number. Assume P(z).
 
     For all natural numbers x,y we have x^{y + (z + 1)} = x^{y} /cdot x^{z + 1}.
     proof.
