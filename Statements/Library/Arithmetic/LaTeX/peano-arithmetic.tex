@@ -1,0 +1,56 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{framed}
+
+\title{Peano Arithmetic}
+\author{Marcel Schütz}
+
+\hypersetup{
+  pdftitle={Peano Arithmetic},
+  pdfdisplaydoctitle=true,
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+  linktoc=all
+}
+
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{signature}[theorem]{Signature}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\phantomsection
+\addcontentsline{toc}{section}{Title}
+\maketitle
+
+\phantomsection
+\addcontentsline{toc}{section}{Tabel of contents}
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+
+\input{sections/01_peano-axioms.tex}
+%\input{sections/02_addition.tex}
+%\input{sections/03_multiplication.tex}
+%\input{sections/04_exponentiation.tex}
+%\input{sections/05_ordering.tex}
+%\input{sections/06_factorial.tex}
+%\input{sections/07_standard-exercises.tex}
+%\input{sections/08_induction.tex}
+\end{document}
