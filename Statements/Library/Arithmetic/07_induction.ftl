@@ -1,18 +1,18 @@
-# 8 Alternate forms of induction
+# 7 Alternate forms of induction
 
 [read FLib/Statements/Library/Arithmetic/05_ordering.ftl]
 
 
 Let P denote a statement that has at most one free variable.
 
-# 8.1 Least elements
+# 7.1 Least elements
 
-Definition 0801. A least natural number satisfying P is a natural number n
+Definition 0701. A least natural number satisfying P is a natural number n
 such that P holds for n and P does not hold for any natural number that is less
 than n.
 
 
-Lemma 0802. Let n,m be least natural numbers satisfying P. Then n = m.
+Lemma 0702. Let n,m be least natural numbers satisfying P. Then n = m.
 
 Proof.
   Assume n /neq m. Then n < m or m < n. If n < m then P does not hold for n and
@@ -20,7 +20,7 @@ Proof.
 qed.
 
 
-Theorem 0803. Assume that P holds for some natural number. Then there is a least
+Theorem 0703. Assume that P holds for some natural number. Then there is a least
 natural number satisfying P.
 
 Proof.
@@ -54,9 +54,9 @@ Proof.
 qed.
 
 
-# 8.2 Induction via predecessors
+# 7.2 Induction via predecessors
 
-Theorem 0804. Assume for all natural numbers n if P holds for all natural
+Theorem 0704. Assume for all natural numbers n if P holds for all natural
 numbers that are less than n then P holds for n. Then P holds for all natural
 numbers.
 
@@ -72,4 +72,42 @@ Proof.
   Hence Q does not hold for any natural number that is less than m. Therefore P
   holds for all natural numbers that are less than m. Thus P holds for m.
   Contradiction.
+qed.
+
+
+# 7.3 Induction above a certain number
+
+Theorem 0705. Let k be a natural number. Assume P(k). Suppose for all natural
+numbers n such that n /geq k we have P(n) => P(n + 1). Then P(n) for all natural
+numbers n such that n /geq k.
+
+Proof.
+  [prove off]
+  # Define Q[x] = "if x /geq k then P(x)" for any natural number x.
+  Define Q = {natural number x | if x /geq k then P(x)}.
+  [/prove]
+
+  We have Q(0).
+
+  For all natural numbers x if Q(x) then Q(x + 1).
+  proof.
+    Let x be a natural number. Assume Q(x).
+
+    If x + 1 /geq k then P(x + 1).
+    proof.
+      Assume x + 1 /geq k.
+
+      Case x < k.
+        Then x + 1 = k. Hence P(x + 1).
+      end.
+
+      Case x /geq k.
+        Then P(x). Hence P(x + 1).
+      end.
+    end.
+
+    Thus we have Q(x + 1).
+  end.
+
+  Therefore Q holds for every natural number. Hence the thesis.
 qed.
