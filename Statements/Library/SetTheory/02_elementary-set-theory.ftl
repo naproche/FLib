@@ -106,7 +106,8 @@ Let a,b denote elements.
 Axiom 0218. There is a zet x such that x = {u | u = a or u = b}.
 
 Definition 0229. `{a,b}` is the zet x such that x = {u | u = a or u = b}. Let
-the unordered pair of a and b stand for `{a,b}`.
+the unordered pair of a and b stand for `{a,b}`. Let /Set{a,b} stand for
+`{a,b}`.
 
 
 Lemma 0220. There is a zet x such that x = {u | u = a}.
@@ -117,4 +118,5 @@ qed.
 
 
 Definition 0221. Let a be an element. `{a}` is the zet x such that `{a}` =
-{u | u = a}. Let the singleton set of a stand for `{a}`.
+{u | u = a}. Let the singleton set of a stand for `{a}`. Let /Set{a} stand for
+`{a}`.
