@@ -101,7 +101,7 @@ qed.
 
 # Neutral element
 
-Proposition 0307. n /cdot 1 = n.
+Proposition 0306. n /cdot 1 = n.
 
 Proof.
     n /cdot 1
@@ -112,9 +112,19 @@ Proof.
 qed.
 
 
+Corollary 0307. n /cdot 2 = n + n.
+
+Proof.
+    n /cdot 2
+  = n /cdot (1 + 1)   # Definition of 2
+  = (n /cdot 1) + n   # 2nd multiplication axiom
+  = n + n.            # 1 is neutral wrt. multiplication
+qed.
+
+
 # Associativity
 
-Proposition 0306. n /cdot (m /cdot k) = (n /cdot m) /cdot k.
+Proposition 0308. n /cdot (m /cdot k) = (n /cdot m) /cdot k.
 
 Proof.
   [prove off]
@@ -151,7 +161,7 @@ qed.
 
 # Commutativity
 
-Proposition 0308. n /cdot m = m /cdot n.
+Proposition 0309. n /cdot m = m /cdot n.
 
 Proof.
   [prove off]
@@ -234,7 +244,7 @@ qed.
 
 # There are no zero-divisors
 
-Proposition 0309. If n /cdot m = 0 then n = 0 or m = 0.
+Proposition 0310. If n /cdot m = 0 then n = 0 or m = 0.
 
 Proof.
   Assume n /cdot m = 0.
@@ -259,7 +269,7 @@ qed.
 
 # Cancellation laws
 
-Proposition 0310. Assume k /neq 0. Then if n /cdot k = m /cdot k then n = m.
+Proposition 0311. Assume k /neq 0. Then if n /cdot k = m /cdot k then n = m.
 
 Proof.
   [prove off]
@@ -305,7 +315,7 @@ Proof.
 qed.
 
 
-Corollary 0311. Assume k /neq 0. Then if k /cdot n = k /cdot m then n = m.
+Corollary 0312. Assume k /neq 0. Then if k /cdot n = k /cdot m then n = m.
 
 Proof.
   Assume k /cdot n = k /cdot m. We have k /cdot n = n /cdot k and k /cdot m =
