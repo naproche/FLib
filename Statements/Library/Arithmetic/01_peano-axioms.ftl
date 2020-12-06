@@ -2,8 +2,8 @@
 
 [read FLib/Statements/Library/statements.ftl]
 
-#[prover eprover-2.5]
-[prover vampire-4.5.1]
+[prover eprover-2.5]
+#[prover vampire-4.5.1]
 
 
 # 1.1 The language of Peano Arithmetic
