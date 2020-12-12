@@ -2071,11 +2071,11 @@ Proof.
     end.
   end.
 
-[checktime 2][checkdepth 3]
+  [checktime 2][checkdepth 3]
 
   Define h[(xi,zeta)] = g[f[xi]][zeta] for (xi,zeta) in kappa \times kappa.
 
-[/checktime][/checkdepth]
+  [/checktime][/checkdepth]
 
   Let us show that h is a surjective function from kappa \times kappa to kappa^{+}.
   	Dom(h) = kappa \times kappa. Every element of kappa^{+} is an element of h^[kappa \times kappa].
