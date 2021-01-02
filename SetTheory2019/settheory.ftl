@@ -61,7 +61,7 @@ Definition. The unordered pair of x and y is {u | u = x \/ u = y}.
 Let \{ x,y \} stand for the unordered pair of x and y.
 
 
-# \subsectioin{Functions} % chapter 1.2
+# \subsection{Functions} % chapter 1.2
 
 Definition. Let f be a function. \range(f) = {f[x] | x \in Dom(f)}.
 Let the range of f stand for \range(f).
@@ -107,7 +107,7 @@ Definition. \id--{x} is a function from x to x such that \id--{x}[i] = i for eve
 Definition. 0--{x} is a function such that Dom(0--{x}) = x and 0--{x}[i] = \emptyset for all i \in x.
 
 
-# \subsectioin{Inductive sets} % chapter 1.3
+# \subsection{Inductive sets} % chapter 1.3
 
 Let 0 stand for \emptyset.
 
