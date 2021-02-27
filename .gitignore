@@ -1,6 +1,8 @@
-*.ftl~
 *.aux
-*.log
+*.fdb_latexmk
+*.fls
 *.gz
+*.log
+*.out
 *.toc
 *~
