@@ -114,7 +114,7 @@ f,g if dom(f) = dom(g) and codom(f) = codom(g) and f \neq g then there is a
 morphism x from G to dom(f) such that x \circ f \neq x \circ g.
 
 
-# 5. Categories and functors
+# 4. Categories and functors
 
 [synonym category/categories]
 [synonym functor/-s]
@@ -159,7 +159,7 @@ Axiom Partial skeletal axiom 2. If A and B are isomorphic then A and B are
 equal.
 
 
-# 6. The category 2
+# 5. The category 2
 
 Signature. 2 is a category.
 
