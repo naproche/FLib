@@ -1,21 +1,25 @@
 # Mathematical structures
 
-This is an approach of a general theory about mathematical structues that
-provides a way of writing ForTheL-texts about them in a quite natural style.
+**WARNING: This formalization is deprecated!**
 
 
-## Overview
+---
 
-The following graph shows how the files in this collection depend on each other.
+- **Author:** Marcel Schütz (2020)
 
-![Dependency graph](./dependencygraph.png)
+- **Required Naproche version:** Some inofficial fork
+
+- **Required amount of free memory:** _unknown_
+
+- **Approximate verification time:** _unknown_
+
+- **Verified with:** [E](https://wwwlehre.dhbw-stuttgart.de/~sschulz/E/E.html) 2.0
+
+---
 
 
-## Usage
-
-The files in this directory are designed to work in a special
-[fork](https://github.com/McEarl/Naproche-SAD) of Naproche-SAD.
-See
-[changelog](https://github.com/McEarl/Naproche-SAD/blob/master/CHANGELOG.md)
-for a list of aspects in which this fork differs from the original version of
-Naproche-SAD.
+This is an approach on formalizing a general theory about mathematical structures.
+It was developed in the context of a bachelor thesis in 2020 and depends on a special fork of Naproche which is no longer maintained.
+Unfortunately the changes made in this fork are not adopted to the current version of Naproche.
+Hence these formalizations won't be accepted by the current version of Naproche.
+Fortunately, it looks like the latest advances in the development of Naproche will make it possible to adopt this formalization to an official version of Naproche in the not too long future.
