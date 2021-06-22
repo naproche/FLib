@@ -851,37 +851,37 @@ Theorem 46_e. omega \in Lim.
 # 3.3 Ordinal recursion
 # ---------------------
 
-# ...
+# [...]
 
 
 # 3.4 Ordinal Arithmetic
 # ----------------------
 
-# ...
+# [...]
 
 
 # 4 Number Systems
 # ================
 
-# ...
+# [...]
 
 
 # 5 Sequences
 # ===========
 
-# ...
+# [...]
 
 
 # 6 The von Neumann Hierarchy
 # ===========================
 
-# ...
+# [...]
 
 
 # 7 The Axiom of Choice
 # =====================
 
-# ...
+# [...]
 
 
 ## >>>>>>>
