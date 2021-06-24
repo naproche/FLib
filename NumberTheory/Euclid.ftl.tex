@@ -1,0 +1,688 @@
+\documentclass{article}
+\usepackage{pdfbase}[2017/03/16]
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    }
+
+\usepackage{xparse,ocgbase}
+\usepackage{xcolor,calc}
+\usepackage{tikzpagenodes,linegoal}
+\usetikzlibrary{calc}
+%\usepackage{tcolorbox}
+
+\ExplSyntaxOn
+\let\tpPdfLink\pbs_pdflink:nn
+\let\tpPdfAnnot\pbs_pdfannot:nnnn\let\tpPdfLastAnn\pbs_pdflastann:
+\let\tpAppendToFields\pbs_appendtofields:n
+\def\tpPdfXform{\pbs_pdfxform:nnnnn{1}{1}{}{}}
+\let\tpPdfLastXform\pbs_pdflastxform:
+\let\cListSet\clist_set:Nn\let\cListItem\clist_item:Nn
+\ExplSyntaxOff
+
+\makeatletter
+\NewDocumentCommand{\tooltip}{%
+  ssssO{\ifdefined\@linkcolor\@linkcolor\else blue\fi}mO{yellow!20}mO{0pt,0pt}%
+}{{%
+  \leavevmode%
+  \IfBooleanT{#2}{%
+    %for variants with two and more stars, put tip box on a PDF Layer (OCG)
+    \ocgbase@new@ocg{tipOCG.\thetcnt}{%
+      /Print<</PrintState/OFF>>/Export<</ExportState/OFF>>%
+    }{false}%
+    \xdef\tpTipOcg{\ocgbase@last@ocg}%
+    %prevent simultaneous visibility of multiple non-draggable tooltips
+    \ocgbase@add@ocg@to@radiobtn@grp{tool@tips}{\ocgbase@last@ocg}%
+  }%
+  \tpPdfLink{%
+    \IfBooleanTF{#4}{%
+      /Subtype/Link/Border[0 0 0]/A <</S/SetOCGState/State [/Toggle \tpTipOcg]>>
+    }{%
+      /Subtype/Screen%
+      /AA<<%
+        \IfBooleanTF{#3}{%
+          /E<</S/SetOCGState/State [/Toggle \tpTipOcg]>>%
+        }{%
+          \IfBooleanTF{#2}{%
+            /E<</S/SetOCGState/State [/ON \tpTipOcg]>>%
+            /X<</S/SetOCGState/State [/OFF \tpTipOcg]>>%
+          }{
+            \IfBooleanTF{#1}{%
+              /E<</S/JavaScript/JS(%
+                var fd=this.getField('tip.\thetcnt');%
+                if(typeof(click\thetcnt)=='undefined'){%
+                  var click\thetcnt=false;%
+                  var fdor\thetcnt=fd.rect;var dragging\thetcnt=false;%
+                }%
+                if(fd.display==display.hidden){%
+                  fd.delay=true;fd.display=display.visible;fd.delay=false;%
+                }else{%
+                  if(!click\thetcnt&&!dragging\thetcnt){fd.display=display.hidden;}%
+                  if(!dragging\thetcnt){click\thetcnt=false;}%
+                }%
+                this.dirty=false;%
+              )>>%
+            }{%
+              /E<</S/JavaScript/JS(%
+                var fd=this.getField('tip.\thetcnt');%
+                if(typeof(click\thetcnt)=='undefined'){%
+                  var click\thetcnt=false;%
+                  var fdor\thetcnt=fd.rect;var dragging\thetcnt=false;%
+                }%
+                if(fd.display==display.hidden){%
+                  fd.delay=true;fd.display=display.visible;fd.delay=false;%
+                }%
+               this.dirty=false;%
+              )>>%
+              /X<</S/JavaScript/JS(%
+                if(!click\thetcnt&&!dragging\thetcnt){fd.display=display.hidden;}%
+                if(!dragging\thetcnt){click\thetcnt=false;}%
+                this.dirty=false;%
+              )>>%
+            }%
+            /U<</S/JavaScript/JS(click\thetcnt=true;this.dirty=false;)>>%
+            /PC<</S/JavaScript/JS (%
+              var fd=this.getField('tip.\thetcnt');%
+              try{fd.rect=fdor\thetcnt;}catch(e){}%
+              fd.display=display.hidden;this.dirty=false;%
+            )>>%
+            /PO<</S/JavaScript/JS(this.dirty=false;)>>%
+          }%
+        }%
+      >>%
+    }%
+  }{{\color{#5}#6}}%
+  \sbox\tiptext{%
+    \IfBooleanT{#2}{%
+      \ocgbase@oc@bdc{\tpTipOcg}\ocgbase@open@stack@push{\tpTipOcg}}%
+    %\fcolorbox{black}{#7}{#8}%
+    \tcbox[colframe=black,colback=#7,size=fbox,arc=1ex,sharp corners=southwest]{#8}%
+    \IfBooleanT{#2}{\ocgbase@oc@emc\ocgbase@open@stack@pop\tpNull}%
+  }%
+  \cListSet\tpOffsets{#9}%
+  \edef\twd{\the\wd\tiptext}%
+  \edef\tht{\the\ht\tiptext}%
+  \edef\tdp{\the\dp\tiptext}%
+  \tipshift=0pt%
+  \IfBooleanTF{#2}{%
+    %OCG-based (that is, all non-draggable) boxes should not extend beyond the
+    %current column as they may get overlaid by text in the neighbouring column
+    \setlength\whatsleft{\linegoal}%
+  }{%
+    \measureremainder{\whatsleft}%
+  }%
+  \ifdim\whatsleft<\dimexpr\twd+\cListItem\tpOffsets{1}\relax%
+    \setlength\tipshift{\whatsleft-\twd-\cListItem\tpOffsets{1}}\fi%
+  \IfBooleanF{#2}{\tpPdfXform{\tiptext}}%
+  \raisebox{\heightof{#6}+\tdp+\cListItem\tpOffsets{2}}[0pt][0pt]{%
+    \makebox[0pt][l]{\hspace{\dimexpr\tipshift+\cListItem\tpOffsets{1}\relax}%
+    \IfBooleanTF{#2}{\usebox{\tiptext}}{%
+      \tpPdfAnnot{\twd}{\tht}{\tdp}{%
+        /Subtype/Widget/FT/Btn/T (tip.\thetcnt)%
+        /AP<</N \tpPdfLastXform>>%
+        /MK<</TP 1/I \tpPdfLastXform/IF<</S/A/FB true/A [0.0 0.0]>>>>%
+        /Ff 65536/F 3%
+        /AA <<%
+          /U <<%
+            /S/JavaScript/JS(%
+              var fd=event.target;%
+              var mX=this.mouseX;var mY=this.mouseY;%
+              var drag=function(){%
+                var nX=this.mouseX;var nY=this.mouseY;%
+                var dX=nX-mX;var dY=nY-mY;%
+                var fdr=fd.rect;%
+                fdr[0]+=dX;fdr[1]+=dY;fdr[2]+=dX;fdr[3]+=dY;%
+                fd.rect=fdr;mX=nX;mY=nY;%
+              };%
+              if(!dragging\thetcnt){%
+                dragging\thetcnt=true;Int=app.setInterval("drag()",1);%
+              }%
+              else{app.clearInterval(Int);dragging\thetcnt=false;}%
+              this.dirty=false;%
+            )%
+          >>%
+        >>%
+      }%
+      \tpAppendToFields{\tpPdfLastAnn}%
+    }%
+  }}%
+  \stepcounter{tcnt}%
+}}
+\makeatother
+\newsavebox\tiptext\newcounter{tcnt}
+\newlength{\whatsleft}\newlength{\tipshift}
+\newcommand{\measureremainder}[1]{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \path let \p0 = (0,0), \p1 = (current page.east) in
+      [/utils/exec={\pgfmathsetlength#1{\x1-\x0}\global#1=#1}];
+  \end{tikzpicture}%
+}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\DeclareMathOperator{\Ab}{Ab}
+\DeclareMathOperator{\MuC}{Mu}
+
+
+
+\newcommand{\gdotG}[1]{\cdot_{#1}}
+\newcommand{\gdot}[1]{\mbox{\tooltip{$\cdot$}{$\cdot_{#1}$}}}
+\newcommand{\sGC}[1]{\vert #1 \vert}
+\newcommand{\sG}[1]{\mbox{\tooltip{$#1$}{$|#1|$}}}
+\newcommand{\inv}[2]{#1^{-1}}
+\newcommand{\invC}[2]{#1^{-1}_{#2}}
+\newcommand{\e}[1]{\mbox{\tooltip{$\mathbf{e}$}{$\eC{#1}$}}}
+\newcommand{\eC}[1]{\mathbf{e}_{#1}}
+%RINGS
+\newcommand{\sRC}[1]{\vert #1 \vert}
+
+\newcommand{\tR}[1]{\mbox{\tooltip{$\cdot$}{$\cdot_{#1}$}}}
+\newcommand{\pR}[1]{\mbox{\tooltip{$+$}{$+_{#1}$}}}
+\newcommand{\sR}[1]{\mbox{\tooltip{$#1$}{$|#1|$}}}
+\newcommand{\Mu}[1]{\mbox{\tooltip{$#1$}{$\MuC(#1)$}}}
+%\newcommand{\pRC}[1]{+_{#1}}
+%\newcommand{\tRC}[1]{\cdot_{#1}}
+\newcommand{\mR}[1]{\mbox{\tooltip{-}{$-_{#1}$}}}
+\newcommand{\zR}[1]{\mbox{\tooltip{0}{$0_{#1}$}}}
+%\newcommand{\zR}[1]{0_{#1}}
+
+\newcommand{\naproche}{$\mathbb{N}$aproche }
+\newcommand{\oR}[1]{\mbox{\tooltip{1}{$1_{#1}$}}}
+%\newcommand{\oRC}[1]{1_{#1}}
+%Ordnungen
+\newcommand{\rest}[2]{#1 \vert_{#2}}
+\newcommand{\oC}[1]{#1}
+\newcommand{\oO}[1]{\mbox{\tooltip{$\le$}{$#1$}}}
+\newcommand{\oBC}[1]{\vert #1 \vert}
+\newcommand{\oB}[1]{\mbox{\tooltip{$#1$}{$|#1|$}}}
+\newcommand{\Min}[1]{\mathcal{M}(#1)}
+\newcommand{\cM}{\mathcal{M}}
+
+
+%ganze zahlen
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\lez}{\le_{\Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\cP}{\mathbb{P}}
+
+\newcommand{\NPOS}{\mathbb{N}_{>1}}
+
+%\newcommand{\ooDIV}{}
+\newcommand{\NDIV}{\vert_{>1}}
+\newcommand{\DIVI}[1]{\mbox{\tooltip{$|$}{$|_{#1}$}}}
+\newcommand{\MoPos}{\mathbb{N}_{>0}}
+
+
+\title{Euclids Theorem}
+\author{Tim Lichtnau}
+\date{2021}
+
+\usepackage{../../../../../lib/tex/naproche}
+\newtheorem*{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\begin{document}
+\maketitle
+\begin{abstract}
+\noindent	We present a formalization of Euclid's Theorem from an algebraic and order-theoretic approach. The \texttt{PDF}-document contains some feature which allow us to unhide suppressed information visible via a mouseover event. At this time, this extra works not for all \texttt{PDF}-viewers, but surely for \\
+\texttt{Adobe Reader} or \texttt{ Foxit Reader}.
+\end{abstract}
+\tableofcontents
+
+\section{Sets and classes}
+\begin{forthel}
+	[synonym subset/-s] \\
+	Let $X$ denote a set.
+	\begin{definition}
+		A subset of $X$ is a set $Y$ such that every element of $Y$ is an element of $X$.
+	\end{definition}
+	\begin{axiom}
+		Let Y be a class. Assume every element of $Y$ is an element of $X$. Then $Y$ is a set.
+	\end{axiom}
+	\begin{axiom}
+		Every element of every set is setsized.
+	\end{axiom}
+	
+\end{forthel}
+\section{Order relations}
+\begin{forthel}
+	Let $Y \subseteq X$ stand for $Y$ is a subset of $X$.
+	\begin{definition}
+		$X$ is nonempty iff there exists an element of $X$.
+	\end{definition}
+	\begin{signature}
+		An order is a notion.
+	\end{signature}
+	Let $O$ denote a order.
+	\begin{signature}
+		$\oBC{O}$ is a set.
+	\end{signature}
+	Let $\oB{O}$ stand for $\oBC{O}$.
+	
+	\begin{signature}
+		Let $x,y \in \oB{O}$.  $x \oC{O} y$ is an atom.
+	\end{signature}
+	Let $x \oO{O} y$ stand for $x \oC{O} y$.
+\end{forthel}
+\begin{forthel}
+	\begin{definition}
+		An order on $X$ is a order $O$ such that $\oBC{O} = X$.
+	\end{definition}
+	\begin{definition}
+		Let $N \subseteq \oB{O}$. $O$ restricted to $N$ is an order $T$ on $N$ such that
+		($x \oC{T} y$ iff $x \oC{O} y$) for all $x,y \in N$.
+	\end{definition}
+	Let $\rest{O}{N}$ stand for $O$ restricted to $N$.
+	\begin{definition}
+		A suborder of $O$ is an order $T$ such that $\oBC{T} \subseteq  \oBC{O}$ and $T = \rest{O}{\oBC{T}}$.
+	\end{definition}
+	\begin{definition}
+		Let $N \subseteq \oB{O}$. An upper bound of $N$ by $O$ is an element $x$ of $\oB{O}$ such that $n \oO{O} x$ for all 
+		$n \in N$.
+	\end{definition}
+\end{forthel}
+\subsection{Partial orders}
+\begin{forthel}
+	\begin{definition}
+		$O$ is reflexive iff $x \oO{O} x$ for any $x \in \oB{O}$. 
+	\end{definition}
+	
+	\begin{definition}
+		$O$ is antisymmetric iff \\
+		$x \oO{O} y \oO{O} x$  $=>$  $x =y$  for any $x,y \in \oB{O}$. 
+	\end{definition}
+	\begin{definition}
+		$O$ is transitive iff \\
+		$x \oO{O} y \oO{O} z$  $=>$  $x \oO{O} z$ for any $x,y,z \in \oB{O}$. 
+	\end{definition}
+	\begin{definition}
+		$O$ is partial iff $O$ is reflexive and antisymmetric and transitive.
+	\end{definition}
+	\begin{lemma}
+		Let $O$ be a partial order. Let $X \subseteq \oBC{O}$. $\rest{O}{X}$ is a partial order.
+	\end{lemma}
+\end{forthel}
+
+
+\section{Monoids}
+\begin{forthel}
+	
+	%[unfoldlow on]
+	
+	\begin{signature}
+		A magma is a notion.
+	\end{signature}
+	Let M,G denote magma.
+	
+	\begin{signature}
+		$\sGC{M}$ is a set.
+	\end{signature}
+	
+	
+	\begin{signature}
+		Let $x,y \in \sGC{M}$. $x \gdotG{M} y$ is an element of $\sGC{M}$.
+	\end{signature}
+	Let $\sG{M}$ stand for $\sGC{M}$.
+	Let $x \gdot{M} y$ stand for $x \gdotG{M} y$.
+	
+	[synonym element/-s] [synonym inverse/-s]
+	%\begin{lemma}
+	% Let $x,y \in \s{M}$. Then $y \gdot{M} x \in \s{M}$.
+	%\end{lemma}
+	\begin{definition}
+		Let $X$ be a set. $M$ is based on $X$ iff $\sGC{M} = X$.
+	\end{definition}
+	\begin{definition}
+		$G$ is associative iff $(x \gdot{G} y) \gdot{G} z = x \gdot{G} (y \gdot{G} z)$ for all $x,y,z \in \sG{G}$.
+	\end{definition}
+	
+	\begin{definition}
+		$G$ is abelian iff $x\gdot{G}y = y\gdot{G}x$ for all $x,y \in \sG{G}$.
+	\end{definition}
+	
+	\begin{definition}
+		%Let $e \in \sG{G}$. $e$ is neutral in $G$
+		A neutral element of $G$ is an element e of $\sG{G}$ such that $(e\gdot{G}x = x$ and $x = x \gdot{G} e)$ for all $x \in \sG{G}$.
+	\end{definition}
+	
+	
+	\begin{lemma}[uniqNeut]
+		% Let $e,e' \in \sG{G}$. Assume $e$ and $e'$ are neutral in $G$. 
+		Let $e$ and $e'$ be neutral elements of $G$.
+		Then $e = e'$.
+	\end{lemma}
+	\begin{proof}
+		$e' = e \gdot{G} e' = e$.
+	\end{proof}
+	
+	
+	\begin{definition}
+		A Monoid is an associative Magma with a neutral element. %$e \in \sG{G}$ such that $e$ is neutral in $G$.
+	\end{definition}
+	Let $M$ denote a Monoid.
+	
+	\begin{definition}
+		Let $x,y \in \sG{M}$. $x$ divides $y$ in $M$ iff there exists $k \in \sG{M}$ such that $k \gdot{M} x = y$.
+	\end{definition}
+	\begin{lemma}[transitiveDiv]
+		Let $k,m,n \in \sG{M}$. Suppose $n$ divides $m$ in $M$ and 
+		$m$ divides $k$ in $M$. Then  $n$ divides $k$ in $M$.
+	\end{lemma}
+	\begin{proof}
+		Take an $l \in \sG{M}$ such that $ l \gdot{M} n = m$. \\
+		Take an $p \in \sG{M}$ such that $p \gdot{M} m = k$.  \\
+		Then $k = p \gdot{M} m = p$ $\gdot{M} (l \gdot{M} n) = (p \gdot{M} l) \gdot{M} n $.
+		Thus $n$ divides $k$ in $M$.
+	\end{proof}
+\end{forthel}
+
+
+%\subsection{Die Teilbarkeitsrelation}
+\subsection{Divisibility theory}
+\begin{forthel}
+	Let M denote a monoid.
+	\begin{definition}
+		$\DIVI{M}$ is an order on $\sG{M}$ such that for any $x,y \in \sG{M}$ we have
+		$x \oC{\DIVI{M}} y$ iff $x$ divides $y$ in $M$ .
+	\end{definition}
+	\begin{lemma}
+		$\DIVI{M}$ is reflexive and transitive.
+	\end{lemma}
+	\begin{proof}
+		$\DIVI{M}$ is reflexive. Indeed $x$ divides $x$ in $M$ for all $x \in \sG{M}$. \\
+		$\DIVI{M}$ is transitive (by transitiveDiv).
+	\end{proof}
+\end{forthel}
+\subsection{Finiteness}
+\begin{forthel}
+	Let X denote a set. 
+	
+	\begin{signature}
+		X is finite is an atom.
+	\end{signature}
+	\begin{axiom}[FiniteMultiplication]
+		Let M be an abelian Monoid. Let $X$ be a finite subset of $\sG{M}$. Then $X$ has an upper bound by $\DIVI{M}$.
+	\end{axiom}
+	
+\end{forthel}
+\subsection{Groups}
+\begin{forthel}
+	\begin{signature}
+		$\eC{M}$ is a neutral element of $M$. %$$e$ of $\sG{M}$ such that $e$ is neutral in $M$.
+	\end{signature}
+	\begin{definition}
+		A submonoid of $M$ is a monoid $N$ such that 
+		$\sG{N} \subseteq \sG{M}$ and $\eC{N} = \eC{M}$ and ($x \gdotG{N} y = x \gdotG{M} y$) for any $x,y \in \sG{N}$.
+	\end{definition}
+	Let $\e{M}$ stand for $\eC{M}$.
+	\begin{definition}
+		Let $x \in \sG{M}$. An inverse of $x$ in $M$ is an element $y$ of $\sG{M}$ such that $x \gdot{M} y = \eC{M}$ and $y \gdot{M} x = \eC{M}$. %$ is a neutral element of $G$ and $y\gdot{G}x$ is neutral in $G$.
+	\end{definition}
+	
+	
+	
+	\begin{lemma}[uniqInv]
+		Let $M$ be a Monoid. Let $x,y,y' \in \sG{M}$. 
+		Assume $y$ and $y'$ are inverses of $x$ in $M$. Then $y = y'$.
+	\end{lemma}
+	\begin{proof}
+		$y = \e{M} \gdot{M} y = (y' \gdot{M} x) \gdot{M} y = y' \gdot{M} (x \gdot{M} y) = y' \gdot{M} \e{M} = y'$. 
+	\end{proof} 
+	\begin{definition}
+		A Group is a Monoid $G$ such that every element of $\sG{G}$ has an inverse in $G$.
+	\end{definition}
+	
+	Let $G$ denote a Group.
+	
+	
+	\begin{signature}
+		Let $x \in \sG{G}$. 
+		$\invC{x}{G}$ is an inverse of $x$ in $G$.
+	\end{signature}
+\end{forthel}
+
+\section{Rings}
+\begin{forthel}
+	[synonym ring/-s]
+	
+	[synonym divisor/-s] [synonym unit/-s]
+	\begin{signature}
+		A Ring is a notion.
+	\end{signature}
+	
+	Let $R$ denote a ring.
+	\begin{signature}
+		$\sRC{R}$ is a set.
+	\end{signature}
+	Let $\sR{R}$ stand for $\sRC{R}$.
+	\begin{signature}
+		$\Ab(R)$ is an abelian group based on $\sR{R}$.
+	\end{signature}
+	
+	\begin{signature}
+		$\MuC(R)$ is a Monoid based on $\sR{R}$.
+	\end{signature}
+	
+	Let $x \pR{R} y$ stand for $x \gdotG{\Ab(R)} y$.
+	Let $x \tR{R} y$ stand for $x \gdotG{\MuC(R)} y$.
+	Let $R$ is commutative stand for $\MuC(R)$ is abelian.
+	
+	\begin{definition}
+		$\zR{R} = \eC{\Ab(R)}$.
+	\end{definition}
+	\begin{definition}
+		$\oR{R} = \eC{\MuC(R)}$.
+	\end{definition}
+	
+	\begin{axiom}[DistribI]
+		Let $x,y,z \in \sR{R}.$ $x \tR{R} (y \pR{R} z) = (x \tR{R} y) \pR{R} (x \tR{R} z)$.
+	\end{axiom}
+	\begin{axiom}[DistribII]
+		Let $x,y,z \in \sR{R}.$ $(x \pR{R} y) \tR{R} z = (x \tR{R} z) \pR{R} (y \tR{R} z)$.
+	\end{axiom}
+	\begin{definition}
+		Let $x \in \sR{R}$. $\mR{R}x = \invC{x}{\Ab(R)}$.
+	\end{definition}
+	
+	
+	Let $x \mR{R} y$ stand for $x \pR{R} (\mR{R}y)$.
+	
+	
+	\begin{lemma}
+		Let $x \in \sR{R}$. $\zR{R} \tR{R} x = \zR{R}$.
+	\end{lemma}
+	\begin{proof}
+		
+		$\zR{R} = (\zR{R} \tR{R} x) \mR{R} (\zR{R} \tR{R} x) \\
+		= ((\zR{R} \pR{R} \zR{R}) \tR{R} x) \mR{R} (\zR{R} \tR{R} x) \\
+		= ((\zR{R} \tR{R} x) \pR{R} (\zR{R} \tR{R} x)) \mR{R} (\zR{R} \tR{R} x) \\
+		= (\zR{R} \tR{R} x) \pR{R} ((\zR{R} \tR{R} x) \mR{R} (\zR{R} \tR{R} x)) \\
+		= (\zR{R} \tR{R} x) \pR{R} \zR{R}. $
+	\end{proof}
+	
+	
+	
+	\begin{lemma}[Minus]
+		Let $k,q \in \sR{R}.$ Then $\mR{R}(k \tR{R} q)= (\mR{R}k) \tR{R} q$.
+	\end{lemma}
+	\begin{proof}
+		$(k \tR{R} q)  \pR{R} ((\mR{R}k) \tR{R} q) = (k \mR{R}k) \tR{R} q = \zR{R} \tR{R} q = \zR{R}$. \\
+		$(k \tR{R} q)$ is an inverse of $((\mR{R}k) \tR{R} q)$ in $\Ab(R)$.
+	\end{proof}
+	
+	
+	\begin{lemma}[MDistrib]
+		Let $x,y,z \in \sR{R}$. $(x \mR{R} y) \tR{R} z = (x \tR{R} z) \mR{R} (y \tR{R} z)$.
+	\end{lemma}
+	\begin{proof}
+		We have
+		$(x \pR{R} (\mR{R} y)) \tR{R} z = (x \tR{R} z) \pR{R} ((\mR{R} y) \tR{R} z)$ (by DistribII). \\
+		$ (x \tR{R} z) \pR{R} ((\mR{R} y) \tR{R} z) = (x \tR{R} z) \mR{R} (y \tR{R} z)$ (by Minus).
+	\end{proof}
+	
+\end{forthel}
+%############ Teilbarkeitstheorie ################################
+
+\begin{forthel}
+	
+	Let $R$ denote a commutative ring.
+	Let $\Mu{R}$ stand for $\MuC(R)$. 
+	%Let $x$ divides $y$ in $R$ stand for $x$ divides $y$ in $\Mu{R}$.
+	%\begin{definition}
+	% Let $x \in \sR{R}$. A divisor of $x$ in $R$ is an element $y$ of $\sR{R}$ such that $y$ divides $x$ in $\Mu{R}$.
+	%\end{definition}
+	
+	\begin{lemma}[divDif]
+		Let $k,m,n \in \sR{R}$. Assume $k$ divides $m$ in $\Mu{R}$ and $k$ divides $n$ in $\Mu{R}$. Then $k$ divides $m \mR{R} n$ in $\Mu{R}$.
+	\end{lemma}
+	\begin{proof}
+		Take $x \in \sR{R}$ such that $x \tR{R} k = m$. \\ 
+		Take $y \in \sR{R}$ such that $y \tR{R} k = n$. 
+		$(x \mR{R} y) \tR{R} k = m \mR{R} n$ (by MDistrib).
+	\end{proof}
+\end{forthel}
+
+
+\section{Wellfounded orders}
+\begin{forthel}
+	\begin{definition}
+		Let $N \subseteq \oBC{O}$. 
+		A minimum of $N$ with $O$ is an element $x$ of $N$ such that 
+		$y \oO{O} x$  $=>$  $x = y$ for all $y \in N$ .
+	\end{definition}
+	
+	\begin{definition}
+		O is wellfounded iff O is a partial order and for all nonempty subsets $S$ of $\oBC{O}$
+		there exists a minimum of $S$ with $O$.
+	\end{definition}
+	
+	[synonym predecessor/-s]
+	\begin{definition}
+		A  minimum of $O$ is a minimum of $\oBC{O}$ with $O$.
+	\end{definition}
+	\begin{definition}
+		$\Min{O}$ = \{$m \in \oB{O}$ $|$ $m$ is a  minimum of $O$ \}.
+	\end{definition}
+	
+	\begin{definition}
+		Let $x \in \oB{O}$. A predecessor of $x$ by $O$ is an element $y$ of $\oB{O}$ such that $y \oO{O} x$.
+	\end{definition}
+	
+	\begin{lemma}
+		Let $O$ be a wellfounded order. Let $x \in \oB{O}$. 
+		Then there exists a predecessor $y$ of $x$ by $O$ such that $y$ is a  minimum of $O$.
+	\end{lemma}
+	\begin{proof}
+		Define $X$ = \{$z \in \oB{O}$ $|$ $z \oO{O} x$\}. $X \subseteq \oB{O}$.
+		Take a minimum $z$ of $X$ with $O$. $z$ is a  minimum of $O$.
+	\end{proof}
+	\begin{definition}
+		Let $x \in \oB{O}$. A stranger of $x$ in $O$ is an element $y$ of $\oB{O}$ such that 
+		$x$ and $y$ have no common predecessors by $O$.
+	\end{definition}
+	\begin{theorem}[StrangerTheorem]
+		Let $O$ be a wellfounded order. Assume every element of $\oB{O}$ has a stranger in $O$.
+		Then $\Min{O}$ has no upper bound by $O$.
+	\end{theorem}
+\end{forthel}
+\section{The ring of integers}
+\begin{forthel}
+	[synonym number/-s] 
+	\begin{signature}
+		$\Z$ is a commutative ring.
+	\end{signature}
+
+	\begin{definition}
+		$\MoPos$ is a submonoid of $\MuC(\Z)$.
+	\end{definition}
+	\begin{definition}
+		A positive number is an element of $\sG{\MoPos}$.
+	\end{definition}
+	Let $n,m$ denote positive numbers.
+
+	\begin{lemma}
+		$\oR{\Z}$ is a positive number.
+	\end{lemma}
+	
+	\begin{axiom}[MultEquiv]
+		Assume $n$ divides $m$ in  $\Mu{\Z}$ and $m$ divides $n$ in $\Mu{\Z}$. Then $n$ = $m$.
+	\end{axiom}
+
+	\begin{lemma}
+		$\DIVI{\MoPos}$ is a partial order.
+	\end{lemma}
+	\begin{proof} 
+		$\DIVI{\MoPos}$ is antisymmetric (by MultEquiv). 
+		Indeed (if $x \oC{\DIVI{\MoPos}} y$ then $x$ divides $y$ in $\Mu{\Z}$) for all $x,y \in \sG{\MoPos}$.  \\
+	\end{proof}
+	Let $n$ is nontrivial stand for $n \neq \oR{\Z}$.
+	\begin{definition}
+		$\NPOS$ = \{$x \in \sG{\MoPos}$ $|$ $x$ is nontrivial \}.
+	\end{definition}
+	\begin{axiom}
+		$n \pR{\Z} m$ is a nontrivial positive number.
+	\end{axiom}
+	\begin{axiom}
+		Let $S$ be a nonempty subset of $\NPOS$. Then there exists a minimum of $S$ with $\DIVI{\MoPos}$.
+	\end{axiom}
+	\begin{definition}
+		$\NDIV$ is $\DIVI{\MoPos}$ restricted to $\NPOS$.
+	\end{definition}
+	\begin{lemma}[Wellfounding]
+		$\NDIV$ is a wellfounded order.
+	\end{lemma}
+	\begin{proof}
+		$\NDIV$ is a partial order. Every nonempty subset of $\NPOS$ has a minimum with $\DIVI{\MoPos}$.
+	\end{proof}
+\end{forthel}
+\section{Euclids Theorem}
+\begin{forthel}
+	\begin{lemma}[ExistenceOfStrangers]
+		Every element of $\NPOS$ has a stranger in $\NDIV$.
+	\end{lemma}
+	
+	\begin{proof}
+		Let $x \in \NPOS$. Consider $y = \oR{\Z} \pR{\Z} x$. $y \in \NPOS$. 
+		Let us show that $x$ and $y$ have no common predecessor by $\NDIV$. \\
+		Proof by contradiction. 
+		Assume the contrary.
+		Take a common predecessor $k$ of $x$ and $y$ by $\NDIV$.
+		$k$ divides $(\oR{\Z} \pR{\Z} x)$ in $\Mu{\Z}$ and $k$ divides $x$ in $\Mu{\Z}$. 
+		$(\oR{\Z} \pR{\Z} x) \mR{\Z} x = \oR{\Z}$.
+		Then $k$ divides $\oR{\Z}$ in $\Mu{\Z}$(by divDif).
+		$\oR{\Z}$ divides $k$ in $\Mu{\Z}$. $\oR{\Z}$ and $k$ are positive numbers.
+		Thus $k = \oR{\Z}$(by MultEquiv) . contradiction.
+		qed.
+	\end{proof}
+	
+	\begin{definition}
+		Let $p \in \NPOS$. $p$ is prime iff for all $d \in \NPOS$ we have \\
+		($d \oC{\DIVI{\MoPos}} p$) $=>$ $d = p$. 
+	\end{definition}
+	\begin{definition}
+		$\cP$ = \{ $p \in \NPOS$ $|$ $p$ is prime \}.
+	\end{definition}
+	\begin{theorem} [Euclid]
+		$\cP$ is not finite.
+	\end{theorem}
+	\begin{proof}
+		Proof by contradiction.
+		Assume $\cP$ is finite. \\
+		$\cP = \Min{\NDIV}$. \\
+		$\Min{\NDIV}$ has no upper bound by $\NDIV$ (by Wellfounding , ExistenceOfStrangers , StrangerTheorem). \\
+		$\Min{\NDIV}$ is a finite subset of $\sG{\MoPos}$. \\
+		$\MoPos$ is an abelian monoid. \\
+		Take an upper bound b of $\Min{\NDIV}$ by $\DIVI{\MoPos}$ (by FiniteMultiplication). \\
+		b = $\oR{\Z}$. $\Min{\NDIV}$ is nonempty. \\
+		contradiction.
+	\end{proof}
+\end{forthel}
+
+\end{document}
