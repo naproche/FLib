@@ -1,0 +1,39 @@
+digraph Sections {
+  subgraph cluster_1 {
+    set_01 [label = "1.1 Sets"]
+    set_02 [label = "1.2 The powerset"]
+    set_03 [label = "1.3 The axiom of regularity"]
+    set_04 [label = "1.4 The symmetric difference"]
+    set_05 [label = "1.5 The Cartesian product"]
+    set_06 [label = "1.6 The axiom of infinity"]
+  }
+
+  subgraph cluster_2 {
+    fun_01 [label = "2.1 Functions"]
+    fun_02 [label = "2.2 Image and preimage"]
+    fun_03 [label = "2.3 Invertible functions"]
+    fun_04 [label = "2.4 Functions and the symmetric difference"]
+    fun_05 [label = "2.5 Functions and set-systems"]
+    fun_06 [label = "2.6 Cantor's theorem"]
+    fun_07 [label = "2.7 Equipollency"]
+    fun_08 [label = "2.8 The Cantor-Schröder-Bernstein theorem"]
+    fun_09 [label = "2.9 The axiom of choice"]
+  }
+
+  /* 1.1 */
+  /* 1.2 */ set_01 -> set_02
+  /* 1.3 */ set_01 -> set_03
+  /* 1.4 */ set_01 -> set_04
+  /* 1.5 */ set_02 -> set_05
+  /* 1.6 */ set_01 -> set_06
+
+  /* 2.1 */ set_01 -> fun_01
+  /* 2.2 */ fun_01 -> fun_02
+  /* 2.3 */ fun_02 -> fun_03
+  /* 2.4 */ set_04, fun_02 -> fun_04
+  /* 2.5 */ set_02, fun_01 -> fun_05
+  /* 2.6 */ set_02, fun_01 -> fun_06
+  /* 2.7 */ fun_03 -> fun_07
+  /* 2.8 */ fun_05, fun_07 -> fun_08
+  /* 2.9 */ fun_01 -> fun_09
+}

@@ -1,0 +1,34 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{basicnotions}
+
+\RequirePackage{pgffor}
+\RequirePackage{amssymb}
+
+% Enumerative set notation, e.g. `\set{1, 2, 3, 4}` prints the numbers 1, 2, 3
+% and 4 as a comma-separated list which is enclosed within curly braces.
+% (Adopted from https://tex.stackexchange.com/questions/178994/how-can-i-set-the-space-between-elements-of-a-set)
+\def\set#1{%
+  \ensuremath{%
+    \{%
+    \foreach[count=\i] \x in {#1}{%
+      \ifnum\i>1,\,\fi%
+      \x%
+    }%
+    \}
+  }%
+}
+
+\newcommand{\val}[2]{#1_{#2}}
+\newcommand{\modulo}{\text{mod}~}
+\newcommand{\symdiff}{\mathop{\triangle}}
+\newcommand{\pow}{\mathcal{P}}
+\newcommand{\range}{\text{range}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\id}{\text{id}}
+\newcommand{\const}[2]{\text{const}_{#1,#2}}
+\newcommand{\restr}{\upharpoonright}
+\newcommand{\pred}{\text{pred}}
+
+\renewcommand{\succ}{\text{succ}}
+\renewcommand{\div}{\mathop{\text{div}}}

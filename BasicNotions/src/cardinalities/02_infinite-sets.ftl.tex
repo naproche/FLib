@@ -1,0 +1,66 @@
+\documentclass[../../basic-notions.ftl.tex]{subfiles}
+
+\begin{document}
+
+  \typeout{
+    \begin{forthel}
+      [readtex FLib/BasicNotions/sections/tuples/01_tuples.ftl.tex]
+
+      [checkconsistency off]
+
+      Let $x,y,z$ denote sets.
+    \end{forthel}
+  }
+
+
+  \section{Infinite sets}
+
+  \begin{forthel}
+    \begin{definition}
+      $x$ is infinite iff $x$ is not finite.
+    \end{definition}
+
+    Let $#x = \infty$ stand for $x$ is infinite.
+
+    \begin{proposition}[3695071727714304]
+      Let $x$ be infinite and $y$ be a supserset of $x$.
+      Then $y$ is infinite.
+    \end{proposition}
+
+    \begin{proposition}[7247472361472000]
+      Let $x,y$ be infinite.
+      Then $x \cup y$ is infinite.
+    \end{proposition}
+
+    \begin{proposition}[1613072347168768]
+      Let $x,y$ be infinite.
+      Then $x \times y$ is infinite.
+    \end{proposition}
+
+    \begin{proposition}[2155195855273984]
+      Let $x$ be infinite.
+      Then $\pow(x)$ is infinite.
+    \end{proposition}
+
+    \begin{proposition}[6578041140543488]
+      Let $X$ be a system of sets.
+      Assume that some element of $X$ is infinite.
+      Then $\bigup X$ is infinite.
+    \end{proposition}
+
+    \begin{proposition}[8660803444015104]
+      Let $f$ be a function from $x$ into $y$ and $a$ be an infinite subset of $x$.
+      Then $f[a]$ is infinite.
+    \end{proposition}
+
+    \begin{corollary}[2307651954278400]
+      Let $f$ be a function from $x$ into $y$ and $x$ be infinite.
+      Then $\range(f)$ is infinite.
+    \end{corollary}
+
+    \begin{proposition}[5577541272207360]
+      Let $f$ be a function from $x$ to $y$ and $b$ be an infinite subset of $y$.
+      Then $f^{-}[b]$ is finite.
+    \end{proposition}
+  \end{forthel}
+\end{document}

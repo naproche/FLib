@@ -1,0 +1,23 @@
+\documentclass[../../sets-and-functions.ftl.tex]{subfiles}
+
+\typeout{
+  \begin{forthel}
+    [readtex FLib/BasicNotions/src/sets-and-functions/sections/01_sets/01_sets.ftl.tex]
+
+    [checkconsistency off]
+
+    Let $u,v,w$ denote elements.
+    Let $x,y,z$ denote sets.
+    Let $f,g,h$ denote functions.
+  \end{forthel}
+}
+
+\begin{document}
+  \section{The axiom of infinity}
+
+  \begin{forthel}
+    \begin{axiom}[infinity]
+      There exists a system of sets $\omega$ such that $\emptyset \in \omega$ and for all $x \in \omega$ we have $x \cup \set{x} \in \omega$.
+    \end{axiom}
+  \end{forthel}
+\end{document}

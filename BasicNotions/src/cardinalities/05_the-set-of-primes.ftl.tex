@@ -1,0 +1,109 @@
+\documentclass[../../basic-notions.ftl.tex]{subfiles}
+
+\begin{document}
+
+  \typeout{
+    \begin{forthel}
+      [readtex FLib/BasicNotions/sections/tuples/01_tuples.ftl.tex]
+
+      [checkconsistency off]
+
+      Let $x,y,z$ denote sets.
+    \end{forthel}
+  }
+
+
+  \section{The set of prime numbers}
+
+  \begin{forthel}
+    \begin{lemma}
+      The class of prime numbers is a set.
+    \end{lemma}
+    \begin{proof}
+      Let $P$ be the class of prime numbers.
+      Then $P = \{ n \in \mathbb{N} \mid n "is prime" \}$.
+      Hence $P$ is a set (by separation).
+    \end{proof}
+
+    \begin{definition}
+      $\mathbb{P}$ is the class that is the set of prime numbers.
+    \end{definition}
+
+    Let the set of prime numbers stand for $\mathbb{P}$.
+
+    \begin{theorem}[Euclid]
+      The set of prime numbers is countably infinite.
+    \end{theorem}
+    \begin{proof}
+      $\mathbb{P}$ is a subset of $\mathbb{N}$.
+      Hence $\mathbb{P}$ is couontable.
+
+      Let us show that $\mathbb{P}$ is infinite.
+        Assume the contrary.
+        Take a natural number $m$ such that $\mathbb{P}$ has $m$ elements.
+        Consider a bijection $p$ between $\set{1, \dots, m}$ and $\mathbb{P}$.
+        Then every prime number is equal to $\val{p}{i}$ for some $i \in \set{1, \dots, m}$.
+
+        Define $$P(i) =
+          \begin{cases}
+            i = 1 & \val{p}{1} \\
+            i > 1 & \val{p}{i} \cdot P(i - 1)
+          \end{cases}$$
+        for $i \in \set{1, \dots, m}$.
+
+        (1) Take $n = P(m) + 1$.
+
+        (2) Consider a prime divisor $q$ of $n$.
+
+        Let us show that (3) $q$ divides $P(m)$.
+          Define $N = \{ "natural number" k \mid "if" k \in \set{1, \dots, m} "then" \val{p}{i} "divides" P(k) "for every" i \in \set{1, \dots, k} \}$.
+
+          (BASE CASE) $N$ contains $0$.
+          Indeed $0 \notin \set{1, \dots, m}$.
+
+          (INDUCTION STEP) For all natural numbers $k$ we have $k \in N \implies k + 1 \in N$. \\
+          Proof.
+            Let $k$ be a natural number.
+            Assume $k \in N$.
+            Suppose $k + 1 \in \set{1, \dots, m}$.
+
+            Case $k + 1 = 1$.
+              Then $P(k + 1) = \val{p}{1}$.
+              We have $\set{1, \dots, 1} = \set{1}$.
+              Hence $\val{p}{i}$ divides $P(k + 1)$ for every $i \in \set{1, \dots, 1}$.
+            End.
+
+            Case $k + 1 \neq 1$.
+              Then $k \in \set{1, \dots, m}$.
+              Hence $\val{p}{i} \mid P(k)$ for every $i \in \set{1, \dots, k}$.
+              Let $i \in \set{1, \dots, k + 1}$.
+              We have $P(k + 1) = \val{p}{k + 1} \cdot P(k)$.
+
+              Case $i = k + 1$.
+                Then $\val{p}{i} = \val{p}{k + 1} \mid \val{p}{k + 1}$.
+                Hence $\val{p}{i} \mid \val{p}{k + 1} \cdot P(k) = P(k + 1)$.
+              End.
+
+              Case $i < k + 1$.
+                Then $i \leq k$.
+                Hence $\val{p}{i} \mid P(k)$.
+                Thus $\val{p}{i} \mid \val{p}{k + 1} \cdot P(k) = P(k + 1)$.
+              End.
+            End.
+          Qed.
+
+          Hence every natural number is contained in $N$.
+          Thus $m \in N$.
+          We have $m \in \set{1, \dots, m}$.
+          Therefore $q$ divides $P(m)$.
+          Indeed $q = \val{p}{i}$ for some $i \in \set{1, \dots, m}$.
+        End.
+
+        $q$ is a divisor of $P(m)$ and $q$ is a divisor of $P(m) + 1$ (by 1, 2, 3).
+        Hence $q$ is a divisor of $1$ (by NN 03 01 695362).
+        Thus $q = 1$.
+        Contradiction.
+      End.
+    \end{proof}
+  \end{forthel}
+\end{document}

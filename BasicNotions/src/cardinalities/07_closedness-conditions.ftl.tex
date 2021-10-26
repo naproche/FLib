@@ -1,0 +1,114 @@
+\documentclass[../../basic-notions.ftl.tex]{subfiles}
+
+\begin{document}
+
+  \typeout{
+    \begin{forthel}
+      [readtex FLib/BasicNotions/sections/tuples/01_tuples.ftl.tex]
+
+      [checkconsistency off]
+
+      Let $x,y,z$ denote sets.
+    \end{forthel}
+  }
+
+
+  \section{Closedness conditions}
+
+  \subsection{Sub- and supersets}
+
+  \begin{forthel}
+    Let $X, Y, Z$ denote a system of sets.
+
+    \begin{definition}
+      $X$ is closed under subsets within $Y$ iff every subset $S$ of any element of $X$ such that $S \in Y$ belongs to $X$.
+    \end{definition}
+
+    \begin{definition}
+      $X$ is closed under subsets iff every subset of any element of $X$ belongs to $X$.
+    \end{definition}
+
+    \begin{definition}
+      $X$ is closed under supersets within $Y$ iff every superset $S$ of any element of $X$ such that $S \in Y$ belongs to $X$.
+    \end{definition}
+
+    \begin{definition}
+      $X$ is closed under supersets iff every superset of any element of $X$ belongs to $X$.
+    \end{definition}
+
+    \begin{proposition}
+      There is no system of sets that is closed under supersets.
+    \end{proposition}
+    \begin{proof}
+      Assume the contrary.
+      Take a system of sets $X$ that is closed under supersets.
+      % ...
+    \end{proof}
+  \end{forthel}
+
+
+  \subsection{Finite intersections and unions}
+
+  \begin{forthel}
+    \begin{definition}
+      $X$ is closed under finite intersections iff the intersection over every finite subset of $X$ is an element of $X$.
+    \end{definition}
+
+    \begin{proposition}
+      $X$ is closed under finite intersections iff $x \cap y \in X$ for all $x,y \in X$.
+    \end{proposition}
+    \begin{proof}
+      % ...
+    \end{proof}
+
+    \begin{definition}
+      $X$ is closed under finite unions iff the union over every finite subset of $X$ is an element of $X$.
+    \end{definition}
+
+    \begin{proposition}
+      $X$ is closed under finite unions iff $x \cup y \in X$ for all $x,y \in X$.
+    \end{proposition}
+    \begin{proof}
+      % ...
+    \end{proof}
+  \end{forthel}
+
+
+  \subsection{Countable intersections and unions}
+
+  \begin{forthel}
+    \begin{definition}
+      $X$ is closed under countable intersections iff the intersection over every countable subset of $X$ is an element of $X$.
+    \end{definition}
+
+    \begin{definition}
+      $X$ is closed under countable unions iff the union over every countable subset of $X$ is an element of $X$.
+    \end{definition}
+  \end{forthel}
+
+
+  \subsection{Arbitrary intersections and unions}
+
+  \begin{forthel}
+    \begin{definition}
+      $X$ is closed under intersections iff the intersection over every subset of $X$ is an element of $X$.
+    \end{definition}
+
+    Let $X$ is closed under arbitrary intersections stand for $X$ is closed under intersections.
+
+    \begin{definition}
+      $X$ is closed under unions iff the union over every subset of $X$ is an element of $X$.
+    \end{definition}
+
+    Let $X$ is closed under arbitrary unions stand for $X$ is closed under unions.
+  \end{forthel}
+
+
+  \subsection{Complements}
+
+  \begin{forthel}
+    \begin{definition}
+      $X$ is closed under complementation in $z$ iff $z \setminus x \in X$ for all $x \in X$.
+    \end{definition}
+  \end{forthel}
+\end{document}

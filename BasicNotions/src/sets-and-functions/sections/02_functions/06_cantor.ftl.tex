@@ -1,0 +1,35 @@
+\documentclass[../../sets-and-functions.ftl.tex]{subfiles}
+
+\typeout{
+  \begin{forthel}
+    [readtex FLib/BasicNotions/src/sets-and-functions/sections/01_sets/02_powerset.ftl.tex]
+    [readtex FLib/BasicNotions/src/sets-and-functions/sections/02_functions/01_functions.ftl.tex]
+
+    [checkconsistency off]
+
+    Let $u,v,w$ denote elements.
+    Let $x,y,z$ denote sets.
+    Let $f,g,h$ denote functions.
+  \end{forthel}
+}
+
+\begin{document}
+  \section{Cantor's theorem}
+
+  \begin{forthel}
+    \begin{theorem}[Cantor]
+      Let $x$ be a set.
+      There exists no function from $x$ onto $\pow(x)$.
+    \end{theorem}
+    \begin{proof}
+      Assume the contrary.
+      Take a function $f$ from $x$ onto $\pow(x)$.
+      Define $N = \{ u \in x \mid u \notin f(u) \}$.
+      Then $N$ is a subset of $x$ (by separation).
+      Hence $N \in \pow(x)$.
+      Thus we can take an element $u$ of $x$ such that $f(u) = N$.
+      Then $u \in N$ iff $u \in f(u)$ iff $u \notin N$.
+      Contradiction.
+    \end{proof}
+  \end{forthel}
+\end{document}

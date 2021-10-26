@@ -1,0 +1,86 @@
+\documentclass[../../sets-and-functions.ftl.tex]{subfiles}
+
+\typeout{
+  \begin{forthel}
+    [readtex FLib/BasicNotions/src/sets-and-functions/sections/02_functions/01_functions.ftl.tex]
+
+    [checkconsistency off]
+
+    Let $u,v,w$ denote elements.
+    Let $x,y,z$ denote sets.
+    Let $f,g,h$ denote functions.
+  \end{forthel}
+}
+
+\begin{document}
+  \section{The axiom of choice}
+
+  \begin{forthel}
+    \begin{definition}
+      Let $X$ be a system of nonempty sets.
+      Assume that $y$ and $y'$ are disjoint for all $y,y' \in X$ such that $y \neq y'$.
+      A choice set of $X$ is a set $z$ such that for all $y \in X$ there exists an element $w$ such that $y \cap z = \set{w}$.
+    \end{definition}
+
+    \begin{axiom}[Choice]
+      Let $X$ be a nonempty system of nonempty sets.
+      Assume that $y$ and $y'$ are disjoint for all $y,y' \in X$ such that $y \neq y'$.
+      Then $X$ has a choice set.
+    \end{axiom}
+
+    \begin{definition}
+      Let $X$ be a system of nonempty sets.
+      A choice function of $X$ is a function $g$ of $X$ such that $g(y) \in y$ for all $y \in X$.
+    \end{definition}
+
+    \begin{proposition}
+      Let $X$ be a system of nonempty sets.
+      Assume that $y$ and $y'$ are disjoint for all $y,y' \in X$ such that $y \neq y'$.
+      $X$ has a choice function iff $X$ has a choice set.
+    \end{proposition}
+    \begin{proof}
+      Case $X$ has a choice function.
+        Take a choice function $g$ of $X$.
+        Define $z = \{ g(y) \mid y \in X \}$.
+        $\range(g)$ is a set.
+        $g(y) \in \range(g)$ for each $y \in X$.
+        Hence $z$ is a set (by separation).
+
+        Let us show that for all $y \in X$ we have $y \cap z = \set{g(y)}$.
+          Let $y \in X$.
+          We have $\set{g(y)} \subseteq y \cap z$.
+          Indeed $g(y) \in y$ and $g(y) \in z$.
+
+          $y \cap z \subseteq \set{g(y)}$. \\
+          Proof.
+            Let $u \in y \cap z$.
+            Then $u \in y$ and $u \in z$.
+            Take $y' \in X$ such that $u = g(y')$.
+            Then $y' = y$.
+            Indeed if $y' \neq y$ then $y'$ and $y$ are disjoint.
+          Qed.
+
+          Hence $y \cap z = \set{g(y)}$.
+        End.
+      End.
+
+      Case $X$ has a choice set.
+        Take a choice set $z$ of $X$.
+        Then for all $y \in X$ there exists an element $w$ such that $y \cap z = \set{w}$.
+        Define $g(y) =$ choose the element $w$ such that $y \cap z = \set{w}$ in $w$ for $y \in X$.
+
+        Let us show that $g(y) \in y$ for all $y \in X$.
+          Let $y \in X$.
+          Take an element $w$ such that $y \cap z = \set{w}$.
+          Then $g(y) = w$.
+          We have $\set{w} \subseteq y \cap z \subseteq y$.
+          Hence $\set{w} \subseteq y$.
+          Thus $w \in y$.
+          Therefore $g(y) \in y$.
+        End.
+
+        Hence $g$ is a choice function of $X$.
+      End.
+    \end{proof}
+  \end{forthel}
+\end{document}
