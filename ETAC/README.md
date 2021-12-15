@@ -5,23 +5,20 @@
 
 - **Author:** Marcel Schütz (2019 - 2021)
 
-- **Required Naproche version:** [Isabelle/Naproche 2021][1]
+- **Required Naproche version:** `naproche-755224402e36` (component of [Isabelle 2021][1])
 
 - **Required amount of free memory:** ~ 300 MB
 
 - **Approximate verification time:** ~ 15 sec
 
-- **Verified with:** [E 2.5][2]
-
 ---
 
 
-This is a formalization of the first bits of the _elementary theory of abstract
-categories_ from Lawvere's paper [_The Category of Categories as a Foundation
-for Mathematics_][3].
+This is a formalization of the first bits of the _Elementary Theory of Abstract
+Categories_ from Lawvere's paper _[The Category of Categories as a Foundation
+for Mathematics][2]_.
 
 
 
-[1]: <https://isabelle.in.tum.de/index.html>
-[2]: <http://wwwlehre.dhbw-stuttgart.de/~sschulz/E/Archive.html>
-[3]: <https://link.springer.com/chapter/10.1007%2F978-3-642-99902-4_1>
+[1]: <https://isabelle.in.tum.de/website-Isabelle2021/index.html>
+[2]: <https://link.springer.com/chapter/10.1007%2F978-3-642-99902-4_1>

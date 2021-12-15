@@ -13,8 +13,6 @@
 
 - **Approximate verification time:** _unknown_
 
-- **Verified with:** [E 2.0][1]
-
 ---
 
 
@@ -26,7 +24,3 @@ version of Naproche, hence the latter will not accept this formalization.
 Fortunately, it looks like the latest advances in the development of Naproche
 will make it possible to adopt this formalization to an official version of
 Naproche in the not too long future.
-
-
-
-[1]: <http://wwwlehre.dhbw-stuttgart.de/~sschulz/E/Archive.html>

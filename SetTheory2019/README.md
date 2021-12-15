@@ -5,13 +5,11 @@
 
 - **Authors:** Alexander Holz (2019), Marcel Schütz (2019)
 
-- **Required Naproche version:** [Isabelle/Naproche 2019][1]
+- **Required Naproche version:** 20190418 (component of [Isabelle 2019][1])
 
 - **Required amount of free memory:** ~ 600 MB
 
 - **Approximate verification time:** ~ 30 min
-
-- **Verified with:** [E 2.0][2]
 
 ---
 
