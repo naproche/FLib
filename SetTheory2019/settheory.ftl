@@ -722,7 +722,7 @@ Definition 41_iv. alpha \geq beta iff beta \leq alpha.
 
   Lemma. alpha \leq beta iff alpha \subseteq beta.
 
-  Lemma. If alpha \in beta then alpha \subseteq beta.#
+  Lemma. If alpha \in beta then alpha \subseteq beta.
 
 ## <<<<<<<
 
