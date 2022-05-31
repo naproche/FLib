@@ -1427,8 +1427,8 @@ Theorem 84_b. omega \in Card.
     proof.
       Assume card(x) \leq card(y).
       Take an injective function f from x to y.
-      Take z \in x. f^{-1} is
-      a function from Range(f) to x.
+      Take z \in x.
+      f^{-1} is a function from Range(f) to x.
 
       Define g[u] =
         case u \in Range(f) -> f^{-1}[u],
