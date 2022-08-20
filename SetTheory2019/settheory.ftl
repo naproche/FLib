@@ -1203,7 +1203,7 @@ Theorem 81_b. x \sim y iff card(x) = card(y).
 
 # [...]
 
-# We shall now explore "sall" cardinals. Below omega, the notions of natural
+# We shall now explore "small" cardinals. Below omega, the notions of natural
 # number, ordinal number and cardinal number agree.
 
 Theorem 83_a. For all natural numbers n card(n) = n.
