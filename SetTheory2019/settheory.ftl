@@ -37,7 +37,7 @@
 # 2 The Zermelo-Fraenkel Axioms
 # =============================
 
-# The diculties around Russell's paradox and also around the axiom of choice
+# The difficulties around Russell's paradox and also around the axiom of choice
 # lead Zermelo to the formulation of axioms for set theory in the spirit of the
 # axiomatics of David Hilbert of whom Zermelo was an assistant at the time.
 # Zermelo's main idea was to restrict Frege's Axiom V to formulas which
@@ -306,7 +306,7 @@ qed.
 # 2.11 Infinity
 # -------------
 
-# All the axioms so far can be realized in a domain of nite sets, [...]. The
+# All the axioms so far can be realized in a domain of finite sets, [...]. The
 # true power of set theory is set free by postulating the existence of one
 # infinite set and continuing to assume the axioms. The axiom of infinity
 # expresses that the set of "natural numbers" exists. To this end, some "number-
@@ -332,7 +332,7 @@ Let x + 1 stand for the successor of x.
 Axiom INF. There is an inductive set.
 
 # Intuitively this says that there is a set which contains all natural numbers.
-# Let us dene set-theoretic analogues of the standard natural numbers:
+# Let us define set-theoretic analogues of the standard natural numbers:
 
 Definition 31_a. 1 = 0 + 1.
 Definition 31_b. 2 = 1 + 1.
@@ -640,7 +640,7 @@ element of y \cap x.
 # 3 Ordinal Numbers
 # =================
 
-# We had dened some natural numbers in set theory. Recall that
+# We had defined some "natural numbers" in set theory. Recall that
 #
 # 0 = \emptyset
 # 1 = 0 + 1 = 0 \cup {0} = {0}
@@ -651,7 +651,7 @@ element of y \cap x.
 # We would then like to have N = {0, 1, 2, 3, ...}. To obtain a set theoretic
 # formalization of numbers we note some properties of the informal presentation:
 #
-# 1. Numbers are ordered by the \in-relation:
+# 1. "Numbers" are ordered by the \in-relation:
 #    m < n iff m \in n.
 #    E.g., 1 \in 3 but not 3 \in 1.
 #
@@ -796,7 +796,7 @@ Let x - 1 stand for Pred(x).
 # 3.2 Natural Numbers
 # -------------------
 
-# We have 0, 1, ... \in Ord. We shall now dene and study the set of natural
+# We have 0, 1, ... \in Ord. We shall now define and study the set of natural
 # numbers/integers within set theory. Recall the axiom of infinity:
 # exists x (0 \in x /\ forall u \in x  u + 1 \in x).
 # The set of natural numbers should be the \subseteq-smallest such x.
@@ -1198,7 +1198,7 @@ qed.
 
 Theorem 81_b. x \sim y iff card(x) = card(y).
 
-# As an immediate corollary we get the CantorSchröderBernstein theorem with
+# As an immediate corollary we get the Cantor-Schröder-Bernstein theorem with
 # AC.
 
 # [...]
@@ -2679,7 +2679,7 @@ Proof.
   end.
 qed.
 
-# The next exponential value 2^aleph--{0} is however very undetermined. It is
+# The "next" exponential value 2^aleph--{0} is however very undetermined. It is
 # possible, in a sense to be made precise later, that 2^aleph--{0} is any
 # successor cardinal, like e.g. aleph--{13}.
 # Cantor's continuum hypothesis is equivalent to the cardinal arithmetic
@@ -2694,7 +2694,7 @@ Indeed 2^kappa \leq mu^kappa \leq (2^kappa)^kappa = 2^(kappa \cdot kappa) =
 # =============
 
 # To get some more information on cardinal exponentiation, we need to measure
-# how fasta cardinal can be approximated using smaller cardinals.
+# how "fast" a cardinal can be approximated using smaller cardinals.
 
 Definition 114_a. Let x \subseteq lambda. x is cofinal in lambda iff for
 all alpha \in lambda there is beta \in x such that alpha < beta.
