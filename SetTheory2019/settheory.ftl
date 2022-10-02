@@ -2645,7 +2645,7 @@ qed.
 
 
 # For infinite cardinal exponentiation the situation is very different. Only a
-# few values can be determined explicitely.
+# few values can be determined explicitly.
 
 Lemma 112. Let kappa \in Card. Let n be a natural number. Assume 1 \leq n.
 kappa^n = kappa.
