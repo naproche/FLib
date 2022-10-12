@@ -1,0 +1,104 @@
+\begin{forthel}
+    \begin{proposition}\printlabel{ARITHMETIC_11_8426075493236736}
+      Let $n, m, k$ be natural numbers such that $n, m \neq 0$ and $k > 1$.
+      Then \[ k^{n} \mid k^{m} \iff n \leq m. \]
+    \end{proposition}
+    \begin{proof}
+      Case $k^{n} \mid k^{m}$.
+        Assume $n > m$.
+        Take a nonzero natural number $l$ such that $n = m + l$.
+        Then $k^{n}
+          = k^{m + l}
+          = k^{m} \cdot k^{l}$.
+        Hence $k^{m} \mid k^{n}$.
+        Thus $k^{m} = k^{n}$.
+        Therefore $m = n$.
+        Contradiction.
+      End.
+
+      Case $n \leq m$.
+        Take a natural number $l$ such that $m = n + l$.
+        Then $k^{m}
+          = k^{n + l}
+          = k^{n} \cdot k^{l}$.
+        Hence $k^{n} \mid k^{m}$.
+      End.
+    \end{proof}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{proposition}\printlabel{ARITHMETIC_11_797196163219456}
+      Let $n$ be a composite natural number.
+      Then $n$ has a nontrivial divisor $m$ such that $m^{2} \leq n$.
+    \end{proposition}
+    \begin{proof}
+      Define $\Phi = \{ m \in \Nat \mid m$ is a nontrivial divisor of $n \}$.
+      $A$ contains some natural number.
+      Hence we can take a least natural number $m$ of $A$.
+      Consider a natural number $k$ such that $m \cdot k = n$.
+      Then $m \leq k$.
+      Indeed if $k < m$ then $k$ is the least natural number of $A$.
+      Hence $m^{2} = m \cdot m \leq m \cdot k = n$.
+      Therefore $m^{2} \leq n$.
+    \end{proof}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{proposition}\printlabel{ARITHMETIC_11_2632282722533376}
+      Let $k$ be a nonzero natural number.
+      If $k \cdot m^{2} = n^{2}$ for some nonzero $n, m \in \Nat$ then $k$ is
+      compound.
+    \end{proposition}
+    \begin{proof}
+      Assume $k \cdot m^{2} = n^{2}$ for some nonzero $n, m \in \Nat$.
+      Consider nonzero $n, m \in \Nat$ such that $k \cdot m^{2} \cdot m^{2} =
+      n^{n}$.
+
+      Case $k = 1$. Obvious.
+
+      Case $k > 1$.
+        Define $\Phi = \{ n' \in \Nat \mid$ if $n' \neq 0$ and $k \cdot m^{2} =
+        n'^{2}$ then $k$ is compound $\}$.
+
+        Let us show that for all $n' \in \Nat$ if $\Phi$ contains all
+        predecessors of $n'$ then $\Phi$ contains $n'$.
+          Let $n'$ be a natural number.
+          Presume that $\Phi$ contains all predecessors of $n'$.
+          Assume $n' \neq 0$ and $k \cdot m^{2} = n'^{2}$.
+
+          Suppose that $k$ is prime.
+          $k$ is a nontrivial divisor of $n'^{2}$.
+          Hence $k$ divides $n'$.
+          Take a natural number $l$ such that $k \cdot l = n'$.
+
+          (1) Then $m^{2} = k \cdot l^{2}$.
+          Indeed $k \cdot m^{2}
+            = (k \cdot l)^{2}
+            = k \cdot (k \cdot l^{2})$.
+
+          (2) $m$ is an element of $\Phi$. \\
+          Proof.
+            We have $n'^{2} > m^{2}$.
+            Indeed $k \cdot m^{2} = n'^{2}$ and $k > 1$ and $m^{2} > 0$.
+            Hence $m < n'$.
+            Indeed if $n' \leq m$ then $n'^{2} \leq m^{2}$.
+            Thus $m \in \Phi$.
+          Qed.
+
+          (3) $l$ is nonzero.
+          Indeed $l = 0 \implies
+          m^{2}
+            = k \cdot 0^{2}
+            = k \cdot 0
+            = 0$
+          and $m^{2} = 0 \implies m = 0$.
+
+          Therefore $k$ is compound (by 1, 2, 3).
+          Contradiction.
+        End.
+
+        Thus $\Phi$ contains every natural number.
+        Therefore $k$ is compound.
+      End.
+    \end{proof}
+  \end{forthel}
