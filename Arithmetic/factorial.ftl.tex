@@ -1,0 +1,199 @@
+\documentclass[../arithmetic.tex]{subfiles}
+
+\begin{document}
+  \chapter{Factorial}\label{chapter:factorial}
+
+  \filename{arithmetic/sections/11_factorial.ftl.tex}
+
+  \begin{forthel}
+    %[prove off][check off]
+
+    [readtex \path{arithmetic/sections/19_exponentiation.ftl.tex}]
+
+    %[prove on][check on]
+  \end{forthel}
+
+
+  \section{Definition of factorial}
+
+  \begin{forthel}
+    \begin{lemma}\printlabel{ARITHMETIC_11_353784742019072}
+      There exists a map $\varphi$ from $\Nat$ to $\Nat$ such that
+      $\varphi(0) = 1$ and $\varphi(n + 1) = \varphi(n) \cdot (n + 1)$ for all
+      $n \in \Nat$.
+    \end{lemma}
+    \begin{proof}
+      For all objects $n, m$ we have $(n,m) \in \Nat \times \Nat$ iff $n, m \in
+      \Nat$.
+      Define $f(n,m) = m \cdot (n + 1)$ for $(n,m) \in \Nat \times \Nat$.
+      Take $A = \Nat \times \Nat$ and $a = (0,1)$.
+      Then $A$ is a set and $a \in A$.
+      Define $g(n,m) = (n + 1, f(n,m))$ for $(n,m) \in \Nat \times \Nat$.
+      $g : A \to A$.
+      Indeed $g(n,m) \in A$ for every $n, m \in \Nat$.
+      Consider a $\psi : \Nat \to A$ such that $\psi$ is recursively defined by
+      $a$ and $g$.
+      Define $\varphi(n) = \pi_{2}(\psi(n))$ for $n \in \Nat$.
+      Then $\varphi$ is a map from $\Nat$ to $\Nat$.
+
+      (1) $\varphi(0) = 1$.
+      Indeed $\varphi(0)
+        = \pi_{2}(\psi(0))
+        = \pi_{2}(a)
+        = 1$.
+
+      Let us show that $\pi_{1}(\psi(n)) = n$ for all $n \in \Nat$.
+        Define $\Phi = \{ n \in \Nat \mid \pi_{1}(\psi(n)) = n \}$.
+
+        (a) $0 \in \Phi$.
+        Indeed $\pi_{1}(\psi(0))
+          = \pi_{1}(a)
+          = 0$.
+
+        (b) For all $n \in \Phi$ we have $n + 1 \in \Phi$. \\
+        Proof.
+          Let $n \in \Phi$.
+          Then $\pi_{1}(\psi(n)) = n$.
+          Hence $\pi_{1}(\psi(n + 1))
+            = \pi_{1}(g(\psi(n)))
+            = \pi_{1}(\psi(n)) + 1
+            = n + 1$.
+        Qed.
+      End.
+
+      Let us show that $f(\psi(n)) = f(n, \varphi(n))$ for all $n \in \Nat$.
+        Define $\Psi = \{ n \in \Nat \mid f(\psi(n)) = f(n, \varphi(n)) \}$.
+
+        (c) $0 \in \Psi$.
+        Indeed $f(\psi(0))
+          = f(0,1)
+          = 1 \cdot (0 + 1)
+          = 1
+          = \varphi(0)
+          = \varphi(0) \cdot (0 + 1)
+          = f(0, \varphi(0))$.
+
+        (d) For all $n \in \Psi$ we have $n + 1 \in \Psi$. \\
+        Proof.
+          Let $n \in \Psi$.
+          Then $f(\psi(n)) = f(n, \varphi(n))$.
+          Hence $f(\psi(n + 1))
+            = f(g(\psi(n)))
+            = f(\pi_{1}(\psi(n)) + 1, f(\psi(n)))
+            = f(n + 1, f(\psi(n)))
+            = f(n + 1, \pi_{2}(g(\psi(n))))
+            = f(n + 1, \pi_{2}(\psi(n + 1)))
+            = f(n + 1, \varphi(n + 1))$.
+          Thus $n + 1 \in \Psi$.
+        Qed.
+      End.
+
+      (2) For all $n \in \Nat$ we have $\varphi(n + 1) =
+      \varphi(n) \cdot (n + 1)$. \\
+      Proof.
+        Let $n \in \Nat$.
+        Then $\varphi(n + 1)
+          = \pi_{2}(\psi(n + 1))
+          = \pi_{2}(g(\psi(n)))
+          = \pi_{2}(\pi_{1}(\psi(n)) + 1, f(\psi(n)))
+          = f(\psi(n))
+          = f(n, \varphi(n))
+          = \varphi(n) \cdot (n + 1)$.
+      Qed.
+    \end{proof}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\printlabel{ARITHMETIC_11_5176070548488192}
+      Let $\varphi, \varphi' : \Nat \to \Nat$.
+      Assume $\varphi(0) = 1$ and $\varphi(n + 1) = \varphi(n) \cdot (n + 1)$
+      for all $n \in \Nat$.
+      Assume $\varphi'(0) = 1$ and $\varphi'(n + 1) = \varphi'(n) \cdot (n + 1)$
+      for all $n \in \Nat$.
+      Then $\varphi = \varphi'$.
+    \end{lemma}
+    \begin{proof}
+      Define $\Phi = \{ n \in \Nat \mid \varphi(n) = \varphi'(n) \}$.
+
+      (1) $0 \in \Phi$.
+      Indeed $\varphi(0) = 1 = \varphi'(0)$.
+
+      (2) For all $n \in \Phi$ we have $n + 1 \in \Phi$. \\
+      Proof.
+        Let $n \in \Phi$.
+        Then $\varphi(n) = \varphi'(n)$.
+        Hence $\varphi(n + 1)
+          = \varphi(n) \cdot (n + 1)
+          = \varphi'(n) \cdot (n + 1)
+          = \varphi'(n + 1)$.
+      Qed.
+
+      Thus $\Phi$ contains every natural number.
+      Therefore $\varphi(n) = \varphi'(n)$ for every $n \in \Nat$.
+    \end{proof}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{definition}\printlabel{ARITHMETIC_11_6912805412274176}
+      $\fac$ is the map from $\Nat$ to $\Nat$ such that $\fac(0) = 1$ and
+      $\fac(n + 1) = \fac(n) \cdot (n + 1)$ for all $n \in \Nat$.
+    \end{definition}
+
+    Let $n!$ stand for $\fac(n)$.
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\printlabel{ARITHMETIC_11_5963501742850048}
+      Let $n$ be a natural number.
+      Then $n \in \dom(\fac)$.
+    \end{lemma}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\printlabel{ARITHMETIC_11_8076250486669312}
+      Let $n$ be a natural number.
+      Then $n! \in \Nat$.
+    \end{lemma}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\printlabel{ARITHMETIC_11_1159827327811584}
+      $0! = 1$.
+    \end{lemma}
+  \end{forthel}
+
+
+  \section{Basic properties}
+
+  \begin{forthel}
+    \begin{lemma}\printlabel{ARITHMETIC_11_7831802427211776}
+      Let $n$ be a natural number.
+      Then \[ (n + 1)! = n! \cdot (n + 1) \]
+      and \[ (n + 1)! = (n + 1) \cdot n!. \]
+    \end{lemma}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{proposition}\printlabel{ARITHMETIC_11_6123519005949952}
+      Let $n$ be a natural number.
+      Then $n! \neq 0$.
+    \end{proposition}
+    \begin{proof}
+      Define \[ \Phi = \class{n' \in \Nat | n'! \neq 0}. \]
+
+      (1) $\Phi$ contains $0$.
+      Indeed $0! = 1 \neq 0$.
+
+      (2) For all $n' \in \Phi$ we have $n' + 1 \in \Phi$. \\
+      Proof.
+        Let $n' \in \Phi$.
+        We have $(n' + 1)! = (n' + 1) \cdot n'!$.
+        $n' + 1$ and $n'!$ are nonzero.
+        Hence $(n' + 1)! \neq 0$.
+      Qed.
+
+      Thus $\Phi$ contains every natural number.
+      Therefore $n! \neq 0$.
+    \end{proof}
+  \end{forthel}  
+\end{document}

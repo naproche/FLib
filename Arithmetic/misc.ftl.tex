@@ -153,3 +153,92 @@
     End.
   \end{proof}
 \end{forthel}
+
+\begin{forthel}
+  \begin{proposition}\printlabel{ARITHMETIC_11_8113296594960384}
+    Let $n$ be a natural number.
+    Assume $n \geq 2$.
+    Then \[ n^{n} > n!. \]
+  \end{proposition}
+  \begin{proof}
+    Define $\Phi = \{ n' \in \Nat_{\geq 2} \mid n'^{n'} > n'! \}$.
+
+    (1) $\Phi$ contains $2$.
+
+    (2) For all $n' \in \Phi$ we have $n' + 1 \in \Phi$. \\
+    Proof.
+      Let $n' \in \Phi$.
+      Then $n' \geq 2$.
+
+      (Claim 1) $(n' + 1)^{n'} \cdot (n' + 1) > n'^{n'} \cdot (n' + 1)$. \\
+      Proof.
+        We have $n' + 1 > n'$ and $n' \neq 0$.
+        Thus $(n' + 1)^{n'} > n'^{n'}$.
+        $n' + 1$ is nonzero.
+        Hence $(n' + 1)^{n'} \cdot (n' + 1) > n'^{n'} \cdot (n' + 1)$.
+      Qed.
+
+      (Claim 2) $n'^{n'} \cdot (n' + 1) > n'! \cdot (n' + 1)$.
+      Indeed $n'^{n'} > n'!$ and $n' + 1 \neq 0$.
+
+      Hence
+      \[  (n' + 1)^{n' + 1}                 \]
+      \[    = (n' + 1)^{n'} \cdot (n' + 1)  \]
+      \[    > n'^{n'} \cdot (n' + 1)        \]
+      \[    > n'! \cdot (n' + 1)            \]
+      \[    = (n' + 1)!.                    \]
+
+      Thus $(n' + 1)^{n' + 1} > (n' + 1)!$.
+    Qed.
+
+    Therefore $\Phi$ contains every element of $\Nat_{\geq 2}$.
+    Consequently $n^{n} > n!$.
+  \end{proof}
+\end{forthel}
+
+\begin{forthel}
+  \begin{proposition}\printlabel{ARITHMETIC_11_5413271156817920}
+    Let $n$ be a natural number.
+    Assume $n \geq 4$.
+    Then \[ n! > 2^{n}. \]
+  \end{proposition}
+  \begin{proof}
+    Define $\Phi = \{ n' \in \Nat_{\geq 4} \mid n'! > 2^{n'} \}$.
+
+    (1) $\Phi$ contains $4$. \\
+    Proof.
+      \[  4!                                  \]
+      \[    = 4 \cdot (3 \cdot 2)             \]
+      \[    = 2 \cdot (2 \cdot (3 \cdot 2))   \]
+      \[    = 3 \cdot (2 \cdot (2 \cdot 2))   \]
+      \[    > 2 \cdot (2 \cdot (2 \cdot 2))   \]
+      \[    = 2^{4}.                          \]
+    Qed.
+
+    (2) For all $n' \in \Phi$ we have $n' + 1 \in \Phi$. \\
+    Proof.
+      Let $n' \in \Phi$.
+      Then $n' \geq 4$ and $n'! > 2^{n'}$.
+
+      (Claim 1) $0 \neq n' + 1 > 2$.
+      Indeed $n' > 1$.
+
+      (Claim 2) $n'! \cdot (n' + 1) > 2^{n'} \cdot (n' + 1)$.
+
+      (Claim 3) $2^{n'} \cdot (n' + 1) > 2^{n'} \cdot 2$.
+      Indeed $2^{n'} \neq 0$.
+
+      Hence
+      \[  (n' + 1)!                   \]
+      \[    = n'! \cdot (n' + 1)      \]
+      \[    > 2^{n'} \cdot (n' + 1)   \]
+      \[    > 2^{n'} \cdot 2          \]
+      \[    = 2^{n' + 1}.             \]
+
+      Thus $(n' + 1)! > 2^{n' + 1}$.
+    Qed.
+
+    Therefore $\Phi$ contains every element of $\Nat_{\geq 4}$.
+    Consequently $n! > 2^{n}$.
+  \end{proof}
+\end{forthel}
