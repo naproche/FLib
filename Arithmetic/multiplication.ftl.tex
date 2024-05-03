@@ -1,0 +1,107 @@
+\documentclass{article}
+\begin{document}
+  \section{Multiplication}\label{sec:multiplication}
+
+  \begin{forthel}
+    %[prove off][check off]
+    [readtex \path{dedekind.ftl.tex}]
+    [readtex \path{library/source/arithmetics/03_addition.ftl.tex}]
+    %[prove on][check on]
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\label{mul_existence}
+      There exists a $\varphi : \Nat \times \Nat \to \Nat$ such
+      that for all $n \in \Nat$ we have
+      \[\varphi(n, 0) = 0\]
+      and
+      \[\varphi(n, m + 1) = \varphi(n,m) + n\]
+      for any $m \in \Nat$.
+    \end{lemma}
+    \begin{proof}
+      Take $A = [\Nat \to \Nat]$.
+      Define $a(n) = 0$ for $n \in \Nat$.
+      Then $A$ is a set and $a \in A$.
+
+      [skipfail on] % Wrong proof task %!!
+      Define $f(g) = \fun n \in \Nat. g(n) + n$ for $g \in A$.
+      [skipfail off]
+
+      Then $f : A \to A$.
+      Indeed $f(g)$ is a map from $\Nat$ to $\Nat$ for any $g \in A$.
+      Consider a $\psi : \Nat \to A$ such that $\psi$ is recursively defined by
+      $a$ and $f$ (by \cref{dedekind_existence}).
+      For any objects $n, m$ we have $(n,m) \in \Nat \times \Nat$ iff
+      $n, m \in \Nat$.
+      Define $\varphi(n,m) = \psi(m)(n)$ for $(n,m) \in \Nat \times \Nat$.
+
+      (1) Then $\varphi$ is a map from $\Nat \times \Nat$ to $\Nat$.
+      Indeed $\varphi(n,m) \in \Nat$ for all $n, m \in \Nat$.
+
+      (2) For all $n \in \Nat$ we have $\varphi(n,0) = 0$. \\
+      Proof.
+        Let $n \in \Nat$.
+        Then $\varphi(n,0)
+          = \psi(0)(n)
+          = a(0)
+          = 0$.
+      Qed.
+
+      (3) For all $n, m \in \Nat$ we have $\varphi(n, m + 1) =
+      \varphi(n,m) + n$. \\
+      Proof.
+        Let $n, m \in \Nat$.
+        Then $\varphi(n, m + 1)
+          = \psi(m + 1)(n)
+          = f(\psi(m))(n)
+          = \psi(m)(n) + n
+          = \varphi(n,m) + n$.
+      Qed.
+
+      [prover vampire]
+      Hence the thesis (by 1, 2, 3).
+      [prover eprover]
+    \end{proof}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\label{mul_uniqueness}
+      Let $\varphi, \varphi' : \Nat \times \Nat \to \Nat$.
+      Assume that for all $n \in \Nat$ we have
+      \[\varphi(n, 0) = 0\]
+      and
+      \[\varphi(n, m + 1) = \varphi(n,m) + n\]
+      for any $m \in \Nat$.
+      Assume that for all $n \in \Nat$ we have
+      \[\varphi'(n, 0) = 0\]
+      and
+      \[\varphi'(n, m + 1) = \varphi'(n,m) + n\]
+      for any $m \in \Nat$.
+      Then $\varphi = \varphi'$.
+    \end{lemma}
+    \begin{proof}
+      (a) Define $\Phi = \{ m \in \Nat \mid \varphi(n,m) = \varphi'(n,m)$ for
+      all $n \in \Nat \}$.
+
+      (1) $0 \in \Phi$.
+      Indeed $\varphi(n,0) = 0 = \varphi'(n,0)$ for all $n \in \Nat$.
+
+      (2) For all $m \in \Phi$ we have $m + 1 \in \Phi$. \\
+      Proof.
+        Let $m \in \Phi$.
+        Then $\varphi(n,m) = \varphi'(n,m)$ for all $n \in \Nat$.
+        Hence $\varphi(n, m + 1)
+          = \varphi(n,m) + n
+          = \varphi'(n,m) + n
+          = \varphi'(n, m + 1)$
+        for all $n \in \Nat$.
+        Thus $m + 1 \in \Phi$ (by a).
+      Qed.
+
+      Thus $\Phi$ contains every natural number (by \cref{ARITHMETIC_03_647949900054528}).
+      Therefore $\varphi(n,m) = \varphi'(n,m)$ for all $n, m \in \Nat$.
+      Consequently $\varphi = \varphi'$.
+      Indeed $\varphi(a) = \varphi'(a)$ for all $a \in \Nat \times \Nat$.
+    \end{proof}
+  \end{forthel}
+\end{document}

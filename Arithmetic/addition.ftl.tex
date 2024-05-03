@@ -1,0 +1,96 @@
+\documentclass{article}
+\begin{document}
+  \section{Addition}\label{sec:addition}
+
+  \begin{forthel}
+    %[prove off][check off]
+    [readtex \path{dedekind.ftl.tex}]
+    %[prove on][check on]
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\label{add_existence}
+      There exists a $\varphi : \Nat \times \Nat \to \Nat$ such
+      that for all $n \in \Nat$ we have
+      \[\varphi(n,0) = n\]
+      and
+      \[\varphi(n,\succ(m)) = \succ(\varphi(n,m))\]
+      for all $m \in \Nat$.
+    \end{lemma}
+    \begin{proof}
+      Take $A = [\Nat \to \Nat]$.
+      Define $a(n) = n$ for $n \in \Nat$.
+      Then $A$ is a set and $a \in A$.
+
+      [skipfail on] % Wrong proof task %!!
+      Define $f(g) = \fun n \in \Nat. \succ(g(n))$ for $g \in A$.
+      [skipfail off]
+
+      Then $f : A \to A$.
+      Indeed $f(g)$ is a map from $\Nat$ to $\Nat$ for any $g \in A$.
+      Consider a $\psi : \Nat \to A$ such that $\psi$ is recursively defined by
+      $a$ and $f$ (by \cref{dedekind_existence}).
+      Define $\varphi(n,m) = \psi(m)(n)$ for $(n,m) \in \Nat \times \Nat$.
+      Then $\varphi$ is a map from $\Nat \times \Nat$ to $\Nat$.
+      Indeed $\varphi(n,m) \in \Nat$ for all $n, m \in \Nat$.
+
+      (1) For all $n \in \Nat$ we have $\varphi(n,0) = n$. \\
+      Proof.
+        Let $n \in \Nat$.
+        Then $\varphi(n,0)
+          = \psi(0)(n)
+          = a(n)
+          = n$.
+      Qed.
+
+      (2) For all $n, m \in \Nat$ we have $\varphi(n, \succ(m)) =
+      \succ(\varphi(n,m))$. \\
+      Proof.
+        Let $n, m \in \Nat$.
+        Then $\varphi(n, \succ(m))
+          = \psi(\succ(m))(n)
+          = f(\psi(m))(n)
+          = \succ(\psi(m)(n))
+          = \succ(\varphi(n,m))$.
+      Qed.
+    \end{proof}
+  \end{forthel}
+
+  \begin{forthel}
+    \begin{lemma}\label{add_uniqueness}
+      Let $\varphi, \varphi' : \Nat \times \Nat \to \Nat$.
+      Assume that for all $n \in \Nat$ we have
+      \[\varphi(n,0) = n\]
+      and
+      \[\varphi(n,\succ(m)) = \succ(\varphi(n,m))\]
+      for all $m \in \Nat$.
+      Assume that for all $n \in \Nat$ we have
+      \[\varphi'(n,0) = n\]
+      and
+      \[\varphi'(n,\succ(m)) = \succ(\varphi'(n,m))\]
+      for all $m \in \Nat$.
+      Then $\varphi = \varphi'$.
+    \end{lemma}
+    \begin{proof}
+      Define $\Phi = \{ m \in \Nat \mid \varphi(n,m) = \varphi'(n,m)$ for
+      all $n \in \Nat \}$.
+
+      (1) $0 \in \Phi$.
+      Indeed $\varphi(n,0) = n = \varphi'(n,0)$ for all $n \in \Nat$.
+
+      (2) For all $m \in \Phi$ we have $\succ(m) \in \Phi$. \\
+      Proof.
+        Let $m \in \Phi$.
+        Then $\varphi(n,m) = \varphi'(n,m)$ for all $n \in \Nat$.
+        Hence $\varphi(n, \succ(m))
+          = \succ(\varphi(n,m))
+          = \succ(\varphi'(n,m))
+          = \varphi(n, \succ(m))$
+        for all $n \in \Nat$.
+      Qed.
+
+      Thus $\Phi$ contains every natural number.
+      Therefore $\varphi(n,m) = \varphi'(n,m)$ for all $n, m \in \Nat$.
+    \end{proof}
+  \end{forthel}
+\end{document}
